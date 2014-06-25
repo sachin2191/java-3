@@ -33,7 +33,6 @@ import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import br.com.uol.pagseguro.domain.Transaction;
 import br.com.uol.pagseguro.domain.direct.InstallmentXml;
 import br.com.uol.pagseguro.logs.Log;
 import br.com.uol.pagseguro.logs.Logger;
@@ -78,7 +77,6 @@ public class InstallmentsParser {
         String tagValue = null;
 
         Element installmentsElement = doc.getDocumentElement();
-        Transaction transaction = new Transaction();
         List<InstallmentXml> installments = new ArrayList<InstallmentXml>();
 
         InstallmentsParser.log.debug("Parsing transaction");
@@ -129,8 +127,6 @@ public class InstallmentsParser {
             }
 
         }
-
-        InstallmentsParser.log.debug("Parsing transaction success: " + transaction.getCode());
 
         return installments;
 
