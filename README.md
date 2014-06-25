@@ -41,6 +41,12 @@ Para facilitar sua integração e permitir um maior controle sobre suas configur
 Mais informações estão disponíveis na [documentação oficial].
 
 
+Dúvidas?
+----------
+---
+Caso tenha dúvidas ou precise de suporte, acesse nosso [fórum].
+
+
 Changelog
 ---------
 ---
@@ -102,12 +108,6 @@ Notas
  - Para que ocorra normalmente a geração de logs, certifique-se que o diretório e o arquivo de log tenham permissões de leitura e escrita.
 
 
-[Dúvidas?]
-----------
----
-Em caso de dúvidas mande um e-mail para desenvolvedores@pagseguro.com.br
-
-
 Contribuições
 -------------
 ---
@@ -123,7 +123,7 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
   [transações por código]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-codigo.html
   [transações por intervalo de datas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-intervalo-de-datas.html
   [transações abandonadas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-abandonadas.html
-  [Dúvidas?]: https://pagseguro.uol.com.br/desenvolvedor/comunidade.jhtml
+  [fórum]: http://forum.pagseguro.uol.com.br/
   [Java]: http://www.oracle.com/technetwork/java/index.html
   [GitHub]: https://github.com/pagseguro/java/
   [documentação oficial]: https://pagseguro.uol.com.br/v2/guia-de-integracao/tutorial-da-biblioteca-pagseguro-em-java.html
