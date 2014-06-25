@@ -25,14 +25,10 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.Map;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
+import br.com.uol.pagseguro.helper.PagSeguroUtil;
 import br.com.uol.pagseguro.logs.Log;
 import br.com.uol.pagseguro.properties.PagSeguroConfig;
 import br.com.uol.pagseguro.properties.PagSeguroSystem;
@@ -55,16 +51,29 @@ public class HttpConnection {
      * @param data
      * @param timeout
      * @param charset
-     * @return
+     * @return connection
      * @throws PagSeguroServiceException
-     * @throws ParseException
-     * @throws IOException
-     * @throws SAXException
-     * @throws ParserConfigurationException
      */
-    public HttpURLConnection post(String url, Map<Object, Object> data, String timeout, String charset)
+    public HttpURLConnection post(String urlPS, Map<Object, Object> data, String timeout, String charset)
             throws PagSeguroServiceException {
-        return this.connection("POST", url, charset);
+
+        HttpURLConnection connection = getConnection(urlPS, timeout, charset, "POST");
+
+        try {
+            // Send POST data
+            OutputStream out = connection.getOutputStream();
+            Writer write = new OutputStreamWriter(out, charset);
+
+            write.write(PagSeguroUtil.urlQuery(data));
+
+            write.close();
+            out.close();
+
+            return connection;
+        } catch (IOException e) {
+            log.error("Error when trying execute method connection: " + e.getMessage());
+            throw new PagSeguroServiceException("Error when trying write or set request method", e);
+        }
     }
 
     /**
@@ -73,29 +82,27 @@ public class HttpConnection {
      * @param url
      * @param timeout
      * @param charset
-     * @return
+     * @return connection
      * @throws PagSeguroServiceException
-     * @throws IOException
      */
-    public HttpURLConnection get(String url, String timeout, String charset) throws PagSeguroServiceException {
-        return this.connection("GET", url, charset);
+    public HttpURLConnection get(String urlPS, String timeout, String charset) throws PagSeguroServiceException {
+
+        return getConnection(urlPS, timeout, charset, "GET");
+
     }
 
     /**
-     * connection POST/GET
+     * Generates a Connection
      * 
-     * @param method
      * @param urlPS
+     * @param timeout
      * @param charset
-     * @return
-     * @throws Exception
-     * @throws ParseException
-     * @throws IOException
-     * @throws SAXException
-     * @throws ParserConfigurationException
+     * @param method
+     * @return connection
+     * @throws PagSeguroServiceException
      */
-    private HttpURLConnection connection(String method, String urlPS, String charset) throws PagSeguroServiceException {
-
+    private HttpURLConnection getConnection(String urlPS, String timeout, String charset, String method)
+            throws PagSeguroServiceException {
         URL url = null;
         HttpURLConnection connection = null;
 
@@ -108,9 +115,9 @@ public class HttpConnection {
             connection.setDoOutput(true);
             connection.setDoInput(true);
             connection.setRequestMethod(method);
+            connection.setRequestProperty("charset", charset);
 
             connection.setRequestProperty("Content-type", PagSeguroSystem.getContentTypeFormUrlEncoded());
-            connection.setRequestProperty("charset", charset);
             connection.setRequestProperty("lib-description", "java:" + PagSeguroSystem.getLibversion());
             connection.setRequestProperty("language-engine-description",
                     "java:" + PagSeguroSystem.getLanguageEnginedescription());
@@ -125,16 +132,6 @@ public class HttpConnection {
                 connection.setRequestProperty("cms-description", cmsVersion);
             }
 
-            if ("POST".equalsIgnoreCase(method)) {
-                
-                OutputStream out = connection.getOutputStream();
-                Writer write = new OutputStreamWriter(out, charset);
-                write.write(urlPS);
-                
-                write.close();
-                out.close();
-            }
-
             return connection;
 
         } catch (MalformedURLException e) {
@@ -147,6 +144,7 @@ public class HttpConnection {
             log.error("Error when trying execute method connection: " + e.getMessage());
             throw new PagSeguroServiceException("Generic error", e);
         }
+
     }
 
 }

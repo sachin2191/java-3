@@ -43,11 +43,6 @@ public class PaymentService {
     }
 
     /**
-     * @var String
-     */
-    private static final String SERVICE_NAME = "paymentService";
-
-    /**
      * @var Log
      */
     private static Log log = new Log(PaymentService.class);
@@ -87,22 +82,23 @@ public class PaymentService {
 
         PaymentService.log.info(String.format("PaymentService.Register( %s ) - begin", paymentRequest.toString()));
 
-        ConnectionData connectionData = new ConnectionData(credentials, PaymentService.SERVICE_NAME);
+        ConnectionData connectionData = new ConnectionData(credentials);
 
         Map<Object, Object> data = PaymentParser.getData(paymentRequest);
-        
+
         String url = PaymentService.buildCheckoutRequestUrl(connectionData) + "&" + PagSeguroUtil.urlQuery(data);
 
         HttpConnection connection = new HttpConnection();
         HttpStatus httpCodeStatus = null;
 
-        HttpURLConnection response = connection.post(url, data, connectionData.getServiceTimeout(), connectionData.getCharset());
+        HttpURLConnection response = connection.post(url, data, connectionData.getServiceTimeout(),
+                connectionData.getCharset());
 
         try {
 
             httpCodeStatus = HttpStatus.fromCode(response.getResponseCode());
-            if (httpCodeStatus == null){
-            	throw new PagSeguroServiceException("Connection Timeout");
+            if (httpCodeStatus == null) {
+                throw new PagSeguroServiceException("Connection Timeout");
             } else if (HttpURLConnection.HTTP_OK == httpCodeStatus.getCode().intValue()) {
 
                 String paymentReturn = null;
@@ -119,7 +115,7 @@ public class PaymentService {
 
                 return paymentReturn;
 
-            } else if(HttpURLConnection.HTTP_BAD_REQUEST == httpCodeStatus.getCode().intValue()) {
+            } else if (HttpURLConnection.HTTP_BAD_REQUEST == httpCodeStatus.getCode().intValue()) {
 
                 List<Error> errors = ErrorsParser.readErrosXml(response.getErrorStream());
 
@@ -131,8 +127,8 @@ public class PaymentService {
                 throw exception;
 
             } else {
-            	
-                throw new PagSeguroServiceException(httpCodeStatus);    
+
+                throw new PagSeguroServiceException(httpCodeStatus);
             }
 
         } catch (PagSeguroServiceException e) {
@@ -148,4 +144,5 @@ public class PaymentService {
             response.disconnect();
         }
     }
+
 }

@@ -31,7 +31,7 @@ public enum PaymentMethodType {
 
     BALANCE("PAGSEGURO BALANCE", 4),
 
-    OI_PAGGO("OI PAGGO - IT'S A KIND OF MOBILE PAYMENT", 5),
+    OI_PAGGO("OI PAGGO", 5),
 
     DIRECT_DEPOSIT("DIRECT DEPOSIT", 7),
 

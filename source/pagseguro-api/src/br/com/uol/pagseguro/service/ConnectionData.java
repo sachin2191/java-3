@@ -25,13 +25,15 @@ import br.com.uol.pagseguro.properties.PagSeguroSystem;
 
 public class ConnectionData {
 
-    private static final String SERVICE_NAME = "paymentService";
-
-    private String serviceName;
-
     private Credentials credentials;
 
     private String webServiceUrl;
+
+    private String paymentSessionUrl;
+
+    private String installmentsUrl;
+
+    private String directPayment;
 
     private String servicePath;
 
@@ -39,18 +41,18 @@ public class ConnectionData {
 
     private String charset;
 
-    public ConnectionData(Credentials credentials, String serviceName) {
-
+    public ConnectionData(Credentials credentials) {
         this.credentials = credentials;
-        this.serviceName = serviceName;
 
         this.webServiceUrl = validUrlWebService();
         this.charset = PagSeguroConfig.getApplicationCharset();
+        this.serviceTimeout = PagSeguroSystem.getServiceTimeout();
 
-        if (serviceName.equals(ConnectionData.SERVICE_NAME)) {
-            this.servicePath = PagSeguroSystem.getServicePath();
-            this.serviceTimeout = PagSeguroSystem.getServiceTimeout();
-        }
+        this.paymentSessionUrl = PagSeguroSystem.getUrlPaymentSession();
+        this.installmentsUrl = PagSeguroSystem.getUrlInstallments();
+        this.directPayment = PagSeguroSystem.getUrlDirectPayment();
+
+        this.servicePath = PagSeguroSystem.getServicePath();
     }
 
     /**
@@ -63,10 +65,37 @@ public class ConnectionData {
     }
 
     /**
+     * Get Payment Session Url
+     * 
+     * @return string
+     */
+    public String getPaymentSessionUrl() {
+        return this.paymentSessionUrl;
+    }
+
+    /**
+     * Get Installments Url
+     * 
+     * @return string
+     */
+    public String getInstallmentsUrl() {
+        return this.installmentsUrl;
+    }
+
+    /**
+     * Get Direct Payment Url
+     * 
+     * @return string
+     */
+    public String getDirectPaymentUrl() {
+        return this.directPayment;
+    }
+
+    /**
      * Create url
      * 
      * @return string
-     * @throws PagSeguroServiceException 
+     * @throws PagSeguroServiceException
      */
     public String getCredentialsUrlQuery() throws PagSeguroServiceException {
         return PagSeguroUtil.urlQuery(this.getCredentials().getAttributes());
@@ -78,11 +107,11 @@ public class ConnectionData {
      * @return string
      */
     private String validUrlWebService() {
-        
+
         String url = PagSeguroSystem.getUrlProduction();
 
         return url + PagSeguroSystem.getServicePath();
-        
+
     }
 
     /**
@@ -98,21 +127,6 @@ public class ConnectionData {
      */
     public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
-    }
-
-    /**
-     * @return the serviceName
-     */
-    public String getServiceName() {
-        return serviceName;
-    }
-
-    /**
-     * @param serviceName
-     *            the serviceName to set
-     */
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
     }
 
     /**

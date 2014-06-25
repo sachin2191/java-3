@@ -73,6 +73,25 @@ public class Item {
      *            the product quantity
      * @param amount
      *            the product unit price
+     */
+    public Item(String id, String description, Integer quantity, BigDecimal amount) {
+        this.id = id;
+        this.description = description;
+        this.quantity = quantity;
+        this.amount = amount;
+    }
+
+    /**
+     * Initializes a newly created instance of this type with the specified arguments
+     * 
+     * @param id
+     *            the product identifier
+     * @param description
+     *            the product description
+     * @param quantity
+     *            the product quantity
+     * @param amount
+     *            the product unit price
      * @param weight
      *            the product weight, in grams
      * @param shippingCost

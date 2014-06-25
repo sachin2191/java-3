@@ -50,11 +50,6 @@ public class TransactionSearchService {
     private static Log log = new Log(TransactionSearchService.class);
 
     /**
-     * @var String
-     */
-    private static String SERVICE_NAME = "transactionSearchService";
-
-    /**
      * @var DATE_FORMAT
      */
     private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm"; // "2011-04-01T08:30"
@@ -164,7 +159,7 @@ public class TransactionSearchService {
         TransactionSearchService.log.info("TransactionSearchService.SearchByCode(transactionCode=" + transactionCode
                 + ") - begin");
 
-        ConnectionData connectionData = new ConnectionData(credentials, TransactionSearchService.SERVICE_NAME);
+        ConnectionData connectionData = new ConnectionData(credentials);
 
         HttpConnection connection = new HttpConnection();
         HttpStatus httpStatusCode = null;
@@ -186,7 +181,7 @@ public class TransactionSearchService {
 
                 return transaction;
 
-            } else if(HttpURLConnection.HTTP_BAD_REQUEST == httpStatusCode.getCode().intValue()) {
+            } else if (HttpURLConnection.HTTP_BAD_REQUEST == httpStatusCode.getCode().intValue()) {
 
                 List<Error> listErrors = ErrorsParser.readErrosXml(response.getErrorStream());
 
@@ -197,7 +192,7 @@ public class TransactionSearchService {
 
                 throw exception;
             } else {
-                throw new PagSeguroServiceException(httpStatusCode);    
+                throw new PagSeguroServiceException(httpStatusCode);
             }
 
         } catch (PagSeguroServiceException e) {
@@ -233,7 +228,7 @@ public class TransactionSearchService {
         TransactionSearchService.log.info(String.format(TransactionSearchService.SEARCH_BY_DATE_BEGIN, dtInitial,
                 dtFinal));
 
-        ConnectionData connectionData = new ConnectionData(credentials, TransactionSearchService.SERVICE_NAME);
+        ConnectionData connectionData = new ConnectionData(credentials);
 
         HttpConnection connection = new HttpConnection();
 
@@ -258,7 +253,7 @@ public class TransactionSearchService {
 
                 return search;
 
-            } else if(HttpURLConnection.HTTP_BAD_REQUEST == httpStatusCode.getCode().intValue()) {
+            } else if (HttpURLConnection.HTTP_BAD_REQUEST == httpStatusCode.getCode().intValue()) {
 
                 List<Error> listErrors = ErrorsParser.readErrosXml(response.getErrorStream());
 
@@ -269,7 +264,7 @@ public class TransactionSearchService {
 
                 throw exception;
             } else {
-                throw new PagSeguroServiceException(httpStatusCode);    
+                throw new PagSeguroServiceException(httpStatusCode);
             }
 
         } catch (PagSeguroServiceException e) {

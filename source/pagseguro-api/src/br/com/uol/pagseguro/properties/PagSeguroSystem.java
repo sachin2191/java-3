@@ -54,6 +54,33 @@ public class PagSeguroSystem {
     }
 
     /**
+     * Get Url to create a payment session
+     * 
+     * @return string
+     */
+    public static String getUrlPaymentSession() {
+        return resourceBundle.getString("paymentService." + PagSeguroConfig.getEnvironment() + ".paymentSession");
+    }
+
+    /**
+     * Get Url to Installments
+     * 
+     * @return string
+     */
+    public static String getUrlInstallments() {
+        return resourceBundle.getString("paymentService." + PagSeguroConfig.getEnvironment() + ".installments");
+    }
+
+    /**
+     * Get Url to Direct Payment
+     * 
+     * @return string
+     */
+    public static String getUrlDirectPayment() {
+        return resourceBundle.getString("paymentService." + PagSeguroConfig.getEnvironment() + ".directPayment");
+    }
+
+    /**
      * Get service path
      * 
      * @return string
@@ -63,7 +90,7 @@ public class PagSeguroSystem {
     }
 
     public static String getServiceTimeout() {
-        return resourceBundle.getString("paymentService.serviceTimeout");
+        return resourceBundle.getString("serviceTimeout");
     }
 
     public static String getNotificationUrl() {

@@ -32,7 +32,7 @@ public class Sender {
     /** Sender name */
     private String name;
 
-    /** Sender email */
+    /** Sender e-mail */
     private String email;
 
     /** Sender born date */
@@ -44,10 +44,28 @@ public class Sender {
     /** Sender documents */
     private List<SenderDocument> documents;
 
+    /** Sender hash */
+    private String hash;
+
+    /** Sender ip */
+    private String ip;
+
     /**
      * Initializes a new instance of the Sender class
      */
     public Sender() {
+
+    }
+
+    /**
+     * Initializes a new instance of the Sender class
+     * 
+     * @param name
+     * @param email
+     */
+    public Sender(String name, String email) {
+        this.name = PagSeguroUtil.removeExtraSpaces(name);
+        this.email = email;
     }
 
     /**
@@ -57,6 +75,54 @@ public class Sender {
      * @param email
      * @param phone
      */
+    public Sender(String name, String email, Phone phone) {
+        this.name = PagSeguroUtil.removeExtraSpaces(name);
+        this.email = email;
+        this.phone = phone;
+    }
+
+    /**
+     * Initializes a new instance of the Sender class
+     * 
+     * @param name
+     * @param email
+     * @param phone
+     * @param document
+     */
+    public Sender(String name, String email, Phone phone, SenderDocument document) {
+        this.name = PagSeguroUtil.removeExtraSpaces(name);
+        this.email = email;
+        this.phone = phone;
+        this.documents = new ArrayList<SenderDocument>();
+        documents.add(document);
+    }
+
+    /**
+     * Initializes a new instance of the Sender class
+     * 
+     * @param name
+     * @param email
+     * @param phone
+     * @param document
+     * @param bornDate
+     */
+    public Sender(String name, String email, Phone phone, SenderDocument document, String bornDate) {
+        this.name = PagSeguroUtil.removeExtraSpaces(name);
+        this.email = email;
+        this.phone = phone;
+        this.documents = new ArrayList<SenderDocument>();
+        documents.add(document);
+        this.bornDate = bornDate;
+    }
+
+    /**
+     * Initializes a new instance of the Sender class
+     * 
+     * @param name
+     * @param email
+     * @param phone
+     * @param bornDate
+     */
     public Sender(String name, String email, Phone phone, String bornDate) {
         this.name = PagSeguroUtil.removeExtraSpaces(name);
         this.email = email;
@@ -65,7 +131,14 @@ public class Sender {
     }
 
     /**
-     * Sets the Sender name
+     * @return the sender name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the sender name
      * 
      * @param name
      */
@@ -74,14 +147,14 @@ public class Sender {
     }
 
     /**
-     * @return the sender name
+     * @return the sender e-mail
      */
-    public String getName() {
-        return this.name;
+    public String getEmail() {
+        return email;
     }
 
     /**
-     * Sets the Sender e-mail
+     * Sets the sender e-mail
      * 
      * @param email
      */
@@ -90,14 +163,14 @@ public class Sender {
     }
 
     /**
-     * @return the sender e-mail
+     * @return the sender born date
      */
-    public String getEmail() {
-        return this.email;
+    public String getBornDate() {
+        return bornDate;
     }
 
     /**
-     * Sets the Sender born date
+     * Sets the sender born date
      * 
      * @param email
      */
@@ -106,10 +179,13 @@ public class Sender {
     }
 
     /**
-     * @return the sender born date
+     * @return the sender phone
      */
-    public String getBornDate() {
-        return this.bornDate;
+    public Phone getPhone() {
+        if (phone == null) {
+            phone = new Phone();
+        }
+        return phone;
     }
 
     /**
@@ -122,25 +198,15 @@ public class Sender {
     }
 
     /**
-     * @return the sender phone
-     */
-    public Phone getPhone() {
-        if (this.phone == null) {
-            this.phone = new Phone();
-        }
-        return this.phone;
-    }
-
-    /**
      * Gets sender documents list
      * 
      * @return the sender documents list
      */
     public List<SenderDocument> getDocuments() {
-        if (this.documents == null) {
-            this.documents = new ArrayList<SenderDocument>();
+        if (documents == null) {
+            documents = new ArrayList<SenderDocument>();
         }
-        return this.documents;
+        return documents;
     }
 
     /**
@@ -158,7 +224,7 @@ public class Sender {
      * @param document
      */
     public void addDocument(SenderDocument document) {
-        this.getDocuments().add(document);
+        getDocuments().add(document);
     }
 
     /**
@@ -168,7 +234,39 @@ public class Sender {
      * @param value
      */
     public void addDocument(DocumentType type, String value) {
-        this.getDocuments().add(new SenderDocument(type, value));
+        addDocument(new SenderDocument(type, value));
+    }
+
+    /**
+     * @return the sender hash
+     */
+    public String getHash() {
+        return hash;
+    }
+
+    /**
+     * Sets the sender hash
+     * 
+     * @param hash
+     */
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    /**
+     * @return the sender ip
+     */
+    public String getIp() {
+        return ip;
+    }
+
+    /**
+     * Sets the sender ip
+     * 
+     * @param ip
+     */
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     /**

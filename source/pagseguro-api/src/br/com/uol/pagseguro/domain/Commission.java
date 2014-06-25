@@ -16,41 +16,72 @@
  ************************************************************************
  */
 
-package br.com.uol.pagseguro.enums;
+package br.com.uol.pagseguro.domain;
+
+import java.math.BigDecimal;
 
 /**
- * Enum constants that represents the senderDocument type accepted by PagSeguro on payment requests
+ * Represents a commision
  */
-public enum DocumentType {
+public class Commission {
 
-    CPF("Cadastro de Pessoa Física"),
+    /**
+     * Rate
+     */
+    private BigDecimal rate;
 
-    CNPJ("Cadastro de Pessoa Jurídica");
-
+    /**
+     * Description
+     */
     private String description;
 
     /**
-     * Initializes a newly created enum constant of this type with the specified argument
-     * 
-     * @param description
-     *            - the description of the enum constant
+     * Initializes a new instance of the Commission class
      */
-    DocumentType(String description) {
+    public Commission() {
+    }
+
+    /**
+     * Initializes a new instance of the Commission class
+     * 
+     * @param rate
+     * @param description
+     */
+    public Commission(BigDecimal rate, String description) {
+        this.rate = rate;
         this.description = description;
     }
 
     /**
-     * @return this enum constant description
+     * @return the rate
+     */
+    public BigDecimal getRate() {
+        return this.rate;
+    }
+
+    /**
+     * @return the description
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
+     * Sets the area code
+     * 
+     * @param areaCode
+     */
+    public void setAreaCode(BigDecimal rate) {
+        this.rate = rate;
+    }
+
+    /**
+     * Sets the description
+     * 
      * @param description
-     *            - new description for this enum constant
      */
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

@@ -41,11 +41,6 @@ public class NotificationService {
     }
 
     /**
-     * @var String
-     */
-    private static String SERVICE_NAME = "notificationService";
-
-    /**
      * @var Log
      */
     private static Log log = new Log(NotificationService.class);
@@ -89,7 +84,7 @@ public class NotificationService {
 
         NotificationService.log.info(String.format(NotificationService.CHECK_TRANSACTION_BEGIN, notificationCode));
 
-        ConnectionData connectionData = new ConnectionData(credentials, NotificationService.SERVICE_NAME);
+        ConnectionData connectionData = new ConnectionData(credentials);
 
         HttpConnection connection = new HttpConnection();
         HttpStatus httpCodeStatus = null;
