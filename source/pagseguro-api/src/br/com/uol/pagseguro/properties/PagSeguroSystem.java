@@ -81,6 +81,15 @@ public class PagSeguroSystem {
     }
 
     /**
+     * Get Url to Payment-Methods
+     * 
+     * @return string
+     */
+    public static String getUrlPaymentMethods() {
+        return resourceBundle.getString("paymentService." + PagSeguroConfig.getEnvironment() + ".paymentMethods");
+    }
+
+    /**
      * Get service path
      * 
      * @return string

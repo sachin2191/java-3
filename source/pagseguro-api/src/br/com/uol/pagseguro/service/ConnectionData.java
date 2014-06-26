@@ -35,6 +35,8 @@ public class ConnectionData {
 
     private String directPayment;
 
+    private String paymentMethodsUrl;
+
     private String servicePath;
 
     private String serviceTimeout;
@@ -51,6 +53,7 @@ public class ConnectionData {
         this.paymentSessionUrl = PagSeguroSystem.getUrlPaymentSession();
         this.installmentsUrl = PagSeguroSystem.getUrlInstallments();
         this.directPayment = PagSeguroSystem.getUrlDirectPayment();
+        this.paymentMethodsUrl = PagSeguroSystem.getUrlPaymentMethods();
 
         this.servicePath = PagSeguroSystem.getServicePath();
     }
@@ -89,6 +92,13 @@ public class ConnectionData {
      */
     public String getDirectPaymentUrl() {
         return this.directPayment;
+    }
+
+    /**
+     * @return the paymentMethodsUrl
+     */
+    public String getPaymentMethodsUrl() {
+        return paymentMethodsUrl;
     }
 
     /**

@@ -15,6 +15,10 @@ import br.com.uol.pagseguro.parser.TransactionParser;
 import br.com.uol.pagseguro.utils.HttpConnection;
 import br.com.uol.pagseguro.xmlparser.ErrorsParser;
 
+/**
+ * 
+ * Class Direct Payment Service
+ */
 public class DirectPaymentService {
 
     /**
@@ -35,6 +39,7 @@ public class DirectPaymentService {
     }
 
     /**
+     * Create a DirectTransaction
      * 
      * @param credentials
      * @param payment
