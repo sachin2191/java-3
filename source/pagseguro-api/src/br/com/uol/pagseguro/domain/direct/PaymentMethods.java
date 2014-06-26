@@ -1,6 +1,8 @@
 package br.com.uol.pagseguro.domain.direct;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import br.com.uol.pagseguro.enums.PaymentMethodCode;
@@ -50,6 +52,16 @@ public class PaymentMethods {
         }
 
         return false;
+    }
+
+    /**
+     * Gets a list of available payment methods of a payment Type
+     * 
+     * @param paymentMethodType
+     * @return a list of PaymentMethod
+     */
+    public List<PaymentMethod> getPaymentMethodsByType(PaymentMethodType paymentMethodType) {
+        return new ArrayList<PaymentMethod>(this.paymentMethods.get(paymentMethodType).values());
     }
 
 }

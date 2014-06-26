@@ -59,14 +59,32 @@ public class GetPaymentMethods {
             }
 
             /**
+             * Gets a list of available payment methods of an specific PaymentType
+             */
+
+            System.out.println("--- Payment methods of " + PaymentMethodType.CREDIT_CARD + " ---");
+            for (PaymentMethod paymentMethod : paymentMethods.getPaymentMethodsByType(PaymentMethodType.CREDIT_CARD)) {
+                System.out.println("" + paymentMethod);
+            }
+
+            System.out.println("");
+
+            /**
              * verify if a payment method is available
              */
-            System.out.println(paymentMethods.isAvailable(PaymentMethodCode.BANRISUL_ONLINE_TRANSFER));
-            System.out.println(paymentMethods.isAvailable(PaymentMethodCode.BANCO_BRASIL_DIRECT_DEPOSIT));
-            System.out.println(paymentMethods.isAvailable(PaymentMethodCode.DINERS_CREDIT_CARD));
-            System.out.println(paymentMethods.isAvailable(PaymentMethodCode.VALECARD_CREDIT_CARD));
-            System.out.println(paymentMethods.isAvailable(PaymentMethodCode.UNKNOWN_CODE));
-            System.out.println(paymentMethods.isAvailable(PaymentMethodCode.AMEX_CREDIT_CARD));
+            System.out.println("--- Vefify Status ---");
+            System.out.println("Status of " + PaymentMethodCode.BANRISUL_ONLINE_TRANSFER + ": "
+                    + paymentMethods.isAvailable(PaymentMethodCode.BANRISUL_ONLINE_TRANSFER));
+            System.out.println("Status of " + PaymentMethodCode.BANCO_BRASIL_DIRECT_DEPOSIT + ": "
+                    + paymentMethods.isAvailable(PaymentMethodCode.BANCO_BRASIL_DIRECT_DEPOSIT));
+            System.out.println("Status of " + PaymentMethodCode.DINERS_CREDIT_CARD + ": "
+                    + paymentMethods.isAvailable(PaymentMethodCode.DINERS_CREDIT_CARD));
+            System.out.println("Status of " + PaymentMethodCode.VALECARD_CREDIT_CARD + ": "
+                    + paymentMethods.isAvailable(PaymentMethodCode.VALECARD_CREDIT_CARD));
+            System.out.println("Status of " + PaymentMethodCode.UNKNOWN_CODE + ": "
+                    + paymentMethods.isAvailable(PaymentMethodCode.UNKNOWN_CODE));
+            System.out.println("Status of " + PaymentMethodCode.AMEX_CREDIT_CARD + ": "
+                    + paymentMethods.isAvailable(PaymentMethodCode.AMEX_CREDIT_CARD));
 
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
