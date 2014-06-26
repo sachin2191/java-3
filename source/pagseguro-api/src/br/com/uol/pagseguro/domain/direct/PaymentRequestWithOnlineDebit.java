@@ -3,25 +3,20 @@ package br.com.uol.pagseguro.domain.direct;
 import java.util.Map;
 
 /**
- * Represents the eletronic fund transfer payment method
+ * Represents the payment request of the online debit
  */
 public class PaymentRequestWithOnlineDebit extends PaymentRequest {
 
+    /**
+     * Bank name
+     */
     private String bankName;
 
     /**
-     * Initializes a new instance of the AbstractPaymentMethod class
+     * Initializes a new instance of the PaymentRequestWithOnlineDebit class
      */
     public PaymentRequestWithOnlineDebit() {
-    }
 
-    /**
-     * Initializes a new instance of the AbstractPaymentMethod class
-     * 
-     * @param bankName
-     */
-    public PaymentRequestWithOnlineDebit(String bankName) {
-        this.bankName = bankName;
     }
 
     /**
@@ -50,11 +45,6 @@ public class PaymentRequestWithOnlineDebit extends PaymentRequest {
         }
 
         return data;
-    }
-
-    @Override
-    public String toString() {
-        return "PaymentMethodEft [bankName=" + bankName + "]";
     }
 
 }

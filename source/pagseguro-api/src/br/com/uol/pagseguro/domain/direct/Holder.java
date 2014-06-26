@@ -5,27 +5,29 @@ import br.com.uol.pagseguro.domain.Phone;
 import br.com.uol.pagseguro.helper.PagSeguroUtil;
 
 /**
- * Represents the holder of the Credit Card
+ * Represents the holder of the credit card payment
  */
 public class Holder {
 
-    /** Holder Name */
-    private String name;
-
-    /** Holder Phone */
-    private Phone phone;
-
-    /** Holder Document */
-    private Document document;
-
-    /** Holder Birth Date */
-    private String birthDate;
+    /**
+     * Holder name
+     */
+    private final String name;
 
     /**
-     * Initializes a new instance of the Holder class
+     * Holder phone
      */
-    public Holder() {
-    }
+    private final Phone phone;
+
+    /**
+     * Holder document
+     */
+    private final Document document;
+
+    /**
+     * Holder birth date
+     */
+    private final String birthDate;
 
     /**
      * Initializes a new instance of the Holder class
@@ -50,26 +52,10 @@ public class Holder {
     }
 
     /**
-     * @param name
-     *            the holder name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * @return the holder phone
      */
     public Phone getPhone() {
         return phone;
-    }
-
-    /**
-     * @param phone
-     *            the holder phone to set
-     */
-    public void setPhone(Phone phone) {
-        this.phone = phone;
     }
 
     /**
@@ -80,32 +66,22 @@ public class Holder {
     }
 
     /**
-     * @param document
-     *            the holder document to set
-     */
-    public void setDocument(Document document) {
-        this.document = document;
-    }
-
-    /**
      * @return the holder birth date
      */
     public String getBirthDate() {
         return birthDate;
     }
 
-    /**
-     * @param birthDate
-     *            the holder birth Date to set
-     */
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
     @Override
     public String toString() {
-        return "Holder [name=" + name + ", document=" + document + ", birthDate=" + birthDate + ", phone=" + phone
-                + "]";
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Holder[");
+        sb.append("name=" + name);
+        sb.append(",phone=" + phone);
+        sb.append(",document=" + document);
+        sb.append(",birthDate=" + birthDate);
+        sb.append("]");
+        return sb.toString();
     }
 
 }

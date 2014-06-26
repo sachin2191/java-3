@@ -56,7 +56,7 @@ public class SessionService {
      * @return string
      * @throws PagSeguroServiceException
      */
-    public static String buildPaymentSessionRequestUrl(ConnectionData connectionData) throws PagSeguroServiceException {
+    private static String buildPaymentSessionRequestUrl(ConnectionData connectionData) throws PagSeguroServiceException {
         return connectionData.getPaymentSessionUrl() + "?" + connectionData.getCredentialsUrlQuery();
     }
 

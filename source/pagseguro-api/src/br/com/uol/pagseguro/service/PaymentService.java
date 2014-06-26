@@ -27,7 +27,6 @@ import br.com.uol.pagseguro.domain.Error;
 import br.com.uol.pagseguro.domain.PaymentRequest;
 import br.com.uol.pagseguro.enums.HttpStatus;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
-import br.com.uol.pagseguro.helper.PagSeguroUtil;
 import br.com.uol.pagseguro.logs.Log;
 import br.com.uol.pagseguro.parser.PaymentParser;
 import br.com.uol.pagseguro.utils.HttpConnection;
@@ -86,7 +85,7 @@ public class PaymentService {
 
         Map<Object, Object> data = PaymentParser.getData(paymentRequest);
 
-        String url = PaymentService.buildCheckoutRequestUrl(connectionData) + "&" + PagSeguroUtil.urlQuery(data);
+        String url = PaymentService.buildCheckoutRequestUrl(connectionData);
 
         HttpConnection connection = new HttpConnection();
         HttpStatus httpCodeStatus = null;

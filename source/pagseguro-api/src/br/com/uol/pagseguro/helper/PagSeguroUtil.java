@@ -36,10 +36,6 @@ import br.com.uol.pagseguro.properties.PagSeguroSystem;
 
 /**
  * @author asilva
- *
- */
-/**
- * @author asilva
  * 
  */
 public class PagSeguroUtil {
@@ -175,7 +171,7 @@ public class PagSeguroUtil {
     public static String removeAccents(String value) {
         String result = value;
         result = value.replaceAll("[Ã‚Ã€Ã�Ã„Ãƒ]", "A");
-        result = value.replaceAll("[Ã¢Ã£Ã Ã¡Ã¤]", "a");
+        result = value.replaceAll("[Ã¢Ã£Ã Ã¡Ã¤]", "a");
         result = value.replaceAll("[ÃŠÃˆÃ‰Ã‹]", "E");
         result = value.replaceAll("[ÃªÃ¨Ã©Ã«]", "e");
         result = value.replaceAll("ÃŽÃ�ÃŒÃ�", "I");

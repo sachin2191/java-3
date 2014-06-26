@@ -33,20 +33,20 @@ import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import br.com.uol.pagseguro.domain.direct.InstallmentXml;
+import br.com.uol.pagseguro.domain.installment.Installment;
+import br.com.uol.pagseguro.domain.installment.Installments;
 import br.com.uol.pagseguro.logs.Log;
 import br.com.uol.pagseguro.logs.Logger;
+import br.com.uol.pagseguro.utils.collections.CollectionsUtil;
+import br.com.uol.pagseguro.utils.collections.Translator;
 import br.com.uol.pagseguro.xmlparser.XMLParserUtils;
 
 /**
- * Parses a transaction XML in a List of <b>InstallmentXml</b> object
+ * Parses a installments XML in a <b>Installments</b> object
  * 
- * @see InstallmentXml
+ * @see Installments
  */
 public class InstallmentsParser {
-
-    private InstallmentsParser() {
-    }
 
     /**
      * PagSeguro Log tool
@@ -60,75 +60,60 @@ public class InstallmentsParser {
      * 
      * @param xmlInputStream
      * @return
-     * @throws ParserConfigurationException
-     * @throws SAXException
      * @throws IOException
+     * @throws ParserConfigurationException
      * @throws ParseException
+     * @throws SAXException
      */
-    public static List<InstallmentXml> readTransaction(InputStream xmlInputStream) throws ParserConfigurationException,
-            SAXException, IOException, ParseException {
+    public static Installments readTransaction(InputStream xmlInputStream) throws IOException, //
+            ParserConfigurationException, //
+            ParseException, //
+            SAXException {
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        InputSource inputSource = new InputSource(xmlInputStream);
+        Document document = documentBuilder.parse(inputSource);
 
-        InputSource is = new InputSource(xmlInputStream);
-        Document doc = dBuilder.parse(is);
+        Element installmentsElement = document.getDocumentElement();
+        List<Installment> installments = new ArrayList<Installment>();
 
-        String tagValue = null;
+        InstallmentsParser.log.debug("Parsing installments");
 
-        Element installmentsElement = doc.getDocumentElement();
-        List<InstallmentXml> installments = new ArrayList<InstallmentXml>();
+        List<Element> installmentElements = XMLParserUtils.getElements("installment", installmentsElement);
+        for (int i = 0; i < installmentElements.size(); i++) {
+            Element element = installmentElements.get(i);
 
-        InstallmentsParser.log.debug("Parsing transaction");
+            // setting <installments><installment><cardBrand>
+            String cardBrand = XMLParserUtils.getTagValue("cardBrand", element);
 
-        // setting <installments><installment>
-        // Element itemsElement = XMLParserUtils.getElement("installments", installmentsElement);
-        if (installmentsElement != null) {
-            List<Element> itElements = XMLParserUtils.getElements("installment", installmentsElement);
+            // setting <installments><installment><quantity>
+            String quantity = XMLParserUtils.getTagValue("quantity", element);
 
-            for (int i = 0; i < itElements.size(); i++) {
-                Element itElement = itElements.get(i);
+            // setting <installments><installment><amount>
+            String amount = XMLParserUtils.getTagValue("amount", element);
 
-                // setting <transaction><items><item>
-                InstallmentXml installment = new InstallmentXml();
+            // setting <installments><installment><totalAmount>
+            String totalAmount = XMLParserUtils.getTagValue("totalAmount", element);
 
-                // setting <transaction><items><item><id>
-                tagValue = XMLParserUtils.getTagValue("cardBrand", itElement);
-                if (tagValue != null) {
-                    installment.setCardBrand(tagValue);
-                }
+            // setting <installments><installment><interestFree>
+            String interestFree = XMLParserUtils.getTagValue("interestFree", element);
 
-                // setting <transaction><items><item><description>
-                tagValue = XMLParserUtils.getTagValue("quantity", itElement);
-                if (tagValue != null) {
-                    installment.setQuantity(new BigDecimal(tagValue));
-                }
-
-                // setting <transaction><items><item><quantity>
-                tagValue = XMLParserUtils.getTagValue("amount", itElement);
-                if (tagValue != null) {
-                    installment.setAmount(new BigDecimal(tagValue));
-                }
-
-                // setting <transaction><items><item><amount>
-                tagValue = XMLParserUtils.getTagValue("totalAmount", itElement);
-                if (tagValue != null) {
-                    installment.setTotalAmount(new BigDecimal(tagValue));
-                }
-
-                // setting <transaction><items><item><amount>
-                tagValue = XMLParserUtils.getTagValue("interestFree", itElement);
-                if (tagValue != null) {
-                    installment.setInterestFree(Boolean.valueOf(tagValue));
-                }
-
-                // adding item for items list
-                installments.add(installment);
-            }
-
+            // adding item for items list
+            installments.add(new Installment(cardBrand, //
+                    Integer.parseInt(quantity), //
+                    new BigDecimal(amount), //
+                    new BigDecimal(totalAmount), //
+                    Boolean.parseBoolean(interestFree)));
         }
 
-        return installments;
+        return new Installments(CollectionsUtil.createMultiMap(installments, new Translator<Installment, String>() {
 
+            @Override
+            public String translate(Installment installment) {
+                return installment.getCardBrand();
+            }
+
+        }));
     }
 }

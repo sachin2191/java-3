@@ -18,9 +18,10 @@
 package br.com.uol.pagseguro.example;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-import br.com.uol.pagseguro.domain.direct.InstallmentXml;
+import br.com.uol.pagseguro.domain.AccountCredentials;
+import br.com.uol.pagseguro.domain.installment.Installment;
+import br.com.uol.pagseguro.domain.installment.Installments;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.properties.PagSeguroConfig;
 import br.com.uol.pagseguro.service.InstallmentService;
@@ -31,26 +32,29 @@ import br.com.uol.pagseguro.service.InstallmentService;
 public class GetInstallments {
 
     public static void main(String[] args) {
-        List<InstallmentXml> installments;
-        try {
-            // Installments available from visa
-            installments = InstallmentService.getInstallmentsAvailable(PagSeguroConfig.getAccountCredentials(), "visa",
-                    new BigDecimal("10.00"));
+        Installments installments;
+        String cardBrand;
 
-            for (InstallmentXml installment : installments) {
-                System.out.println(installment.getCardBrand() + " - " + installment.getQuantity() + " x "
-                        + installment.getAmount());
+        try {
+            final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
+
+            cardBrand = "visa";
+            installments = InstallmentService.getInstallments(accountCredentials, //
+                    new BigDecimal("5000.00"), //
+                    cardBrand);
+
+            for (Installment installment : installments.get(cardBrand)) {
+                System.out.println(installment);
             }
 
-            System.out.println("----------------------------------------------------------------");
+            // ----------
 
-            // Installments available from all credit card brands
-            installments = InstallmentService.getInstallmentsAvailable(PagSeguroConfig.getAccountCredentials(), null,
-                    new BigDecimal("10.00"));
+            cardBrand = "mastercard";
+            installments = InstallmentService.getInstallments(accountCredentials, //
+                    new BigDecimal("5000.00"));
 
-            for (InstallmentXml installment : installments) {
-                System.out.println(installment.getCardBrand() + " - " + installment.getQuantity() + " x "
-                        + installment.getAmount());
+            for (Installment installment : installments.get(cardBrand)) {
+                System.out.println(installment);
             }
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());

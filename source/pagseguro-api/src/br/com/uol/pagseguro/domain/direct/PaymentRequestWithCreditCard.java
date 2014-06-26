@@ -8,52 +8,45 @@ import br.com.uol.pagseguro.domain.Phone;
 import br.com.uol.pagseguro.enums.DocumentType;
 
 /**
- * Represents the credit card payment method
+ * Represents the payment request of the credit card
  */
 public class PaymentRequestWithCreditCard extends PaymentRequest {
 
-    /** Token */
+    /**
+     * Token
+     */
     private String token;
 
-    /** Installment */
+    /**
+     * Installment
+     */
     private Installment installment;
 
-    /** Holder */
+    /**
+     * Holder
+     */
     private Holder holder;
 
-    /** Billing Address */
+    /**
+     * Billing address
+     */
     private Address billingAddress;
 
-    /** Presencial */
+    /**
+     * Presencial
+     */
     private Boolean presencial;
 
-    /** Dynamic Payment Method Message */
+    /**
+     * Dynamic payment method message
+     */
     private String dynamicPaymentMethodMessage;
 
     /**
-     * Initializes a new instance of the PaymentMethodCreditCard class
+     * Initializes a new instance of the PaymentRequestWithCreditCard class
      */
     public PaymentRequestWithCreditCard() {
-    }
 
-    /**
-     * Initializes a new instance of the PaymentMethodCreditCard class
-     * 
-     * @param token
-     * @param installment
-     * @param holder
-     * @param billingAddress
-     * @param dynamicPaymentMethodMessage
-     * @param presencial
-     */
-    public PaymentRequestWithCreditCard(String token, Installment installment, Holder holder, Address billingAddress,
-            String dynamicPaymentMethodMessage, Boolean presencial) {
-        this.token = token;
-        this.installment = installment;
-        this.holder = holder;
-        this.billingAddress = billingAddress;
-        this.dynamicPaymentMethodMessage = dynamicPaymentMethodMessage;
-        this.presencial = presencial;
     }
 
     /**
@@ -146,11 +139,6 @@ public class PaymentRequestWithCreditCard extends PaymentRequest {
         this.presencial = presencial;
     }
 
-    /*
-     * parse object
-     * 
-     * @see AbstractPaymentMethod#parse()
-     */
     @Override
     public Map<Object, Object> getMap() {
         final Map<Object, Object> data = super.getMap();
@@ -259,13 +247,6 @@ public class PaymentRequestWithCreditCard extends PaymentRequest {
         }
 
         return data;
-    }
-
-    @Override
-    public String toString() {
-        return "PaymentMethodCreditCard [token=" + token + ", installment=" + installment + ", holder=" + holder
-                + ", billingAddress=" + billingAddress + ", dynamicPaymentMethodMessageCreditCard="
-                + dynamicPaymentMethodMessage + ", presencial=" + presencial + "]";
     }
 
 }

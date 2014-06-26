@@ -92,6 +92,7 @@ public class CreateDefaultPaymentWithCreditCard {
                 "Av. Brig. Faria Lima", //
                 "1384", //
                 "5º andar"));
+
         try {
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
 

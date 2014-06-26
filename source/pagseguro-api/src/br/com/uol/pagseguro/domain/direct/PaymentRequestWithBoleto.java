@@ -3,38 +3,32 @@ package br.com.uol.pagseguro.domain.direct;
 import java.util.Map;
 
 /**
- * Represents the boleto payment method
+ * Represents the payment request of the boleto
  */
 public class PaymentRequestWithBoleto extends PaymentRequest {
 
-    /** Dynamic Payment Method Message */
+    /**
+     * Dynamic payment method message
+     */
     private String dynamicPaymentMethodMessage;
 
     /**
-     * Initializes a new instance of the PaymentMethodBoleto class
+     * Initializes a new instance of the PaymentRequestWithBoleto class
      */
     public PaymentRequestWithBoleto() {
+
     }
 
     /**
-     * Initializes a new instance of the PaymentMethodBoleto class
-     * 
-     * @param dynamicPaymentMethodMessage
-     */
-    public PaymentRequestWithBoleto(String dynamicPaymentMethodMessage) {
-        this.dynamicPaymentMethodMessage = dynamicPaymentMethodMessage;
-    }
-
-    /**
-     * @return the dynamicPaymentMethodMessageBoleto
+     * @return the dynamicPaymentMethodMessage
      */
     public String getDynamicPaymentMethodMessage() {
         return dynamicPaymentMethodMessage;
     }
 
     /**
-     * @param dynamicPaymentMethodMessageBoleto
-     *            the dynamicPaymentMethodMessageBoleto to set
+     * @param dynamicPaymentMethodMessage
+     *            the dynamicPaymentMethodMessage to set
      */
     public void setDynamicPaymentMethodMessage(String dynamicPaymentMethodMessage) {
         this.dynamicPaymentMethodMessage = dynamicPaymentMethodMessage;
@@ -51,11 +45,6 @@ public class PaymentRequestWithBoleto extends PaymentRequest {
         }
 
         return data;
-    }
-
-    @Override
-    public String toString() {
-        return "PaymentMethodBoleto [dynamicPaymentMethodMessageBoleto=" + dynamicPaymentMethodMessage + "]";
     }
 
 }

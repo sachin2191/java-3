@@ -23,34 +23,54 @@ import br.com.uol.pagseguro.enums.ShippingType;
  */
 public abstract class PaymentRequest {
 
-    /** Payment Mode */
+    /**
+     * Payment Mode
+     */
     private PaymentMode paymentMode;
 
-    /** Receiver E-Mail */
+    /**
+     * Receiver E-Mail
+     */
     private String receiverEmail;
 
-    /** Currency */
+    /**
+     * Currency
+     */
     private Currency currency;
 
-    /** Notification URL */
+    /**
+     * Notification URL
+     */
     private String notificationURL;
 
-    /** Reference */
+    /**
+     * Reference
+     */
     private String reference;
 
-    /** Sender */
+    /**
+     * Sender
+     */
     private Sender sender;
 
-    /** Shipping */
+    /**
+     * Shipping
+     */
     private Shipping shipping;
 
-    /** Extra Amount */
+    /**
+     * Extra Amount
+     */
     private BigDecimal extraAmount;
 
-    /** Items */
+    /**
+     * Items
+     */
     private List<Item> items;
 
-    /** Commission */
+    /**
+     * Commission
+     */
     private Commission commission;
 
     /**
@@ -107,7 +127,7 @@ public abstract class PaymentRequest {
 
     /**
      * @param notificationUrl
-     *            the notification Url to set
+     *            the notification URL to set
      */
     public void setNotificationURL(String notificationURL) {
         this.notificationURL = notificationURL;
@@ -430,16 +450,5 @@ public abstract class PaymentRequest {
 
         return data;
     };
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Payment(Reference=");
-        sb.append(reference);
-        sb.append(",SenderEmail=");
-        sb.append(sender != null ? sender.getEmail() : null);
-        sb.append(")");
-        return sb.toString();
-    }
 
 }

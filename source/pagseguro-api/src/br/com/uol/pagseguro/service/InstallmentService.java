@@ -20,10 +20,9 @@ package br.com.uol.pagseguro.service;
 
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
-import java.util.List;
 
 import br.com.uol.pagseguro.domain.Credentials;
-import br.com.uol.pagseguro.domain.direct.InstallmentXml;
+import br.com.uol.pagseguro.domain.installment.Installments;
 import br.com.uol.pagseguro.enums.HttpStatus;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.logs.Log;
@@ -52,21 +51,28 @@ public class InstallmentService {
      * @return string
      * @throws PagSeguroServiceException
      */
-    public static String buildInstallmentsRequestUrl(ConnectionData connectionData) throws PagSeguroServiceException {
+    private static String buildInstallmentsRequestUrl(ConnectionData connectionData) throws PagSeguroServiceException {
         return connectionData.getInstallmentsUrl() + "?" + connectionData.getCredentialsUrlQuery();
     }
 
-    public static List<InstallmentXml> getInstallmentsAvailable(Credentials credentials, String creditCardBrand,
-            BigDecimal amount) throws PagSeguroServiceException {
-        log.info(String.format("InstallmentService.getInstallmentsAvailable( %s ) - begin", creditCardBrand + " - "
-                + amount));
+    public static Installments getInstallments(Credentials credentials, //
+            BigDecimal amount) //
+            throws PagSeguroServiceException {
+        return getInstallments(credentials, amount, null);
+    }
+
+    public static Installments getInstallments(Credentials credentials, //
+            BigDecimal amount, //
+            String cardBrand) //
+            throws PagSeguroServiceException {
+        log.info(String.format("InstallmentService.getInstallmentsAvailable( %s ) - begin", cardBrand + " - " + amount));
 
         ConnectionData connectionData = new ConnectionData(credentials);
 
         String url = InstallmentService.buildInstallmentsRequestUrl(connectionData) + "&amount=" + amount.toString();
 
-        if (creditCardBrand != null) {
-            url += "&cardBrand=" + creditCardBrand;
+        if (cardBrand != null) {
+            url += "&cardBrand=" + cardBrand;
         }
 
         HttpConnection connection = new HttpConnection();
@@ -82,8 +88,8 @@ public class InstallmentService {
                 throw new PagSeguroServiceException("Connection Timeout");
             } else if (HttpURLConnection.HTTP_OK == httpCodeStatus.getCode().intValue()) {
 
-                log.info(String.format("InstallmentService.getInstallmentsAvailable( %1s ) - end  %2s )",
-                        creditCardBrand, amount));
+                log.info(String.format("InstallmentService.getInstallmentsAvailable( %1s ) - end  %2s )", cardBrand,
+                        amount));
 
                 return InstallmentsParser.readTransaction(response.getInputStream());
 
@@ -91,8 +97,8 @@ public class InstallmentService {
 
                 PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus);
 
-                log.error(String.format("InstallmentService.getInstallmentsAvailable( %1s ) - error %2s",
-                        creditCardBrand, exception.getMessage()));
+                log.error(String.format("InstallmentService.getInstallmentsAvailable( %1s ) - error %2s", cardBrand,
+                        exception.getMessage()));
 
                 throw exception;
 
@@ -105,7 +111,7 @@ public class InstallmentService {
             throw e;
         } catch (Exception e) {
 
-            log.error(String.format("PaymentService.getInstallmentsAvailable( %1s ) - error %2s", creditCardBrand,
+            log.error(String.format("PaymentService.getInstallmentsAvailable( %1s ) - error %2s", cardBrand,
                     e.getMessage()));
 
             throw new PagSeguroServiceException(httpCodeStatus, e);

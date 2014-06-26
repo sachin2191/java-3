@@ -3,22 +3,19 @@ package br.com.uol.pagseguro.domain.direct;
 import java.math.BigDecimal;
 
 /**
- * Represents the definition of intallment of a credit card payment
+ * Represents the installment of a credit card payment
  */
 public class Installment {
 
-    /** Quantity of installments */
-    private Integer quantity;
-
-    /** value of each installment */
-    private BigDecimal value;
+    /**
+     * Quantity of installments
+     */
+    private final Integer quantity;
 
     /**
-     * Initializes a new instance of the Installment class
+     * Value of each installment
      */
-    public Installment() {
-
-    }
+    private final BigDecimal value;
 
     /**
      * Initializes a new instance of the Installment class
@@ -27,7 +24,6 @@ public class Installment {
      * @param value
      */
     public Installment(Integer quantity, BigDecimal value) {
-        super();
         this.quantity = quantity;
         this.value = value;
     }
@@ -40,31 +36,20 @@ public class Installment {
     }
 
     /**
-     * @param quantity
-     *            the quantity of installments to set
-     */
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    /**
-     * @return the value of eatch installment
+     * @return the value of each installment
      */
     public BigDecimal getValue() {
         return value;
     }
 
-    /**
-     * @param value
-     *            the value of eatch installment to set
-     */
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
-
     @Override
     public String toString() {
-        return "Installment [quantity=" + quantity + ", value=" + value + "]";
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Installment[");
+        sb.append("quantity=" + quantity);
+        sb.append(",value=" + value);
+        sb.append("]");
+        return sb.toString();
     }
 
 }
