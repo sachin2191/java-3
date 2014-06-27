@@ -78,7 +78,6 @@ public class Installment implements Comparable<Installment> {
         return interestFree;
     }
 
-    @Override
     public int compareTo(Installment other) {
         if (other == null) {
             return -1;

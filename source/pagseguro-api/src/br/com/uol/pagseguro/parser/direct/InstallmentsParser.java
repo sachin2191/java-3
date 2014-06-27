@@ -109,7 +109,6 @@ public class InstallmentsParser {
 
         return new Installments(CollectionsUtil.createMultiMap(installments, new Translator<Installment, String>() {
 
-            @Override
             public String translate(Installment installment) {
                 return installment.getCardBrand();
             }
