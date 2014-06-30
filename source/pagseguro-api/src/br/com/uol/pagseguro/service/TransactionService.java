@@ -26,72 +26,68 @@ public class TransactionService {
      */
     private static Log log = new Log(TransactionService.class);
 
-    private static String buildDirectPaymentRequestUrl(ConnectionData connectionData) throws PagSeguroServiceException {
+    private static String buildDirectPaymentRequestUrl(ConnectionData connectionData) //
+            throws PagSeguroServiceException {
         return connectionData.getDirectPaymentUrl() + "?" + connectionData.getCredentialsUrlQuery();
     }
 
-    /**
-     * Create a Transaction
-     * 
-     * @param credentials
-     * @param payment
-     * @return string
-     * @throws PagSeguroServiceException
-     */
-    public static Transaction createTransaction(Credentials credentials, PaymentRequest payment)
+    public static Transaction createTransaction(Credentials credentials, //
+            PaymentRequest payment) //
             throws PagSeguroServiceException {
-        log.info(String.format("TransactionService.createTransaction( %s ) - begin", payment.toString()));
+        log.info(String.format("TransactionService.createTransaction(%s) - begin", //
+                payment.toString()));
 
         ConnectionData connectionData = new ConnectionData(credentials);
 
         Map<Object, Object> data = payment.getMap();
 
-        String url = buildDirectPaymentRequestUrl(connectionData);
+        String url = TransactionService.buildDirectPaymentRequestUrl(connectionData);
 
         HttpConnection connection = new HttpConnection();
         HttpStatus httpCodeStatus = null;
 
-        HttpURLConnection response = connection.post(url, data, connectionData.getServiceTimeout(),
+        HttpURLConnection response = connection.post(url, //
+                data, //
+                connectionData.getServiceTimeout(), //
                 connectionData.getCharset());
 
         try {
             httpCodeStatus = HttpStatus.fromCode(response.getResponseCode());
+
             if (httpCodeStatus == null) {
                 throw new PagSeguroServiceException("Connection Timeout");
             } else if (HttpURLConnection.HTTP_OK == httpCodeStatus.getCode().intValue()) {
-
                 Transaction transaction = TransactionParser.readTransaction(response.getInputStream());
 
-                log.info(String.format("TransactionService.createTransaction( %1s ) - end  %2s )", payment.toString(),
-                        transaction.getCode()));
+                log.info("TransactionService.createTransaction() - end");
 
                 return transaction;
-
             } else if (HttpURLConnection.HTTP_BAD_REQUEST == httpCodeStatus.getCode().intValue()) {
-
                 List<Error> errors = ErrorsParser.readErrosXml(response.getErrorStream());
 
                 PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus, errors);
 
-                log.error(String.format("TransactionService.createTransaction( %1s ) - error %2s", payment.toString(),
+                log.error(String.format("TransactionService.createTransaction() - error %s", //
                         exception.getMessage()));
 
                 throw exception;
+            } else if (HttpURLConnection.HTTP_UNAUTHORIZED == httpCodeStatus.getCode().intValue()) {
+                PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus);
 
+                log.error(String.format("TransactionService.createTransaction() - error %s", //
+                        exception.getMessage()));
+
+                throw exception;
             } else {
-
                 throw new PagSeguroServiceException(httpCodeStatus);
             }
-
         } catch (PagSeguroServiceException e) {
             throw e;
         } catch (Exception e) {
-
-            log.error(String.format("TransactionService.createTransaction( %1s ) - error %2s", payment.toString(),
+            log.error(String.format("TransactionService.createTransaction() - error %s", //
                     e.getMessage()));
 
             throw new PagSeguroServiceException(httpCodeStatus, e);
-
         } finally {
             response.disconnect();
         }

@@ -20,14 +20,17 @@ package br.com.uol.pagseguro.service;
 
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
+import java.util.List;
 
 import br.com.uol.pagseguro.domain.Credentials;
+import br.com.uol.pagseguro.domain.Error;
 import br.com.uol.pagseguro.domain.installment.Installments;
 import br.com.uol.pagseguro.enums.HttpStatus;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.logs.Log;
 import br.com.uol.pagseguro.parser.InstallmentsParser;
 import br.com.uol.pagseguro.utils.HttpConnection;
+import br.com.uol.pagseguro.xmlparser.ErrorsParser;
 
 /**
  * 
@@ -40,7 +43,8 @@ public class InstallmentService {
      */
     private static Log log = new Log(InstallmentService.class);
 
-    private static String buildInstallmentsRequestUrl(ConnectionData connectionData) throws PagSeguroServiceException {
+    private static String buildInstallmentsRequestUrl(ConnectionData connectionData) //
+            throws PagSeguroServiceException {
         return connectionData.getInstallmentsUrl() + "?" + connectionData.getCredentialsUrlQuery();
     }
 
@@ -54,60 +58,65 @@ public class InstallmentService {
             BigDecimal amount, //
             String cardBrand) //
             throws PagSeguroServiceException {
-        log.info(String.format("InstallmentService.getInstallmentsAvailable( %s ) - begin", cardBrand + " - " + amount));
+        log.info(String.format("InstallmentService.getInstallments(%1s, %2s) - begin", //
+                amount, //
+                cardBrand));
 
         ConnectionData connectionData = new ConnectionData(credentials);
 
-        String url = InstallmentService.buildInstallmentsRequestUrl(connectionData) + "&amount=" + amount.toString();
-
+        StringBuilder url = new StringBuilder(InstallmentService.buildInstallmentsRequestUrl(connectionData));
+        url.append("&amount=" + amount.toString());
         if (cardBrand != null) {
-            url += "&cardBrand=" + cardBrand;
+            url.append("&cardBrand=" + cardBrand);
         }
 
         HttpConnection connection = new HttpConnection();
         HttpStatus httpCodeStatus = null;
 
-        HttpURLConnection response = connection.get(url, connectionData.getServiceTimeout(),
+        HttpURLConnection response = connection.get(url.toString(), //
+                connectionData.getServiceTimeout(), //
                 connectionData.getCharset());
 
         try {
-
             httpCodeStatus = HttpStatus.fromCode(response.getResponseCode());
+
             if (httpCodeStatus == null) {
                 throw new PagSeguroServiceException("Connection Timeout");
             } else if (HttpURLConnection.HTTP_OK == httpCodeStatus.getCode().intValue()) {
+                Installments installments = InstallmentsParser.readInstallments(response.getInputStream());
 
-                log.info(String.format("InstallmentService.getInstallmentsAvailable( %1s ) - end  %2s )", cardBrand,
-                        amount));
+                log.info("InstallmentService.getInstallments() - end");
 
-                return InstallmentsParser.readInstallments(response.getInputStream());
+                return installments;
+            } else if (HttpURLConnection.HTTP_BAD_REQUEST == httpCodeStatus.getCode().intValue()) {
+                List<Error> errors = ErrorsParser.readErrosXml(response.getErrorStream());
 
-            } else if (HttpURLConnection.HTTP_UNAUTHORIZED == httpCodeStatus.getCode().intValue()) {
+                PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus, errors);
 
-                PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus);
-
-                log.error(String.format("InstallmentService.getInstallmentsAvailable( %1s ) - error %2s", cardBrand,
+                log.error(String.format("InstallmentService.getInstallments() - error %s", //
                         exception.getMessage()));
 
                 throw exception;
+            } else if (HttpURLConnection.HTTP_UNAUTHORIZED == httpCodeStatus.getCode().intValue()) {
+                PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus);
 
+                log.error(String.format("InstallmentService.getInstallments() - error %s", //
+                        exception.getMessage()));
+
+                throw exception;
             } else {
-
                 throw new PagSeguroServiceException(httpCodeStatus);
             }
-
         } catch (PagSeguroServiceException e) {
             throw e;
         } catch (Exception e) {
-
-            log.error(String.format("PaymentService.getInstallmentsAvailable( %1s ) - error %2s", cardBrand,
+            log.error(String.format("PaymentService.getInstallments() - error %s", //
                     e.getMessage()));
 
             throw new PagSeguroServiceException(httpCodeStatus, e);
-
         } finally {
             response.disconnect();
         }
-
     }
+
 }

@@ -31,7 +31,6 @@ import br.com.uol.pagseguro.service.PaymentMethodService;
 public class GetPaymentMethods {
 
     public static void main(String[] args) {
-
         try {
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
 

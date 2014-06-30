@@ -24,6 +24,9 @@ public class PaymentMethod implements Comparable<PaymentMethod> {
      * @param status
      */
     public PaymentMethod(int code, String name, String displayName, PaymentMethodStatus status) {
+        if (name == null || displayName == null || status == null) {
+            throw new IllegalArgumentException();
+        }
         this.code = code;
         this.name = name;
         this.displayName = displayName;

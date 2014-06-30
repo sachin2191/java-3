@@ -42,23 +42,24 @@ public class PaymentMethodService {
      */
     private static Log log = new Log(PaymentMethodService.class);
 
-    private static String buildPaymentMethodsUrl(ConnectionData connectionData, //
-            String publicKey) {
-        return connectionData.getPaymentMethodsUrl() + "?publicKey=" + publicKey;
+    private static String buildPaymentMethodsUrl(ConnectionData connectionData) {
+        return connectionData.getPaymentMethodsUrl();
     }
 
-    public static PaymentMethods getPaymentMethods(Credentials credentials, String publicKey)
+    public static PaymentMethods getPaymentMethods(Credentials credentials, //
+            String publicKey) //
             throws PagSeguroServiceException {
-        log.info("PaymentMethodService.getPaymentMethods - begin");
+        log.info("PaymentMethodService.getPaymentMethods() - begin");
 
         ConnectionData connectionData = new ConnectionData(credentials);
 
-        String url = buildPaymentMethodsUrl(connectionData, publicKey);
+        StringBuilder url = new StringBuilder(PaymentMethodService.buildPaymentMethodsUrl(connectionData));
+        url.append("?publicKey=" + publicKey);
 
         HttpConnection connection = new HttpConnection();
         HttpStatus httpCodeStatus = null;
 
-        HttpURLConnection response = connection.get(url, //
+        HttpURLConnection response = connection.get(url.toString(), //
                 connectionData.getServiceTimeout(), //
                 connectionData.getCharset());
 
@@ -78,7 +79,15 @@ public class PaymentMethodService {
 
                 PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus, errors);
 
-                log.error(String.format("PaymentMethodService.getPaymentMethods() - error %1s", exception.getMessage()));
+                log.error(String.format("PaymentMethodService.getPaymentMethods() - error %s", //
+                        exception.getMessage()));
+
+                throw exception;
+            } else if (HttpURLConnection.HTTP_UNAUTHORIZED == httpCodeStatus.getCode().intValue()) {
+                PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus);
+
+                log.error(String.format("PaymentMethodService.getPaymentMethods() - error %s", //
+                        exception.getMessage()));
 
                 throw exception;
             } else {
@@ -87,7 +96,8 @@ public class PaymentMethodService {
         } catch (PagSeguroServiceException e) {
             throw e;
         } catch (Exception e) {
-            log.error(String.format("PaymentMethodService.getPaymentMethods() - error %1s", e.getMessage()));
+            log.error(String.format("PaymentMethodService.getPaymentMethods() - error %s", //
+                    e.getMessage()));
 
             throw new PagSeguroServiceException(httpCodeStatus, e);
         } finally {

@@ -36,6 +36,9 @@ public class Installment implements Comparable<Installment> {
             BigDecimal amount, //
             BigDecimal totalAmount, //
             boolean interestFree) {
+        if (cardBrand == null || amount == null || totalAmount == null) {
+            throw new IllegalArgumentException();
+        }
         this.cardBrand = cardBrand;
         this.quantity = quantity;
         this.amount = amount;

@@ -33,6 +33,7 @@ public class Installments implements Iterable<Installment> {
         if (cardBrand == null) {
             throw new IllegalArgumentException();
         }
+
         final List<Installment> installmentList = installments.get(cardBrand);
         if (installmentList == null || installmentList.size() == 0) {
             return Collections.emptyList();
@@ -43,10 +44,13 @@ public class Installments implements Iterable<Installment> {
     }
 
     public Iterator<Installment> iterator() {
-        final ArrayList<Installment> list = new ArrayList<Installment>();
-        for (List<Installment> e : installments.values()) {
-            list.addAll(e);
+        final ArrayList<Installment> installmentList = new ArrayList<Installment>();
+        for (List<Installment> value : installments.values()) {
+            installmentList.addAll(value);
         }
-        return list.iterator();
+
+        Collections.sort(installmentList);
+        return Collections.unmodifiableList(installmentList).iterator();
     }
+
 }

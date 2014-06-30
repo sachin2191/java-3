@@ -249,4 +249,15 @@ public class CreditCardPaymentRequest extends PaymentRequest {
         return data;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("CreditCardPaymentRequest[");
+        sb.append("paymentMode=" + getPaymentMode());
+        sb.append(",reference=" + getReference());
+        sb.append(",senderEmail=" + getSender() != null ? getSender().getEmail() : null);
+        sb.append("]");
+        return sb.toString();
+    }
+
 }

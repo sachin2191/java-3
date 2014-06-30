@@ -62,6 +62,7 @@ public class PaymentMethods {
         if (paymentMethodType == null) {
             throw new IllegalArgumentException();
         }
+
         final Map<Integer, PaymentMethod> paymentMethodsByType = paymentMethods.get(paymentMethodType);
         if (paymentMethodsByType == null) {
             return Collections.emptyList();

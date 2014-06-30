@@ -123,4 +123,5 @@ public class PaymentMethodsParser {
 
         return new PaymentMethods(paymentMethods);
     }
+
 }

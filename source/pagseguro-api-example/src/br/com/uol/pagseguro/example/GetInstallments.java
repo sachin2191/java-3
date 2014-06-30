@@ -47,7 +47,7 @@ public class GetInstallments {
                 System.out.println(installment);
             }
 
-            // ----------
+            System.out.println();
 
             cardBrand = "mastercard";
             installments = InstallmentService.getInstallments(accountCredentials, //

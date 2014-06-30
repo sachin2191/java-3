@@ -47,4 +47,15 @@ public class BoletoPaymentRequest extends PaymentRequest {
         return data;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("BoletoPaymentRequest[");
+        sb.append("paymentMode=" + getPaymentMode());
+        sb.append(",reference=" + getReference());
+        sb.append(",senderEmail=" + getSender() != null ? getSender().getEmail() : null);
+        sb.append("]");
+        return sb.toString();
+    }
+
 }
