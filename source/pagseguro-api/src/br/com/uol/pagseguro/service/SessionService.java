@@ -40,46 +40,35 @@ import br.com.uol.pagseguro.xmlparser.XMLParserUtils;
  */
 public class SessionService {
 
-    private SessionService() {
-    }
-
     /**
      * @var Log
      */
     private static Log log = new Log(SessionService.class);
 
-    /**
-     * Build a Direct Payment Session Request Url
-     * 
-     * @param ConnectionData
-     *            connectionData
-     * @return string
-     * @throws PagSeguroServiceException
-     */
-    private static String buildPaymentSessionRequestUrl(ConnectionData connectionData) throws PagSeguroServiceException {
+    private static String buildSessionRequestUrl(ConnectionData connectionData) throws PagSeguroServiceException {
         return connectionData.getPaymentSessionUrl() + "?" + connectionData.getCredentialsUrlQuery();
     }
 
-    public static String createPaymentSession(Credentials credentials) throws PagSeguroServiceException {
-        log.info(String.format("SessionService.createPaymentSession( %s ) - begin", credentials.toString()));
+    public static String createSession(Credentials credentials) throws PagSeguroServiceException {
+        log.info(String.format("SessionService.createSession( %s ) - begin", credentials.toString()));
 
         ConnectionData connectionData = new ConnectionData(credentials);
 
-        String url = SessionService.buildPaymentSessionRequestUrl(connectionData);
+        String url = SessionService.buildSessionRequestUrl(connectionData);
 
         HttpConnection connection = new HttpConnection();
         HttpStatus httpCodeStatus = null;
 
-        HttpURLConnection response = connection.get(url, connectionData.getServiceTimeout(),
+        HttpURLConnection response = connection.get(url, //
+                connectionData.getServiceTimeout(), //
                 connectionData.getCharset());
 
         try {
-
             httpCodeStatus = HttpStatus.fromCode(response.getResponseCode());
+
             if (httpCodeStatus == null) {
                 throw new PagSeguroServiceException("Connection Timeout");
             } else if (HttpURLConnection.HTTP_OK == httpCodeStatus.getCode().intValue()) {
-
                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 
@@ -93,38 +82,32 @@ public class SessionService {
                 // parsing <startPaymentSessionResult><sessionId>
                 tagValue = XMLParserUtils.getTagValue("sessionId", paymentSessionElement);
 
-                log.info(String.format("SessionService.createPaymentSession( %1s ) - end  %2s )",
-                        credentials.toString(), tagValue));
+                log.info(String.format("SessionService.createSession( %1s ) - end  %2s )", credentials.toString(),
+                        tagValue));
 
                 return tagValue;
-
             } else if (HttpURLConnection.HTTP_UNAUTHORIZED == httpCodeStatus.getCode().intValue()) {
-
                 PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus);
 
-                log.error(String.format("SessionService.createPaymentSession( %1s ) - error %2s",
-                        credentials.toString(), exception.getMessage()));
+                log.error(String.format("SessionService.createSession( %1s ) - error %2s", //
+                        credentials.toString(), //
+                        exception.getMessage()));
 
                 throw exception;
-
             } else {
-
                 throw new PagSeguroServiceException(httpCodeStatus);
             }
-
         } catch (PagSeguroServiceException e) {
             throw e;
         } catch (Exception e) {
-
-            log.error(String.format("SessionService.createPaymentSession( %1s ) - error %2s", credentials.toString(),
+            log.error(String.format("SessionService.createSession( %1s ) - error %2s", //
+                    credentials.toString(), //
                     e.getMessage()));
 
             throw new PagSeguroServiceException(httpCodeStatus, e);
-
         } finally {
             response.disconnect();
         }
-
     }
 
 }

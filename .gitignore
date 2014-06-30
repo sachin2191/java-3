@@ -1,26 +1,30 @@
+*.class
+
 #################
 ## Eclipse
 #################
 
-*.pydevproject
-.project
+.classpath
 .metadata
-bin/
+.project
+.settings
+bin
+target
+
+*.pydevproject
 tmp/
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
-.classpath
-.settings/
 .loadpath
 
 #################
 ## IntelliJ
 #################
-.idea/
 *.iml
+.idea
 
 #################
 ## Netbeans

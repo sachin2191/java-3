@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Represents the payment request of the boleto
  */
-public class PaymentRequestWithBoleto extends PaymentRequest {
+public class BoletoPaymentRequest extends PaymentRequest {
 
     /**
      * Dynamic payment method message
@@ -15,7 +15,7 @@ public class PaymentRequestWithBoleto extends PaymentRequest {
     /**
      * Initializes a new instance of the PaymentRequestWithBoleto class
      */
-    public PaymentRequestWithBoleto() {
+    public BoletoPaymentRequest() {
 
     }
 

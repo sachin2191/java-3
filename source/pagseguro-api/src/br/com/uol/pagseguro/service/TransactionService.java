@@ -17,38 +17,30 @@ import br.com.uol.pagseguro.xmlparser.ErrorsParser;
 
 /**
  * 
- * Class Direct Payment Service
+ * Class Transaction Service
  */
-public class DirectPaymentService {
+public class TransactionService {
 
     /**
      * @var Log
      */
-    private static Log log = new Log(DirectPaymentService.class);
+    private static Log log = new Log(TransactionService.class);
 
-    /**
-     * Build a direct payment url
-     * 
-     * @param ConnectionData
-     *            connectionData
-     * @return string
-     * @throws PagSeguroServiceException
-     */
     private static String buildDirectPaymentRequestUrl(ConnectionData connectionData) throws PagSeguroServiceException {
         return connectionData.getDirectPaymentUrl() + "?" + connectionData.getCredentialsUrlQuery();
     }
 
     /**
-     * Create a DirectTransaction
+     * Create a Transaction
      * 
      * @param credentials
      * @param payment
      * @return string
      * @throws PagSeguroServiceException
      */
-    public static Transaction createDirectTransaction(Credentials credentials, PaymentRequest payment)
+    public static Transaction createTransaction(Credentials credentials, PaymentRequest payment)
             throws PagSeguroServiceException {
-        log.info(String.format("DirectPaymentService.createDirectTransaction( %s ) - begin", payment.toString()));
+        log.info(String.format("TransactionService.createTransaction( %s ) - begin", payment.toString()));
 
         ConnectionData connectionData = new ConnectionData(credentials);
 
@@ -63,7 +55,6 @@ public class DirectPaymentService {
                 connectionData.getCharset());
 
         try {
-
             httpCodeStatus = HttpStatus.fromCode(response.getResponseCode());
             if (httpCodeStatus == null) {
                 throw new PagSeguroServiceException("Connection Timeout");
@@ -71,8 +62,8 @@ public class DirectPaymentService {
 
                 Transaction transaction = TransactionParser.readTransaction(response.getInputStream());
 
-                log.info(String.format("DirectPaymentService.createDirectTransaction( %1s ) - end  %2s )",
-                        payment.toString(), transaction.getCode()));
+                log.info(String.format("TransactionService.createTransaction( %1s ) - end  %2s )", payment.toString(),
+                        transaction.getCode()));
 
                 return transaction;
 
@@ -82,8 +73,8 @@ public class DirectPaymentService {
 
                 PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus, errors);
 
-                log.error(String.format("DirectPaymentService.createDirectTransaction( %1s ) - error %2s",
-                        payment.toString(), exception.getMessage()));
+                log.error(String.format("TransactionService.createTransaction( %1s ) - error %2s", payment.toString(),
+                        exception.getMessage()));
 
                 throw exception;
 
@@ -96,15 +87,14 @@ public class DirectPaymentService {
             throw e;
         } catch (Exception e) {
 
-            log.error(String.format("DirectPaymentService.createDirectTransaction( %1s ) - error %2s",
-                    payment.toString(), e.getMessage()));
+            log.error(String.format("TransactionService.createTransaction( %1s ) - error %2s", payment.toString(),
+                    e.getMessage()));
 
             throw new PagSeguroServiceException(httpCodeStatus, e);
 
         } finally {
             response.disconnect();
         }
-
     }
 
 }

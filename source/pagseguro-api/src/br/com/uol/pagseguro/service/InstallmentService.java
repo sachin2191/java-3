@@ -26,7 +26,7 @@ import br.com.uol.pagseguro.domain.installment.Installments;
 import br.com.uol.pagseguro.enums.HttpStatus;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.logs.Log;
-import br.com.uol.pagseguro.parser.direct.InstallmentsParser;
+import br.com.uol.pagseguro.parser.InstallmentsParser;
 import br.com.uol.pagseguro.utils.HttpConnection;
 
 /**
@@ -35,22 +35,11 @@ import br.com.uol.pagseguro.utils.HttpConnection;
  */
 public class InstallmentService {
 
-    private InstallmentService() {
-    }
-
     /**
      * @var Log
      */
     private static Log log = new Log(InstallmentService.class);
 
-    /**
-     * Build Installment Request Url
-     * 
-     * @param ConnectionData
-     *            connectionData
-     * @return string
-     * @throws PagSeguroServiceException
-     */
     private static String buildInstallmentsRequestUrl(ConnectionData connectionData) throws PagSeguroServiceException {
         return connectionData.getInstallmentsUrl() + "?" + connectionData.getCredentialsUrlQuery();
     }
@@ -91,7 +80,7 @@ public class InstallmentService {
                 log.info(String.format("InstallmentService.getInstallmentsAvailable( %1s ) - end  %2s )", cardBrand,
                         amount));
 
-                return InstallmentsParser.readTransaction(response.getInputStream());
+                return InstallmentsParser.readInstallments(response.getInputStream());
 
             } else if (HttpURLConnection.HTTP_UNAUTHORIZED == httpCodeStatus.getCode().intValue()) {
 

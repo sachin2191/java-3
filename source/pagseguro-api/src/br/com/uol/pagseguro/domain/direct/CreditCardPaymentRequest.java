@@ -10,12 +10,12 @@ import br.com.uol.pagseguro.enums.DocumentType;
 /**
  * Represents the payment request of the credit card
  */
-public class PaymentRequestWithCreditCard extends PaymentRequest {
+public class CreditCardPaymentRequest extends PaymentRequest {
 
     /**
      * Token
      */
-    private String token;
+    private String creditCardToken;
 
     /**
      * Installment
@@ -45,23 +45,23 @@ public class PaymentRequestWithCreditCard extends PaymentRequest {
     /**
      * Initializes a new instance of the PaymentRequestWithCreditCard class
      */
-    public PaymentRequestWithCreditCard() {
+    public CreditCardPaymentRequest() {
 
     }
 
     /**
      * @return the credit card token
      */
-    public String getToken() {
-        return token;
+    public String getCreditCardToken() {
+        return creditCardToken;
     }
 
     /**
-     * @param token
+     * @param creditCardToken
      *            the credit card token to set
      */
-    public void setToken(String token) {
-        this.token = token;
+    public void setCreditCardToken(String creditCardToken) {
+        this.creditCardToken = creditCardToken;
     }
 
     /**
@@ -145,8 +145,8 @@ public class PaymentRequestWithCreditCard extends PaymentRequest {
 
         data.put("paymentMethod", "CREDIT_CARD");
 
-        if (token != null) {
-            data.put("creditCardToken", token);
+        if (creditCardToken != null) {
+            data.put("creditCardToken", creditCardToken);
         }
 
         /**

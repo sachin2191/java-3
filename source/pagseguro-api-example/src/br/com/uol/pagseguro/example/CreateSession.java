@@ -8,13 +8,13 @@ import br.com.uol.pagseguro.service.SessionService;
 /**
  * Class with a main method to illustrate the usage of the SessionService to create Session to Direct Payment
  */
-public class CreatePaymentSession {
+public class CreateSession {
 
     public static void main(String[] args) {
         try {
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
 
-            final String sessionId = SessionService.createPaymentSession(accountCredentials);
+            final String sessionId = SessionService.createSession(accountCredentials);
 
             System.out.println("Sessão: " + sessionId);
         } catch (PagSeguroServiceException e) {
