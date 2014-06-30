@@ -74,11 +74,20 @@ public class CreateTransactionUsingBoleto {
                 "Av. Brig. Faria Lima", //
                 "1384", //
                 "5º andar"));
+        
         request.setShippingType(ShippingType.SEDEX);
+        
         request.setShippingCost(new BigDecimal("5.00"));
 
-        request.addItem(new Item("1", "Notebook Prata", Integer.valueOf(1), new BigDecimal("2500.00")));
-        request.addItem(new Item("2", "Notebook Rosa", Integer.valueOf(1), new BigDecimal("2500.00")));
+        request.addItem(new Item("1", //
+                "Notebook Prata", //
+                Integer.valueOf(1), //
+                new BigDecimal("2500.00")));
+        
+        request.addItem(new Item("2", //
+                "Notebook Rosa", //
+                Integer.valueOf(1), //
+                new BigDecimal("2500.00")));
 
         try {
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
@@ -87,7 +96,7 @@ public class CreateTransactionUsingBoleto {
                     request);
 
             if (transaction != null) {
-                System.out.println("Código da Transação: " + transaction.getCode());
+                System.out.println("Transaction Code: " + transaction.getCode());
             }
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
@@ -119,7 +128,7 @@ public class CreateTransactionUsingBoleto {
                     request);
 
             if (transaction != null) {
-                System.out.println("Código da Transação: " + transaction.getCode());
+                System.out.println("Transaction Code: " + transaction.getCode());
             }
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());

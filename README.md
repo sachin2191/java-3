@@ -6,6 +6,7 @@ Descrição
 ---
 A biblioteca PagSeguro em Java é um conjunto de classes de domínio que facilitam, para o desenvolvedor Java, a utilização das funcionalidades que o PagSeguro oferece na forma de APIs. Com a biblioteca instalada e configurada, você pode facilmente integrar funcionalidades como:
 
+ - Criar [requisições de checkouts]
  - Criar [requisições de pagamentos]
  - Consultar [transações por código]
  - Consultar [transações por intervalo de datas]
@@ -50,6 +51,10 @@ Caso tenha dúvidas ou precise de suporte, acesse nosso [fórum].
 Changelog
 ---------
 ---
+
+2.2.0
+
+ - Adicionado classes e métodos para utilização do [Checkout Transparente].
 
 2.1.2
 
@@ -118,7 +123,9 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
 * Envie um pull request no [GitHub].
 
 
-  [requisições de pagamentos]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html
+  [requisições de checkout]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html
+  [requisições de pagamentos]: https://pagseguro.uol.com.br/receba-pagamentos.jhtml#checkout-transparent
+  [Checkout Transparente] https://pagseguro.uol.com.br/receba-pagamentos.jhtml#checkout-transparent
   [notificações]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-notificacoes.html
   [transações por código]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-codigo.html
   [transações por intervalo de datas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-intervalo-de-datas.html
@@ -127,4 +134,3 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
   [Java]: http://www.oracle.com/technetwork/java/index.html
   [GitHub]: https://github.com/pagseguro/java/
   [documentação oficial]: https://pagseguro.uol.com.br/v2/guia-de-integracao/tutorial-da-biblioteca-pagseguro-em-java.html
-  [fórum]: http://forum.pagseguro.uol.com.br/

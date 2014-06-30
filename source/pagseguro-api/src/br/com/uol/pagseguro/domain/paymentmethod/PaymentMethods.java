@@ -67,7 +67,7 @@ public class PaymentMethods {
             return Collections.emptyList();
         }
 
-        final List<PaymentMethod> paymentMethodList = new ArrayList<>(paymentMethodsByType.values());
+        final List<PaymentMethod> paymentMethodList = new ArrayList<PaymentMethod>(paymentMethodsByType.values());
 
         Collections.sort(paymentMethodList);
         return Collections.unmodifiableList(paymentMethodList);

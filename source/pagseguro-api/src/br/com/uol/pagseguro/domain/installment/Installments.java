@@ -42,7 +42,6 @@ public class Installments implements Iterable<Installment> {
         return Collections.unmodifiableList(installmentList);
     }
 
-    @Override
     public Iterator<Installment> iterator() {
         final ArrayList<Installment> list = new ArrayList<Installment>();
         for (List<Installment> e : installments.values()) {

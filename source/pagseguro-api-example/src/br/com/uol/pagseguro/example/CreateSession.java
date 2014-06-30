@@ -16,7 +16,7 @@ public class CreateSession {
 
             final String sessionId = SessionService.createSession(accountCredentials);
 
-            System.out.println("Sessão: " + sessionId);
+            System.out.println("Session ID: " + sessionId);
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
         }

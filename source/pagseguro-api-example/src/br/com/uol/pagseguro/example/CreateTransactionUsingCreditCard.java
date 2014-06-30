@@ -78,12 +78,20 @@ public class CreateTransactionUsingCreditCard {
                 "1384", //
                 "5º andar"));
         request.setShippingType(ShippingType.SEDEX);
+        
         request.setShippingCost(new BigDecimal("5.00"));
 
-        request.addItem(new Item("1", "Notebook Prata", Integer.valueOf(1), new BigDecimal("2500.00")));
-        request.addItem(new Item("2", "Notebook Rosa", Integer.valueOf(1), new BigDecimal("2500.00")));
+        request.addItem(new Item("1", //
+                "Notebook Prata", //
+                Integer.valueOf(1), //
+                new BigDecimal("2500.00")));
+        
+        request.addItem(new Item("2", //
+                "Notebook Rosa", //
+                Integer.valueOf(1), //
+                new BigDecimal("2500.00")));
 
-        request.setCreditCardToken("f4a1d6e7fc294e54ab9ae792cc2306c3");
+        request.setCreditCardToken("286ff355747941f58b2093608cd6b7a2");
 
         request.setInstallment(new Installment(1, new BigDecimal("5005.00")));
 
@@ -108,7 +116,7 @@ public class CreateTransactionUsingCreditCard {
                     request);
 
             if (transaction != null) {
-                System.out.println("Código da Transação: " + transaction.getCode());
+                System.out.println("Transaction Code: " + transaction.getCode());
             }
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
@@ -133,7 +141,7 @@ public class CreateTransactionUsingCreditCard {
         request.addItem(new Item("1", "Notebook Prata", Integer.valueOf(1), new BigDecimal("2500.00")));
         request.addItem(new Item("2", "Notebook Rosa", Integer.valueOf(1), new BigDecimal("2500.00")));
 
-        request.setCreditCardToken("f4a1d6e7fc294e54ab9ae792cc2306c3");
+        request.setCreditCardToken("286ff355747941f58b2093608cd6b7a2");
 
         request.setInstallment(new Installment(1, new BigDecimal("5000.00")));
 
@@ -144,7 +152,7 @@ public class CreateTransactionUsingCreditCard {
                     request);
 
             if (transaction != null) {
-                System.out.println("Código da Transação: " + transaction.getCode());
+                System.out.println("Transaction Code: " + transaction.getCode());
             }
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());

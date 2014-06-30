@@ -58,7 +58,6 @@ public class PaymentMethod implements Comparable<PaymentMethod> {
         return status;
     }
 
-    @Override
     public int compareTo(PaymentMethod other) {
         if (other == null) {
             return -1;

@@ -35,7 +35,7 @@ public class GetPaymentMethods {
         try {
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
 
-            final String publicKey = "abc";
+            final String publicKey = "PUBE469778A81D64C838DA121DB3180FE36";
             final PaymentMethods paymentMethods = PaymentMethodService.getPaymentMethods(accountCredentials, //
                     publicKey);
 

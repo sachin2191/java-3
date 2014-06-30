@@ -60,6 +60,8 @@ public enum PaymentMethodCode {
     AVISTA_CREDIT_CARD(PaymentMethodType.CREDIT_CARD, "AVISTA CREDIT CARD", 118),
 
     GRANDCARD_CREDIT_CARD(PaymentMethodType.CREDIT_CARD, "GRANDCARD CREDIT CARD", 119),
+    
+    SOROCRED_CREDIT_CARD(PaymentMethodType.CREDIT_CARD, "Sorocred CREDIT CARD", 120),
 
     BRADESCO_BOLETO(PaymentMethodType.BOLETO, "BRADESCO BOLETO", 201),
 
