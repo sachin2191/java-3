@@ -17,12 +17,9 @@
  */
 package br.com.uol.pagseguro.example;
 
-import java.util.Map;
-
 import br.com.uol.pagseguro.domain.AccountCredentials;
-import br.com.uol.pagseguro.domain.direct.PaymentMethod;
-import br.com.uol.pagseguro.domain.direct.PaymentMethods;
-import br.com.uol.pagseguro.enums.PaymentMethodCode;
+import br.com.uol.pagseguro.domain.paymentmethod.PaymentMethod;
+import br.com.uol.pagseguro.domain.paymentmethod.PaymentMethods;
 import br.com.uol.pagseguro.enums.PaymentMethodType;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.properties.PagSeguroConfig;
@@ -34,58 +31,17 @@ import br.com.uol.pagseguro.service.PaymentMethodService;
 public class GetPaymentMethods {
 
     public static void main(String[] args) {
-        PaymentMethods paymentMethods;
-        String publicKey = "abc";
 
         try {
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
 
-            /**
-             * Gets a full list of available payment methods
-             */
-            paymentMethods = PaymentMethodService.getPaymentMethods(accountCredentials, //
+            final String publicKey = "abc";
+            final PaymentMethods paymentMethods = PaymentMethodService.getPaymentMethods(accountCredentials, //
                     publicKey);
 
-            for (Map.Entry<PaymentMethodType, Map<Integer, PaymentMethod>> paymentMethodsByType : paymentMethods
-                    .getPaymentMethods().entrySet()) {
-                System.out.println("--------------- " + paymentMethodsByType.getKey() + " ---------------");
-
-                for (Map.Entry<Integer, PaymentMethod> paymentMethodsByCode : paymentMethodsByType.getValue()
-                        .entrySet()) {
-                    System.out.println("" + paymentMethodsByCode.getValue());
-                }
-
-                System.out.println("");
-            }
-
-            /**
-             * Gets a list of available payment methods of an specific PaymentType
-             */
-
-            System.out.println("--- Payment methods of " + PaymentMethodType.CREDIT_CARD + " ---");
             for (PaymentMethod paymentMethod : paymentMethods.getPaymentMethodsByType(PaymentMethodType.CREDIT_CARD)) {
-                System.out.println("" + paymentMethod);
+                System.out.println(paymentMethod);
             }
-
-            System.out.println("");
-
-            /**
-             * verify if a payment method is available
-             */
-            System.out.println("--- Vefify Status ---");
-            System.out.println("Status of " + PaymentMethodCode.BANRISUL_ONLINE_TRANSFER + ": "
-                    + paymentMethods.isAvailable(PaymentMethodCode.BANRISUL_ONLINE_TRANSFER));
-            System.out.println("Status of " + PaymentMethodCode.BANCO_BRASIL_DIRECT_DEPOSIT + ": "
-                    + paymentMethods.isAvailable(PaymentMethodCode.BANCO_BRASIL_DIRECT_DEPOSIT));
-            System.out.println("Status of " + PaymentMethodCode.DINERS_CREDIT_CARD + ": "
-                    + paymentMethods.isAvailable(PaymentMethodCode.DINERS_CREDIT_CARD));
-            System.out.println("Status of " + PaymentMethodCode.VALECARD_CREDIT_CARD + ": "
-                    + paymentMethods.isAvailable(PaymentMethodCode.VALECARD_CREDIT_CARD));
-            System.out.println("Status of " + PaymentMethodCode.UNKNOWN_CODE + ": "
-                    + paymentMethods.isAvailable(PaymentMethodCode.UNKNOWN_CODE));
-            System.out.println("Status of " + PaymentMethodCode.AMEX_CREDIT_CARD + ": "
-                    + paymentMethods.isAvailable(PaymentMethodCode.AMEX_CREDIT_CARD));
-
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
         }

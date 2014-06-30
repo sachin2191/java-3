@@ -21,27 +21,38 @@ import java.math.BigDecimal;
 
 import br.com.uol.pagseguro.domain.AccountCredentials;
 import br.com.uol.pagseguro.domain.Address;
+import br.com.uol.pagseguro.domain.Document;
 import br.com.uol.pagseguro.domain.Item;
 import br.com.uol.pagseguro.domain.Phone;
 import br.com.uol.pagseguro.domain.Sender;
 import br.com.uol.pagseguro.domain.SenderDocument;
 import br.com.uol.pagseguro.domain.Transaction;
-import br.com.uol.pagseguro.domain.direct.PaymentRequestWithOnlineDebit;
+import br.com.uol.pagseguro.domain.direct.CreditCardPaymentRequest;
+import br.com.uol.pagseguro.domain.direct.Holder;
+import br.com.uol.pagseguro.domain.direct.Installment;
 import br.com.uol.pagseguro.enums.Currency;
 import br.com.uol.pagseguro.enums.DocumentType;
 import br.com.uol.pagseguro.enums.PaymentMode;
 import br.com.uol.pagseguro.enums.ShippingType;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.properties.PagSeguroConfig;
-import br.com.uol.pagseguro.service.DirectPaymentService;
+import br.com.uol.pagseguro.service.TransactionService;
 
 /**
- * Class with a main method to illustrate the usage of the domain class PaymentRequestWithOnlineDebit
+ * Class with a main method to illustrate the usage of the domain class CreditCardPaymentRequest
  */
-public class CreateDefaultPaymentWithOnlineDebit {
+public class CreateTransactionUsingCreditCard {
 
     public static void main(String[] args) {
-        final PaymentRequestWithOnlineDebit request = new PaymentRequestWithOnlineDebit();
+        // default mode
+        createTransactionUsingDefaulMode();
+
+        // gateway mode
+        createTransactionUsingGatewayMode();
+    }
+
+    public static void createTransactionUsingDefaulMode() {
+        final CreditCardPaymentRequest request = new CreditCardPaymentRequest();
 
         request.setPaymentMode(PaymentMode.DEFAULT);
 
@@ -72,12 +83,64 @@ public class CreateDefaultPaymentWithOnlineDebit {
         request.addItem(new Item("1", "Notebook Prata", Integer.valueOf(1), new BigDecimal("2500.00")));
         request.addItem(new Item("2", "Notebook Rosa", Integer.valueOf(1), new BigDecimal("2500.00")));
 
-        request.setBankName("BRADESCO");
+        request.setCreditCardToken("f4a1d6e7fc294e54ab9ae792cc2306c3");
+
+        request.setInstallment(new Installment(1, new BigDecimal("5005.00")));
+
+        request.setHolder(new Holder("João Comprador", //
+                new Phone("11", "56273440"), //
+                new Document(DocumentType.CPF, "000.000.001-91"), //
+                "07/05/1981"));
+
+        request.setBillingAddress(new Address("BRA", //
+                "SP", //
+                "Sao Paulo", //
+                "Jardim Paulistano", //
+                "01452002", //
+                "Av. Brig. Faria Lima", //
+                "1384", //
+                "5º andar"));
 
         try {
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
 
-            final Transaction transaction = DirectPaymentService.createDirectTransaction(accountCredentials, //
+            final Transaction transaction = TransactionService.createTransaction(accountCredentials, //
+                    request);
+
+            if (transaction != null) {
+                System.out.println("Código da Transação: " + transaction.getCode());
+            }
+        } catch (PagSeguroServiceException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void createTransactionUsingGatewayMode() {
+        final CreditCardPaymentRequest request = new CreditCardPaymentRequest();
+
+        request.setPaymentMode(PaymentMode.GATEWAY);
+
+        request.setReceiverEmail("backoffice@lojamodelo.com.br");
+
+        request.setCurrency(Currency.BRL);
+
+        request.setNotificationURL("http://www.meusite.com.br/notification");
+
+        request.setReference("REF1234");
+
+        request.setSender(new Sender("João Comprador", "comprador@uol.com.br"));
+
+        request.addItem(new Item("1", "Notebook Prata", Integer.valueOf(1), new BigDecimal("2500.00")));
+        request.addItem(new Item("2", "Notebook Rosa", Integer.valueOf(1), new BigDecimal("2500.00")));
+
+        request.setCreditCardToken("f4a1d6e7fc294e54ab9ae792cc2306c3");
+
+        request.setInstallment(new Installment(1, new BigDecimal("5000.00")));
+
+        try {
+            final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
+
+            final Transaction transaction = TransactionService.createTransaction(accountCredentials, //
                     request);
 
             if (transaction != null) {

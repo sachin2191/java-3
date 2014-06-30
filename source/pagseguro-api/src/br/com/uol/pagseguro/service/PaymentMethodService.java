@@ -23,11 +23,11 @@ import java.util.List;
 
 import br.com.uol.pagseguro.domain.Credentials;
 import br.com.uol.pagseguro.domain.Error;
-import br.com.uol.pagseguro.domain.direct.PaymentMethods;
+import br.com.uol.pagseguro.domain.paymentmethod.PaymentMethods;
 import br.com.uol.pagseguro.enums.HttpStatus;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.logs.Log;
-import br.com.uol.pagseguro.parser.direct.PaymentMethodsParser;
+import br.com.uol.pagseguro.parser.PaymentMethodsParser;
 import br.com.uol.pagseguro.utils.HttpConnection;
 import br.com.uol.pagseguro.xmlparser.ErrorsParser;
 
@@ -42,29 +42,13 @@ public class PaymentMethodService {
      */
     private static Log log = new Log(PaymentMethodService.class);
 
-    /**
-     * 
-     * @param ConnectionData
-     *            connectionData
-     * @param publicKey
-     * @return string
-     * @throws PagSeguroServiceException
-     */
-    public static String buildPaymentMethodsUrl(ConnectionData connectionData, String publicKey)
-            throws PagSeguroServiceException {
+    private static String buildPaymentMethodsUrl(ConnectionData connectionData, //
+            String publicKey) {
         return connectionData.getPaymentMethodsUrl() + "?publicKey=" + publicKey;
     }
 
-    /**
-     * 
-     * @param credentials
-     * @param publicKey
-     * @return PaymentMethods
-     * @throws PagSeguroServiceException
-     */
     public static PaymentMethods getPaymentMethods(Credentials credentials, String publicKey)
             throws PagSeguroServiceException {
-
         log.info("PaymentMethodService.getPaymentMethods - begin");
 
         ConnectionData connectionData = new ConnectionData(credentials);
@@ -74,25 +58,22 @@ public class PaymentMethodService {
         HttpConnection connection = new HttpConnection();
         HttpStatus httpCodeStatus = null;
 
-        HttpURLConnection response = connection.get(url, connectionData.getServiceTimeout(),
+        HttpURLConnection response = connection.get(url, //
+                connectionData.getServiceTimeout(), //
                 connectionData.getCharset());
 
         try {
-
             httpCodeStatus = HttpStatus.fromCode(response.getResponseCode());
+
             if (httpCodeStatus == null) {
                 throw new PagSeguroServiceException("Connection Timeout");
             } else if (HttpURLConnection.HTTP_OK == httpCodeStatus.getCode().intValue()) {
-
-                PaymentMethods paymentMethods = new PaymentMethods(
-                        PaymentMethodsParser.parse(response.getInputStream()));
+                PaymentMethods paymentMethods = PaymentMethodsParser.readPaymentMethods(response.getInputStream());
 
                 log.info("PaymentMethodService.getPaymentMethods() - end");
 
                 return paymentMethods;
-
             } else if (HttpURLConnection.HTTP_BAD_REQUEST == httpCodeStatus.getCode().intValue()) {
-
                 List<Error> errors = ErrorsParser.readErrosXml(response.getErrorStream());
 
                 PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus, errors);
@@ -100,7 +81,6 @@ public class PaymentMethodService {
                 log.error(String.format("PaymentMethodService.getPaymentMethods() - error %1s", exception.getMessage()));
 
                 throw exception;
-
             } else {
                 throw new PagSeguroServiceException(httpCodeStatus);
             }

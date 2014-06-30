@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Represents the payment request of the online debit
  */
-public class PaymentRequestWithOnlineDebit extends PaymentRequest {
+public class OnlineDebitPaymentRequest extends PaymentRequest {
 
     /**
      * Bank name
@@ -15,7 +15,7 @@ public class PaymentRequestWithOnlineDebit extends PaymentRequest {
     /**
      * Initializes a new instance of the PaymentRequestWithOnlineDebit class
      */
-    public PaymentRequestWithOnlineDebit() {
+    public OnlineDebitPaymentRequest() {
 
     }
 

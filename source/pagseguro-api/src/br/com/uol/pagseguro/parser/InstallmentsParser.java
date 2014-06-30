@@ -15,7 +15,7 @@
  limitations under the License.
  ************************************************************************
  */
-package br.com.uol.pagseguro.parser.direct;
+package br.com.uol.pagseguro.parser;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,7 +65,8 @@ public class InstallmentsParser {
      * @throws ParseException
      * @throws SAXException
      */
-    public static Installments readTransaction(InputStream xmlInputStream) throws IOException, //
+    public static Installments readInstallments(InputStream xmlInputStream) //
+            throws IOException, //
             ParserConfigurationException, //
             ParseException, //
             SAXException {
