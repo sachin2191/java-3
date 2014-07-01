@@ -123,9 +123,9 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
 * Envie um pull request no [GitHub].
 
 
-  [requisições de checkout]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html
+  [requisições de checkouts]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html
   [requisições de pagamentos]: https://pagseguro.uol.com.br/receba-pagamentos.jhtml#checkout-transparent
-  [Checkout Transparente] https://pagseguro.uol.com.br/receba-pagamentos.jhtml#checkout-transparent
+  [Checkout Transparente]: https://pagseguro.uol.com.br/receba-pagamentos.jhtml#checkout-transparent
   [notificações]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-notificacoes.html
   [transações por código]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-codigo.html
   [transações por intervalo de datas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-intervalo-de-datas.html
