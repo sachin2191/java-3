@@ -42,13 +42,13 @@ public class CreateTransactionUsingBoleto {
 
     public static void main(String[] args) {
         // default mode
-        createTransactionUsingDefaulMode();
+        createTransactionUsingDefaultMode();
 
         // gateway mode
         createTransactionUsingGatewayMode();
     }
 
-    public static void createTransactionUsingDefaulMode() {
+    public static void createTransactionUsingDefaultMode() {
         final BoletoPaymentRequest request = new BoletoPaymentRequest();
 
         request.setPaymentMode(PaymentMode.DEFAULT);
@@ -96,7 +96,7 @@ public class CreateTransactionUsingBoleto {
                     request);
 
             if (transaction != null) {
-                System.out.println("Transaction Code: " + transaction.getCode());
+                System.out.println("Transaction Code - Default Mode: " + transaction.getCode());
             }
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
@@ -128,7 +128,7 @@ public class CreateTransactionUsingBoleto {
                     request);
 
             if (transaction != null) {
-                System.out.println("Transaction Code: " + transaction.getCode());
+                System.out.println("Transaction Code - Gateway Mode: " + transaction.getCode());
             }
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());

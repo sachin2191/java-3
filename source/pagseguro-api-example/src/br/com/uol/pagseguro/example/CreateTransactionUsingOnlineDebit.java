@@ -42,13 +42,13 @@ public class CreateTransactionUsingOnlineDebit {
 
     public static void main(String[] args) {
         // default mode
-        createTransactionUsingDefaulMode();
+        createTransactionUsingDefaultMode();
 
         // gateway mode
         createTransactionUsingGatewayMode();
     }
 
-    public static void createTransactionUsingDefaulMode() {
+    public static void createTransactionUsingDefaultMode() {
         final OnlineDebitPaymentRequest request = new OnlineDebitPaymentRequest();
 
         request.setPaymentMode(PaymentMode.DEFAULT);
@@ -82,12 +82,12 @@ public class CreateTransactionUsingOnlineDebit {
         request.addItem(new Item("1", //
                 "Notebook Prata", //
                 Integer.valueOf(1), //
-                new BigDecimal("2500.00")));
+                new BigDecimal("500.00")));
         
         request.addItem(new Item("2", //
                 "Notebook Rosa", //
                 Integer.valueOf(1), //
-                new BigDecimal("2500.00")));
+                new BigDecimal("500.00")));
 
         request.setBankName("BRADESCO");
 
@@ -98,7 +98,7 @@ public class CreateTransactionUsingOnlineDebit {
                     request);
 
             if (transaction != null) {
-                System.out.println("Transaction Code: " + transaction.getCode());
+                System.out.println("Transaction Code - Default Mode: " + transaction.getCode());
             }
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
@@ -120,8 +120,8 @@ public class CreateTransactionUsingOnlineDebit {
 
         request.setSender(new Sender("João Comprador", "comprador@uol.com.br"));
 
-        request.addItem(new Item("1", "Notebook Prata", Integer.valueOf(1), new BigDecimal("2500.00")));
-        request.addItem(new Item("2", "Notebook Rosa", Integer.valueOf(1), new BigDecimal("2500.00")));
+        request.addItem(new Item("1", "Notebook Prata", Integer.valueOf(1), new BigDecimal("500.00")));
+        request.addItem(new Item("2", "Notebook Rosa", Integer.valueOf(1), new BigDecimal("500.00")));
 
         request.setBankName("BRADESCO");
 
@@ -132,7 +132,7 @@ public class CreateTransactionUsingOnlineDebit {
                     request);
 
             if (transaction != null) {
-                System.out.println("Transaction Code: " + transaction.getCode());
+                System.out.println("Transaction Code - Gateway Mode: " + transaction.getCode());
             }
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
