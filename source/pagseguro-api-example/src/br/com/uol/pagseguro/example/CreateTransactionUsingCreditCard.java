@@ -27,9 +27,9 @@ import br.com.uol.pagseguro.domain.Phone;
 import br.com.uol.pagseguro.domain.Sender;
 import br.com.uol.pagseguro.domain.SenderDocument;
 import br.com.uol.pagseguro.domain.Transaction;
-import br.com.uol.pagseguro.domain.direct.CreditCardPaymentRequest;
 import br.com.uol.pagseguro.domain.direct.Holder;
 import br.com.uol.pagseguro.domain.direct.Installment;
+import br.com.uol.pagseguro.domain.direct.checkout.CreditCardCheckout;
 import br.com.uol.pagseguro.enums.Currency;
 import br.com.uol.pagseguro.enums.DocumentType;
 import br.com.uol.pagseguro.enums.PaymentMode;
@@ -39,7 +39,7 @@ import br.com.uol.pagseguro.properties.PagSeguroConfig;
 import br.com.uol.pagseguro.service.TransactionService;
 
 /**
- * Class with a main method to illustrate the usage of the domain class CreditCardPaymentRequest
+ * Class with a main method to illustrate the usage of the domain class CreditCardCheckout
  */
 public class CreateTransactionUsingCreditCard {
 
@@ -52,7 +52,7 @@ public class CreateTransactionUsingCreditCard {
     }
 
     public static void createTransactionUsingDefaultMode() {
-        final CreditCardPaymentRequest request = new CreditCardPaymentRequest();
+        final CreditCardCheckout request = new CreditCardCheckout();
 
         request.setPaymentMode(PaymentMode.DEFAULT);
 
@@ -124,7 +124,7 @@ public class CreateTransactionUsingCreditCard {
     }
 
     public static void createTransactionUsingGatewayMode() {
-        final CreditCardPaymentRequest request = new CreditCardPaymentRequest();
+        final CreditCardCheckout request = new CreditCardCheckout();
 
         request.setPaymentMode(PaymentMode.GATEWAY);
 

@@ -75,6 +75,22 @@ public class HttpConnection {
             throw new PagSeguroServiceException("Error when trying write or set request method", e);
         }
     }
+    
+    /**
+     * Http request method without data
+     * 
+     * @param urlPS
+     * @param timeout
+     * @param charset
+     * @param method
+     * @return
+     * @throws PagSeguroServiceException
+     */
+    public HttpURLConnection httpRequestMethod(String urlPS, String timeout, String charset, String method)
+            throws PagSeguroServiceException {
+
+        return getConnection(urlPS, timeout, charset, method);
+    }
 
     /**
      * GET
@@ -118,6 +134,7 @@ public class HttpConnection {
             connection.setRequestProperty("charset", charset);
 
             connection.setRequestProperty("Content-type", PagSeguroSystem.getContentTypeFormUrlEncoded());
+            connection.setRequestProperty("Accept", getAcceptHeader(urlPS));
             connection.setRequestProperty("lib-description", "java:" + PagSeguroSystem.getLibversion());
             connection.setRequestProperty("language-engine-description",
                     "java:" + PagSeguroSystem.getLanguageEnginedescription());
@@ -145,6 +162,20 @@ public class HttpConnection {
             throw new PagSeguroServiceException("Generic error", e);
         }
 
+    }
+    
+    /**
+     * Sets different types of the accept header
+     * 
+     * @param urlPS
+     * @return accept header
+     */
+    private String getAcceptHeader(String urlPS) {
+        
+        if (urlPS.contains("payment-request"))
+            return "application/vnd.pagseguro.com.br.v1+xml;charset=ISO-8859-1";    
+        
+        return "application/xml;charset=ISO-8859-1";
     }
 
 }

@@ -24,9 +24,14 @@ import br.com.uol.pagseguro.enums.Currency;
 import br.com.uol.pagseguro.enums.DocumentType;
 import br.com.uol.pagseguro.enums.MetaDataItemKey;
 import br.com.uol.pagseguro.enums.ShippingType;
+import br.com.uol.pagseguro.example.checkout.CreateCheckout;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.properties.PagSeguroConfig;
 
+/**
+ * @deprecated use {@link CreateCheckout} instead.
+ */
+@Deprecated
 public class CreatePayment {
 
     /**

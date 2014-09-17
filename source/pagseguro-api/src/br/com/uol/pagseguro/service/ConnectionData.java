@@ -28,7 +28,17 @@ public class ConnectionData {
     private Credentials credentials;
 
     private String webServiceUrl;
-
+    
+    private String wsPaymentRequestUrl;
+    
+    private String wsPaymentRequestFindByCodeUrl;
+   
+    private String wsPreApprovalUrl;
+    
+    private String wsPreApprovalFindByCodeUrl;
+    
+    private String wsPreApprovalCancelByCodeUrl;
+    
     private String paymentSessionUrl;
 
     private String installmentsUrl;
@@ -37,7 +47,7 @@ public class ConnectionData {
 
     private String paymentMethodsUrl;
 
-    private String servicePath;
+    private String checkoutServicePath;
 
     private String serviceTimeout;
 
@@ -47,15 +57,20 @@ public class ConnectionData {
         this.credentials = credentials;
 
         this.webServiceUrl = validUrlWebService();
+        this.wsPaymentRequestUrl = validUrlWSPaymentRequest();
+        this.wsPaymentRequestFindByCodeUrl = validUrlWSPaymentRequestFindByCode();
+        this.wsPreApprovalUrl = validUrlWSPreApproval();
+        this.wsPreApprovalFindByCodeUrl = validUrlWSPreApprovalFindByCode();
+        this.wsPreApprovalCancelByCodeUrl = validUrlWSPreApprovalCancelByCode();
         this.charset = PagSeguroConfig.getApplicationCharset();
         this.serviceTimeout = PagSeguroSystem.getServiceTimeout();
 
         this.paymentSessionUrl = PagSeguroSystem.getUrlPaymentSession();
         this.installmentsUrl = PagSeguroSystem.getUrlInstallments();
         this.directPayment = PagSeguroSystem.getUrlDirectPayment();
-        this.paymentMethodsUrl = PagSeguroSystem.getUrlPaymentMethods();
-
-        this.servicePath = PagSeguroSystem.getServicePath();
+        this.paymentMethodsUrl = PagSeguroSystem.getUrlPaymentMethods();        
+        
+        this.checkoutServicePath = PagSeguroSystem.getCheckoutServicePath();
     }
 
     /**
@@ -100,7 +115,7 @@ public class ConnectionData {
     public String getPaymentMethodsUrl() {
         return paymentMethodsUrl;
     }
-
+    
     /**
      * Create url
      * 
@@ -120,10 +135,55 @@ public class ConnectionData {
 
         String url = PagSeguroSystem.getUrlProduction();
 
-        return url + PagSeguroSystem.getServicePath();
+        return url + PagSeguroSystem.getCheckoutServicePath();
 
     }
-
+    
+    /**
+     * Valid url web service production or development for payment request
+     * 
+     * @return string
+     */
+    private String validUrlWSPaymentRequest() {
+        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPaymentRequestServicePath();
+    }
+    
+    /**
+     * Valid url web service production or development for finding a payment request transaction
+     * 
+     * @return string
+     */
+    private String validUrlWSPaymentRequestFindByCode() {
+        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPaymentRequestFindByCodePath();
+    }
+    
+    /**
+     * Valid url web service production or development for pre-approval
+     * 
+     * @return string
+     */
+    private String validUrlWSPreApproval() {
+        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPreApprovalServicePath();
+    }
+    
+    /**
+     * Valid url web service production or development for finding a pre-approval transaction
+     * 
+     * @return string
+     */
+    private String validUrlWSPreApprovalFindByCode() {
+        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPreApprovalFindByCodePath();
+    }
+    
+    /**
+     * Valid url web service production or development for canceling a pre-approval transaction
+     * 
+     * @return string
+     */
+    private String validUrlWSPreApprovalCancelByCode() {
+        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPreApprovalCancelByCodePath();
+    }
+    
     /**
      * @return the credentials
      */
@@ -145,7 +205,42 @@ public class ConnectionData {
     public String getWebServiceUrl() {
         return webServiceUrl;
     }
+    
+    /**
+     * @return the wsPaymentRequestUrl
+     */
+    public String getWSPaymentRequestUrl() {
+        return wsPaymentRequestUrl;
+    }
 
+    /**
+     * @return the wsPaymentRequestFindByCodeUrl
+     */
+    public String getWSPaymentRequestFindByCodeUrl() {
+        return wsPaymentRequestFindByCodeUrl;
+    }
+    
+    /**
+     * @return the wsPreApprovalUrl
+     */
+    public String getWSPreApprovalUrl() {
+        return wsPreApprovalUrl;
+    }
+    
+    /**
+     * @return the wsPreApprovalFindByCodeUrl
+     */
+    public String getWSPreApprovalFindByCodeUrl() {
+        return wsPreApprovalFindByCodeUrl;
+    }
+    
+    /**
+     * @return the wsPreApprovalCancelByCodeUrl
+     */
+    public String getWSPreApprovalCancelByCodeUrl() {
+        return wsPreApprovalCancelByCodeUrl;
+    }
+    
     /**
      * @param webServiceUrl
      *            the webServiceUrl to set
@@ -153,7 +248,31 @@ public class ConnectionData {
     public void setWebServiceUrl(String webServiceUrl) {
         this.webServiceUrl = webServiceUrl;
     }
-
+    
+    /**
+     * @param wsPaymentRequestFindByCodeUrl
+     *            the wsPaymentRequestFindByCodeUrl to set
+     */
+    public void setWSPaymentRequestFindByCodeUrl(String wsPaymentRequestFindByCodeUrl) {
+        this.wsPaymentRequestFindByCodeUrl = wsPaymentRequestFindByCodeUrl;
+    }
+    
+    /**
+     * @param wsPaymentRequestUrl
+     *            the wsPaymentRequestUrl to set
+     */
+    public void setWSPaymentRequestUrl(String wsPaymentRequestUrl) {
+        this.wsPaymentRequestUrl = wsPaymentRequestUrl;
+    }
+    
+    /**
+     * @param wsPreApprovalUrl
+     *            the wsPreApprovalUrl to set
+     */
+    public void setWSPreApprovalUrl(String wsPreApprovalUrl) {
+        this.wsPreApprovalUrl = wsPreApprovalUrl;
+    }
+    
     /**
      * @return the charset
      */
@@ -173,7 +292,7 @@ public class ConnectionData {
      * @return the servicePath
      */
     public String getServicePath() {
-        return servicePath;
+        return checkoutServicePath;
     }
 
     /**
@@ -181,7 +300,7 @@ public class ConnectionData {
      *            the servicePath to set
      */
     public void setServicePath(String servicePath) {
-        this.servicePath = servicePath;
+        this.checkoutServicePath = servicePath;
     }
 
     /**
@@ -206,5 +325,4 @@ public class ConnectionData {
     public String getTransactionSearchUrl() {
         return PagSeguroSystem.getTransactionSearchUrl();
     }
-
 }

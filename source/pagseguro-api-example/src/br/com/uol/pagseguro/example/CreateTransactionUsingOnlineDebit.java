@@ -26,7 +26,7 @@ import br.com.uol.pagseguro.domain.Phone;
 import br.com.uol.pagseguro.domain.Sender;
 import br.com.uol.pagseguro.domain.SenderDocument;
 import br.com.uol.pagseguro.domain.Transaction;
-import br.com.uol.pagseguro.domain.direct.OnlineDebitPaymentRequest;
+import br.com.uol.pagseguro.domain.direct.checkout.OnlineDebitCheckout;
 import br.com.uol.pagseguro.enums.Currency;
 import br.com.uol.pagseguro.enums.DocumentType;
 import br.com.uol.pagseguro.enums.PaymentMode;
@@ -36,7 +36,7 @@ import br.com.uol.pagseguro.properties.PagSeguroConfig;
 import br.com.uol.pagseguro.service.TransactionService;
 
 /**
- * Class with a main method to illustrate the usage of the domain class OnlineDebitPaymentRequest
+ * Class with a main method to illustrate the usage of the domain class OnlineDebitCheckout
  */
 public class CreateTransactionUsingOnlineDebit {
 
@@ -49,7 +49,7 @@ public class CreateTransactionUsingOnlineDebit {
     }
 
     public static void createTransactionUsingDefaultMode() {
-        final OnlineDebitPaymentRequest request = new OnlineDebitPaymentRequest();
+        final OnlineDebitCheckout request = new OnlineDebitCheckout();
 
         request.setPaymentMode(PaymentMode.DEFAULT);
 
@@ -106,7 +106,7 @@ public class CreateTransactionUsingOnlineDebit {
     }
 
     public static void createTransactionUsingGatewayMode() {
-        final OnlineDebitPaymentRequest request = new OnlineDebitPaymentRequest();
+        final OnlineDebitCheckout request = new OnlineDebitCheckout();
 
         request.setPaymentMode(PaymentMode.GATEWAY);
 

@@ -1,6 +1,6 @@
 /*
  ************************************************************************
- Copyright [2011] [PagSeguro Internet Ltda.]
+ Copyright [2014] [PagSeguro Internet Ltda.]
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
  ************************************************************************
  */
 
-package br.com.uol.pagseguro.service;
+package br.com.uol.pagseguro.service.checkout;
 
 import java.net.HttpURLConnection;
 import java.util.List;
@@ -24,32 +24,28 @@ import java.util.Map;
 
 import br.com.uol.pagseguro.domain.Credentials;
 import br.com.uol.pagseguro.domain.Error;
-import br.com.uol.pagseguro.domain.PaymentRequest;
 import br.com.uol.pagseguro.domain.checkout.Checkout;
 import br.com.uol.pagseguro.enums.HttpStatus;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.logs.Log;
-import br.com.uol.pagseguro.parser.PaymentParser;
-import br.com.uol.pagseguro.service.checkout.CheckoutService;
+import br.com.uol.pagseguro.parser.checkout.CheckoutParser;
+import br.com.uol.pagseguro.service.ConnectionData;
 import br.com.uol.pagseguro.utils.HttpConnection;
 import br.com.uol.pagseguro.xmlparser.ErrorsParser;
 
 /**
  * 
- * Class Payment Service
- * 
- * @deprecated use {@link CheckoutService} instead.  
+ * Class CheckoutRequestService
  */
-@Deprecated
-public class PaymentService {
+public class CheckoutService {
 
-    private PaymentService() {
+    private CheckoutService() {
     }
 
     /**
      * @var Log
      */
-    private static Log log = new Log(PaymentService.class);
+    private static Log log = new Log(CheckoutService.class);
 
     /**
      * 
@@ -59,7 +55,7 @@ public class PaymentService {
      * @throws PagSeguroServiceException
      */
     public static String buildCheckoutRequestUrl(ConnectionData connectionData) throws PagSeguroServiceException {
-    	return CheckoutService.buildCheckoutRequestUrl(connectionData);
+        return connectionData.getWebServiceUrl() + "?" + connectionData.getCredentialsUrlQuery();
     }
 
     /**
@@ -83,30 +79,14 @@ public class PaymentService {
      */
     public static String createCheckoutRequest(Credentials credentials, Checkout checkout,
             Boolean onlyCheckoutCode) throws PagSeguroServiceException {
-    	return CheckoutService.createCheckoutRequest(credentials, checkout, onlyCheckoutCode);
-    }
-    
-    /**
-     * 
-     * @param credentials
-     * @param paymentRequest
-     * @param onlyCheckoutCode
-     * @return string
-     * @throws Exception
-     * 
-     * @deprecated use {@link #createCheckoutRequest(Credentials, Checkout, Boolean)} instead.  
-     */
-    @Deprecated
-    public static String createCheckoutRequest(Credentials credentials, PaymentRequest paymentRequest,
-            Boolean onlyCheckoutCode) throws PagSeguroServiceException {
-    	
-        PaymentService.log.info(String.format("PaymentService.Register( %s ) - begin", paymentRequest.toString()));
+
+        CheckoutService.log.info(String.format("CheckoutService.Register( %s ) - begin", checkout.toString()));
 
         ConnectionData connectionData = new ConnectionData(credentials);
 
-        Map<Object, Object> data = PaymentParser.getData(paymentRequest);
+        Map<Object, Object> data = CheckoutParser.getData(checkout);
 
-        String url = PaymentService.buildCheckoutRequestUrl(connectionData);
+        String url = CheckoutService.buildCheckoutRequestUrl(connectionData);
 
         HttpConnection connection = new HttpConnection();
         HttpStatus httpCodeStatus = null;
@@ -121,19 +101,19 @@ public class PaymentService {
                 throw new PagSeguroServiceException("Connection Timeout");
             } else if (HttpURLConnection.HTTP_OK == httpCodeStatus.getCode().intValue()) {
 
-                String paymentReturn = null;
-                String code = PaymentParser.readSuccessXml(response);
+                String checkoutReturn = null;
+                String code = CheckoutParser.readSuccessXml(response);
 
                 if (onlyCheckoutCode) {
-                    paymentReturn = code;
+                    checkoutReturn = code;
                 } else {
-                    paymentReturn = PaymentService.buildCheckoutUrl(connectionData, code);
+                    checkoutReturn = CheckoutService.buildCheckoutUrl(connectionData, code);
                 }
 
-                PaymentService.log.info(String.format("PaymentService.Register( %1s ) - end  %2s )",
-                        paymentRequest.toString(), code));
+                CheckoutService.log.info(String.format("CheckoutService.Register( %1s ) - end  %2s )",
+                        checkout.toString(), code));
 
-                return paymentReturn;
+                return checkoutReturn;
 
             } else if (HttpURLConnection.HTTP_BAD_REQUEST == httpCodeStatus.getCode().intValue()) {
 
@@ -141,8 +121,8 @@ public class PaymentService {
 
                 PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus, errors);
 
-                PaymentService.log.error(String.format("PaymentService.Register( %1s ) - error %2s",
-                        paymentRequest.toString(), exception.getMessage()));
+                CheckoutService.log.error(String.format("CheckoutService.Register( %1s ) - error %2s",
+                        checkout.toString(), exception.getMessage()));
 
                 throw exception;
 
@@ -155,8 +135,8 @@ public class PaymentService {
             throw e;
         } catch (Exception e) {
 
-            PaymentService.log.error(String.format("PaymentService.Register( %1s ) - error %2s",
-                    paymentRequest.toString(), e.getMessage()));
+        	CheckoutService.log.error(String.format("CheckoutService.Register( %1s ) - error %2s",
+                    checkout.toString(), e.getMessage()));
 
             throw new PagSeguroServiceException(httpCodeStatus, e);
 

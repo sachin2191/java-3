@@ -26,7 +26,7 @@ import br.com.uol.pagseguro.domain.Phone;
 import br.com.uol.pagseguro.domain.Sender;
 import br.com.uol.pagseguro.domain.SenderDocument;
 import br.com.uol.pagseguro.domain.Transaction;
-import br.com.uol.pagseguro.domain.direct.BoletoPaymentRequest;
+import br.com.uol.pagseguro.domain.direct.checkout.BoletoCheckout;
 import br.com.uol.pagseguro.enums.Currency;
 import br.com.uol.pagseguro.enums.DocumentType;
 import br.com.uol.pagseguro.enums.PaymentMode;
@@ -36,7 +36,7 @@ import br.com.uol.pagseguro.properties.PagSeguroConfig;
 import br.com.uol.pagseguro.service.TransactionService;
 
 /**
- * Class with a main method to illustrate the usage of the domain class BoletoPaymentRequest
+ * Class with a main method to illustrate the usage of the domain class BoletoCheckout
  */
 public class CreateTransactionUsingBoleto {
 
@@ -49,7 +49,7 @@ public class CreateTransactionUsingBoleto {
     }
 
     public static void createTransactionUsingDefaultMode() {
-        final BoletoPaymentRequest request = new BoletoPaymentRequest();
+        final BoletoCheckout request = new BoletoCheckout();
 
         request.setPaymentMode(PaymentMode.DEFAULT);
 
@@ -104,7 +104,7 @@ public class CreateTransactionUsingBoleto {
     }
 
     public static void createTransactionUsingGatewayMode() {
-        final BoletoPaymentRequest request = new BoletoPaymentRequest();
+        final BoletoCheckout request = new BoletoCheckout();
 
         request.setPaymentMode(PaymentMode.GATEWAY);
 

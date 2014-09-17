@@ -1,6 +1,6 @@
 /*
  ************************************************************************
- Copyright [2011] [PagSeguro Internet Ltda.]
+ Copyright [2014] [PagSeguro Internet Ltda.]
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -16,56 +16,56 @@
  ************************************************************************
  */
 
-package br.com.uol.pagseguro.domain;
+package br.com.uol.pagseguro.domain.checkout;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
-import br.com.uol.pagseguro.domain.checkout.Checkout;
+import br.com.uol.pagseguro.domain.Address;
+import br.com.uol.pagseguro.domain.Credentials;
+import br.com.uol.pagseguro.domain.Item;
+import br.com.uol.pagseguro.domain.MetaData;
+import br.com.uol.pagseguro.domain.MetaDataItem;
+import br.com.uol.pagseguro.domain.Parameter;
+import br.com.uol.pagseguro.domain.ParameterItem;
+import br.com.uol.pagseguro.domain.Phone;
+import br.com.uol.pagseguro.domain.Sender;
+import br.com.uol.pagseguro.domain.SenderDocument;
+import br.com.uol.pagseguro.domain.Shipping;
 import br.com.uol.pagseguro.enums.Currency;
 import br.com.uol.pagseguro.enums.DocumentType;
+import br.com.uol.pagseguro.enums.InvalidURL;
 import br.com.uol.pagseguro.enums.MetaDataItemKey;
 import br.com.uol.pagseguro.enums.ShippingType;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
+import br.com.uol.pagseguro.service.checkout.CheckoutService;
 
 /**
- * Represents a payment request
- * 
- * @deprecated use {@link Checkout} instead.  
+ * Represents a checkout request
  */
-@Deprecated
-public class PaymentRequest {
-	
-	/**
-	 * New Checkout class
-	 */
-	private Checkout checkout;
-	
-	/**
+public class Checkout {
+    /**
      * Party that will be sending the money
      */
-    @SuppressWarnings("unused")
-	private Sender sender;
+    private Sender sender;
 
     /**
      * Payment currency.
      */
-    @SuppressWarnings("unused")
-	private Currency currency;
+    private Currency currency;
 
     /**
      * List of products/items in this checkout request
      */
-    @SuppressWarnings("unused")
-	private List<Item> items;
+    private List<Item> items;
 
     /**
      * Uri to where the PagSeguro checkout page should redirect the user after the payment information is processed.
      * Typically this is a confirmation page on your web site.
      */
-    @SuppressWarnings("unused")
-	private String redirectURL;
+    private String redirectURL;
 
     /**
      * Extra/discount amount to be added to the transaction total
@@ -73,8 +73,7 @@ public class PaymentRequest {
      * Optional. This value can be used to add an extra charge to the transaction or provide a discount in the case
      * ExtraAmount is a negative value.
      */
-    @SuppressWarnings("unused")
-	private BigDecimal extraAmount;
+    private BigDecimal extraAmount;
 
     /**
      * Reference code
@@ -82,14 +81,12 @@ public class PaymentRequest {
      * Optional. You can use the reference code to store an identifier so you can associate the PagSeguro transaction to
      * a transaction in your system.
      */
-    @SuppressWarnings("unused")
-	private String reference;
+    private String reference;
 
     /**
      * Shipping information associated with this checkout request
      */
-    @SuppressWarnings("unused")
-	private Shipping shipping;
+    private Shipping shipping;
 
     /**
      * How long this payment request will remain valid, in seconds.
@@ -97,8 +94,7 @@ public class PaymentRequest {
      * Optional. After this checkout request is submitted, the payment code returned will remain valid for the period
      * specified here.
      */
-    @SuppressWarnings("unused")
-	private BigInteger maxAge;
+    private BigInteger maxAge;
 
     /**
      * How many times the payment redirect url returned by the payment web service can be accessed.
@@ -106,8 +102,7 @@ public class PaymentRequest {
      * Optional. After this checkout request is submitted, the payment redirect url returned by the checkout web service
      * will remain valid for the number of uses specified here.
      */
-    @SuppressWarnings("unused")
-	private BigInteger maxUses;
+    private BigInteger maxUses;
 
     /**
      * Determines for which url PagSeguro will send the order related notifications changes.
@@ -115,8 +110,7 @@ public class PaymentRequest {
      * Optional. A new notification will be send to this url if any change happens in the transaction status. You can
      * use that for update the related order.
      */
-    @SuppressWarnings("unused")
-	private String notificationURL;
+    private String notificationURL;
 
     /**
      * Extra parameters that user can add to a PagSeguro checkout request
@@ -125,8 +119,7 @@ public class PaymentRequest {
      * 
      * @var MetaData
      */
-    @SuppressWarnings("unused")
-	private MetaData metaData;
+    private MetaData metaData;
 
     /**
      * Extra parameters that user can add to a PagSeguro checkout request
@@ -135,14 +128,12 @@ public class PaymentRequest {
      * 
      * @var PagSeguroParameter
      */
-    @SuppressWarnings("unused")
-	private Parameter parameter;
+    private Parameter parameter;
 
     /**
-     * Initializes a new instance of the PaymentRequest class
+     * Initializes a new instance of the Checkout class
      */
-    public PaymentRequest() {
-    	this.checkout = new Checkout();
+    public Checkout() {
     }
 
     /**
@@ -152,7 +143,7 @@ public class PaymentRequest {
      *         payment information is processed. money
      */
     public Sender getSender() {
-    	return this.checkout.getSender();
+        return this.sender;
     }
 
     /**
@@ -163,7 +154,7 @@ public class PaymentRequest {
      * @see Sender
      */
     public void setSender(Sender sender) {
-        this.checkout.setSender(sender);
+        this.sender = sender;
     }
 
     /**
@@ -175,7 +166,14 @@ public class PaymentRequest {
      *            the sender e-mail address
      */
     public void setSender(String name, String email) {
-    	this.checkout.setSender(name, email);
+
+        if (this.sender == null) {
+            this.sender = new Sender();
+        }
+
+        this.sender.setName(name);
+        this.sender.setEmail(email);
+
     }
 
     /**
@@ -188,7 +186,15 @@ public class PaymentRequest {
      * @param number
      */
     public void setSender(String name, String email, Phone number) {
-    	this.checkout.setSender(name, email, number);
+
+        if (this.sender == null) {
+            this.sender = new Sender();
+        }
+
+        this.sender.setName(name);
+        this.sender.setEmail(email);
+        this.sender.setPhone(number);
+
     }
 
     /**
@@ -202,7 +208,15 @@ public class PaymentRequest {
      * @param number
      */
     public void setSender(String name, String email, String areaCode, String number) {
-    	this.checkout.setSender(name, email, areaCode, number);
+
+        if (this.sender == null) {
+            this.sender = new Sender();
+        }
+
+        this.sender.setName(name);
+        this.sender.setEmail(email);
+        this.sender.setPhone(new Phone(areaCode, number));
+
     }
 
     /**
@@ -217,7 +231,16 @@ public class PaymentRequest {
      * @param bornDate
      */
     public void setSender(String name, String email, String areaCode, String number, String bornDate) {
-    	this.checkout.setSender(name, email, areaCode, number, bornDate);
+
+        if (this.sender == null) {
+            this.sender = new Sender();
+        }
+
+        this.sender.setName(name);
+        this.sender.setEmail(email);
+        this.sender.setPhone(new Phone(areaCode, number));
+        this.sender.setBornDate(bornDate);
+
     }
 
     /**
@@ -231,7 +254,16 @@ public class PaymentRequest {
      * @param number
      */
     public void setSender(String name, String email, Phone number, String bornDate) {
-    	this.checkout.setSender(name, email, number, bornDate);
+
+        if (this.sender == null) {
+            this.sender = new Sender();
+        }
+
+        this.sender.setName(name);
+        this.sender.setEmail(email);
+        this.sender.setPhone(number);
+        this.sender.setBornDate(bornDate);
+
     }
 
     /**
@@ -248,7 +280,16 @@ public class PaymentRequest {
      */
     public void setSender(String name, String email, String areaCode, String number, DocumentType documentType,
             String documentValue) {
-    	this.checkout.setSender(name, email, areaCode, number, documentType, documentValue);
+
+        if (this.sender == null) {
+            this.sender = new Sender();
+        }
+
+        this.sender.setName(name);
+        this.sender.setEmail(email);
+        this.sender.setPhone(new Phone(areaCode, number));
+        this.sender.addDocument(documentType, documentValue);
+
     }
 
     /**
@@ -263,7 +304,16 @@ public class PaymentRequest {
      * @param documentValue
      */
     public void setSender(String name, String email, Phone number, DocumentType documentType, String documentValue) {
-    	this.checkout.setSender(name, email, number, documentType, documentValue);
+
+        if (this.sender == null) {
+            this.sender = new Sender();
+        }
+
+        this.sender.setName(name);
+        this.sender.setEmail(email);
+        this.sender.setPhone(number);
+        this.sender.addDocument(documentType, documentValue);
+
     }
 
     /**
@@ -281,7 +331,17 @@ public class PaymentRequest {
      */
     public void setSender(String name, String email, String areaCode, String number, DocumentType documentType,
             String documentValue, String bornDate) {
-    	this.checkout.setSender(name, email, areaCode, number, documentType, documentValue, bornDate);
+
+        if (this.sender == null) {
+            this.sender = new Sender();
+        }
+
+        this.sender.setName(name);
+        this.sender.setEmail(email);
+        this.sender.setPhone(new Phone(areaCode, number));
+        this.sender.addDocument(documentType, documentValue);
+        this.sender.setBornDate(bornDate);
+
     }
 
     /**
@@ -298,7 +358,17 @@ public class PaymentRequest {
      */
     public void setSender(String name, String email, Phone number, DocumentType documentType, String documentValue,
             String bornDate) {
-    	this.checkout.setSender(name, email, number, documentType, documentValue, bornDate);
+
+        if (this.sender == null) {
+            this.sender = new Sender();
+        }
+
+        this.sender.setName(name);
+        this.sender.setEmail(email);
+        this.sender.setPhone(number);
+        this.sender.addDocument(documentType, documentValue);
+        this.sender.setBornDate(bornDate);
+
     }
 
     /**
@@ -308,14 +378,20 @@ public class PaymentRequest {
      * @param number
      */
     public void setSenderPhone(String areaCode, String number) {
-    	this.checkout.setSenderPhone(areaCode, number);
+
+        if (this.sender == null) {
+            this.sender = new Sender();
+        }
+
+        this.sender.setPhone(new Phone(areaCode, number));
+
     }
-    
+
     /**
      * @return the currency Example: BRL
      */
     public Currency getCurrency() {
-    	return this.checkout.getCurrency();
+        return this.currency;
     }
 
     /**
@@ -324,7 +400,7 @@ public class PaymentRequest {
      * @param currency
      */
     public void setCurrency(Currency currency) {
-    	this.checkout.setCurrency(currency);
+        this.currency = currency;
     }
 
     /**
@@ -332,7 +408,13 @@ public class PaymentRequest {
      * @see Item
      */
     public List<Item> getItems() {
-    	return this.checkout.getItems();
+
+        if (this.items == null) {
+            this.items = new ArrayList<Item>();
+        }
+
+        return this.items;
+
     }
 
     /**
@@ -343,7 +425,7 @@ public class PaymentRequest {
      * @param items
      */
     public void setItems(List<Item> items) {
-    	this.checkout.setItems(items);
+        this.items = items;
     }
 
     /**
@@ -360,7 +442,7 @@ public class PaymentRequest {
      */
     public void addItem(String id, String description, Integer quantity, BigDecimal amount, Long weight,
             BigDecimal shippingCost) {
-    	this.checkout.addItem(id, description, quantity, amount, weight, shippingCost);
+        this.getItems().add(new Item(id, description, quantity, amount, weight, shippingCost));
     }
 
     /**
@@ -371,7 +453,7 @@ public class PaymentRequest {
      * @param item
      */
     public void addItem(Item item) {
-    	this.checkout.addItem(item);
+        this.getItems().add(item);
     }
 
     /**
@@ -381,7 +463,7 @@ public class PaymentRequest {
      * @return the redirectURL
      */
     public String getRedirectURL() {
-    	return this.checkout.getRedirectURL();
+        return this.redirectURL;
     }
 
     /**
@@ -393,7 +475,7 @@ public class PaymentRequest {
      * @param redirectURL
      */
     public void setRedirectURL(String redirectURL) {
-    	this.checkout.setRedirectURL(redirectURL);
+        this.redirectURL = this.verifyURLTest(redirectURL);
     }
 
     /**
@@ -403,7 +485,7 @@ public class PaymentRequest {
      * @return the extra amount
      */
     public BigDecimal getExtraAmount() {
-    	return this.checkout.getExtraAmount();
+        return this.extraAmount;
     }
 
     /**
@@ -413,14 +495,14 @@ public class PaymentRequest {
      * @param extraAmount
      */
     public void setExtraAmount(BigDecimal extraAmount) {
-    	this.checkout.setExtraAmount(extraAmount);
+        this.extraAmount = extraAmount;
     }
 
     /**
      * @return the reference of this checkout request
      */
     public String getReference() {
-    	return this.checkout.getReference();
+        return this.reference;
     }
 
     /**
@@ -429,7 +511,7 @@ public class PaymentRequest {
      * @param reference
      */
     public void setReference(String reference) {
-    	this.checkout.setReference(reference);
+        this.reference = reference;
     }
 
     /**
@@ -437,7 +519,7 @@ public class PaymentRequest {
      * @see Shipping
      */
     public Shipping getShipping() {
-    	return getShipping();
+        return this.shipping;
     }
 
     /**
@@ -448,7 +530,7 @@ public class PaymentRequest {
      * @param shipping
      */
     public void setShipping(Shipping shipping) {
-    	this.checkout.setShipping(shipping);
+        this.shipping = shipping;
     }
 
     /**
@@ -459,7 +541,13 @@ public class PaymentRequest {
      * @param type
      */
     public void setShippingType(ShippingType type) {
-    	this.checkout.setShippingType(type);
+
+        if (this.shipping == null) {
+            this.shipping = new Shipping();
+        }
+
+        this.shipping.setType(type);
+
     }
 
     /**
@@ -469,7 +557,13 @@ public class PaymentRequest {
      * @param cost
      */
     public void setShippingCost(BigDecimal cost) {
-    	this.checkout.setShippingCost(cost);
+
+        if (this.shipping == null) {
+            this.shipping = new Shipping();
+        }
+
+        this.shipping.setCost(cost);
+
     }
 
     /**
@@ -487,7 +581,14 @@ public class PaymentRequest {
      */
     public void setShipping(ShippingType type, String country, String state, String city, String district,
             String postalCode, String street, String number, String complement) {
-    	this.checkout.setShipping(type, country, state, city, district, postalCode, street, number, complement);
+
+        if (this.shipping == null) {
+            this.shipping = new Shipping();
+        }
+
+        this.shipping.setType(type);
+        this.shipping.setAddress(new Address(country, state, city, district, postalCode, street, number, complement));
+
     }
 
     /**
@@ -506,7 +607,10 @@ public class PaymentRequest {
      */
     public void setShipping(ShippingType type, String country, String state, String city, String district,
             String postalCode, String street, String number, String complement, BigDecimal cost) {
-    	this.checkout.setShipping(type, country, state, city, district, postalCode, street, number, complement, cost);
+
+        this.setShipping(type, country, state, city, district, postalCode, street, number, complement);
+        this.shipping.setCost(cost);
+
     }
 
     /**
@@ -523,7 +627,13 @@ public class PaymentRequest {
      */
     public void setShippingAddress(String country, String state, String city, String district, String postalCode,
             String street, String number, String complement) {
-    	this.checkout.setShippingAddress(country, state, city, district, postalCode, street, number, complement);
+
+        if (this.shipping == null) {
+            this.shipping = new Shipping();
+        }
+
+        this.shipping.setAddress(new Address(country, state, city, district, postalCode, street, number, complement));
+
     }
 
     /**
@@ -532,7 +642,13 @@ public class PaymentRequest {
      * @param address
      */
     public void setShippingAddress(Address address) {
-    	this.checkout.setShippingAddress(address);
+
+        if (this.shipping == null) {
+            this.shipping = new Shipping();
+        }
+
+        this.shipping.setAddress(address);
+
     }
 
     /**
@@ -542,7 +658,7 @@ public class PaymentRequest {
      *         specified.
      */
     public BigInteger getMaxAge() {
-    	return this.checkout.getMaxAge();
+        return this.maxAge;
     }
 
     /**
@@ -552,7 +668,7 @@ public class PaymentRequest {
      * @param maxAge
      */
     public void setMaxAge(BigInteger maxAge) {
-    	this.checkout.setMaxAge(maxAge);
+        this.maxAge = maxAge;
     }
 
     /**
@@ -562,7 +678,7 @@ public class PaymentRequest {
      * @return the max uses configured for this checkout request
      */
     public BigInteger getMaxUses() {
-    	return this.checkout.getMaxUses();
+        return this.maxUses;
     }
 
     /**
@@ -574,7 +690,7 @@ public class PaymentRequest {
      * @param maxUses
      */
     public void setMaxUses(BigInteger maxUses) {
-    	this.checkout.setMaxUses(maxUses);
+        this.maxUses = maxUses;
     }
 
     /**
@@ -583,7 +699,7 @@ public class PaymentRequest {
      * @return String
      */
     public String getNotificationURL() {
-    	return this.checkout.getNotificationURL();
+        return this.notificationURL;
     }
 
     /**
@@ -592,7 +708,7 @@ public class PaymentRequest {
      * @param notificationURL
      */
     public void setNotificationURL(String notificationURL) {
-    	this.checkout.setNotificationURL(notificationURL);
+        this.notificationURL = verifyURLTest(notificationURL);
     }
 
     /**
@@ -601,7 +717,7 @@ public class PaymentRequest {
      * @param document
      */
     public void addSenderDocument(SenderDocument document) {
-    	this.checkout.addSenderDocument(document);
+        this.getSender().addDocument(document);
     }
 
     /**
@@ -611,7 +727,7 @@ public class PaymentRequest {
      * @param value
      */
     public void addSenderDocument(DocumentType type, String value) {
-    	this.checkout.addSenderDocument(type, value);
+        this.getSender().addDocument(type, value);
     }
 
     /**
@@ -620,7 +736,13 @@ public class PaymentRequest {
      * @return MetaData
      */
     public MetaData getMetaData() {
-    	return this.checkout.getMetaData();
+
+        if (this.metaData == null) {
+            this.metaData = new MetaData();
+        }
+
+        return this.metaData;
+
     }
 
     /**
@@ -630,7 +752,7 @@ public class PaymentRequest {
      *            metaData
      */
     public void setMetaData(MetaData metaData) {
-    	this.checkout.setMetaData(metaData);
+        this.metaData = metaData;
     }
 
     /**
@@ -641,7 +763,7 @@ public class PaymentRequest {
      * @param group
      */
     public void addMetaDataItem(MetaDataItemKey key, String value, Integer group) {
-    	this.checkout.addMetaDataItem(key, value, group);
+        this.getMetaData().addItem(new MetaDataItem(key, value, group));
     }
 
     /**
@@ -651,7 +773,7 @@ public class PaymentRequest {
      * @param value
      */
     public void addMetaDataItem(MetaDataItemKey key, String value) {
-    	this.checkout.addMetaDataItem(key, value);
+        this.getMetaData().addItem(new MetaDataItem(key, value));
     }
 
     /**
@@ -660,7 +782,13 @@ public class PaymentRequest {
      * @return Parameter
      */
     public Parameter getParameter() {
-    	return this.checkout.getParameter();
+
+        if (this.parameter == null) {
+            this.parameter = new Parameter();
+        }
+
+        return this.parameter;
+
     }
 
     /**
@@ -669,7 +797,7 @@ public class PaymentRequest {
      * @param parameter
      */
     public void setParameter(Parameter parameter) {
-    	this.checkout.setParameter(parameter);
+        this.parameter = parameter;
     }
 
     /**
@@ -681,7 +809,7 @@ public class PaymentRequest {
      * @param value
      */
     public void addParameter(String name, String value) {
-    	this.checkout.addParameter(name, value);
+        this.getParameter().addItem(new ParameterItem(name, value));
     }
 
     /**
@@ -694,7 +822,7 @@ public class PaymentRequest {
      * @param index
      */
     public void addIndexedParameter(String name, String value, Integer index) {
-    	this.checkout.addIndexedParameter(name, value, index);
+        this.getParameter().addItem(new ParameterItem(name, value, index));
     }
 
     /**
@@ -705,7 +833,7 @@ public class PaymentRequest {
      * @throws PagSeguroServiceException
      */
     public String register(Credentials credentials) throws PagSeguroServiceException {
-    	return this.checkout.register(credentials);
+        return this.register(credentials, false);
     }
 
     /**
@@ -717,7 +845,7 @@ public class PaymentRequest {
      * @throws PagSeguroServiceException
      */
     public String register(Credentials credentials, Boolean onlyCheckoutCode) throws PagSeguroServiceException {
-    	return this.checkout.register(credentials, onlyCheckoutCode);
+        return CheckoutService.createCheckoutRequest(credentials, this, onlyCheckoutCode);
     }
 
     /**
@@ -725,7 +853,13 @@ public class PaymentRequest {
      */
     @Override
     public String toString() {
-    	return this.checkout.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("PaymentRequest(Reference=");
+        sb.append(reference);
+        sb.append(",SenderEmail=");
+        sb.append(sender != null ? sender.getEmail() : null);
+        sb.append(")");
+        return sb.toString();
     }
 
     /**
@@ -736,6 +870,16 @@ public class PaymentRequest {
      * @return type
      */
     public String verifyURLTest(String url) {
-    	return this.checkout.verifyURLTest(url);
+
+        String urlReturn = url;
+
+        for (InvalidURL invalid : InvalidURL.values()) {
+            if (url.toLowerCase().contains(invalid.getValue().toLowerCase())) {
+                urlReturn = "";
+            }
+        }
+
+        return urlReturn;
+
     }
 }

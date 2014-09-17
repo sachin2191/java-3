@@ -24,11 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import br.com.uol.pagseguro.domain.Item;
@@ -36,24 +33,42 @@ import br.com.uol.pagseguro.domain.MetaDataItem;
 import br.com.uol.pagseguro.domain.ParameterItem;
 import br.com.uol.pagseguro.domain.PaymentRequest;
 import br.com.uol.pagseguro.domain.SenderDocument;
-import br.com.uol.pagseguro.xmlparser.XMLParserUtils;
+import br.com.uol.pagseguro.domain.checkout.Checkout;
+import br.com.uol.pagseguro.parser.checkout.CheckoutParser;
+
 
 /**
  * Parses PaymentRequests and responses
+ * 
+ * @deprecated use {@link CheckoutParser} instead.  
  */
+@Deprecated
 public class PaymentParser {
-
+	
     private PaymentParser() {
+
     }
 
     /**
      * 
-     * @param payment
+     * @param checkout
      * @return mixed
      */
+    public static Map<Object, Object> getData(Checkout checkout) {
+    	return CheckoutParser.getData(checkout);
+    }
+    
+    /**
+     * 
+     * @param payment
+     * @return mixed
+     *
+     * @deprecated use {@link #getData(Checkout)} instead.  
+     */
+    @Deprecated
     public static Map<Object, Object> getData(PaymentRequest payment) {
-
-        Map<Object, Object> data = new HashMap<Object, Object>();
+    	
+    	Map<Object, Object> data = new HashMap<Object, Object>();
 
         // SET REFERENCE
         if (payment.getReference() != null) {
@@ -292,18 +307,10 @@ public class PaymentParser {
         }
 
         return data;
-
     }
 
     public static String readSuccessXml(HttpURLConnection connection) throws ParserConfigurationException,
             SAXException, IOException {
-
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        org.w3c.dom.Document doc = dBuilder.parse(connection.getInputStream());
-        Element paymentReturnElement = doc.getDocumentElement();
-
-        return XMLParserUtils.getTagValue("code", paymentReturnElement);
-
+    	return CheckoutParser.readSuccessXml(connection);
     }
 }

@@ -2,28 +2,39 @@ package br.com.uol.pagseguro.domain.direct;
 
 import java.util.Map;
 
+import br.com.uol.pagseguro.domain.direct.checkout.BoletoCheckout;
+
 /**
  * Represents the payment request of the boleto
+ * 
+ * @deprecated use {@link BoletoCheckout} instead.  
  */
+@Deprecated
 public class BoletoPaymentRequest extends PaymentRequest {
 
+	/**
+	 * New BoletoCheckout class
+	 */
+	private BoletoCheckout boletoCheckout;
+	
     /**
      * Dynamic payment method message
      */
-    private String dynamicPaymentMethodMessage;
+    @SuppressWarnings("unused")
+	private String dynamicPaymentMethodMessage;
 
     /**
      * Initializes a new instance of the PaymentRequestWithBoleto class
      */
     public BoletoPaymentRequest() {
-
+    	this.boletoCheckout = new BoletoCheckout();
     }
 
     /**
      * @return the dynamicPaymentMethodMessage
      */
     public String getDynamicPaymentMethodMessage() {
-        return dynamicPaymentMethodMessage;
+    	return this.boletoCheckout.getDynamicPaymentMethodMessage();
     }
 
     /**
@@ -31,31 +42,16 @@ public class BoletoPaymentRequest extends PaymentRequest {
      *            the dynamicPaymentMethodMessage to set
      */
     public void setDynamicPaymentMethodMessage(String dynamicPaymentMethodMessage) {
-        this.dynamicPaymentMethodMessage = dynamicPaymentMethodMessage;
+    	this.boletoCheckout.setDynamicPaymentMethodMessage(dynamicPaymentMethodMessage);
     }
 
     @Override
     public Map<Object, Object> getMap() {
-        final Map<Object, Object> data = super.getMap();
-
-        data.put("paymentMethod", "BOLETO");
-
-        if (dynamicPaymentMethodMessage != null) {
-            data.put("dynamicPaymentMethodMessageBoleto", dynamicPaymentMethodMessage);
-        }
-
-        return data;
+    	return this.boletoCheckout.getMap();
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("BoletoPaymentRequest[");
-        sb.append("paymentMode=" + getPaymentMode());
-        sb.append(",reference=" + getReference());
-        sb.append(",senderEmail=" + getSender() != null ? getSender().getEmail() : null);
-        sb.append("]");
-        return sb.toString();
+    	return this.boletoCheckout.toString();
     }
-
 }
