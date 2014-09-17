@@ -43,8 +43,9 @@ import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestSender;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShipping;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShippingPackage;
 import br.com.uol.pagseguro.domain.preapproval.PreApproval;
-import br.com.uol.pagseguro.domain.preapproval.PreApprovalStatus;
 import br.com.uol.pagseguro.domain.preapproval.PreApprovalTransaction;
+import br.com.uol.pagseguro.enums.PreApprovalPeriod;
+import br.com.uol.pagseguro.enums.PreApprovalStatus;
 import br.com.uol.pagseguro.helper.PagSeguroUtil;
 import br.com.uol.pagseguro.logs.Log;
 import br.com.uol.pagseguro.logs.Logger;
@@ -201,7 +202,7 @@ public class PreApprovalParser {
     	 * Set period
     	 */
     	if(preApproval.getPeriod() != null)
-    		data.put(PRE_APPROVAL_PERIOD, preApproval.getPeriod());
+    		data.put(PRE_APPROVAL_PERIOD, preApproval.getPeriod().toString());
 
     	return data;
     }
@@ -296,7 +297,7 @@ public class PreApprovalParser {
         // parsing <recurrence><period>
         tagValue = XMLParserUtils.getTagValue("period", preApprovalElement);
         if (tagValue != null) {
-            preApprovalTransaction.setPeriod(tagValue);
+            preApprovalTransaction.setPeriod(PreApprovalPeriod.valueOf(tagValue));
         }
         
         // parsing <recurrence><paymentRequestsQuantity>

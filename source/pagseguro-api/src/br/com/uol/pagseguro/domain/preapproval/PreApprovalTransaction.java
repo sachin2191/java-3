@@ -21,6 +21,8 @@ package br.com.uol.pagseguro.domain.preapproval;
 import java.util.Date;
 
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequest;
+import br.com.uol.pagseguro.enums.PreApprovalPeriod;
+import br.com.uol.pagseguro.enums.PreApprovalStatus;
 
 /**
  * Represents a PagSeguro pre-approval transaction
@@ -34,7 +36,7 @@ public class PreApprovalTransaction {
     private PreApprovalStatus status;
     
     /** Pre-approval period*/
-    private String period;
+    private PreApprovalPeriod period;
     
     /** Payment requests quantity */
     private Integer paymentRequestsQuantity;
@@ -88,7 +90,7 @@ public class PreApprovalTransaction {
     /**
      * @return the period
      */
-    public String getPeriod() {
+    public PreApprovalPeriod getPeriod() {
         return period;
     }
 
@@ -97,7 +99,7 @@ public class PreApprovalTransaction {
      * 
      * @param period
      */
-    public void setPeriod(String period) {
+    public void setPeriod(PreApprovalPeriod period) {
         this.period = period;
     }
 

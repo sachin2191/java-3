@@ -11,7 +11,7 @@ import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestItem;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestSender;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShipping;
 import br.com.uol.pagseguro.domain.preapproval.PreApproval;
-import br.com.uol.pagseguro.domain.preapproval.PreApprovalConstants;
+import br.com.uol.pagseguro.enums.PreApprovalPeriod;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.properties.PagSeguroConfig;
 
@@ -69,7 +69,7 @@ public class CreatePreApproval {
     	preApproval.setPaymentRequestsQuantity(3);
     	
     	// payment requests period will be sent to the sender
-    	preApproval.setPeriod(PreApprovalConstants.PRE_APPROVAL_PERIOD_MONTHLY);
+    	preApproval.setPeriod(PreApprovalPeriod.MONTHLY);
     	
         try {
             // Set your account credentials on src/pagseguro-config.properties

@@ -21,6 +21,7 @@ package br.com.uol.pagseguro.domain.preapproval;
 import br.com.uol.pagseguro.domain.Credentials;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequest;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestTransaction;
+import br.com.uol.pagseguro.enums.PreApprovalPeriod;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.service.paymentrequest.PaymentRequestService;
 import br.com.uol.pagseguro.service.preapproval.PreApprovalService;
@@ -50,7 +51,7 @@ public class PreApproval {
     /**
      * Period in which the pre-approval will live
      */
-    private String period;
+    private PreApprovalPeriod period;
 
     /**
      * Initializes a new instance of the PreApproval class
@@ -69,7 +70,7 @@ public class PreApproval {
 	 * @param period
 	 */
 	public PreApproval(String initialDate, PaymentRequest paymentRequest,
-			Integer paymentRequestsQuantity, String period) {
+			Integer paymentRequestsQuantity, PreApprovalPeriod period) {
 		super();
 		this.initialDate = initialDate;
 		this.paymentRequest = paymentRequest;
@@ -128,7 +129,7 @@ public class PreApproval {
 	/**
 	 * @return the period
 	 */
-	public String getPeriod() {
+	public PreApprovalPeriod getPeriod() {
 		return period;
 	}
 
@@ -137,7 +138,7 @@ public class PreApproval {
 	 * 
 	 * @param period
 	 */
-	public void setPeriod(String period) {
+	public void setPeriod(PreApprovalPeriod period) {
 		this.period = period;
 	}
 

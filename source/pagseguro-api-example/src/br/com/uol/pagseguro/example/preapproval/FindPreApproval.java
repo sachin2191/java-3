@@ -14,7 +14,7 @@ public class FindPreApproval {
     public static void main(String[] args) {
 
         // Substitute the code below with a valid payment request code for your account
-        findByCode("6522D93903FC4A778892C653E3B400B1");
+        findByCode("D9515EFF67BC4D8F86FDD02045937C0D");
     }
     
     private static void findByCode(String preApprovalCode) {
@@ -40,7 +40,7 @@ public class FindPreApproval {
         
         System.out.println("code: " + preApprovalTransaction.getCode());
         System.out.println("status: " + preApprovalTransaction.getStatus());
-        System.out.println("period: " + preApprovalTransaction.getPeriod());
+        System.out.println("period: " + preApprovalTransaction.getPeriod().toString());
         System.out.println("paymentRequestsQuantity: " + preApprovalTransaction.getPaymentRequestsQuantity());
         System.out.println("initialDate: " + preApprovalTransaction.getInitialDate());
 
