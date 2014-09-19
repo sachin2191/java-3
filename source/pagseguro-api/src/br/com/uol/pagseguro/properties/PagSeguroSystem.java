@@ -149,6 +149,10 @@ public class PagSeguroSystem {
     public static String getContentTypeFormUrlEncoded() {
         return resourceBundle.getString("contentType.formUrlEncoded");
     }
+    
+    public static String getAcceptHeaderXML() {
+        return resourceBundle.getString("acceptHeader.xml");
+    }
 
     public static String getPagSeguroEncoding() {
         return resourceBundle.getString("encoding");

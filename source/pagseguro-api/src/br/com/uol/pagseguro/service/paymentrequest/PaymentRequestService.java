@@ -30,6 +30,7 @@ import br.com.uol.pagseguro.enums.HttpStatus;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.logs.Log;
 import br.com.uol.pagseguro.parser.paymentrequest.PaymentRequestParser;
+import br.com.uol.pagseguro.properties.PagSeguroSystem;
 import br.com.uol.pagseguro.service.ConnectionData;
 import br.com.uol.pagseguro.utils.HttpConnection;
 import br.com.uol.pagseguro.xmlparser.ErrorsParser;
@@ -130,7 +131,7 @@ public class PaymentRequestService {
         HttpStatus httpCodeStatus = null;
         
         HttpURLConnection response = connection.post(url, data, connectionData.getServiceTimeout(),
-                connectionData.getCharset());
+                connectionData.getCharset(), PagSeguroSystem.getAcceptHeaderXML());
 
         try {
 
@@ -193,7 +194,7 @@ public class PaymentRequestService {
 
         HttpURLConnection response = connection.get(
                 PaymentRequestService.buildPaymentRequestFindUrlByCode(connectionData, paymentRequestcode),
-                connectionData.getServiceTimeout(), connectionData.getCharset());
+                connectionData.getServiceTimeout(), connectionData.getCharset(), PagSeguroSystem.getAcceptHeaderXML());
 
         try {
 

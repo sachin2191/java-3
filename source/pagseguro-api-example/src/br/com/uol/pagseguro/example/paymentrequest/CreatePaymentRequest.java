@@ -54,8 +54,8 @@ public class CreatePaymentRequest {
 
         try {
             // Set your account credentials on src/pagseguro-config.properties
-            String paymentURL = paymentRequest.register(PagSeguroConfig.getAccountCredentials());
-            System.out.println(paymentURL);
+            String paymentRequestCode = paymentRequest.register(PagSeguroConfig.getAccountCredentials());
+            System.out.println(paymentRequestCode);
 
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());

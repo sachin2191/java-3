@@ -14,7 +14,7 @@ public class FindPreApproval {
     public static void main(String[] args) {
 
         // Substitute the code below with a valid payment request code for your account
-        findByCode("D9515EFF67BC4D8F86FDD02045937C0D");
+        findByCode("F1DEEA6D76B54267A753D6B87CB6A62D");
     }
     
     private static void findByCode(String preApprovalCode) {

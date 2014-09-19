@@ -73,8 +73,8 @@ public class CreatePreApproval {
     	
         try {
             // Set your account credentials on src/pagseguro-config.properties
-            String preApprovalURL = preApproval.register(PagSeguroConfig.getAccountCredentials());
-            System.out.println(preApprovalURL);
+            String preApprovalCode = preApproval.register(PagSeguroConfig.getAccountCredentials());
+            System.out.println(preApprovalCode);
 
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
