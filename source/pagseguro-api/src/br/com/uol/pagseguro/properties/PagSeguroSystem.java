@@ -22,7 +22,6 @@ import java.util.ResourceBundle;
 
 /**
  * Helper to get values from properties
- * 
  */
 public class PagSeguroSystem {
 
@@ -48,9 +47,10 @@ public class PagSeguroSystem {
      * Get Url to create a payment request
      * 
      * @return string
-     */    
+     */
     public static String getUrlPaymentRequest() {
-        return resourceBundle.getString("paymentRequestService." + PagSeguroConfig.getEnvironment() + ".paymentRequestUrl");
+        return resourceBundle.getString("paymentRequestService." + PagSeguroConfig.getEnvironment()
+                + ".paymentRequestUrl");
     }
 
     /**
@@ -63,12 +63,12 @@ public class PagSeguroSystem {
     }
 
     /**
-     * Get Url to create a payment session
+     * Get Url to create a session
      * 
      * @return string
      */
-    public static String getUrlPaymentSession() {
-        return resourceBundle.getString("paymentService." + PagSeguroConfig.getEnvironment() + ".paymentSession");
+    public static String getUrlSessions() {
+        return resourceBundle.getString("paymentService." + PagSeguroConfig.getEnvironment() + ".sessions");
     }
 
     /**
@@ -79,7 +79,7 @@ public class PagSeguroSystem {
     public static String getUrlInstallments() {
         return resourceBundle.getString("paymentService." + PagSeguroConfig.getEnvironment() + ".installments");
     }
-    
+
     /**
      * Get Url to Direct Payment
      * 
@@ -97,6 +97,7 @@ public class PagSeguroSystem {
     public static String getUrlPaymentMethods() {
         return resourceBundle.getString("paymentService." + PagSeguroConfig.getEnvironment() + ".paymentMethods");
     }
+
     /**
      * Get checkout service path
      * 
@@ -105,23 +106,23 @@ public class PagSeguroSystem {
     public static String getCheckoutServicePath() {
         return resourceBundle.getString("checkoutService.servicePath");
     }
-    
+
     public static String getPaymentRequestServicePath() {
-    	return resourceBundle.getString("paymentRequestService.servicePath");
+        return resourceBundle.getString("paymentRequestService.servicePath");
     }
-    
+
     public static String getPaymentRequestFindByCodePath() {
-    	return resourceBundle.getString("paymentRequestService.findByCodePath");
+        return resourceBundle.getString("paymentRequestService.findByCodePath");
     }
 
     public static String getPreApprovalServicePath() {
-    	return resourceBundle.getString("preApprovalService.servicePath");
+        return resourceBundle.getString("preApprovalService.servicePath");
     }
-    
+
     public static String getPreApprovalFindByCodePath() {
-    	return resourceBundle.getString("preApprovalService.findByCodePath");
+        return resourceBundle.getString("preApprovalService.findByCodePath");
     }
-    
+
     public static String getPreApprovalCancelByCodePath() {
         return resourceBundle.getString("preApprovalService.cancelByCodePath");
     }

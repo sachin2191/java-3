@@ -27,10 +27,9 @@ public class SearchTransactionByCode {
 
     public static void main(String[] args) {
 
-        // Substitute the code below with a valid transaction code for your
-        // account
+        // Substitute the code below with a valid transaction code for your account
 
-        String transactionCode = "4EDCA6AD-112D-4474-BA4E-E613A095B93A";
+        String transactionCode = "ACD7599E-3F7B-44B5-B67B-D9FDB7C55017";
 
         Transaction transaction = null;
 

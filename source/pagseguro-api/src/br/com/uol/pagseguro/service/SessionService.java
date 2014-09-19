@@ -38,7 +38,6 @@ import br.com.uol.pagseguro.xmlparser.ErrorsParser;
 import br.com.uol.pagseguro.xmlparser.XMLParserUtils;
 
 /**
- * 
  * Class Session Service
  */
 public class SessionService {
@@ -48,9 +47,9 @@ public class SessionService {
      */
     private static Log log = new Log(SessionService.class);
 
-    private static String buildSessionRequestUrl(ConnectionData connectionData) //
+    private static String buildSessionsRequestUrl(ConnectionData connectionData) //
             throws PagSeguroServiceException {
-        return connectionData.getPaymentSessionUrl() + "?" + connectionData.getCredentialsUrlQuery();
+        return connectionData.getSessionsUrl();
     }
 
     public static String createSession(Credentials credentials) //
@@ -59,12 +58,13 @@ public class SessionService {
 
         ConnectionData connectionData = new ConnectionData(credentials);
 
-        String url = SessionService.buildSessionRequestUrl(connectionData);
+        String url = SessionService.buildSessionsRequestUrl(connectionData);
 
         HttpConnection connection = new HttpConnection();
         HttpStatus httpCodeStatus = null;
 
-        HttpURLConnection response = connection.get(url, //
+        HttpURLConnection response = connection.post(url, //
+                credentials.getAttributes(), //
                 connectionData.getServiceTimeout(), //
                 connectionData.getCharset());
 
@@ -82,8 +82,8 @@ public class SessionService {
 
                 Element element = document.getDocumentElement();
 
-                // setting <startPaymentSessionResult><sessionId>
-                String sessionId = XMLParserUtils.getTagValue("sessionId", element);
+                // setting <session><id>
+                String sessionId = XMLParserUtils.getTagValue("id", element);
 
                 log.info("SessionService.createSession() - end");
 

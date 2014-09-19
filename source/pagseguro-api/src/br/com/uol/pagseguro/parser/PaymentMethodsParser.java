@@ -85,8 +85,8 @@ public class PaymentMethodsParser {
         for (int i = 0; i < paymentMethodElements.size(); i++) {
             Element element = paymentMethodElements.get(i);
 
-            // setting <paymentMethods><paymentMethod><type>
-            String type = XMLParserUtils.getTagValue("type", element);
+            // setting <paymentMethods><paymentMethod><code>
+            String type = XMLParserUtils.getTagValue("code", element);
 
             PaymentMethodType paymentMethodType = PaymentMethodType.fromValue(Integer.parseInt(type));
 
