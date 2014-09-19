@@ -30,7 +30,7 @@ import org.w3c.dom.Text;
  * Utility class for XML parsing
  */
 public class XMLParserUtils {
-    
+
     private XMLParserUtils() {
     }
 
@@ -41,8 +41,7 @@ public class XMLParserUtils {
      * @param fromElement
      * @return
      */
-    public static List<Element> getElements(String elementTag,
-            Element fromElement) {
+    public static List<Element> getElements(String elementTag, Element fromElement) {
         List<Element> elements = new ArrayList<Element>();
         NodeList nodeList = fromElement.getElementsByTagName(elementTag);
         for (int i = 0; i < nodeList.getLength(); i++) {

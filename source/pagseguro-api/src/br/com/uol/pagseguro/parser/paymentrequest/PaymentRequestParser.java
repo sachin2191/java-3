@@ -62,144 +62,156 @@ import br.com.uol.pagseguro.xmlparser.XMLParserUtils;
  */
 public class PaymentRequestParser {
 
-	/**
+    /**
      * PagSeguro Log tool
      * 
      * @see Logger
      */
     private static Log log = new Log(PaymentRequestParser.class);
-	
+
     public static String PAYMENT_REQUEST_NAME = "name";
-	public static String PAYMENT_REQUEST_REFERENCE = "reference";
-	public static String PAYMENT_REQUEST_EXPIRATION = "expiration";
-	public static String PAYMENT_REQUEST_DUE = "due";
-	public static String PAYMENT_REQUEST_SENDER_EMAIL = "sender.email";
-	public static String PAYMENT_REQUEST_SENDER_NAME = "sender.name";
-	public static String PAYMENT_REQUEST_ITEM_PREFIX = "item[";
-	public static String PAYMENT_REQUEST_ITEM_DESCRIPTION = "].description";
-	public static String PAYMENT_REQUEST_ITEM_QUANTITY = "].quantity";
-	public static String PAYMENT_REQUEST_ITEM_AMOUNT = "].amount";
-	public static String PAYMENT_REQUEST_ITEM_ID = "].id";
-	public static String PAYMENT_REQUEST_SHIPPING_PREFIX = "shipping";
-	public static String PAYMENT_REQUEST_SHIPPING_COST = PAYMENT_REQUEST_SHIPPING_PREFIX + ".cost";
-	public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX = ".package";
-	public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_WIDTH = PAYMENT_REQUEST_SHIPPING_PREFIX + PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX + ".width";
-	public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_HEIGHT = PAYMENT_REQUEST_SHIPPING_PREFIX + PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX + ".height";
-	public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_LENGTH = PAYMENT_REQUEST_SHIPPING_PREFIX + PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX + ".length";
-	public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_WEIGHT = PAYMENT_REQUEST_SHIPPING_PREFIX + PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX + ".weight";
-	
+    public static String PAYMENT_REQUEST_REFERENCE = "reference";
+    public static String PAYMENT_REQUEST_EXPIRATION = "expiration";
+    public static String PAYMENT_REQUEST_DUE = "due";
+    public static String PAYMENT_REQUEST_SENDER_EMAIL = "sender.email";
+    public static String PAYMENT_REQUEST_SENDER_NAME = "sender.name";
+    public static String PAYMENT_REQUEST_ITEM_PREFIX = "item[";
+    public static String PAYMENT_REQUEST_ITEM_DESCRIPTION = "].description";
+    public static String PAYMENT_REQUEST_ITEM_QUANTITY = "].quantity";
+    public static String PAYMENT_REQUEST_ITEM_AMOUNT = "].amount";
+    public static String PAYMENT_REQUEST_ITEM_ID = "].id";
+    public static String PAYMENT_REQUEST_SHIPPING_PREFIX = "shipping";
+    public static String PAYMENT_REQUEST_SHIPPING_COST = PAYMENT_REQUEST_SHIPPING_PREFIX + ".cost";
+    public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX = ".package";
+    public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_WIDTH = PAYMENT_REQUEST_SHIPPING_PREFIX
+            + PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX + ".width";
+    public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_HEIGHT = PAYMENT_REQUEST_SHIPPING_PREFIX
+            + PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX + ".height";
+    public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_LENGTH = PAYMENT_REQUEST_SHIPPING_PREFIX
+            + PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX + ".length";
+    public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_WEIGHT = PAYMENT_REQUEST_SHIPPING_PREFIX
+            + PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX + ".weight";
+
     private PaymentRequestParser() {
 
     }
-    
+
     /**
      * 
      * @param paymentRequest
      * @return mixed
      */
     public static Map<Object, Object> getData(PaymentRequest paymentRequest) {
-    	Map<Object, Object> data = new HashMap<Object, Object>();
-    	
-    	/**
-    	 * Set payment request name
-    	 */
-    	if(paymentRequest.getName() != null)
-    		data.put(PAYMENT_REQUEST_NAME, paymentRequest.getName());
-    	
-    	/**
-    	 * Set payment request reference
-    	 */
-    	if(paymentRequest.getReference() != null)
-    		data.put(PAYMENT_REQUEST_REFERENCE, paymentRequest.getReference());
-    	
-    	/**
-    	 * Set payment request expiration days
-    	 */
-    	if(paymentRequest.getExpiration() != null)
-    		data.put(PAYMENT_REQUEST_EXPIRATION, paymentRequest.getExpiration());
+        Map<Object, Object> data = new HashMap<Object, Object>();
 
-    	/**
-    	 * Set payment request due days
-    	 */
-    	if(paymentRequest.getDue() != null)
-    		data.put(PAYMENT_REQUEST_DUE, paymentRequest.getDue());
+        /**
+         * Set payment request name
+         */
+        if (paymentRequest.getName() != null)
+            data.put(PAYMENT_REQUEST_NAME, paymentRequest.getName());
 
-    	/**
-    	 * Set payment request sender information
-    	 * 
-    	 * @see PaymentRequestSender
-    	 */
-    	if(paymentRequest.getSender() != null){
-    		
-    		/**
-    		 * Set payment request sender email
-    		 */
-    		if(paymentRequest.getSender().getEmail() != null)
-    			data.put(PAYMENT_REQUEST_SENDER_EMAIL, paymentRequest.getSender().getEmail());
-    		
-    		/**
-    		 * Set payment request sender name
-    		 */
-    		if(paymentRequest.getSender().getName() != null)
-    			data.put(PAYMENT_REQUEST_SENDER_NAME, paymentRequest.getSender().getName());
-    	}
-    	
-    	/**
-    	 * Set payment request items
-    	 * 
-    	 * @see PaymentRequestItem
-    	 */
-    	if(paymentRequest.getItems() != null && !paymentRequest.getItems().isEmpty()){
-    		Integer count = 1;
-    		
-    		for (PaymentRequestItem item : paymentRequest.getItems()) {
-				if(item.getDescription() != null)
-					data.put(PAYMENT_REQUEST_ITEM_PREFIX + count.toString() + PAYMENT_REQUEST_ITEM_DESCRIPTION, item.getDescription());
-				
-				if(item.getAmount() != null)
-					data.put(PAYMENT_REQUEST_ITEM_PREFIX + count.toString() + PAYMENT_REQUEST_ITEM_AMOUNT, item.getAmount());
-			
-				if(item.getQuantity() != null)
-					data.put(PAYMENT_REQUEST_ITEM_PREFIX + count.toString() + PAYMENT_REQUEST_ITEM_QUANTITY, item.getQuantity());
-				
-				if(item.getId() != null)
-					data.put(PAYMENT_REQUEST_ITEM_PREFIX + count.toString() + PAYMENT_REQUEST_ITEM_ID, item.getId());
-    			
-    			count++;
-			}
-    	}
-    	
-    	/**
-    	 * Set payment request shipping
-    	 * 
-    	 * @see PaymentRequestShipping
-    	 */
-    	if(paymentRequest.getShipping() != null){
-    		if(paymentRequest.getShipping().getCost() != null)
-    			data.put(PAYMENT_REQUEST_SHIPPING_COST, paymentRequest.getShipping().getCost());
-    		
-    		if(paymentRequest.getShipping().getPaymentRequestShippingPackage() != null){
-    			if(paymentRequest.getShipping().getPaymentRequestShippingPackage().getWidth() != null)
-    				data.put(PAYMENT_REQUEST_SHIPPING_PACKAGE_WIDTH, paymentRequest.getShipping().getPaymentRequestShippingPackage().getWidth());
-    			
-    			if(paymentRequest.getShipping().getPaymentRequestShippingPackage().getHeight() != null)
-    				data.put(PAYMENT_REQUEST_SHIPPING_PACKAGE_HEIGHT, paymentRequest.getShipping().getPaymentRequestShippingPackage().getWidth());
-    			
-    			if(paymentRequest.getShipping().getPaymentRequestShippingPackage().getLength() != null)
-    				data.put(PAYMENT_REQUEST_SHIPPING_PACKAGE_LENGTH, paymentRequest.getShipping().getPaymentRequestShippingPackage().getWidth());
-    			
-    			if(paymentRequest.getShipping().getPaymentRequestShippingPackage().getWeight() != null)
-    				data.put(PAYMENT_REQUEST_SHIPPING_PACKAGE_WEIGHT, paymentRequest.getShipping().getPaymentRequestShippingPackage().getWidth());
-    		}
-    			
-    	}
-    	
-    	return data;
+        /**
+         * Set payment request reference
+         */
+        if (paymentRequest.getReference() != null)
+            data.put(PAYMENT_REQUEST_REFERENCE, paymentRequest.getReference());
+
+        /**
+         * Set payment request expiration days
+         */
+        if (paymentRequest.getExpiration() != null)
+            data.put(PAYMENT_REQUEST_EXPIRATION, paymentRequest.getExpiration());
+
+        /**
+         * Set payment request due days
+         */
+        if (paymentRequest.getDue() != null)
+            data.put(PAYMENT_REQUEST_DUE, paymentRequest.getDue());
+
+        /**
+         * Set payment request sender information
+         * 
+         * @see PaymentRequestSender
+         */
+        if (paymentRequest.getSender() != null) {
+
+            /**
+             * Set payment request sender email
+             */
+            if (paymentRequest.getSender().getEmail() != null)
+                data.put(PAYMENT_REQUEST_SENDER_EMAIL, paymentRequest.getSender().getEmail());
+
+            /**
+             * Set payment request sender name
+             */
+            if (paymentRequest.getSender().getName() != null)
+                data.put(PAYMENT_REQUEST_SENDER_NAME, paymentRequest.getSender().getName());
+        }
+
+        /**
+         * Set payment request items
+         * 
+         * @see PaymentRequestItem
+         */
+        if (paymentRequest.getItems() != null && !paymentRequest.getItems().isEmpty()) {
+            Integer count = 1;
+
+            for (PaymentRequestItem item : paymentRequest.getItems()) {
+                if (item.getDescription() != null)
+                    data.put(PAYMENT_REQUEST_ITEM_PREFIX + count.toString() + PAYMENT_REQUEST_ITEM_DESCRIPTION,
+                            item.getDescription());
+
+                if (item.getAmount() != null)
+                    data.put(PAYMENT_REQUEST_ITEM_PREFIX + count.toString() + PAYMENT_REQUEST_ITEM_AMOUNT,
+                            item.getAmount());
+
+                if (item.getQuantity() != null)
+                    data.put(PAYMENT_REQUEST_ITEM_PREFIX + count.toString() + PAYMENT_REQUEST_ITEM_QUANTITY,
+                            item.getQuantity());
+
+                if (item.getId() != null)
+                    data.put(PAYMENT_REQUEST_ITEM_PREFIX + count.toString() + PAYMENT_REQUEST_ITEM_ID, item.getId());
+
+                count++;
+            }
+        }
+
+        /**
+         * Set payment request shipping
+         * 
+         * @see PaymentRequestShipping
+         */
+        if (paymentRequest.getShipping() != null) {
+            if (paymentRequest.getShipping().getCost() != null)
+                data.put(PAYMENT_REQUEST_SHIPPING_COST, paymentRequest.getShipping().getCost());
+
+            if (paymentRequest.getShipping().getPaymentRequestShippingPackage() != null) {
+                if (paymentRequest.getShipping().getPaymentRequestShippingPackage().getWidth() != null)
+                    data.put(PAYMENT_REQUEST_SHIPPING_PACKAGE_WIDTH, paymentRequest.getShipping()
+                            .getPaymentRequestShippingPackage().getWidth());
+
+                if (paymentRequest.getShipping().getPaymentRequestShippingPackage().getHeight() != null)
+                    data.put(PAYMENT_REQUEST_SHIPPING_PACKAGE_HEIGHT, paymentRequest.getShipping()
+                            .getPaymentRequestShippingPackage().getWidth());
+
+                if (paymentRequest.getShipping().getPaymentRequestShippingPackage().getLength() != null)
+                    data.put(PAYMENT_REQUEST_SHIPPING_PACKAGE_LENGTH, paymentRequest.getShipping()
+                            .getPaymentRequestShippingPackage().getWidth());
+
+                if (paymentRequest.getShipping().getPaymentRequestShippingPackage().getWeight() != null)
+                    data.put(PAYMENT_REQUEST_SHIPPING_PACKAGE_WEIGHT, paymentRequest.getShipping()
+                            .getPaymentRequestShippingPackage().getWidth());
+            }
+
+        }
+
+        return data;
     }
-    
-    public static PaymentRequestTransaction readPaymentRequest(InputStream xmlInputStream) throws ParserConfigurationException, SAXException, IOException, ParseException {
-    	
-    	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+
+    public static PaymentRequestTransaction readPaymentRequest(InputStream xmlInputStream)
+            throws ParserConfigurationException, SAXException, IOException, ParseException {
+
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 
         InputSource is = new InputSource(xmlInputStream);
@@ -210,9 +222,9 @@ public class PaymentRequestParser {
         Element paymentRequestElement = doc.getDocumentElement();
 
         PaymentRequestTransaction paymentRequestTransaction = new PaymentRequestTransaction();
-        
+
         PaymentRequestParser.log.debug("Parsing payment request");
-        
+
         // parsing <paymentRequest><date>
         tagValue = XMLParserUtils.getTagValue("date", paymentRequestElement);
         if (tagValue != null) {
@@ -224,49 +236,49 @@ public class PaymentRequestParser {
         if (tagValue != null) {
             paymentRequestTransaction.setCode(tagValue);
         }
-        
+
         // parsing <paymentRequest><reference>
         tagValue = XMLParserUtils.getTagValue("reference", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setReference(tagValue);
         }
-        
+
         // parsing <paymentRequest><recoveryCode>
         tagValue = XMLParserUtils.getTagValue("recoveryCode", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setRecoveryCode(tagValue);
         }
-        
+
         // parsing <paymentRequest><type>
         tagValue = XMLParserUtils.getTagValue("type", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setType(TransactionType.fromValue((Integer.valueOf(tagValue))));
         }
-        
+
         // parsing <paymentRequest><status>
         tagValue = XMLParserUtils.getTagValue("status", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setStatus(TransactionStatus.fromValue((Integer.valueOf(tagValue))));
         }
-        
+
         // parsing <paymentRequest><expiration>
         tagValue = XMLParserUtils.getTagValue("expiration", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setExpiration(PagSeguroUtil.parse(tagValue));
         }
-        
+
         // parsing <paymentRequest><due>
         tagValue = XMLParserUtils.getTagValue("due", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setDue(PagSeguroUtil.parse(tagValue));
         }
-        
+
         // parsing <paymentRequest><lastEventDate>
         tagValue = XMLParserUtils.getTagValue("lastEventDate", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setLastEventDate(PagSeguroUtil.parse(tagValue));
         }
-        
+
         // parsing <paymentRequest><paymentMethod>
         Element paymentMethodElement = XMLParserUtils.getElement("paymentMethod", paymentRequestElement);
         if (paymentMethodElement != null) {
@@ -287,100 +299,100 @@ public class PaymentRequestParser {
             // setting payment request transaction payment method
             paymentRequestTransaction.setPaymentMethod(paymentMethod);
         }
-        
+
         // parsing <paymentRequest><grossAmount>
         tagValue = XMLParserUtils.getTagValue("grossAmount", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setGrossAmount(new BigDecimal(tagValue));
         }
-        
+
         // parsing <paymentRequest><paidAmount>
         tagValue = XMLParserUtils.getTagValue("paidAmount", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setPaidAmount(new BigDecimal(tagValue));
         }
-        
+
         // parsing <paymentRequest><discountAmount>
         tagValue = XMLParserUtils.getTagValue("discountAmount", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setDiscountAmount(new BigDecimal(tagValue));
         }
-        
+
         // parsing <paymentRequest><receiverFees>
         Element receiverFeesElement = XMLParserUtils.getElement("receiverFees", paymentRequestElement);
         if (receiverFeesElement != null) {
-        	PaymentRequestReceiverFees receiverFees = new PaymentRequestReceiverFees();
-        	
-        	// parsing <paymentRequest><receiverFees><installmentFeeAmount>
-        	tagValue = XMLParserUtils.getTagValue("installmentFeeAmount", receiverFeesElement);
-        	if(tagValue != null) {
-        		receiverFees.setInstallmentFeeAmount(new BigDecimal(tagValue));
-        	}
-        	
-        	// parsing <paymentRequest><receiverFees><operationalFeeAmount>
-        	tagValue = XMLParserUtils.getTagValue("operationalFeeAmount", receiverFeesElement);
-        	if(tagValue != null) {
-        		receiverFees.setOperationalFeeAmount(new BigDecimal(tagValue));
-        	}
-        	
-        	// parsing <paymentRequest><receiverFees><intermediationRateAmount>
-        	tagValue = XMLParserUtils.getTagValue("intermediationRateAmount", receiverFeesElement);
-        	if(tagValue != null) {
-        		receiverFees.setIntermediationRateAmount(new BigDecimal(tagValue));
-        	}
-        	
-        	// parsing <paymentRequest><receiverFees><intermediationFeeAmount>
-        	tagValue = XMLParserUtils.getTagValue("intermediationFeeAmount", receiverFeesElement);
-        	if(tagValue != null) {
-        		receiverFees.setIntermediationFeeAmount(new BigDecimal(tagValue));
-        	}
-        	
-        	// parsing <paymentRequest><receiverFees><commissionFeeAmount>
-        	tagValue = XMLParserUtils.getTagValue("commissionFeeAmount", receiverFeesElement);
-        	if(tagValue != null) {
-        		receiverFees.setCommissionFeeAmount(new BigDecimal(tagValue));
-        	}
-        	
-        	// parsing <paymentRequest><receiverFees><efrete>
-        	tagValue = XMLParserUtils.getTagValue("efrete", receiverFeesElement);
-        	if(tagValue != null) {
-        		receiverFees.setEfrete(new BigDecimal(tagValue));
-        	}
-        	
-        	// setting payment request transaction receiver fees
-        	paymentRequestTransaction.setReceiverFees(receiverFees);
+            PaymentRequestReceiverFees receiverFees = new PaymentRequestReceiverFees();
+
+            // parsing <paymentRequest><receiverFees><installmentFeeAmount>
+            tagValue = XMLParserUtils.getTagValue("installmentFeeAmount", receiverFeesElement);
+            if (tagValue != null) {
+                receiverFees.setInstallmentFeeAmount(new BigDecimal(tagValue));
+            }
+
+            // parsing <paymentRequest><receiverFees><operationalFeeAmount>
+            tagValue = XMLParserUtils.getTagValue("operationalFeeAmount", receiverFeesElement);
+            if (tagValue != null) {
+                receiverFees.setOperationalFeeAmount(new BigDecimal(tagValue));
+            }
+
+            // parsing <paymentRequest><receiverFees><intermediationRateAmount>
+            tagValue = XMLParserUtils.getTagValue("intermediationRateAmount", receiverFeesElement);
+            if (tagValue != null) {
+                receiverFees.setIntermediationRateAmount(new BigDecimal(tagValue));
+            }
+
+            // parsing <paymentRequest><receiverFees><intermediationFeeAmount>
+            tagValue = XMLParserUtils.getTagValue("intermediationFeeAmount", receiverFeesElement);
+            if (tagValue != null) {
+                receiverFees.setIntermediationFeeAmount(new BigDecimal(tagValue));
+            }
+
+            // parsing <paymentRequest><receiverFees><commissionFeeAmount>
+            tagValue = XMLParserUtils.getTagValue("commissionFeeAmount", receiverFeesElement);
+            if (tagValue != null) {
+                receiverFees.setCommissionFeeAmount(new BigDecimal(tagValue));
+            }
+
+            // parsing <paymentRequest><receiverFees><efrete>
+            tagValue = XMLParserUtils.getTagValue("efrete", receiverFeesElement);
+            if (tagValue != null) {
+                receiverFees.setEfrete(new BigDecimal(tagValue));
+            }
+
+            // setting payment request transaction receiver fees
+            paymentRequestTransaction.setReceiverFees(receiverFees);
         }
-        
+
         // parsing <paymentRequest><netAmount>
         tagValue = XMLParserUtils.getTagValue("netAmount", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setNetAmount(new BigDecimal(tagValue));
         }
-        
+
         // parsing <paymentRequest><description>
         tagValue = XMLParserUtils.getTagValue("description", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setDescription(tagValue);
         }
-        
+
         // parsing <paymentRequest><escrowEndDate>
         tagValue = XMLParserUtils.getTagValue("escrowEndDate", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setEscrowEndDate(PagSeguroUtil.parse(tagValue));
         }
-        
+
         // parsing <paymentRequest><installmentCount>
         tagValue = XMLParserUtils.getTagValue("installmentCount", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setInstallmentCount(Integer.valueOf(tagValue));
         }
-        
+
         // parsing <paymentRequest><itemCount>
         tagValue = XMLParserUtils.getTagValue("itemCount", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setItemCount(Integer.valueOf(tagValue));
         }
-        
+
         // parsing <paymentRequest><items>
         Element itemsElement = XMLParserUtils.getElement("items", paymentRequestElement);
         if (itemsElement != null) {
@@ -388,9 +400,9 @@ public class PaymentRequestParser {
             List<PaymentRequestItem> items = new ArrayList<PaymentRequestItem>();
 
             for (Element itElement : itElements) {
-				
-			    // setting <paymentRequest><items><item>
-            	PaymentRequestItem item = new PaymentRequestItem();
+
+                // setting <paymentRequest><items><item>
+                PaymentRequestItem item = new PaymentRequestItem();
 
                 // setting <paymentRequest><items><item><id>
                 tagValue = XMLParserUtils.getTagValue("id", itElement);
@@ -422,7 +434,7 @@ public class PaymentRequestParser {
 
             paymentRequestTransaction.setItems(items);
         }
-        
+
         // parsing <paymentRequest><sender>
         Element senderElement = XMLParserUtils.getElement("sender", paymentRequestElement);
         if (senderElement != null) {
@@ -434,7 +446,7 @@ public class PaymentRequestParser {
             if (tagValue != null) {
                 sender.setEmail(tagValue);
             }
-            
+
             // setting <paymentRequest><sender><name>
             tagValue = XMLParserUtils.getTagValue("name", senderElement);
             if (tagValue != null) {
@@ -461,7 +473,7 @@ public class PaymentRequestParser {
 
             paymentRequestTransaction.setSender(sender);
         }
-        
+
         // parsing <paymentRequest><shipping>
         Element shippingElement = XMLParserUtils.getElement("shipping", paymentRequestElement);
         if (shippingElement != null) {
@@ -527,7 +539,7 @@ public class PaymentRequestParser {
                 // setting address for shipping object
                 shipping.setAddress(address);
             }
-            
+
             // setting <paymentRequest><shipping><type>
             tagValue = XMLParserUtils.getTagValue("type", shippingElement);
             if (tagValue != null) {
@@ -539,51 +551,50 @@ public class PaymentRequestParser {
             if (tagValue != null) {
                 shipping.setCost(new BigDecimal(tagValue));
             }
-            
+
             // parsing <paymentRequest><shipping><package>
             Element packageElement = XMLParserUtils.getElement("package", shippingElement);
-            if(packageElement != null) {
-            	
-            	// creating new PaymentRequestShippingPackage object
-            	PaymentRequestShippingPackage shippingPackage = new PaymentRequestShippingPackage();
-            	
-            	// setting <paymentRequest><shipping><package><weight>
-            	tagValue = XMLParserUtils.getTagValue("weight", packageElement);
-            	if(tagValue != null){
-            		shippingPackage.setWeight(Integer.valueOf(tagValue));
-            	}
-            	
-            	// setting <paymentRequest><shipping><package><width>
-            	tagValue = XMLParserUtils.getTagValue("width", packageElement);
-            	if(tagValue != null){
-            		shippingPackage.setWidth(Integer.valueOf(tagValue));
-            	}
-            	
-            	// setting <paymentRequest><shipping><package><height>
-            	tagValue = XMLParserUtils.getTagValue("height", packageElement);
-            	if(tagValue != null){
-            		shippingPackage.setHeight(Integer.valueOf(tagValue));
-            	}
-            	
-            	// setting <paymentRequest><shipping><package><length>
-            	tagValue = XMLParserUtils.getTagValue("length", packageElement);
-            	if(tagValue != null){
-            		shippingPackage.setLength(Integer.valueOf(tagValue));
-            	}
-            	
-            	shipping.setPaymentRequestPackage(shippingPackage);
+            if (packageElement != null) {
+
+                // creating new PaymentRequestShippingPackage object
+                PaymentRequestShippingPackage shippingPackage = new PaymentRequestShippingPackage();
+
+                // setting <paymentRequest><shipping><package><weight>
+                tagValue = XMLParserUtils.getTagValue("weight", packageElement);
+                if (tagValue != null) {
+                    shippingPackage.setWeight(Integer.valueOf(tagValue));
+                }
+
+                // setting <paymentRequest><shipping><package><width>
+                tagValue = XMLParserUtils.getTagValue("width", packageElement);
+                if (tagValue != null) {
+                    shippingPackage.setWidth(Integer.valueOf(tagValue));
+                }
+
+                // setting <paymentRequest><shipping><package><height>
+                tagValue = XMLParserUtils.getTagValue("height", packageElement);
+                if (tagValue != null) {
+                    shippingPackage.setHeight(Integer.valueOf(tagValue));
+                }
+
+                // setting <paymentRequest><shipping><package><length>
+                tagValue = XMLParserUtils.getTagValue("length", packageElement);
+                if (tagValue != null) {
+                    shippingPackage.setLength(Integer.valueOf(tagValue));
+                }
+
+                shipping.setPaymentRequestPackage(shippingPackage);
             }
-            
+
             // setting <paymentRequest><shipping>
             paymentRequestTransaction.setShipping(shipping);
         }
 
         PaymentRequestParser.log.debug("Parsing payment request success: " + paymentRequestTransaction.getCode());
 
-	
-		return paymentRequestTransaction;
+        return paymentRequestTransaction;
     }
-    
+
     /**
      * Reads the payment request code when the request is successful
      * 

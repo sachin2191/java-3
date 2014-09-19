@@ -28,119 +28,118 @@ import br.com.uol.pagseguro.enums.ShippingType;
  */
 public class PaymentRequestShipping {
 
-	/**
-	 * Shipping cost - fixed value
-	 * 
-	 * Optional if PaymentRequestShippingPackage not null
-	 */
-	private BigDecimal cost;
-	
-	/**
-	 * Shipping cost - value to calculate
-	 * 
-	 * Optional if cost not null
-	 */
-	private PaymentRequestShippingPackage paymentRequestShippingPackage;
+    /**
+     * Shipping cost - fixed value
+     * 
+     * Optional if PaymentRequestShippingPackage not null
+     */
+    private BigDecimal cost;
 
-	/**
+    /**
+     * Shipping cost - value to calculate
+     * 
+     * Optional if cost not null
+     */
+    private PaymentRequestShippingPackage paymentRequestShippingPackage;
+
+    /**
      * Shipping address
      */
     private Address address;
 
-    /** 
+    /**
      * Shipping types
      */
     private ShippingType type;
-	
-	/**
+
+    /**
      * Initializes a new instance of the PaymentRequestShipping class
      */
-	public PaymentRequestShipping(){
-		
-	}
-	
-	/**
-	 * Initializes a new instance of the PaymentRequestShipping class with the specified arguments
-	 * 
-	 * @param cost
-	 */
-	public PaymentRequestShipping(BigDecimal cost) {
-		this.cost = cost;
-	}
-	
-	/**
-	 * Initializes a new instance of the PaymentRequestShipping class with the specified arguments
-	 * 
-	 * @param paymentRequestshippingPackage
-	 */
-	public PaymentRequestShipping(PaymentRequestShippingPackage paymentRequestShippingPackage) {
-		this.paymentRequestShippingPackage = paymentRequestShippingPackage;
-	}
-	
-	/**
-	 * Initializes a new instance of the PaymentRequestShipping class with the specified arguments
-	 * 
-	 * @param cost
-	 * @param address
-	 * @param type
-	 */
-	public PaymentRequestShipping(BigDecimal cost, Address address,
-			ShippingType type) {
-		super();
-		this.cost = cost;
-		this.address = address;
-		this.type = type;
-	}
+    public PaymentRequestShipping() {
 
-	/**
-	 * Initializes a new instance of the PaymentRequestShipping class with the specified arguments
-	 * 
-	 * @param paymentRequestShippingPackage
-	 * @param address
-	 * @param type
-	 */
-	public PaymentRequestShipping(
-			PaymentRequestShippingPackage paymentRequestShippingPackage,
-			Address address, ShippingType type) {
-		super();
-		this.paymentRequestShippingPackage = paymentRequestShippingPackage;
-		this.address = address;
-		this.type = type;
-	}
+    }
 
-	/**
-	 * @return the cost
-	 */
-	public BigDecimal getCost() {
-		return cost;
-	}
+    /**
+     * Initializes a new instance of the PaymentRequestShipping class with the specified arguments
+     * 
+     * @param cost
+     */
+    public PaymentRequestShipping(BigDecimal cost) {
+        this.cost = cost;
+    }
 
-	/**
-	 * Sets the shipping cost (fixed value) of this shipping
-	 * 
-	 * @param cost the cost to set
-	 */
-	public void setCost(BigDecimal cost) {
-		this.cost = cost;
-	}
+    /**
+     * Initializes a new instance of the PaymentRequestShipping class with the specified arguments
+     * 
+     * @param paymentRequestshippingPackage
+     */
+    public PaymentRequestShipping(PaymentRequestShippingPackage paymentRequestShippingPackage) {
+        this.paymentRequestShippingPackage = paymentRequestShippingPackage;
+    }
 
-	/**
-	 * @return the paymentRequestPackage
-	 */
-	public PaymentRequestShippingPackage getPaymentRequestShippingPackage() {
-		return paymentRequestShippingPackage;
-	}
+    /**
+     * Initializes a new instance of the PaymentRequestShipping class with the specified arguments
+     * 
+     * @param cost
+     * @param address
+     * @param type
+     */
+    public PaymentRequestShipping(BigDecimal cost, Address address, ShippingType type) {
+        super();
+        this.cost = cost;
+        this.address = address;
+        this.type = type;
+    }
 
-	/**
-	 * Sets the shipping cost (value to calculate) of this shipping
-	 * 
-	 * @param paymentRequestPackage
-	 */
-	public void setPaymentRequestPackage(PaymentRequestShippingPackage paymentRequestShippingPackage) {
-		this.paymentRequestShippingPackage = paymentRequestShippingPackage;
-	}
-	
-	/**
+    /**
+     * Initializes a new instance of the PaymentRequestShipping class with the specified arguments
+     * 
+     * @param paymentRequestShippingPackage
+     * @param address
+     * @param type
+     */
+    public PaymentRequestShipping(PaymentRequestShippingPackage paymentRequestShippingPackage, Address address,
+            ShippingType type) {
+        super();
+        this.paymentRequestShippingPackage = paymentRequestShippingPackage;
+        this.address = address;
+        this.type = type;
+    }
+
+    /**
+     * @return the cost
+     */
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    /**
+     * Sets the shipping cost (fixed value) of this shipping
+     * 
+     * @param cost
+     *            the cost to set
+     */
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    /**
+     * @return the paymentRequestPackage
+     */
+    public PaymentRequestShippingPackage getPaymentRequestShippingPackage() {
+        return paymentRequestShippingPackage;
+    }
+
+    /**
+     * Sets the shipping cost (value to calculate) of this shipping
+     * 
+     * @param paymentRequestPackage
+     */
+    public void setPaymentRequestPackage(PaymentRequestShippingPackage paymentRequestShippingPackage) {
+        this.paymentRequestShippingPackage = paymentRequestShippingPackage;
+    }
+
+    /**
      * Sets the shipping address
      * 
      * @param address
@@ -179,14 +178,12 @@ public class PaymentRequestShipping {
         return this.type;
     }
 
-	/**
-	 * @return string
-	 */
-	@Override
-	public String toString() {
-		return "PaymentRequestShipping [cost=" + cost
-				+ ", paymentRequestShippingPackage="
-				+ paymentRequestShippingPackage + ", address=" + address
-				+ ", type=" + type + "]";
-	}
+    /**
+     * @return string
+     */
+    @Override
+    public String toString() {
+        return "PaymentRequestShipping [cost=" + cost + ", paymentRequestShippingPackage="
+                + paymentRequestShippingPackage + ", address=" + address + ", type=" + type + "]";
+    }
 }

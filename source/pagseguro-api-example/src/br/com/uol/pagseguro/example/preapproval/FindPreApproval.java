@@ -16,7 +16,7 @@ public class FindPreApproval {
         // Substitute the code below with a valid payment request code for your account
         findByCode("F1DEEA6D76B54267A753D6B87CB6A62D");
     }
-    
+
     private static void findByCode(String preApprovalCode) {
 
         PreApprovalTransaction preApprovalTransaction = null;
@@ -33,11 +33,11 @@ public class FindPreApproval {
 
         if (preApprovalTransaction != null)
             printPreApproval(preApprovalTransaction);
-        
+
     }
-     
+
     private static void printPreApproval(PreApprovalTransaction preApprovalTransaction) {
-        
+
         System.out.println("code: " + preApprovalTransaction.getCode());
         System.out.println("status: " + preApprovalTransaction.getStatus());
         System.out.println("period: " + preApprovalTransaction.getPeriod().toString());
@@ -46,14 +46,16 @@ public class FindPreApproval {
 
         if (preApprovalTransaction.getPaymentRequest().getSender() != null) {
 
-            System.out.println("paymentRequestSenderName: " + preApprovalTransaction.getPaymentRequest().getSender().getName());
-            System.out.println("paymentRequestSenderEmail: " + preApprovalTransaction.getPaymentRequest().getSender().getEmail());
+            System.out.println("paymentRequestSenderName: "
+                    + preApprovalTransaction.getPaymentRequest().getSender().getName());
+            System.out.println("paymentRequestSenderEmail: "
+                    + preApprovalTransaction.getPaymentRequest().getSender().getEmail());
         }
-        
-        if(preApprovalTransaction.getPaymentRequest().getItems() != null) {
-            
+
+        if (preApprovalTransaction.getPaymentRequest().getItems() != null) {
+
             System.out.println("itemCount: " + preApprovalTransaction.getPaymentRequest().getItems().size());
-    
+
             for (PaymentRequestItem item : preApprovalTransaction.getPaymentRequest().getItems()) {
                 System.out.println("itemId: " + item.getId());
                 System.out.println("itemDescription: " + item.getDescription());
@@ -61,31 +63,40 @@ public class FindPreApproval {
                 System.out.println("itemAmount: " + item.getAmount());
             }
         }
-        
+
         if (preApprovalTransaction.getPaymentRequest().getShipping() != null) {
-            
+
             System.out.println("shippingType: " + preApprovalTransaction.getPaymentRequest().getShipping().getType());
-            
-            if(preApprovalTransaction.getPaymentRequest().getShipping().getCost() != null) {
-                System.out.println("shippingCost: " + preApprovalTransaction.getPaymentRequest().getShipping().getCost());
+
+            if (preApprovalTransaction.getPaymentRequest().getShipping().getCost() != null) {
+                System.out.println("shippingCost: "
+                        + preApprovalTransaction.getPaymentRequest().getShipping().getCost());
             }
-            
-            if(preApprovalTransaction.getPaymentRequest().getShipping().getPaymentRequestShippingPackage() != null) {
-                System.out.println("shippingPackageWeight: " + preApprovalTransaction.getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getWeight());
-                System.out.println("shippingPackageWidth: " + preApprovalTransaction.getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getWidth());
-                System.out.println("shippingPackageHeight: " + preApprovalTransaction.getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getHeight());
-                System.out.println("shippingPackageLength: " + preApprovalTransaction.getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getLength());
+
+            if (preApprovalTransaction.getPaymentRequest().getShipping().getPaymentRequestShippingPackage() != null) {
+                System.out.println("shippingPackageWeight: "
+                        + preApprovalTransaction.getPaymentRequest().getShipping().getPaymentRequestShippingPackage()
+                                .getWeight());
+                System.out.println("shippingPackageWidth: "
+                        + preApprovalTransaction.getPaymentRequest().getShipping().getPaymentRequestShippingPackage()
+                                .getWidth());
+                System.out.println("shippingPackageHeight: "
+                        + preApprovalTransaction.getPaymentRequest().getShipping().getPaymentRequestShippingPackage()
+                                .getHeight());
+                System.out.println("shippingPackageLength: "
+                        + preApprovalTransaction.getPaymentRequest().getShipping().getPaymentRequestShippingPackage()
+                                .getLength());
             }
         }
-        
+
         System.out.println("paymentRequestName: " + preApprovalTransaction.getPaymentRequest().getName());
         System.out.println("paymentRequestDescription: " + preApprovalTransaction.getPaymentRequest().getDescription());
         System.out.println("paymentRequestExpiration: " + preApprovalTransaction.getPaymentRequest().getExpiration());
         System.out.println("paymentRequestReference: " + preApprovalTransaction.getPaymentRequest().getReference());
         System.out.println("paymentRequestDue: " + preApprovalTransaction.getPaymentRequest().getDue());
     }
-    
+
     private FindPreApproval() {
-        
+
     }
 }

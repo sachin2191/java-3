@@ -41,7 +41,7 @@ public class ErrorsParser {
 
     private ErrorsParser() {
     }
-    
+
     /**
      * read a response from PagSeguro web service and fill the error list
      * 
@@ -51,8 +51,8 @@ public class ErrorsParser {
      * @throws SAXException
      * @throws IOException
      */
-    public static List<Error> readErrosXml(InputStream xml)
-            throws ParserConfigurationException, SAXException, IOException {
+    public static List<Error> readErrosXml(InputStream xml) throws ParserConfigurationException, SAXException,
+            IOException {
 
         List<Error> errors = new ArrayList<Error>();
 
@@ -78,13 +78,13 @@ public class ErrorsParser {
     }
 
     public static List<Error> readErrosException(Exception exception) {
-        
+
         List<Error> errors = new ArrayList<Error>();
         Error error = new Error("", exception.getMessage());
         errors.add(error);
-        
+
         return errors;
-        
+
     }
 
 }

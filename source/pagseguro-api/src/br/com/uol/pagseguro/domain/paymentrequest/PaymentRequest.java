@@ -32,20 +32,20 @@ import br.com.uol.pagseguro.service.paymentrequest.PaymentRequestService;
  *
  */
 public class PaymentRequest {
-	
-	/**
+
+    /**
      * Receiver name
      */
-	private String name;
-	
-	/** 
-     * Payment request reference code 
+    private String name;
+
+    /**
+     * Payment request reference code
      * 
-     * Optional 
+     * Optional
      */
     private String reference;
-    
-	/**
+
+    /**
      * Party that will be sending the money
      */
     private PaymentRequestSender sender;
@@ -59,76 +59,75 @@ public class PaymentRequest {
      * Shipping information associated with this payment request
      */
     private PaymentRequestShipping shipping;
-    
+
     /**
      * Observation of this payment request/ Comment in the debtor email
      * 
      * Optional
      */
     private String description;
-    
+
     /**
      * Expiration days of this payment request
-    */
+     */
     private Integer expiration;
-    
+
     /**
      * Due days of this payment request
      * 
      * Optional
      */
     private Integer due;
-    
+
     /**
      * Initializes a new instance of the PaymentRequest class
      */
-	public PaymentRequest(){
-		
-	}
-	
-	/**
-	 * Initializes a new instance of the PaymentRequest class with the specified arguments
-	 * 
-	 * @param name
-	 * @param reference
-	 * @param sender
-	 * @param items
-	 * @param shipping
-	 * @param description
-	 * @param expiration
-	 * @param due
-	 */
-	public PaymentRequest(String name, String reference,
-			PaymentRequestSender sender, List<PaymentRequestItem> items,
-			PaymentRequestShipping shipping, String description, Integer expiration, Integer due) {
-		super();
-		this.name = name;
-		this.reference = reference;
-		this.sender = sender;
-		this.items = items;
-		this.shipping = shipping;
-		this.description = description;
-		this.expiration = expiration;
-		this.due = due;
-	}
+    public PaymentRequest() {
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    }
 
-	/**
-	 * Sets the payment request name
-	 * 
-	 * @param name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Initializes a new instance of the PaymentRequest class with the specified arguments
+     * 
+     * @param name
+     * @param reference
+     * @param sender
+     * @param items
+     * @param shipping
+     * @param description
+     * @param expiration
+     * @param due
+     */
+    public PaymentRequest(String name, String reference, PaymentRequestSender sender, List<PaymentRequestItem> items,
+            PaymentRequestShipping shipping, String description, Integer expiration, Integer due) {
+        super();
+        this.name = name;
+        this.reference = reference;
+        this.sender = sender;
+        this.items = items;
+        this.shipping = shipping;
+        this.description = description;
+        this.expiration = expiration;
+        this.due = due;
+    }
 
-	/**
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the payment request name
+     * 
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
      * @return the payment request reference
      */
     public String getReference() {
@@ -143,40 +142,40 @@ public class PaymentRequest {
     public void setReference(String reference) {
         this.reference = reference;
     }
-    
-	/**
-	 * @return the PaymentRequestSender
-	 */
-	public PaymentRequestSender getSender() {
-		return sender;
-	}
 
-	/**
-	 * Sets the PaymentRequestSender
-	 * 
-	 * @param PaymentRequestSender
-	 */
-	public void setSender(PaymentRequestSender sender) {
-		this.sender = sender;
-	}
+    /**
+     * @return the PaymentRequestSender
+     */
+    public PaymentRequestSender getSender() {
+        return sender;
+    }
 
-	/**
-	 * @return the items
-	 */
-	public List<PaymentRequestItem> getItems() {
-		return items;
-	}
+    /**
+     * Sets the PaymentRequestSender
+     * 
+     * @param PaymentRequestSender
+     */
+    public void setSender(PaymentRequestSender sender) {
+        this.sender = sender;
+    }
 
-	/**
-	 * Sets the payment request items
-	 * 
-	 * @param items
-	 */
-	public void setItems(List<PaymentRequestItem> items) {
-		this.items = items;
-	}
-	
-	/**
+    /**
+     * @return the items
+     */
+    public List<PaymentRequestItem> getItems() {
+        return items;
+    }
+
+    /**
+     * Sets the payment request items
+     * 
+     * @param items
+     */
+    public void setItems(List<PaymentRequestItem> items) {
+        this.items = items;
+    }
+
+    /**
      * Adds a new item in this payment request
      * 
      * @see Item
@@ -201,69 +200,69 @@ public class PaymentRequest {
         this.getItems().add(item);
     }
 
-	/**
-	 * @return the shipping
-	 */
-	public PaymentRequestShipping getShipping() {
-		return shipping;
-	}
+    /**
+     * @return the shipping
+     */
+    public PaymentRequestShipping getShipping() {
+        return shipping;
+    }
 
-	/**
-	 * Sets the payment request shipping
-	 * 
-	 * @param shipping
-	 */
-	public void setShipping(PaymentRequestShipping shipping) {
-		this.shipping = shipping;
-	}
+    /**
+     * Sets the payment request shipping
+     * 
+     * @param shipping
+     */
+    public void setShipping(PaymentRequestShipping shipping) {
+        this.shipping = shipping;
+    }
 
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * Sets the payment request description
-	 * 
-	 * @param description
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    /**
+     * Sets the payment request description
+     * 
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	/**
-	 * @return the expiration
-	 */
-	public Integer getExpiration() {
-		return expiration;
-	}
+    /**
+     * @return the expiration
+     */
+    public Integer getExpiration() {
+        return expiration;
+    }
 
-	/**
-	 * Sets the payment request expiration days
-	 * 
-	 * @param expiration
-	 */
-	public void setExpiration(Integer expiration) {
-		this.expiration = expiration;
-	}
+    /**
+     * Sets the payment request expiration days
+     * 
+     * @param expiration
+     */
+    public void setExpiration(Integer expiration) {
+        this.expiration = expiration;
+    }
 
-	/**
-	 * @return the due days
-	 */
-	public Integer getDue() {
-		return due;
-	}
+    /**
+     * @return the due days
+     */
+    public Integer getDue() {
+        return due;
+    }
 
-	/**
-	 * Sets the payment request due days
-	 * 
-	 * @param due
-	 */
-	public void setDue(Integer due) {
-		this.due = due;
-	}
+    /**
+     * Sets the payment request due days
+     * 
+     * @param due
+     */
+    public void setDue(Integer due) {
+        this.due = due;
+    }
 
     /**
      * Calls the PagSeguro web service and register this payment request
@@ -275,7 +274,7 @@ public class PaymentRequest {
     public String register(Credentials credentials) throws PagSeguroServiceException {
         return PaymentRequestService.createPaymentRequest(credentials, this);
     }
-    
+
     /**
      * Calls the PagSeguro web service and return a payment request
      * 
@@ -284,18 +283,18 @@ public class PaymentRequest {
      * @return The payment request
      * @throws PagSeguroServiceException
      */
-    public PaymentRequestTransaction search(Credentials credentials, String paymentRequestCode) throws PagSeguroServiceException {
+    public PaymentRequestTransaction search(Credentials credentials, String paymentRequestCode)
+            throws PagSeguroServiceException {
         return PaymentRequestService.findByCode(credentials, paymentRequestCode);
     }
 
-	/**
-	 * @return string
-	 */
-	@Override
-	public String toString() {
-		return "PaymentRequest [name=" + name + ", reference=" + reference
-				+ ", sender=" + sender + ", items=" + items + ", shipping="
-				+ shipping + ", description=" + description + ", expiration="
-				+ expiration + ", due=" + due + "]";
-	}
+    /**
+     * @return string
+     */
+    @Override
+    public String toString() {
+        return "PaymentRequest [name=" + name + ", reference=" + reference + ", sender=" + sender + ", items=" + items
+                + ", shipping=" + shipping + ", description=" + description + ", expiration=" + expiration + ", due="
+                + due + "]";
+    }
 }

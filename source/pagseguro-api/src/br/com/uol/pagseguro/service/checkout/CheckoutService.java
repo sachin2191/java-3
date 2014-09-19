@@ -77,8 +77,8 @@ public class CheckoutService {
      * @return string
      * @throws Exception
      */
-    public static String createCheckoutRequest(Credentials credentials, Checkout checkout,
-            Boolean onlyCheckoutCode) throws PagSeguroServiceException {
+    public static String createCheckoutRequest(Credentials credentials, Checkout checkout, Boolean onlyCheckoutCode)
+            throws PagSeguroServiceException {
 
         CheckoutService.log.info(String.format("CheckoutService.Register( %s ) - begin", checkout.toString()));
 
@@ -135,8 +135,8 @@ public class CheckoutService {
             throw e;
         } catch (Exception e) {
 
-        	CheckoutService.log.error(String.format("CheckoutService.Register( %1s ) - error %2s",
-                    checkout.toString(), e.getMessage()));
+            CheckoutService.log.error(String.format("CheckoutService.Register( %1s ) - error %2s", checkout.toString(),
+                    e.getMessage()));
 
             throw new PagSeguroServiceException(httpCodeStatus, e);
 

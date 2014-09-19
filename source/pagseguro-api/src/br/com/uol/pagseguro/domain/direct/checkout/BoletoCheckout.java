@@ -6,7 +6,7 @@ import java.util.Map;
  * Represents the checkout of the boleto
  */
 public class BoletoCheckout extends Checkout {
-	/**
+    /**
      * Dynamic payment method message
      */
     private String dynamicPaymentMethodMessage;

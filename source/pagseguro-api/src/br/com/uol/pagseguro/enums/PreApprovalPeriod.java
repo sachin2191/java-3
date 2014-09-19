@@ -20,24 +20,24 @@ package br.com.uol.pagseguro.enums;
 
 public enum PreApprovalPeriod {
     WEEKLY('W'), MONTHLY('M'), YEARLY('Y');
-    
+
     private Character id;
-    
+
     private PreApprovalPeriod(Character id) {
         this.id = id;
     }
-    
+
     public Character getId() {
         return this.id;
     }
-    
+
     public static PreApprovalPeriod fromValue(Character id) {
         for (PreApprovalPeriod value : PreApprovalPeriod.values()) {
-            if(value.getId().equals(id)) {
+            if (value.getId().equals(id)) {
                 return value;
             }
         }
-        
+
         return null;
     }
 }

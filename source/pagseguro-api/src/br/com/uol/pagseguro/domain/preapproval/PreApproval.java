@@ -32,18 +32,18 @@ import br.com.uol.pagseguro.service.preapproval.PreApprovalService;
  *
  */
 public class PreApproval {
-	
-	/**
+
+    /**
      * The initial date that the pre-approval will be sent
      */
-	private String initialDate;
-	
-	/** 
+    private String initialDate;
+
+    /**
      * Payment request that will be sent by the pre-approval
      */
     private PaymentRequest paymentRequest;
-    
-	/**
+
+    /**
      * Number of payment requests that will be sent
      */
     private Integer paymentRequestsQuantity;
@@ -56,91 +56,90 @@ public class PreApproval {
     /**
      * Initializes a new instance of the PreApproval class
      */
-	public PreApproval(){
-		
-	}
-	
-	
-	/**
-	 * Initializes a new instance of the PreApproval class with the specified arguments
-	 * 
-	 * @param initialDate
-	 * @param paymentRequest
-	 * @param paymentRequestsQuantity
-	 * @param period
-	 */
-	public PreApproval(String initialDate, PaymentRequest paymentRequest,
-			Integer paymentRequestsQuantity, PreApprovalPeriod period) {
-		super();
-		this.initialDate = initialDate;
-		this.paymentRequest = paymentRequest;
-		this.paymentRequestsQuantity = paymentRequestsQuantity;
-		this.period = period;
-	}
-	
-	/**
-	 * @return the initialDate
-	 */
-	public String getInitialDate() {
-		return initialDate;
-	}
+    public PreApproval() {
 
-	/**
-	 * Sets the initialDate
-	 * 
-	 * @param initialDate
-	 */
-	public void setInitialDate(String initialDate) {
-		this.initialDate = initialDate;
-	}
+    }
 
-	/**
-	 * @return the paymentRequest
-	 */
-	public PaymentRequest getPaymentRequest() {
-		return paymentRequest;
-	}
+    /**
+     * Initializes a new instance of the PreApproval class with the specified arguments
+     * 
+     * @param initialDate
+     * @param paymentRequest
+     * @param paymentRequestsQuantity
+     * @param period
+     */
+    public PreApproval(String initialDate, PaymentRequest paymentRequest, Integer paymentRequestsQuantity,
+            PreApprovalPeriod period) {
+        super();
+        this.initialDate = initialDate;
+        this.paymentRequest = paymentRequest;
+        this.paymentRequestsQuantity = paymentRequestsQuantity;
+        this.period = period;
+    }
 
-	/**
-	 * Sets the paymentRequest
-	 * 
-	 * @param paymentRequest
-	 */
-	public void setPaymentRequest(PaymentRequest paymentRequest) {
-		this.paymentRequest = paymentRequest;
-	}
+    /**
+     * @return the initialDate
+     */
+    public String getInitialDate() {
+        return initialDate;
+    }
 
-	/**
-	 * @return the paymentRequestsQuantity
-	 */
-	public Integer getPaymentRequestsQuantity() {
-		return paymentRequestsQuantity;
-	}
+    /**
+     * Sets the initialDate
+     * 
+     * @param initialDate
+     */
+    public void setInitialDate(String initialDate) {
+        this.initialDate = initialDate;
+    }
 
-	/**
-	 * Sets the paymentRequestsQuantity
-	 * 
-	 * @param paymentRequestsQuantity
-	 */
-	public void setPaymentRequestsQuantity(Integer paymentRequestsQuantity) {
-		this.paymentRequestsQuantity = paymentRequestsQuantity;
-	}
+    /**
+     * @return the paymentRequest
+     */
+    public PaymentRequest getPaymentRequest() {
+        return paymentRequest;
+    }
 
-	/**
-	 * @return the period
-	 */
-	public PreApprovalPeriod getPeriod() {
-		return period;
-	}
+    /**
+     * Sets the paymentRequest
+     * 
+     * @param paymentRequest
+     */
+    public void setPaymentRequest(PaymentRequest paymentRequest) {
+        this.paymentRequest = paymentRequest;
+    }
 
-	/**
-	 * Sets the period
-	 * 
-	 * @param period
-	 */
-	public void setPeriod(PreApprovalPeriod period) {
-		this.period = period;
-	}
+    /**
+     * @return the paymentRequestsQuantity
+     */
+    public Integer getPaymentRequestsQuantity() {
+        return paymentRequestsQuantity;
+    }
+
+    /**
+     * Sets the paymentRequestsQuantity
+     * 
+     * @param paymentRequestsQuantity
+     */
+    public void setPaymentRequestsQuantity(Integer paymentRequestsQuantity) {
+        this.paymentRequestsQuantity = paymentRequestsQuantity;
+    }
+
+    /**
+     * @return the period
+     */
+    public PreApprovalPeriod getPeriod() {
+        return period;
+    }
+
+    /**
+     * Sets the period
+     * 
+     * @param period
+     */
+    public void setPeriod(PreApprovalPeriod period) {
+        this.period = period;
+    }
 
     /**
      * Calls the PagSeguro web service and register this pre-approval request
@@ -152,7 +151,7 @@ public class PreApproval {
     public String register(Credentials credentials) throws PagSeguroServiceException {
         return PreApprovalService.createPreApproval(credentials, this);
     }
-    
+
     /**
      * Calls the PagSeguro web service and return a payment request
      * 
@@ -161,17 +160,17 @@ public class PreApproval {
      * @return The payment request
      * @throws PagSeguroServiceException
      */
-    public PaymentRequestTransaction search(Credentials credentials, String paymentRequestCode) throws PagSeguroServiceException {
+    public PaymentRequestTransaction search(Credentials credentials, String paymentRequestCode)
+            throws PagSeguroServiceException {
         return PaymentRequestService.findByCode(credentials, paymentRequestCode);
     }
 
-	/**
-	 * @return string
-	 */
-	@Override
-	public String toString() {
-		return "PreApproval [initialDate=" + initialDate + ", paymentRequest="
-				+ paymentRequest + ", paymentRequestsQuantity="
-				+ paymentRequestsQuantity + ", period=" + period + "]";
-	}
+    /**
+     * @return string
+     */
+    @Override
+    public String toString() {
+        return "PreApproval [initialDate=" + initialDate + ", paymentRequest=" + paymentRequest
+                + ", paymentRequestsQuantity=" + paymentRequestsQuantity + ", period=" + period + "]";
+    }
 }

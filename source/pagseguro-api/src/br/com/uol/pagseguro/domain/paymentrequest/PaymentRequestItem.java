@@ -25,14 +25,14 @@ import java.math.BigDecimal;
  */
 public class PaymentRequestItem {
 
-	/**
+    /**
      * Item id
      * 
      * Optional
      */
     private String id;
-    
-	/**
+
+    /**
      * Item description
      */
     private String description;
@@ -41,7 +41,7 @@ public class PaymentRequestItem {
      * Item amount
      */
     private BigDecimal amount;
-    
+
     /**
      * Item quantity
      */
@@ -62,7 +62,7 @@ public class PaymentRequestItem {
      * @param description
      *            the item description
      * @param amount
-     * 			  the item amount            
+     *            the item amount
      * @param quantity
      *            the item quantity
      */
@@ -81,10 +81,10 @@ public class PaymentRequestItem {
     }
 
     /**
-	 * Sets the item description
-	 * 
-	 * @param description
-	 */
+     * Sets the item description
+     * 
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
@@ -97,14 +97,14 @@ public class PaymentRequestItem {
     }
 
     /**
-	 * Sets the item amount
-	 * 
-	 * @param amount
-	 */
+     * Sets the item amount
+     * 
+     * @param amount
+     */
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-    
+
     /**
      * @return the item quantity
      */
@@ -113,10 +113,10 @@ public class PaymentRequestItem {
     }
 
     /**
-	 * Sets the item quantity
-	 * 
-	 * @param quantity
-	 */
+     * Sets the item quantity
+     * 
+     * @param quantity
+     */
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
@@ -129,20 +129,20 @@ public class PaymentRequestItem {
     }
 
     /**
-	 * Sets the item id
-	 * 
-	 * @param id 
-	 */
+     * Sets the item id
+     * 
+     * @param id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
-	/**
-	 * @return string
-	 */
-	@Override
-	public String toString() {
-		return "PaymentRequestItem [id=" + id + ", description=" + description
-				+ ", amount=" + amount + ", quantity=" + quantity + "]";
-	}
+    /**
+     * @return string
+     */
+    @Override
+    public String toString() {
+        return "PaymentRequestItem [id=" + id + ", description=" + description + ", amount=" + amount + ", quantity="
+                + quantity + "]";
+    }
 }

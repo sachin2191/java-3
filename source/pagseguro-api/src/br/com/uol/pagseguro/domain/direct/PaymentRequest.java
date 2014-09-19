@@ -17,81 +17,81 @@ import br.com.uol.pagseguro.enums.ShippingType;
 /**
  * Represents the payment request
  * 
- * @deprecated use {@link Checkout} instead.  
+ * @deprecated use {@link Checkout} instead.
  */
 @Deprecated
 public abstract class PaymentRequest {
-	
-	/**
-	 * New Checkout class
-	 */
-	private Checkout checkout;
+
+    /**
+     * New Checkout class
+     */
+    private Checkout checkout;
 
     /**
      * Payment Mode
      */
     @SuppressWarnings("unused")
-	private PaymentMode paymentMode;
+    private PaymentMode paymentMode;
 
     /**
      * Receiver E-Mail
      */
     @SuppressWarnings("unused")
-	private String receiverEmail;
+    private String receiverEmail;
 
     /**
      * Currency
      */
     @SuppressWarnings("unused")
-	private Currency currency;
+    private Currency currency;
 
     /**
      * Notification URL
      */
     @SuppressWarnings("unused")
-	private String notificationURL;
+    private String notificationURL;
 
     /**
      * Reference
      */
     @SuppressWarnings("unused")
-	private String reference;
+    private String reference;
 
     /**
      * Sender
      */
     @SuppressWarnings("unused")
-	private Sender sender;
+    private Sender sender;
 
     /**
      * Shipping
      */
     @SuppressWarnings("unused")
-	private Shipping shipping;
+    private Shipping shipping;
 
     /**
      * Extra Amount
      */
     @SuppressWarnings("unused")
-	private BigDecimal extraAmount;
+    private BigDecimal extraAmount;
 
     /**
      * Items
      */
     @SuppressWarnings("unused")
-	private List<Item> items;
+    private List<Item> items;
 
     /**
      * Commission
      */
     @SuppressWarnings("unused")
-	private Commission commission;
-    
+    private Commission commission;
+
     /**
      * @return the payment mode
      */
     public PaymentMode getPaymentMode() {
-    	return this.checkout.getPaymentMode();
+        return this.checkout.getPaymentMode();
     }
 
     /**
@@ -99,14 +99,14 @@ public abstract class PaymentRequest {
      *            the payment mode to set
      */
     public void setPaymentMode(PaymentMode paymentMode) {
-    	this.checkout.setPaymentMode(paymentMode);
+        this.checkout.setPaymentMode(paymentMode);
     }
 
     /**
      * @return the receiverEmail
      */
     public String getReceiverEmail() {
-    	return this.checkout.getReceiverEmail();
+        return this.checkout.getReceiverEmail();
     }
 
     /**
@@ -114,14 +114,14 @@ public abstract class PaymentRequest {
      *            the receiverEmail to set
      */
     public void setReceiverEmail(String receiverEmail) {
-    	this.checkout.setReceiverEmail(receiverEmail);
+        this.checkout.setReceiverEmail(receiverEmail);
     }
 
     /**
      * @return the currency
      */
     public Currency getCurrency() {
-    	return this.checkout.getCurrency();
+        return this.checkout.getCurrency();
     }
 
     /**
@@ -129,14 +129,14 @@ public abstract class PaymentRequest {
      *            the currency to set
      */
     public void setCurrency(Currency currency) {
-    	this.checkout.setCurrency(currency);
+        this.checkout.setCurrency(currency);
     }
 
     /**
      * @return the notification URL
      */
     public String getNotificationURL() {
-    	return this.checkout.getNotificationURL();
+        return this.checkout.getNotificationURL();
     }
 
     /**
@@ -144,14 +144,14 @@ public abstract class PaymentRequest {
      *            the notification URL to set
      */
     public void setNotificationURL(String notificationURL) {
-    	this.checkout.setNotificationURL(notificationURL);
+        this.checkout.setNotificationURL(notificationURL);
     }
 
     /**
      * @return the reference
      */
     public String getReference() {
-    	return this.checkout.getReference();
+        return this.checkout.getReference();
     }
 
     /**
@@ -159,14 +159,14 @@ public abstract class PaymentRequest {
      *            the reference to set
      */
     public void setReference(String reference) {
-    	this.checkout.setReference(reference);
+        this.checkout.setReference(reference);
     }
 
     /**
      * @return the sender
      */
     public Sender getSender() {
-    	return this.checkout.getSender();
+        return this.checkout.getSender();
     }
 
     /**
@@ -174,14 +174,14 @@ public abstract class PaymentRequest {
      *            the sender to set
      */
     public void setSender(Sender sender) {
-    	this.checkout.setSender(sender);
+        this.checkout.setSender(sender);
     }
 
     /**
      * @return the shipping
      */
     public Shipping getShipping() {
-    	return this.checkout.getShipping();
+        return this.checkout.getShipping();
     }
 
     /**
@@ -189,7 +189,7 @@ public abstract class PaymentRequest {
      *            the shipping to set
      */
     public void setShipping(Shipping shipping) {
-    	this.checkout.setShipping(shipping);
+        this.checkout.setShipping(shipping);
     }
 
     /**
@@ -198,7 +198,7 @@ public abstract class PaymentRequest {
      * @param address
      */
     public void setShippingAddress(Address address) {
-    	this.checkout.setShippingAddress(address);
+        this.checkout.setShippingAddress(address);
     }
 
     /**
@@ -209,23 +209,23 @@ public abstract class PaymentRequest {
      * @param type
      */
     public void setShippingType(ShippingType type) {
-    	this.checkout.setShippingType(type);
+        this.checkout.setShippingType(type);
     }
-    
+
     /**
      * Sets the shipping cost for this direct payment request
      * 
      * @param cost
      */
     public void setShippingCost(BigDecimal cost) {
-    	this.checkout.setShippingCost(cost);
+        this.checkout.setShippingCost(cost);
     }
 
     /**
      * @return the extraAmount
      */
     public BigDecimal getExtraAmount() {
-    	return this.checkout.getExtraAmount();
+        return this.checkout.getExtraAmount();
     }
 
     /**
@@ -233,14 +233,14 @@ public abstract class PaymentRequest {
      *            the extraAmount to set
      */
     public void setExtraAmount(BigDecimal extraAmount) {
-    	this.checkout.setExtraAmount(extraAmount);
+        this.checkout.setExtraAmount(extraAmount);
     }
 
     /**
      * @return the items
      */
     public List<Item> getItems() {
-    	return this.checkout.getItems();
+        return this.checkout.getItems();
     }
 
     /**
@@ -248,7 +248,7 @@ public abstract class PaymentRequest {
      *            the items to set
      */
     public void setItems(List<Item> items) {
-    	this.checkout.setItems(items);
+        this.checkout.setItems(items);
     }
 
     /**
@@ -259,14 +259,14 @@ public abstract class PaymentRequest {
      * @param item
      */
     public void addItem(Item item) {
-    	this.checkout.addItem(item);
+        this.checkout.addItem(item);
     }
 
     /**
      * @return the commission
      */
     public Commission getCommission() {
-    	return this.checkout.getCommission();
+        return this.checkout.getCommission();
     }
 
     /**
@@ -274,11 +274,11 @@ public abstract class PaymentRequest {
      *            the commission to set
      */
     public void setCommission(Commission commission) {
-    	this.checkout.setCommission(commission);
+        this.checkout.setCommission(commission);
     }
 
     public Map<Object, Object> getMap() {
-    	return this.checkout.getMap();
+        return this.checkout.getMap();
     };
 
 }

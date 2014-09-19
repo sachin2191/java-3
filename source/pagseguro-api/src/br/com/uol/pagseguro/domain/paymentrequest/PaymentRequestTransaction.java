@@ -39,25 +39,25 @@ public class PaymentRequestTransaction {
 
     /** Transaction date */
     private Date date;
-    
+
     /** Transaction code */
     private String code;
-    
+
     /** Transaction recurrence code */
     private String recurrenceCode;
-    
+
     /** A reference to associate the PagSeguro transaction to a transaction in your system. */
     private String reference;
-    
+
     /** Recovery code of the initiated transaction. */
     private String recoveryCode;
-    
+
     /** Transaction type */
     private TransactionType type;
-    
+
     /** Transaction status */
     private TransactionStatus status;
-    
+
     /** Date the last notification about this transaction was sent */
     private Date lastEventDate;
 
@@ -66,7 +66,7 @@ public class PaymentRequestTransaction {
 
     /** Transaction gross amount */
     private BigDecimal grossAmount;
-    
+
     /** Transaction paid amount */
     private BigDecimal paidAmount;
 
@@ -81,7 +81,7 @@ public class PaymentRequestTransaction {
 
     /** Transaction extra/discount amount */
     private BigDecimal extraAmount;
-    
+
     /** Transaction description */
     private String description;
 
@@ -93,7 +93,7 @@ public class PaymentRequestTransaction {
 
     /** Transaction items count */
     private Integer itemCount;
-    
+
     /**
      * item/product list in this transaction
      * 
@@ -107,20 +107,20 @@ public class PaymentRequestTransaction {
      * @see PaymentRequestSender
      */
     private PaymentRequestSender sender;
-    
+
     /**
      * Shipping information
      * 
      * @see PaymentRequestShipping
      */
     private PaymentRequestShipping shipping;
-    
+
     /** Transaction expiration */
     private Date expiration;
-    
+
     /** Transaction due */
     private Date due;
-    
+
     /**
      * Initializes a new instance of the PaymentRequestTransaction class
      */
@@ -134,7 +134,7 @@ public class PaymentRequestTransaction {
         this.sender = new PaymentRequestSender();
         this.shipping = new PaymentRequestShipping();
     }
-    
+
     /**
      * @return the transaction date
      */
@@ -168,22 +168,22 @@ public class PaymentRequestTransaction {
     }
 
     /**
-	 * @return the recurrenceCode
-	 */
-	public String getRecurrenceCode() {
-		return recurrenceCode;
-	}
+     * @return the recurrenceCode
+     */
+    public String getRecurrenceCode() {
+        return recurrenceCode;
+    }
 
-	/**
-	 * Sets the recurrence code
-	 * 
-	 * @param recurrenceCode
-	 */
-	public void setRecurrenceCode(String recurrenceCode) {
-		this.recurrenceCode = recurrenceCode;
-	}
+    /**
+     * Sets the recurrence code
+     * 
+     * @param recurrenceCode
+     */
+    public void setRecurrenceCode(String recurrenceCode) {
+        this.recurrenceCode = recurrenceCode;
+    }
 
-	/**
+    /**
      * You can use the reference code to store an identifier so you can associate the PagSeguro transaction to a
      * transaction in your system.
      * 
@@ -202,23 +202,23 @@ public class PaymentRequestTransaction {
         this.reference = reference;
     }
 
-	/**
-	 * @return the recoveryCode
-	 */
-	public String getRecoveryCode() {
-		return recoveryCode;
-	}
+    /**
+     * @return the recoveryCode
+     */
+    public String getRecoveryCode() {
+        return recoveryCode;
+    }
 
-	/**
-	 * Ses the recovery code
-	 * 
-	 * @param recoveryCode
-	 */
-	public void setRecoveryCode(String recoveryCode) {
-		this.recoveryCode = recoveryCode;
-	}
+    /**
+     * Ses the recovery code
+     * 
+     * @param recoveryCode
+     */
+    public void setRecoveryCode(String recoveryCode) {
+        this.recoveryCode = recoveryCode;
+    }
 
-	/**
+    /**
      * @return the transaction Type
      * @see TransactionType
      */
@@ -236,7 +236,7 @@ public class PaymentRequestTransaction {
     public void setType(TransactionType type) {
         this.type = type;
     }
-    
+
     /**
      * @return the transaction status
      * @see TransactionStatus
@@ -256,7 +256,7 @@ public class PaymentRequestTransaction {
         this.status = status;
     }
 
-	/**
+    /**
      * Date the last notification about this transaction was sent
      * 
      * @return the last event date
@@ -273,7 +273,7 @@ public class PaymentRequestTransaction {
     public void setLastEventDate(Date lastEventDate) {
         this.lastEventDate = lastEventDate;
     }
-    
+
     /**
      * @return the payment method used in this transaction
      * @see PaymentMethod
@@ -306,22 +306,23 @@ public class PaymentRequestTransaction {
     public void setGrossAmount(BigDecimal totalValue) {
         this.grossAmount = totalValue;
     }
-    
+
     /**
-	 * @return the paidAmount
-	 */
-	public BigDecimal getPaidAmount() {
-		return paidAmount;
-	}
+     * @return the paidAmount
+     */
+    public BigDecimal getPaidAmount() {
+        return paidAmount;
+    }
 
-	/**
-	 * @param paidAmount the paidAmount to set
-	 */
-	public void setPaidAmount(BigDecimal paidAmount) {
-		this.paidAmount = paidAmount;
-	}
+    /**
+     * @param paidAmount
+     *            the paidAmount to set
+     */
+    public void setPaidAmount(BigDecimal paidAmount) {
+        this.paidAmount = paidAmount;
+    }
 
-	/**
+    /**
      * @return the discount amount
      */
     public BigDecimal getDiscountAmount() {
@@ -337,21 +338,22 @@ public class PaymentRequestTransaction {
         this.discountAmount = discountAmount;
     }
 
-	/**
-	 * @return the receiverFees
-	 */
-	public PaymentRequestReceiverFees getReceiverFees() {
-		return receiverFees;
-	}
+    /**
+     * @return the receiverFees
+     */
+    public PaymentRequestReceiverFees getReceiverFees() {
+        return receiverFees;
+    }
 
-	/**
-	 * @param receiverFees the receiverFees to set
-	 */
-	public void setReceiverFees(PaymentRequestReceiverFees receiverFees) {
-		this.receiverFees = receiverFees;
-	}
+    /**
+     * @param receiverFees
+     *            the receiverFees to set
+     */
+    public void setReceiverFees(PaymentRequestReceiverFees receiverFees) {
+        this.receiverFees = receiverFees;
+    }
 
-	/**
+    /**
      * @return the net amount
      */
     public BigDecimal getNetAmount() {
@@ -383,22 +385,23 @@ public class PaymentRequestTransaction {
         this.extraAmount = extraAmount;
     }
 
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * Sets the description
-	 * @param description
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    /**
+     * Sets the description
+     * 
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	/**
+    /**
      * Get Escrow End Date
      * 
      * @return Date
@@ -504,55 +507,51 @@ public class PaymentRequestTransaction {
     public void setShipping(PaymentRequestShipping shipping) {
         this.shipping = shipping;
     }
-    
-    /**
-	 * @return the expiration
-	 */
-	public Date getExpiration() {
-		return expiration;
-	}
-
-	/**
-	 * Sets the expiration days
-	 * 
-	 * @param expiration
-	 */
-	public void setExpiration(Date expiration) {
-		this.expiration = expiration;
-	}
-
-	/**
-	 * @return the due
-	 */
-	public Date getDue() {
-		return due;
-	}
-
-	/**
-	 * Sets the due days
-	 * @param due
-	 */
-	public void setDue(Date due) {
-		this.due = due;
-	}
 
     /**
-	 * @return string
-	 */
-	@Override
-	public String toString() {
-		return "PaymentRequestTransaction [date=" + date + ", code=" + code
-				+ ", recurrenceCode=" + recurrenceCode + ", reference="
-				+ reference + ", recoveryCode=" + recoveryCode + ", type="
-				+ type + ", status=" + status + ", lastEventDate="
-				+ lastEventDate + ", paymentMethod=" + paymentMethod
-				+ ", grossAmount=" + grossAmount + ", paidAmount=" + paidAmount
-				+ ", discountAmount=" + discountAmount + ", receiverFees="
-				+ receiverFees + ", netAmount=" + netAmount + ", extraAmount="
-				+ extraAmount + ", description=" + description
-				+ ", escrowEndDate=" + escrowEndDate + ", installmentCount="
-				+ installmentCount + ", itemCount=" + itemCount + ", items="
-				+ items + ", sender=" + sender + ", shipping=" + shipping
-				+ ", expiration=" + expiration + ", due=" + due + "]";
-	}
+     * @return the expiration
+     */
+    public Date getExpiration() {
+        return expiration;
+    }
+
+    /**
+     * Sets the expiration days
+     * 
+     * @param expiration
+     */
+    public void setExpiration(Date expiration) {
+        this.expiration = expiration;
+    }
+
+    /**
+     * @return the due
+     */
+    public Date getDue() {
+        return due;
+    }
+
+    /**
+     * Sets the due days
+     * 
+     * @param due
+     */
+    public void setDue(Date due) {
+        this.due = due;
+    }
+
+    /**
+     * @return string
+     */
+    @Override
+    public String toString() {
+        return "PaymentRequestTransaction [date=" + date + ", code=" + code + ", recurrenceCode=" + recurrenceCode
+                + ", reference=" + reference + ", recoveryCode=" + recoveryCode + ", type=" + type + ", status="
+                + status + ", lastEventDate=" + lastEventDate + ", paymentMethod=" + paymentMethod + ", grossAmount="
+                + grossAmount + ", paidAmount=" + paidAmount + ", discountAmount=" + discountAmount + ", receiverFees="
+                + receiverFees + ", netAmount=" + netAmount + ", extraAmount=" + extraAmount + ", description="
+                + description + ", escrowEndDate=" + escrowEndDate + ", installmentCount=" + installmentCount
+                + ", itemCount=" + itemCount + ", items=" + items + ", sender=" + sender + ", shipping=" + shipping
+                + ", expiration=" + expiration + ", due=" + due + "]";
+    }
 }

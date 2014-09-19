@@ -31,16 +31,16 @@ public class PreApprovalTransaction {
 
     /** Pre-approval code */
     private String code;
-    
+
     /** Pre-approval status */
     private PreApprovalStatus status;
-    
-    /** Pre-approval period*/
+
+    /** Pre-approval period */
     private PreApprovalPeriod period;
-    
+
     /** Payment requests quantity */
     private Integer paymentRequestsQuantity;
-    
+
     /** Pre-approval initial date */
     private Date initialDate;
 

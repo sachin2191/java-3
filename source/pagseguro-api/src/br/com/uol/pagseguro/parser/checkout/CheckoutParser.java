@@ -42,9 +42,9 @@ import br.com.uol.pagseguro.xmlparser.XMLParserUtils;
  * Parses Checkout and responses
  */
 public class CheckoutParser {
-	
-	private CheckoutParser() {
-		
+
+    private CheckoutParser() {
+
     }
 
     /**

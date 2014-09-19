@@ -15,9 +15,9 @@ public class CancelPreApproval {
         // Substitute the code below with a valid pre-approval code for your account
         cancelByCode("F1DEEA6D76B54267A753D6B87CB6A62D");
     }
-    
+
     private static void cancelByCode(String preApprovalCode) {
-        
+
         HashMap<String, String> cancelReturn = null;
 
         try {
@@ -33,9 +33,9 @@ public class CancelPreApproval {
         if (cancelReturn != null)
             printPreApproval(cancelReturn);
     }
-    
+
     private static void printPreApproval(HashMap<String, String> cancelReturn) {
-        
+
         System.out.println("code: " + cancelReturn.get("code"));
         System.out.println("date: " + cancelReturn.get("date"));
         System.out.println("status: " + cancelReturn.get("status"));

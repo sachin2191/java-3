@@ -96,7 +96,7 @@ public class Phone {
      * Sets the number from a formatted string
      * 
      * @param number
-     * String formatted string like <code>(99) 9-9999-9999</code>
+     *            String formatted string like <code>(99) 9-9999-9999</code>
      */
     public void setFullPhone(String number) {
 

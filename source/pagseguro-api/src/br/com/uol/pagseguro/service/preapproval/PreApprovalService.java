@@ -43,7 +43,7 @@ import br.com.uol.pagseguro.xmlparser.ErrorsParser;
 public class PreApprovalService {
 
     private PreApprovalService() {
-    	
+
     }
 
     /**
@@ -53,38 +53,37 @@ public class PreApprovalService {
      */
     private static Log log = new Log(PreApprovalService.class);
 
-    /** 
+    /**
      * @var String
      */
     private static final String PREFIX = "PreApprovalService.";
-    
-    /** 
+
+    /**
      * @var String
      */
     private static final String SUFFIX_BEGIN = "( %1s ) - begin";
-    
-    /** 
+
+    /**
      * @var String
      */
     private static final String SUFFIX_END = " - end %2s )";
-    
-    /** 
+
+    /**
      * @var String
      */
     private static final String SUFFIX_ERROR = " - error %2s )";
-    
-    
-    /** 
+
+    /**
      * @var String
      */
     private static final String REGISTER = "Register";
-    
-    /** 
+
+    /**
      * @var String
      */
     private static final String FIND_BY_CODE = "FindByCode";
-    
-    /** 
+
+    /**
      * @var String
      */
     private static final String CANCEL_BY_CODE = "CancelByCode";
@@ -115,7 +114,7 @@ public class PreApprovalService {
         return connectionData.getWSPreApprovalFindByCodeUrl() + "/" + preApprovalCode + "?"
                 + connectionData.getCredentialsUrlQuery();
     }
-    
+
     /**
      * Build Cancel Url By Code
      * 
@@ -131,7 +130,7 @@ public class PreApprovalService {
         return connectionData.getWSPreApprovalCancelByCodeUrl() + "/" + preApprovalCode + "?"
                 + connectionData.getCredentialsUrlQuery();
     }
-    
+
     /**
      * 
      * @param credentials
@@ -139,9 +138,10 @@ public class PreApprovalService {
      * @return string
      * @throws Exception
      */
-    public static String createPreApproval(Credentials credentials, PreApproval preApproval) throws PagSeguroServiceException {
+    public static String createPreApproval(Credentials credentials, PreApproval preApproval)
+            throws PagSeguroServiceException {
 
-    	PreApprovalService.log.info(String.format(PREFIX + REGISTER + SUFFIX_BEGIN, preApproval.toString()));
+        PreApprovalService.log.info(String.format(PREFIX + REGISTER + SUFFIX_BEGIN, preApproval.toString()));
 
         ConnectionData connectionData = new ConnectionData(credentials);
 
@@ -163,8 +163,8 @@ public class PreApprovalService {
             } else if (HttpURLConnection.HTTP_OK == httpCodeStatus.getCode().intValue()) {
                 String code = PreApprovalParser.readSuccessXml(response);
 
-                PreApprovalService.log.info(String.format(PREFIX + REGISTER + SUFFIX_END,
-                        preApproval.toString(), code));
+                PreApprovalService.log
+                        .info(String.format(PREFIX + REGISTER + SUFFIX_END, preApproval.toString(), code));
 
                 return code;
 
@@ -174,8 +174,8 @@ public class PreApprovalService {
 
                 PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus, errors);
 
-                PreApprovalService.log.error(String.format(PREFIX + REGISTER + SUFFIX_ERROR,
-                        preApproval.toString(), exception.getMessage()));
+                PreApprovalService.log.error(String.format(PREFIX + REGISTER + SUFFIX_ERROR, preApproval.toString(),
+                        exception.getMessage()));
 
                 throw exception;
 
@@ -188,8 +188,8 @@ public class PreApprovalService {
             throw e;
         } catch (Exception e) {
 
-        	PreApprovalService.log.error(String.format(PREFIX + REGISTER + SUFFIX_ERROR,
-                    preApproval.toString(), e.getMessage()));
+            PreApprovalService.log.error(String.format(PREFIX + REGISTER + SUFFIX_ERROR, preApproval.toString(),
+                    e.getMessage()));
 
             throw new PagSeguroServiceException(httpCodeStatus, e);
 
@@ -197,7 +197,7 @@ public class PreApprovalService {
             response.disconnect();
         }
     }
-    
+
     /**
      * 
      * @param credentials
@@ -205,8 +205,9 @@ public class PreApprovalService {
      * @return PaymentRequest
      * @throws Exception
      */
-    public static PreApprovalTransaction findByCode(Credentials credentials, String preApprovalCode) throws PagSeguroServiceException {
-        
+    public static PreApprovalTransaction findByCode(Credentials credentials, String preApprovalCode)
+            throws PagSeguroServiceException {
+
         PreApprovalService.log.info(String.format(PREFIX + FIND_BY_CODE + SUFFIX_BEGIN, preApprovalCode));
 
         ConnectionData connectionData = new ConnectionData(credentials);
@@ -224,21 +225,22 @@ public class PreApprovalService {
 
             if (HttpURLConnection.HTTP_OK == httpStatusCode.getCode().intValue()) {
 
-                PreApprovalTransaction preApprovalTransaction = PreApprovalParser.readPreApproval(response.getInputStream());
+                PreApprovalTransaction preApprovalTransaction = PreApprovalParser.readPreApproval(response
+                        .getInputStream());
 
-                PreApprovalService.log.info(String.format(PreApprovalService.FIND_BY_CODE,
-                        preApprovalCode, preApprovalTransaction.toString()));
+                PreApprovalService.log.info(String.format(PreApprovalService.FIND_BY_CODE, preApprovalCode,
+                        preApprovalTransaction.toString()));
 
                 return preApprovalTransaction;
-                
+
             } else if (HttpURLConnection.HTTP_BAD_REQUEST == httpStatusCode.getCode().intValue()) {
 
                 List<Error> listErrors = ErrorsParser.readErrosXml(response.getErrorStream());
 
                 PagSeguroServiceException exception = new PagSeguroServiceException(httpStatusCode, listErrors);
 
-                PreApprovalService.log.error(String.format(PREFIX + FIND_BY_CODE + SUFFIX_ERROR,
-                        preApprovalCode, exception.getMessage()));
+                PreApprovalService.log.error(String.format(PREFIX + FIND_BY_CODE + SUFFIX_ERROR, preApprovalCode,
+                        exception.getMessage()));
 
                 throw exception;
             } else {
@@ -258,7 +260,7 @@ public class PreApprovalService {
             response.disconnect();
         }
     }
-    
+
     /**
      * 
      * @param credentials
@@ -266,7 +268,8 @@ public class PreApprovalService {
      * @return
      * @throws PagSeguroServiceException
      */
-    public static HashMap<String, String> cancelPreApprovalByCode(Credentials credentials, String preApprovalCode) throws PagSeguroServiceException {
+    public static HashMap<String, String> cancelPreApprovalByCode(Credentials credentials, String preApprovalCode)
+            throws PagSeguroServiceException {
 
         PreApprovalService.log.info(String.format(PREFIX + CANCEL_BY_CODE + SUFFIX_BEGIN, preApprovalCode));
 
@@ -277,7 +280,8 @@ public class PreApprovalService {
 
         HttpURLConnection response = connection.httpRequestMethod(
                 PreApprovalService.buildPreApprovalCancelUrlByCode(connectionData, preApprovalCode),
-                connectionData.getServiceTimeout(), connectionData.getCharset(), "POST", PagSeguroSystem.getAcceptHeaderXML());
+                connectionData.getServiceTimeout(), connectionData.getCharset(), "POST",
+                PagSeguroSystem.getAcceptHeaderXML());
 
         try {
 
@@ -287,19 +291,18 @@ public class PreApprovalService {
 
                 HashMap<String, String> cancelReturn = PreApprovalParser.readCancelXml(response.getInputStream());
 
-                PreApprovalService.log.info(String.format(PreApprovalService.CANCEL_BY_CODE,
-                        preApprovalCode));
+                PreApprovalService.log.info(String.format(PreApprovalService.CANCEL_BY_CODE, preApprovalCode));
 
                 return cancelReturn;
-                
+
             } else if (HttpURLConnection.HTTP_BAD_REQUEST == httpStatusCode.getCode().intValue()) {
 
                 List<Error> listErrors = ErrorsParser.readErrosXml(response.getErrorStream());
 
                 PagSeguroServiceException exception = new PagSeguroServiceException(httpStatusCode, listErrors);
 
-                PreApprovalService.log.error(String.format(PREFIX + CANCEL_BY_CODE + SUFFIX_ERROR,
-                        preApprovalCode, exception.getMessage()));
+                PreApprovalService.log.error(String.format(PREFIX + CANCEL_BY_CODE + SUFFIX_ERROR, preApprovalCode,
+                        exception.getMessage()));
 
                 throw exception;
             } else {

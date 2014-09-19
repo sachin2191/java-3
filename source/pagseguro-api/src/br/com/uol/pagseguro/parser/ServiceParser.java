@@ -38,7 +38,7 @@ import br.com.uol.pagseguro.logs.Logger;
 import br.com.uol.pagseguro.xmlparser.XMLParserUtils;
 
 public class ServiceParser {
-    
+
     private ServiceParser() {
     }
 
@@ -49,7 +49,8 @@ public class ServiceParser {
      */
     private static Log log = new Log(ServiceParser.class);
 
-    public static List<Error> readErrors(InputStream xmlInputStream) throws ParserConfigurationException, SAXException, IOException {
+    public static List<Error> readErrors(InputStream xmlInputStream) throws ParserConfigurationException, SAXException,
+            IOException {
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -74,8 +75,8 @@ public class ServiceParser {
 
             errors.add(error);
         }
-        
+
         return errors;
-        
+
     }
 }

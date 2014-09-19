@@ -13,7 +13,7 @@ import br.com.uol.pagseguro.enums.DocumentType;
  * Represents the checkout of the credit card
  */
 public class CreditCardCheckout extends Checkout {
-	/**
+    /**
      * Token
      */
     private String creditCardToken;
