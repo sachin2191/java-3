@@ -139,8 +139,8 @@ public class Checkout {
     /**
      * @return the sender
      * 
-     *         Party that will be sending the Uri to where the PagSeguro checkout page should redirect the user after the
-     *         payment information is processed. money
+     *         Party that will be sending the Uri to where the PagSeguro checkout page should redirect the user after
+     *         the payment information is processed. money
      */
     public Sender getSender() {
         return this.sender;
@@ -672,8 +672,8 @@ public class Checkout {
     }
 
     /**
-     * After this checkout request is submitted, the payment redirect uri returned by the checkout web service will remain
-     * valid for the number of uses specified here.
+     * After this checkout request is submitted, the payment redirect uri returned by the checkout web service will
+     * remain valid for the number of uses specified here.
      * 
      * @return the max uses configured for this checkout request
      */
@@ -684,8 +684,8 @@ public class Checkout {
     /**
      * Sets the max uses of this checkout request
      * 
-     * After this checkout request is submitted, the payment redirect uri returned by the checkout web service will remain
-     * valid for the number of uses specified here.
+     * After this checkout request is submitted, the payment redirect uri returned by the checkout web service will
+     * remain valid for the number of uses specified here.
      * 
      * @param maxUses
      */

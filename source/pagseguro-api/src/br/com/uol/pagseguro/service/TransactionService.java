@@ -31,7 +31,7 @@ public class TransactionService {
             throws PagSeguroServiceException {
         return connectionData.getDirectPaymentUrl() + "?" + connectionData.getCredentialsUrlQuery();
     }
-    
+
     /**
      * @param connectionData
      * @return
@@ -106,7 +106,7 @@ public class TransactionService {
             response.disconnect();
         }
     }
-    
+
     /**
      * @param credentials
      * @param payment

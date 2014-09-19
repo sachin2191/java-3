@@ -45,7 +45,7 @@ public class AccountCredentials extends Credentials {
      * PagSeguro sandbox account security token
      */
     private String sandboxToken;
-    
+
     /**
      * Initializes a newly created instance of this type with the specified arguments
      * 
@@ -63,7 +63,7 @@ public class AccountCredentials extends Credentials {
         this.email = email.trim();
         this.productionToken = token.trim();
     }
-    
+
     /**
      * Initializes a newly created instance of this type with the specified arguments
      * 
@@ -74,11 +74,11 @@ public class AccountCredentials extends Credentials {
      * @param sandboxToken
      *            the sandbox pagseguro account security token. A sequence of 32 characters
      */
-    public AccountCredentials(String email, String productionToken, String sandboxToken) throws PagSeguroServiceException {
+    public AccountCredentials(String email, String productionToken, String sandboxToken)
+            throws PagSeguroServiceException {
 
-        if (email == null || "".equals(email.trim()) 
-        || productionToken == null || "".equals(productionToken.trim())
-        || sandboxToken == null || "".equals(sandboxToken.trim())) {
+        if (email == null || "".equals(email.trim()) || productionToken == null || "".equals(productionToken.trim())
+                || sandboxToken == null || "".equals(sandboxToken.trim())) {
             throw new PagSeguroServiceException("Credentials not set.");
         }
 
@@ -106,9 +106,9 @@ public class AccountCredentials extends Credentials {
      * @return the account security token
      */
     public String getToken() {
-    	if(PagSeguroConfig.isSandboxEnvironment())
-    		return this.sandboxToken;
-    	return this.productionToken;
+        if (PagSeguroConfig.isSandboxEnvironment())
+            return this.sandboxToken;
+        return this.productionToken;
     }
 
     /**
@@ -118,7 +118,7 @@ public class AccountCredentials extends Credentials {
     public void setProductionToken(String productionToken) {
         this.productionToken = productionToken;
     }
-    
+
     /**
      * @param token
      *            the account security token to set. A sequence of 32 characters
@@ -129,23 +129,23 @@ public class AccountCredentials extends Credentials {
 
     /**
      * @return array a map of name value pairs that compose this set of credentials
-     * @throws PagSeguroServiceException 
+     * @throws PagSeguroServiceException
      */
     @Override
     public Map<Object, Object> getAttributes() throws PagSeguroServiceException {
 
         Map<Object, Object> attributeMap = new HashMap<Object, Object>(HASH_SIZE);
-        
+
         attributeMap.put("email", this.email);
-        if(PagSeguroConfig.isSandboxEnvironment()) {
-        	if(this.sandboxToken == null || "".equals(this.sandboxToken)) {
-        		throw new PagSeguroServiceException("Sandbox credentials not set.");
-        	}
-        	attributeMap.put("token", this.sandboxToken);
+        if (PagSeguroConfig.isSandboxEnvironment()) {
+            if (this.sandboxToken == null || "".equals(this.sandboxToken)) {
+                throw new PagSeguroServiceException("Sandbox credentials not set.");
+            }
+            attributeMap.put("token", this.sandboxToken);
         } else {
-        	attributeMap.put("token", this.productionToken);
+            attributeMap.put("token", this.productionToken);
         }
-        
+
         return attributeMap;
 
     }
@@ -155,6 +155,7 @@ public class AccountCredentials extends Credentials {
      */
     @Override
     public String toString() {
-        return this.email + " - " + this.productionToken + " (production token) - " + this.sandboxToken + " (sandbox token)";
+        return this.email + " - " + this.productionToken + " (production token) - " + this.sandboxToken
+                + " (sandbox token)";
     }
 }

@@ -74,16 +74,16 @@ public class CreateTransactionUsingOnlineDebit {
                 "Av. Brig. Faria Lima", //
                 "1384", //
                 "5º andar"));
-        
+
         request.setShippingType(ShippingType.SEDEX);
-        
+
         request.setShippingCost(new BigDecimal("5.00"));
 
         request.addItem(new Item("1", //
                 "Notebook Prata", //
                 Integer.valueOf(1), //
                 new BigDecimal("500.00")));
-        
+
         request.addItem(new Item("2", //
                 "Notebook Rosa", //
                 Integer.valueOf(1), //

@@ -26,21 +26,21 @@ import br.com.uol.pagseguro.helper.PagSeguroUtil;
  */
 public class PaymentRequestSender {
 
-	/** 
-	 * PaymentRequestSender e-mail  
-	 */
+    /**
+     * PaymentRequestSender e-mail
+     */
     private String email;
-    
-    /** 
-     * PaymentRequestSender name 
+
+    /**
+     * PaymentRequestSender name
      */
     private String name;
-    
+
     /**
      * Payment request sender phone
      */
     private Phone phone;
-    
+
     /**
      * Initializes a new instance of the PaymentRequestSender class
      */
@@ -58,7 +58,7 @@ public class PaymentRequestSender {
         this.email = email;
         this.name = PagSeguroUtil.removeExtraSpaces(name);
     }
-    
+
     /**
      * Initializes a new instance of the PaymentRequestSender class with the specified arguments
      * 
@@ -70,7 +70,7 @@ public class PaymentRequestSender {
         this.name = PagSeguroUtil.removeExtraSpaces(name);
         this.phone = phone;
     }
-    
+
     /**
      * @return the sender e-mail
      */
@@ -85,8 +85,8 @@ public class PaymentRequestSender {
      */
     public void setEmail(String email) {
         this.email = email;
-    } 
-    
+    }
+
     /**
      * @return the sender name
      */
@@ -102,7 +102,7 @@ public class PaymentRequestSender {
     public void setName(String name) {
         this.name = PagSeguroUtil.removeExtraSpaces(name);
     }
-    
+
     /**
      * @return the sender phone
      */
@@ -121,13 +121,12 @@ public class PaymentRequestSender {
     public void setPhone(Phone phone) {
         this.phone = phone;
     }
-    
+
     /**
-	 * @return string
-	 */
-	@Override
-	public String toString() {
-		return "PaymentRequestSender [email=" + email + ", name=" + name
-				+ ", phone=" + phone + "]";
-	}
+     * @return string
+     */
+    @Override
+    public String toString() {
+        return "PaymentRequestSender [email=" + email + ", name=" + name + ", phone=" + phone + "]";
+    }
 }

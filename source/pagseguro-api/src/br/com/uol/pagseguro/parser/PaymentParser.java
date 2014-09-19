@@ -36,15 +36,14 @@ import br.com.uol.pagseguro.domain.SenderDocument;
 import br.com.uol.pagseguro.domain.checkout.Checkout;
 import br.com.uol.pagseguro.parser.checkout.CheckoutParser;
 
-
 /**
  * Parses PaymentRequests and responses
  * 
- * @deprecated use {@link CheckoutParser} instead.  
+ * @deprecated use {@link CheckoutParser} instead.
  */
 @Deprecated
 public class PaymentParser {
-	
+
     private PaymentParser() {
 
     }
@@ -55,20 +54,20 @@ public class PaymentParser {
      * @return mixed
      */
     public static Map<Object, Object> getData(Checkout checkout) {
-    	return CheckoutParser.getData(checkout);
+        return CheckoutParser.getData(checkout);
     }
-    
+
     /**
      * 
      * @param payment
      * @return mixed
      *
-     * @deprecated use {@link #getData(Checkout)} instead.  
+     * @deprecated use {@link #getData(Checkout)} instead.
      */
     @Deprecated
     public static Map<Object, Object> getData(PaymentRequest payment) {
-    	
-    	Map<Object, Object> data = new HashMap<Object, Object>();
+
+        Map<Object, Object> data = new HashMap<Object, Object>();
 
         // SET REFERENCE
         if (payment.getReference() != null) {
@@ -311,6 +310,6 @@ public class PaymentParser {
 
     public static String readSuccessXml(HttpURLConnection connection) throws ParserConfigurationException,
             SAXException, IOException {
-    	return CheckoutParser.readSuccessXml(connection);
+        return CheckoutParser.readSuccessXml(connection);
     }
 }

@@ -45,16 +45,14 @@ public class CreatePayment {
                 "Notebook Lilás", //
                 Integer.valueOf(1), //
                 new BigDecimal("2430.00"), //
-                new Long(1000),
-                null);
-        
+                new Long(1000), null);
+
         paymentRequest.addItem("0002", //
                 "Notebook Rosa", //
                 Integer.valueOf(2), //
                 new BigDecimal("2560.00"), //
-                new Long(750),
-                null);
-        
+                new Long(750), null);
+
         paymentRequest.setShippingAddress("BRA", //
                 "SP", //
                 "Sao Paulo", //
@@ -92,19 +90,19 @@ public class CreatePayment {
         paymentRequest.addIndexedParameter("itemId", //
                 "0003", //
                 3);
-        
+
         paymentRequest.addIndexedParameter("itemDescription", //
                 "Notebook Preto", //
                 3);
-        
+
         paymentRequest.addIndexedParameter("itemQuantity", //
                 "1", //
                 3);
-        
+
         paymentRequest.addIndexedParameter("itemAmount", //
                 "200.00", //
                 3);
-        
+
         paymentRequest.addIndexedParameter("itemWeight", //
                 "320", //
                 3);
@@ -112,10 +110,10 @@ public class CreatePayment {
         paymentRequest.addMetaDataItem(MetaDataItemKey.PASSENGER_CPF, //
                 "15600944276", //
                 1);
-        
+
         paymentRequest.addMetaDataItem(MetaDataItemKey.GAME_NAME, //
                 "DOTA");
-        
+
         paymentRequest.addMetaDataItem(MetaDataItemKey.PASSENGER_PASSPORT, //
                 "23456", //
                 1);

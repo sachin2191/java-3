@@ -16,22 +16,20 @@ public class CreateCheckout {
      */
     public static void main(String[] args) {
 
-    	Checkout checkout = new Checkout();
+        Checkout checkout = new Checkout();
 
         checkout.addItem("0001", //
                 "Notebook Lilás", //
                 Integer.valueOf(1), //
                 new BigDecimal("2430.00"), //
-                new Long(1000),
-                null);
-        
+                new Long(1000), null);
+
         checkout.addItem("0002", //
                 "Notebook Rosa", //
                 Integer.valueOf(2), //
                 new BigDecimal("2560.00"), //
-                new Long(750),
-                null);
-        
+                new Long(750), null);
+
         checkout.setShippingAddress("BRA", //
                 "SP", //
                 "Sao Paulo", //
@@ -69,19 +67,19 @@ public class CreateCheckout {
         checkout.addIndexedParameter("itemId", //
                 "0003", //
                 3);
-        
+
         checkout.addIndexedParameter("itemDescription", //
                 "Notebook Preto", //
                 3);
-        
+
         checkout.addIndexedParameter("itemQuantity", //
                 "1", //
                 3);
-        
+
         checkout.addIndexedParameter("itemAmount", //
                 "200.00", //
                 3);
-        
+
         checkout.addIndexedParameter("itemWeight", //
                 "320", //
                 3);
@@ -89,10 +87,10 @@ public class CreateCheckout {
         checkout.addMetaDataItem(MetaDataItemKey.PASSENGER_CPF, //
                 "15600944276", //
                 1);
-        
+
         checkout.addMetaDataItem(MetaDataItemKey.GAME_NAME, //
                 "DOTA");
-        
+
         checkout.addMetaDataItem(MetaDataItemKey.PASSENGER_PASSPORT, //
                 "23456", //
                 1);
@@ -112,6 +110,6 @@ public class CreateCheckout {
     }
 
     private CreateCheckout() {
-    	
+
     }
 }

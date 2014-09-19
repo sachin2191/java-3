@@ -120,13 +120,13 @@ public class TransactionSearchResult {
      * @see TransactionSummary
      */
     public List<TransactionSummary> getTransactionSummaries() {
-        
+
         if (this.transactions == null) {
             this.transactions = new ArrayList<TransactionSummary>();
         }
-        
+
         return this.transactions;
-        
+
     }
 
     /**
@@ -134,8 +134,7 @@ public class TransactionSearchResult {
      * 
      * @param transactionSummaries
      */
-    public void setTransactions(
-            List<TransactionSummary> transactions) {
+    public void setTransactions(List<TransactionSummary> transactions) {
         this.transactions = transactions;
     }
 
@@ -151,9 +150,9 @@ public class TransactionSearchResult {
      */
     @Override
     public String toString() {
-        
+
         StringBuilder sb = new StringBuilder();
-        
+
         sb.append("TransactionSearchResult(Date=");
         sb.append(date);
         sb.append(",CurrentPage=");
@@ -162,7 +161,7 @@ public class TransactionSearchResult {
         sb.append(totalPages);
         sb.append(",Transactions in this page=");
         sb.append(transactions != null ? transactions.size() : 0);
-        
+
         return sb.toString();
     }
 

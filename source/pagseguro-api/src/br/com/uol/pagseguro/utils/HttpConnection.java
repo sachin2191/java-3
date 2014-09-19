@@ -54,10 +54,27 @@ public class HttpConnection {
      * @return connection
      * @throws PagSeguroServiceException
      */
+    @Deprecated
     public HttpURLConnection post(String urlPS, Map<Object, Object> data, String timeout, String charset)
             throws PagSeguroServiceException {
 
-        HttpURLConnection connection = getConnection(urlPS, timeout, charset, "POST");
+        return post(urlPS, data, timeout, charset, null);
+    }
+
+    /**
+     * POST
+     * 
+     * @param url
+     * @param data
+     * @param timeout
+     * @param charset
+     * @return connection
+     * @throws PagSeguroServiceException
+     */
+    public HttpURLConnection post(String urlPS, Map<Object, Object> data, String timeout, String charset,
+            String acceptHeader) throws PagSeguroServiceException {
+
+        HttpURLConnection connection = getConnection(urlPS, timeout, charset, "POST", acceptHeader);
 
         try {
             // Send POST data
@@ -75,7 +92,7 @@ public class HttpConnection {
             throw new PagSeguroServiceException("Error when trying write or set request method", e);
         }
     }
-    
+
     /**
      * Http request method without data
      * 
@@ -86,10 +103,26 @@ public class HttpConnection {
      * @return
      * @throws PagSeguroServiceException
      */
+    @Deprecated
     public HttpURLConnection httpRequestMethod(String urlPS, String timeout, String charset, String method)
             throws PagSeguroServiceException {
+        return httpRequestMethod(urlPS, timeout, charset, method, null);
+    }
 
-        return getConnection(urlPS, timeout, charset, method);
+    /**
+     * Http request method without data
+     * 
+     * @param urlPS
+     * @param timeout
+     * @param charset
+     * @param method
+     * @return
+     * @throws PagSeguroServiceException
+     */
+    public HttpURLConnection httpRequestMethod(String urlPS, String timeout, String charset, String method,
+            String acceptHeader) throws PagSeguroServiceException {
+
+        return getConnection(urlPS, timeout, charset, method, acceptHeader);
     }
 
     /**
@@ -101,9 +134,25 @@ public class HttpConnection {
      * @return connection
      * @throws PagSeguroServiceException
      */
+    @Deprecated
     public HttpURLConnection get(String urlPS, String timeout, String charset) throws PagSeguroServiceException {
 
-        return getConnection(urlPS, timeout, charset, "GET");
+        return get(urlPS, timeout, charset, null);
+    }
+
+    /**
+     * GET
+     * 
+     * @param url
+     * @param timeout
+     * @param charset
+     * @return connection
+     * @throws PagSeguroServiceException
+     */
+    public HttpURLConnection get(String urlPS, String timeout, String charset, String acceptHeader)
+            throws PagSeguroServiceException {
+
+        return getConnection(urlPS, timeout, charset, "GET", acceptHeader);
 
     }
 
@@ -117,8 +166,8 @@ public class HttpConnection {
      * @return connection
      * @throws PagSeguroServiceException
      */
-    private HttpURLConnection getConnection(String urlPS, String timeout, String charset, String method)
-            throws PagSeguroServiceException {
+    private HttpURLConnection getConnection(String urlPS, String timeout, String charset, String method,
+            String acceptHeader) throws PagSeguroServiceException {
         URL url = null;
         HttpURLConnection connection = null;
 
@@ -134,7 +183,10 @@ public class HttpConnection {
             connection.setRequestProperty("charset", charset);
 
             connection.setRequestProperty("Content-type", PagSeguroSystem.getContentTypeFormUrlEncoded());
-            connection.setRequestProperty("Accept", getAcceptHeader(urlPS));
+
+            if (acceptHeader != null)
+                connection.setRequestProperty("Accept", acceptHeader);
+
             connection.setRequestProperty("lib-description", "java:" + PagSeguroSystem.getLibversion());
             connection.setRequestProperty("language-engine-description",
                     "java:" + PagSeguroSystem.getLanguageEnginedescription());
@@ -161,21 +213,5 @@ public class HttpConnection {
             log.error("Error when trying execute method connection: " + e.getMessage());
             throw new PagSeguroServiceException("Generic error", e);
         }
-
     }
-    
-    /**
-     * Sets different types of the accept header
-     * 
-     * @param urlPS
-     * @return accept header
-     */
-    private String getAcceptHeader(String urlPS) {
-        
-        if (urlPS.contains("payment-request"))
-            return "application/vnd.pagseguro.com.br.v1+xml;charset=ISO-8859-1";    
-        
-        return "application/xml;charset=ISO-8859-1";
-    }
-
 }

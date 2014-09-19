@@ -8,64 +8,64 @@ import br.com.uol.pagseguro.domain.direct.checkout.CreditCardCheckout;
 /**
  * Represents the payment request of the credit card
  * 
- * @deprecated use {@link CreditCardCheckout} instead.  
+ * @deprecated use {@link CreditCardCheckout} instead.
  */
 @Deprecated
 public class CreditCardPaymentRequest extends PaymentRequest {
 
-	/**
-	 * New CreditCardCheckout class
-	 */
-	private CreditCardCheckout creditCardCheckout;
-	
+    /**
+     * New CreditCardCheckout class
+     */
+    private CreditCardCheckout creditCardCheckout;
+
     /**
      * Token
      */
     @SuppressWarnings("unused")
-	private String creditCardToken;
+    private String creditCardToken;
 
     /**
      * Installment
      */
     @SuppressWarnings("unused")
-	private Installment installment;
+    private Installment installment;
 
     /**
      * Holder
      */
     @SuppressWarnings("unused")
-	private Holder holder;
+    private Holder holder;
 
     /**
      * Billing address
      */
     @SuppressWarnings("unused")
-	private Address billingAddress;
+    private Address billingAddress;
 
     /**
      * Presencial
      */
     @SuppressWarnings("unused")
-	private Boolean presencial;
+    private Boolean presencial;
 
     /**
      * Dynamic payment method message
      */
     @SuppressWarnings("unused")
-	private String dynamicPaymentMethodMessage;
+    private String dynamicPaymentMethodMessage;
 
     /**
      * Initializes a new instance of the PaymentRequestWithCreditCard class
      */
     public CreditCardPaymentRequest() {
-    	this.creditCardCheckout = new CreditCardCheckout();
+        this.creditCardCheckout = new CreditCardCheckout();
     }
 
     /**
      * @return the credit card token
      */
     public String getCreditCardToken() {
-    	return this.creditCardCheckout.getCreditCardToken();
+        return this.creditCardCheckout.getCreditCardToken();
     }
 
     /**
@@ -73,14 +73,14 @@ public class CreditCardPaymentRequest extends PaymentRequest {
      *            the credit card token to set
      */
     public void setCreditCardToken(String creditCardToken) {
-    	this.creditCardCheckout.setCreditCardToken(creditCardToken);
+        this.creditCardCheckout.setCreditCardToken(creditCardToken);
     }
 
     /**
      * @return the installment
      */
     public Installment getInstallment() {
-    	return this.creditCardCheckout.getInstallment();
+        return this.creditCardCheckout.getInstallment();
     }
 
     /**
@@ -88,14 +88,14 @@ public class CreditCardPaymentRequest extends PaymentRequest {
      *            the installment to set
      */
     public void setInstallment(Installment installment) {
-    	this.creditCardCheckout.setInstallment(installment);
+        this.creditCardCheckout.setInstallment(installment);
     }
 
     /**
      * @return the holder
      */
     public Holder getHolder() {
-    	return this.creditCardCheckout.getHolder();
+        return this.creditCardCheckout.getHolder();
     }
 
     /**
@@ -103,14 +103,14 @@ public class CreditCardPaymentRequest extends PaymentRequest {
      *            the holder to set
      */
     public void setHolder(Holder holder) {
-    	this.creditCardCheckout.setHolder(holder);
+        this.creditCardCheckout.setHolder(holder);
     }
 
     /**
      * @return the billingAddress
      */
     public Address getBillingAddress() {
-    	return this.creditCardCheckout.getBillingAddress();
+        return this.creditCardCheckout.getBillingAddress();
     }
 
     /**
@@ -118,14 +118,14 @@ public class CreditCardPaymentRequest extends PaymentRequest {
      *            the billingAddress to set
      */
     public void setBillingAddress(Address billingAddress) {
-    	this.creditCardCheckout.setBillingAddress(billingAddress);
+        this.creditCardCheckout.setBillingAddress(billingAddress);
     }
 
     /**
      * @return the dynamicPaymentMethodMessage
      */
     public String getDynamicPaymentMethodMessage() {
-    	return this.creditCardCheckout.getDynamicPaymentMethodMessage();
+        return this.creditCardCheckout.getDynamicPaymentMethodMessage();
     }
 
     /**
@@ -133,14 +133,14 @@ public class CreditCardPaymentRequest extends PaymentRequest {
      *            the dynamicPaymentMethodMessage to set
      */
     public void setDynamicPaymentMethodMessage(String dynamicPaymentMethodMessage) {
-    	this.creditCardCheckout.setDynamicPaymentMethodMessage(dynamicPaymentMethodMessage);
+        this.creditCardCheckout.setDynamicPaymentMethodMessage(dynamicPaymentMethodMessage);
     }
 
     /**
      * @return the presencial
      */
     public Boolean getPresencial() {
-    	return this.creditCardCheckout.getPresencial();
+        return this.creditCardCheckout.getPresencial();
     }
 
     /**
@@ -148,16 +148,16 @@ public class CreditCardPaymentRequest extends PaymentRequest {
      *            the presencial to set
      */
     public void setPresencial(Boolean presencial) {
-    	this.creditCardCheckout.setPresencial(presencial);
+        this.creditCardCheckout.setPresencial(presencial);
     }
 
     @Override
     public Map<Object, Object> getMap() {
-    	return this.creditCardCheckout.getMap();
+        return this.creditCardCheckout.getMap();
     }
 
     @Override
     public String toString() {
-    	return this.creditCardCheckout.toString();
+        return this.creditCardCheckout.toString();
     }
 }

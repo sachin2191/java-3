@@ -38,7 +38,7 @@ import br.com.uol.pagseguro.xmlparser.ErrorsParser;
  * 
  * Class Payment Service
  * 
- * @deprecated use {@link CheckoutService} instead.  
+ * @deprecated use {@link CheckoutService} instead.
  */
 @Deprecated
 public class PaymentService {
@@ -59,7 +59,7 @@ public class PaymentService {
      * @throws PagSeguroServiceException
      */
     public static String buildCheckoutRequestUrl(ConnectionData connectionData) throws PagSeguroServiceException {
-    	return CheckoutService.buildCheckoutRequestUrl(connectionData);
+        return CheckoutService.buildCheckoutRequestUrl(connectionData);
     }
 
     /**
@@ -81,11 +81,11 @@ public class PaymentService {
      * @return string
      * @throws Exception
      */
-    public static String createCheckoutRequest(Credentials credentials, Checkout checkout,
-            Boolean onlyCheckoutCode) throws PagSeguroServiceException {
-    	return CheckoutService.createCheckoutRequest(credentials, checkout, onlyCheckoutCode);
+    public static String createCheckoutRequest(Credentials credentials, Checkout checkout, Boolean onlyCheckoutCode)
+            throws PagSeguroServiceException {
+        return CheckoutService.createCheckoutRequest(credentials, checkout, onlyCheckoutCode);
     }
-    
+
     /**
      * 
      * @param credentials
@@ -94,12 +94,12 @@ public class PaymentService {
      * @return string
      * @throws Exception
      * 
-     * @deprecated use {@link #createCheckoutRequest(Credentials, Checkout, Boolean)} instead.  
+     * @deprecated use {@link #createCheckoutRequest(Credentials, Checkout, Boolean)} instead.
      */
     @Deprecated
     public static String createCheckoutRequest(Credentials credentials, PaymentRequest paymentRequest,
             Boolean onlyCheckoutCode) throws PagSeguroServiceException {
-    	
+
         PaymentService.log.info(String.format("PaymentService.Register( %s ) - begin", paymentRequest.toString()));
 
         ConnectionData connectionData = new ConnectionData(credentials);
