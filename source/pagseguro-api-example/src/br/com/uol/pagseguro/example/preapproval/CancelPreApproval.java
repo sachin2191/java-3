@@ -13,7 +13,7 @@ public class CancelPreApproval {
     public static void main(String[] args) {
 
         // Substitute the code below with a valid pre-approval code for your account
-        cancelByCode("F1DEEA6D76B54267A753D6B87CB6A62D");
+        cancelByCode("355BDB09644141DCAE1568C1DE5C6BD4");
     }
 
     private static void cancelByCode(String preApprovalCode) {
@@ -38,6 +38,5 @@ public class CancelPreApproval {
 
         System.out.println("code: " + cancelReturn.get("code"));
         System.out.println("date: " + cancelReturn.get("date"));
-        System.out.println("status: " + cancelReturn.get("status"));
     }
 }

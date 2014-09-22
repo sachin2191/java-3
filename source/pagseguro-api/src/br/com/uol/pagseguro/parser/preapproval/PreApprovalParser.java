@@ -264,11 +264,6 @@ public class PreApprovalParser {
         if (tagValue != null)
             cancelReturn.put("date", tagValue);
 
-        // parsing <recurrenceCancel><status>
-        tagValue = XMLParserUtils.getTagValue("status", paymentRequestReturnElement);
-        if (tagValue != null)
-            cancelReturn.put("status", tagValue);
-
         return cancelReturn;
     }
 
