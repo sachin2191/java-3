@@ -42,10 +42,10 @@ import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestItem;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestSender;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShipping;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShippingPackage;
-import br.com.uol.pagseguro.domain.preapproval.PreApproval;
-import br.com.uol.pagseguro.domain.preapproval.PreApprovalTransaction;
-import br.com.uol.pagseguro.enums.PreApprovalPeriod;
-import br.com.uol.pagseguro.enums.PreApprovalStatus;
+import br.com.uol.pagseguro.domain.preapproval.Recurrence;
+import br.com.uol.pagseguro.domain.preapproval.RecurrenceTransaction;
+import br.com.uol.pagseguro.enums.RecurrencePeriod;
+import br.com.uol.pagseguro.enums.RecurrenceStatus;
 import br.com.uol.pagseguro.helper.PagSeguroUtil;
 import br.com.uol.pagseguro.logs.Log;
 import br.com.uol.pagseguro.logs.Logger;
@@ -53,87 +53,87 @@ import br.com.uol.pagseguro.parser.paymentrequest.PaymentRequestParser;
 import br.com.uol.pagseguro.xmlparser.XMLParserUtils;
 
 /**
- * Parses pre-approval requests and responses
+ * Parses recurrence requests and responses
  */
-public class PreApprovalParser {
+public class RecurrenceParser {
 
     /**
      * PagSeguro Log tool
      * 
      * @see Logger
      */
-    private static Log log = new Log(PreApprovalParser.class);
+    private static Log log = new Log(RecurrenceParser.class);
 
-    public static String PRE_APPROVAL_INITIAL_DATE = "initialDate";
-    public static String PRE_APPROVAL_PAYMENT_REQUESTS_QUANTITY = "paymentRequestsQuantity";
-    public static String PRE_APPROVAL_PERIOD = "period";
+    public static String RECURRENCE_INITIAL_DATE = "initialDate";
+    public static String RECURRENCE_PAYMENT_REQUESTS_QUANTITY = "paymentRequestsQuantity";
+    public static String RECURRENCE_PERIOD = "period";
 
-    private PreApprovalParser() {
+    private RecurrenceParser() {
 
     }
 
     /**
      * 
-     * @param preApproval
+     * @param recurrence
      * @return mixed
      */
-    public static Map<Object, Object> getData(PreApproval preApproval) {
+    public static Map<Object, Object> getData(Recurrence recurrence) {
         Map<Object, Object> data = new HashMap<Object, Object>();
 
         /**
-         * Set pre-approval initial date
+         * Set recurrence initial date
          */
-        if (preApproval.getInitialDate() != null)
-            data.put(PRE_APPROVAL_INITIAL_DATE, preApproval.getInitialDate());
+        if (recurrence.getInitialDate() != null)
+            data.put(RECURRENCE_INITIAL_DATE, recurrence.getInitialDate());
 
         /**
          * Set payment request
          */
-        if (preApproval.getPaymentRequest() != null) {
+        if (recurrence.getPaymentRequest() != null) {
             /**
              * Set payment request name
              */
-            if (preApproval.getPaymentRequest().getName() != null)
-                data.put(PaymentRequestParser.PAYMENT_REQUEST_NAME, preApproval.getPaymentRequest().getName());
+            if (recurrence.getPaymentRequest().getName() != null)
+                data.put(PaymentRequestParser.PAYMENT_REQUEST_NAME, recurrence.getPaymentRequest().getName());
 
             /**
              * Set payment request reference
              */
-            if (preApproval.getPaymentRequest().getReference() != null)
-                data.put(PaymentRequestParser.PAYMENT_REQUEST_REFERENCE, preApproval.getPaymentRequest().getReference());
+            if (recurrence.getPaymentRequest().getReference() != null)
+                data.put(PaymentRequestParser.PAYMENT_REQUEST_REFERENCE, recurrence.getPaymentRequest().getReference());
 
             /**
              * Set payment request expiration days
              */
-            if (preApproval.getPaymentRequest().getExpiration() != null)
-                data.put(PaymentRequestParser.PAYMENT_REQUEST_EXPIRATION, preApproval.getPaymentRequest()
+            if (recurrence.getPaymentRequest().getExpiration() != null)
+                data.put(PaymentRequestParser.PAYMENT_REQUEST_EXPIRATION, recurrence.getPaymentRequest()
                         .getExpiration());
 
             /**
              * Set payment request due days
              */
-            if (preApproval.getPaymentRequest().getDue() != null)
-                data.put(PaymentRequestParser.PAYMENT_REQUEST_DUE, preApproval.getPaymentRequest().getDue());
+            if (recurrence.getPaymentRequest().getDue() != null)
+                data.put(PaymentRequestParser.PAYMENT_REQUEST_DUE, recurrence.getPaymentRequest().getDue());
 
             /**
              * Set payment request sender information
              * 
              * @see PaymentRequestSender
              */
-            if (preApproval.getPaymentRequest().getSender() != null) {
+            if (recurrence.getPaymentRequest().getSender() != null) {
 
                 /**
                  * Set payment request sender email
                  */
-                if (preApproval.getPaymentRequest().getSender().getEmail() != null)
-                    data.put(PaymentRequestParser.PAYMENT_REQUEST_SENDER_EMAIL, preApproval.getPaymentRequest()
+                if (recurrence.getPaymentRequest().getSender().getEmail() != null)
+                    data.put(PaymentRequestParser.PAYMENT_REQUEST_SENDER_EMAIL, recurrence.getPaymentRequest()
                             .getSender().getEmail());
 
                 /**
                  * Set payment request sender name
                  */
-                if (preApproval.getPaymentRequest().getSender().getName() != null)
-                    data.put(PaymentRequestParser.PAYMENT_REQUEST_SENDER_NAME, preApproval.getPaymentRequest()
+                if (recurrence.getPaymentRequest().getSender().getName() != null)
+                    data.put(PaymentRequestParser.PAYMENT_REQUEST_SENDER_NAME, recurrence.getPaymentRequest()
                             .getSender().getName());
             }
 
@@ -142,11 +142,11 @@ public class PreApprovalParser {
              * 
              * @see PaymentRequestItem
              */
-            if (preApproval.getPaymentRequest().getItems() != null
-                    && !preApproval.getPaymentRequest().getItems().isEmpty()) {
+            if (recurrence.getPaymentRequest().getItems() != null
+                    && !recurrence.getPaymentRequest().getItems().isEmpty()) {
                 Integer count = 1;
 
-                for (PaymentRequestItem item : preApproval.getPaymentRequest().getItems()) {
+                for (PaymentRequestItem item : recurrence.getPaymentRequest().getItems()) {
                     if (item.getDescription() != null)
                         data.put(PaymentRequestParser.PAYMENT_REQUEST_ITEM_PREFIX + count.toString()
                                 + PaymentRequestParser.PAYMENT_REQUEST_ITEM_DESCRIPTION, item.getDescription());
@@ -172,26 +172,26 @@ public class PreApprovalParser {
              * 
              * @see PaymentRequestShipping
              */
-            if (preApproval.getPaymentRequest().getShipping() != null) {
-                if (preApproval.getPaymentRequest().getShipping().getCost() != null)
-                    data.put(PaymentRequestParser.PAYMENT_REQUEST_SHIPPING_COST, preApproval.getPaymentRequest()
+            if (recurrence.getPaymentRequest().getShipping() != null) {
+                if (recurrence.getPaymentRequest().getShipping().getCost() != null)
+                    data.put(PaymentRequestParser.PAYMENT_REQUEST_SHIPPING_COST, recurrence.getPaymentRequest()
                             .getShipping().getCost());
 
-                if (preApproval.getPaymentRequest().getShipping().getPaymentRequestShippingPackage() != null) {
-                    if (preApproval.getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getWidth() != null)
-                        data.put(PaymentRequestParser.PAYMENT_REQUEST_SHIPPING_PACKAGE_WIDTH, preApproval
+                if (recurrence.getPaymentRequest().getShipping().getPaymentRequestShippingPackage() != null) {
+                    if (recurrence.getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getWidth() != null)
+                        data.put(PaymentRequestParser.PAYMENT_REQUEST_SHIPPING_PACKAGE_WIDTH, recurrence
                                 .getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getWidth());
 
-                    if (preApproval.getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getHeight() != null)
-                        data.put(PaymentRequestParser.PAYMENT_REQUEST_SHIPPING_PACKAGE_HEIGHT, preApproval
+                    if (recurrence.getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getHeight() != null)
+                        data.put(PaymentRequestParser.PAYMENT_REQUEST_SHIPPING_PACKAGE_HEIGHT, recurrence
                                 .getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getWidth());
 
-                    if (preApproval.getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getLength() != null)
-                        data.put(PaymentRequestParser.PAYMENT_REQUEST_SHIPPING_PACKAGE_LENGTH, preApproval
+                    if (recurrence.getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getLength() != null)
+                        data.put(PaymentRequestParser.PAYMENT_REQUEST_SHIPPING_PACKAGE_LENGTH, recurrence
                                 .getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getWidth());
 
-                    if (preApproval.getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getWeight() != null)
-                        data.put(PaymentRequestParser.PAYMENT_REQUEST_SHIPPING_PACKAGE_WEIGHT, preApproval
+                    if (recurrence.getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getWeight() != null)
+                        data.put(PaymentRequestParser.PAYMENT_REQUEST_SHIPPING_PACKAGE_WEIGHT, recurrence
                                 .getPaymentRequest().getShipping().getPaymentRequestShippingPackage().getWidth());
                 }
             }
@@ -200,20 +200,20 @@ public class PreApprovalParser {
         /**
          * Set payment requests quantity
          */
-        if (preApproval.getPaymentRequestsQuantity() != null)
-            data.put(PRE_APPROVAL_PAYMENT_REQUESTS_QUANTITY, preApproval.getPaymentRequestsQuantity());
+        if (recurrence.getPaymentRequestsQuantity() != null)
+            data.put(RECURRENCE_PAYMENT_REQUESTS_QUANTITY, recurrence.getPaymentRequestsQuantity());
 
         /**
          * Set period
          */
-        if (preApproval.getPeriod() != null)
-            data.put(PRE_APPROVAL_PERIOD, preApproval.getPeriod().toString());
+        if (recurrence.getPeriod() != null)
+            data.put(RECURRENCE_PERIOD, recurrence.getPeriod().toString());
 
         return data;
     }
 
     /**
-     * Reads the pre-approval request code when the request is successful
+     * Reads the recurrence request code when the request is successful
      * 
      * @param connection
      * @return payment request code
@@ -233,7 +233,7 @@ public class PreApprovalParser {
     }
 
     /**
-     * Reads the pre-approval cancel information
+     * Reads the recurrence cancel information
      * 
      * @param connection
      * @return payment request code
@@ -267,7 +267,7 @@ public class PreApprovalParser {
         return cancelReturn;
     }
 
-    public static PreApprovalTransaction readPreApproval(InputStream xmlInputStream)
+    public static RecurrenceTransaction readRecurrence(InputStream xmlInputStream)
             throws ParserConfigurationException, SAXException, IOException, ParseException {
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -278,44 +278,44 @@ public class PreApprovalParser {
 
         String tagValue = null;
 
-        Element preApprovalElement = doc.getDocumentElement();
+        Element recurrenceElement = doc.getDocumentElement();
 
-        PreApprovalTransaction preApprovalTransaction = new PreApprovalTransaction();
+        RecurrenceTransaction recurrenceTransaction = new RecurrenceTransaction();
 
-        PreApprovalParser.log.debug("Parsing pre-approval");
+        RecurrenceParser.log.debug("Parsing recurrence");
 
         // parsing <recurrence><code>
-        tagValue = XMLParserUtils.getTagValue("code", preApprovalElement);
+        tagValue = XMLParserUtils.getTagValue("code", recurrenceElement);
         if (tagValue != null) {
-            preApprovalTransaction.setCode(tagValue);
+            recurrenceTransaction.setCode(tagValue);
         }
 
         // parsing <recurrence><status>
-        tagValue = XMLParserUtils.getTagValue("status", preApprovalElement);
+        tagValue = XMLParserUtils.getTagValue("status", recurrenceElement);
         if (tagValue != null) {
-            preApprovalTransaction.setStatus(PreApprovalStatus.fromValue(tagValue.charAt(0)));
+            recurrenceTransaction.setStatus(RecurrenceStatus.fromValue(tagValue.charAt(0)));
         }
 
         // parsing <recurrence><period>
-        tagValue = XMLParserUtils.getTagValue("period", preApprovalElement);
+        tagValue = XMLParserUtils.getTagValue("period", recurrenceElement);
         if (tagValue != null) {
-            preApprovalTransaction.setPeriod(PreApprovalPeriod.valueOf(tagValue));
+            recurrenceTransaction.setPeriod(RecurrencePeriod.valueOf(tagValue));
         }
 
         // parsing <recurrence><paymentRequestsQuantity>
-        tagValue = XMLParserUtils.getTagValue("paymentRequestsQuantity", preApprovalElement);
+        tagValue = XMLParserUtils.getTagValue("paymentRequestsQuantity", recurrenceElement);
         if (tagValue != null) {
-            preApprovalTransaction.setPaymentRequestsQuantity(Integer.valueOf(tagValue));
+            recurrenceTransaction.setPaymentRequestsQuantity(Integer.valueOf(tagValue));
         }
 
         // parsing <recurrence><initialDate>
-        tagValue = XMLParserUtils.getTagValue("initialDate", preApprovalElement);
+        tagValue = XMLParserUtils.getTagValue("initialDate", recurrenceElement);
         if (tagValue != null) {
-            preApprovalTransaction.setInitialDate(PagSeguroUtil.parse(tagValue));
+            recurrenceTransaction.setInitialDate(PagSeguroUtil.parse(tagValue));
         }
 
         // parsing <recurrence><paymentRequest>
-        Element paymentRequestElement = XMLParserUtils.getElement("paymentRequest", preApprovalElement);
+        Element paymentRequestElement = XMLParserUtils.getElement("paymentRequest", recurrenceElement);
         if (paymentRequestElement != null) {
             PaymentRequest paymentRequest = new PaymentRequest();
 
@@ -463,11 +463,11 @@ public class PreApprovalParser {
                 paymentRequest.setDue(Integer.valueOf(tagValue));
             }
 
-            preApprovalTransaction.setPaymentRequest(paymentRequest);
+            recurrenceTransaction.setPaymentRequest(paymentRequest);
         }
 
-        PreApprovalParser.log.debug("Parsing pre-approval success: " + preApprovalTransaction.getCode());
+        RecurrenceParser.log.debug("Parsing recurrence success: " + recurrenceTransaction.getCode());
 
-        return preApprovalTransaction;
+        return recurrenceTransaction;
     }
 }

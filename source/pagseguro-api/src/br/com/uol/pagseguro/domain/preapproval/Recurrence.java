@@ -20,26 +20,24 @@ package br.com.uol.pagseguro.domain.preapproval;
 
 import br.com.uol.pagseguro.domain.Credentials;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequest;
-import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestTransaction;
-import br.com.uol.pagseguro.enums.PreApprovalPeriod;
+import br.com.uol.pagseguro.enums.RecurrencePeriod;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
-import br.com.uol.pagseguro.service.paymentrequest.PaymentRequestService;
-import br.com.uol.pagseguro.service.preapproval.PreApprovalService;
+import br.com.uol.pagseguro.service.preapproval.RecurrenceService;
 
 /**
  * 
- * Represents a pre-approval transaction
+ * Represents a recurrence transaction
  *
  */
-public class PreApproval {
+public class Recurrence {
 
     /**
-     * The initial date that the pre-approval will be sent
+     * The initial date that the recurrence will be sent
      */
     private String initialDate;
 
     /**
-     * Payment request that will be sent by the pre-approval
+     * Payment request that will be sent by the recurrence
      */
     private PaymentRequest paymentRequest;
 
@@ -49,27 +47,27 @@ public class PreApproval {
     private Integer paymentRequestsQuantity;
 
     /**
-     * Period in which the pre-approval will live
+     * Period in which the recurrence will live
      */
-    private PreApprovalPeriod period;
+    private RecurrencePeriod period;
 
     /**
-     * Initializes a new instance of the PreApproval class
+     * Initializes a new instance of the Recurrence class
      */
-    public PreApproval() {
+    public Recurrence() {
 
     }
 
     /**
-     * Initializes a new instance of the PreApproval class with the specified arguments
+     * Initializes a new instance of the Recurrence class with the specified arguments
      * 
      * @param initialDate
      * @param paymentRequest
      * @param paymentRequestsQuantity
      * @param period
      */
-    public PreApproval(String initialDate, PaymentRequest paymentRequest, Integer paymentRequestsQuantity,
-            PreApprovalPeriod period) {
+    public Recurrence(String initialDate, PaymentRequest paymentRequest, Integer paymentRequestsQuantity,
+            RecurrencePeriod period) {
         super();
         this.initialDate = initialDate;
         this.paymentRequest = paymentRequest;
@@ -128,7 +126,7 @@ public class PreApproval {
     /**
      * @return the period
      */
-    public PreApprovalPeriod getPeriod() {
+    public RecurrencePeriod getPeriod() {
         return period;
     }
 
@@ -137,32 +135,32 @@ public class PreApproval {
      * 
      * @param period
      */
-    public void setPeriod(PreApprovalPeriod period) {
+    public void setPeriod(RecurrencePeriod period) {
         this.period = period;
     }
 
     /**
-     * Calls the PagSeguro web service and register this pre-approval request
+     * Calls the PagSeguro web service and register this recurrence request
      * 
      * @param credentials
      * @return The payment request code
      * @throws PagSeguroServiceException
      */
     public String register(Credentials credentials) throws PagSeguroServiceException {
-        return PreApprovalService.createPreApproval(credentials, this);
+        return RecurrenceService.createRecurrence(credentials, this);
     }
 
     /**
      * Calls the PagSeguro web service and return a payment request
      * 
      * @param credentials
-     * @param paymentRequestCode
-     * @return The payment request
+     * @param recurrenceCode
+     * @return The recurrence
      * @throws PagSeguroServiceException
      */
-    public PaymentRequestTransaction search(Credentials credentials, String paymentRequestCode)
+    public RecurrenceTransaction search(Credentials credentials, String recurrenceCode)
             throws PagSeguroServiceException {
-        return PaymentRequestService.findByCode(credentials, paymentRequestCode);
+        return RecurrenceService.findByCode(credentials, recurrenceCode);
     }
 
     /**
@@ -170,7 +168,7 @@ public class PreApproval {
      */
     @Override
     public String toString() {
-        return "PreApproval [initialDate=" + initialDate + ", paymentRequest=" + paymentRequest
+        return "Recurrence [initialDate=" + initialDate + ", paymentRequest=" + paymentRequest
                 + ", paymentRequestsQuantity=" + paymentRequestsQuantity + ", period=" + period + "]";
     }
 }

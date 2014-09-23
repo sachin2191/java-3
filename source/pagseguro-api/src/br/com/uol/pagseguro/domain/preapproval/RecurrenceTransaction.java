@@ -21,36 +21,36 @@ package br.com.uol.pagseguro.domain.preapproval;
 import java.util.Date;
 
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequest;
-import br.com.uol.pagseguro.enums.PreApprovalPeriod;
-import br.com.uol.pagseguro.enums.PreApprovalStatus;
+import br.com.uol.pagseguro.enums.RecurrencePeriod;
+import br.com.uol.pagseguro.enums.RecurrenceStatus;
 
 /**
- * Represents a PagSeguro pre-approval transaction
+ * Represents a PagSeguro recurrence transaction
  */
-public class PreApprovalTransaction {
+public class RecurrenceTransaction {
 
-    /** Pre-approval code */
+    /** Recurrence code */
     private String code;
 
-    /** Pre-approval status */
-    private PreApprovalStatus status;
+    /** Recurrence status */
+    private RecurrenceStatus status;
 
-    /** Pre-approval period */
-    private PreApprovalPeriod period;
+    /** Recurrence period */
+    private RecurrencePeriod period;
 
     /** Payment requests quantity */
     private Integer paymentRequestsQuantity;
 
-    /** Pre-approval initial date */
+    /** Recurrence initial date */
     private Date initialDate;
 
     /** Transaction payment request */
     private PaymentRequest paymentRequest;
 
     /**
-     * Initializes a new instance of the PreApprovalTransaction class
+     * Initializes a new instance of the RecurrenceTransaction class
      */
-    public PreApprovalTransaction() {
+    public RecurrenceTransaction() {
 
         this.paymentRequest = new PaymentRequest();
     }
@@ -74,7 +74,7 @@ public class PreApprovalTransaction {
     /**
      * @return the status
      */
-    public PreApprovalStatus getStatus() {
+    public RecurrenceStatus getStatus() {
         return status;
     }
 
@@ -83,14 +83,14 @@ public class PreApprovalTransaction {
      * 
      * @param status
      */
-    public void setStatus(PreApprovalStatus status) {
+    public void setStatus(RecurrenceStatus status) {
         this.status = status;
     }
 
     /**
      * @return the period
      */
-    public PreApprovalPeriod getPeriod() {
+    public RecurrencePeriod getPeriod() {
         return period;
     }
 
@@ -99,7 +99,7 @@ public class PreApprovalTransaction {
      * 
      * @param period
      */
-    public void setPeriod(PreApprovalPeriod period) {
+    public void setPeriod(RecurrencePeriod period) {
         this.period = period;
     }
 
@@ -156,7 +156,7 @@ public class PreApprovalTransaction {
      */
     @Override
     public String toString() {
-        return "PreApprovalTransaction [code=" + code + ", status=" + status + ", period=" + period
+        return "RecurrenceTransaction [code=" + code + ", status=" + status + ", period=" + period
                 + ", paymentRequestQuantity=" + paymentRequestsQuantity + ", initialDate=" + initialDate
                 + ", paymentRequest=" + paymentRequest + "]";
     }

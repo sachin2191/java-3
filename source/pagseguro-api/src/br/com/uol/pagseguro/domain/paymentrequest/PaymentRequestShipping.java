@@ -145,28 +145,28 @@ public class PaymentRequestShipping {
      * @param address
      * @see Address
      */
-    public void setAddress(Address address) {
+    public void setShippingAddress(Address address) {
         this.address = address;
     }
-
+    
     /**
      * @return the shipping address
      * @see Address
      */
-    public Address getAddress() {
+    public Address getShippingAddress() {
         if (this.address == null) {
             this.address = new Address();
         }
         return this.address;
     }
-
+    
     /**
      * Sets the shipping type
      * 
      * @param type
      * @see ShippingType
      */
-    public void setType(ShippingType type) {
+    public void setShippingType(ShippingType type) {
         this.type = type;
     }
 
@@ -174,7 +174,7 @@ public class PaymentRequestShipping {
      * @return the shipping type
      * @see ShippingType
      */
-    public ShippingType getType() {
+    public ShippingType getShippingType() {
         return this.type;
     }
 

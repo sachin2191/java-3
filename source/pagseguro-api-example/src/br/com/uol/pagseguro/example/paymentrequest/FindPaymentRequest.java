@@ -13,7 +13,7 @@ public class FindPaymentRequest {
     public static void main(String[] args) {
 
         // Substitute the code below with a valid payment request code for your account
-        findByCode("4123078228594D65ACA439C82FBCC335");
+        findByCode("A7847FB35AC447BD9FAD33728770C6A9");
     }
 
     private static void findByCode(String paymentRequestCode) {
@@ -83,33 +83,27 @@ public class FindPaymentRequest {
         System.out.println("senderName: " + paymentRequestTransaction.getSender().getName());
         System.out.println("senderEmail: " + paymentRequestTransaction.getSender().getEmail());
 
-        if (paymentRequestTransaction.getSender() != null) {
-            System.out
-                    .println("senderPhoneAreaCode: " + paymentRequestTransaction.getSender().getPhone().getAreaCode());
-            System.out.println("senderPhoneNumber: " + paymentRequestTransaction.getSender().getPhone().getNumber());
-        }
-
         if (paymentRequestTransaction.getShipping() != null) {
-            if (paymentRequestTransaction.getShipping().getAddress() != null) {
+            if (paymentRequestTransaction.getShipping().getShippingAddress() != null) {
                 System.out.println("shippingAddressStreet: "
-                        + paymentRequestTransaction.getShipping().getAddress().getStreet());
+                        + paymentRequestTransaction.getShipping().getShippingAddress().getStreet());
                 System.out.println("shippingAddressNumber: "
-                        + paymentRequestTransaction.getShipping().getAddress().getNumber());
+                        + paymentRequestTransaction.getShipping().getShippingAddress().getNumber());
                 System.out.println("shippingAddressComplement: "
-                        + paymentRequestTransaction.getShipping().getAddress().getComplement());
+                        + paymentRequestTransaction.getShipping().getShippingAddress().getComplement());
                 System.out.println("shippingAddressDistrict: "
-                        + paymentRequestTransaction.getShipping().getAddress().getDistrict());
+                        + paymentRequestTransaction.getShipping().getShippingAddress().getDistrict());
                 System.out.println("shippingAddressCity: "
-                        + paymentRequestTransaction.getShipping().getAddress().getCity());
+                        + paymentRequestTransaction.getShipping().getShippingAddress().getCity());
                 System.out.println("shippingAddressState: "
-                        + paymentRequestTransaction.getShipping().getAddress().getState());
+                        + paymentRequestTransaction.getShipping().getShippingAddress().getState());
                 System.out.println("shippingAddressCountry: "
-                        + paymentRequestTransaction.getShipping().getAddress().getCountry());
+                        + paymentRequestTransaction.getShipping().getShippingAddress().getCountry());
                 System.out.println("shippingAddressPostalCode: "
-                        + paymentRequestTransaction.getShipping().getAddress().getPostalCode());
+                        + paymentRequestTransaction.getShipping().getShippingAddress().getPostalCode());
             }
 
-            System.out.println("shippingType: " + paymentRequestTransaction.getShipping().getType());
+            System.out.println("shippingType: " + paymentRequestTransaction.getShipping().getShippingType());
 
             if (paymentRequestTransaction.getShipping().getCost() != null) {
                 System.out.println("shippingCost: " + paymentRequestTransaction.getShipping().getCost());

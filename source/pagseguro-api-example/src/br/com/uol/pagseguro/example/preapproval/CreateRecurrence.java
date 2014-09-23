@@ -10,21 +10,21 @@ import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequest;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestItem;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestSender;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShipping;
-import br.com.uol.pagseguro.domain.preapproval.PreApproval;
-import br.com.uol.pagseguro.enums.PreApprovalPeriod;
+import br.com.uol.pagseguro.domain.preapproval.Recurrence;
+import br.com.uol.pagseguro.enums.RecurrencePeriod;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.properties.PagSeguroConfig;
 
-public class CreatePreApproval {
+public class CreateRecurrence {
     /**
-     * Class with a main method to illustrate the usage of the domain class PreApproval
+     * Class with a main method to illustrate the usage of the domain class Recurrence
      */
     public static void main(String[] args) {
 
-        PreApproval preApproval = new PreApproval();
+        Recurrence recurrence = new Recurrence();
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        preApproval.setInitialDate( //
+        recurrence.setInitialDate( //
                 simpleDateFormat.format(new Date()) // today
                 );
 
@@ -58,30 +58,30 @@ public class CreatePreApproval {
 
         paymentRequest.setShipping(shipping);
 
-        paymentRequest.setExpiration(30);
+        paymentRequest.setExpiration(new Integer(30));
 
         // Sets a reference code for this payment request, it's useful to identify this payment in future notifications
         paymentRequest.setReference("REF1234");
 
-        preApproval.setPaymentRequest(paymentRequest);
+        recurrence.setPaymentRequest(paymentRequest);
 
         // payment requests quantity that will be sent to the sender
-        preApproval.setPaymentRequestsQuantity(3);
+        recurrence.setPaymentRequestsQuantity(new Integer(3));
 
         // payment requests period will be sent to the sender
-        preApproval.setPeriod(PreApprovalPeriod.MONTHLY);
+        recurrence.setPeriod(RecurrencePeriod.MONTHLY);
 
         try {
             // Set your account credentials on src/pagseguro-config.properties
-            String preApprovalCode = preApproval.register(PagSeguroConfig.getAccountCredentials());
-            System.out.println(preApprovalCode);
+            String recurrenceCode = recurrence.register(PagSeguroConfig.getAccountCredentials());
+            System.out.println(recurrenceCode);
 
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
         }
     }
 
-    private CreatePreApproval() {
+    private CreateRecurrence() {
 
     }
 }

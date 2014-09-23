@@ -18,12 +18,12 @@
 
 package br.com.uol.pagseguro.enums;
 
-public enum PreApprovalPeriod {
+public enum RecurrencePeriod {
     WEEKLY('W'), MONTHLY('M'), YEARLY('Y');
 
     private Character id;
 
-    private PreApprovalPeriod(Character id) {
+    private RecurrencePeriod(Character id) {
         this.id = id;
     }
 
@@ -31,8 +31,8 @@ public enum PreApprovalPeriod {
         return this.id;
     }
 
-    public static PreApprovalPeriod fromValue(Character id) {
-        for (PreApprovalPeriod value : PreApprovalPeriod.values()) {
+    public static RecurrencePeriod fromValue(Character id) {
+        for (RecurrencePeriod value : RecurrencePeriod.values()) {
             if (value.getId().equals(id)) {
                 return value;
             }

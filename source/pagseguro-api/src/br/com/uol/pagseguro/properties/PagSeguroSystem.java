@@ -115,16 +115,16 @@ public class PagSeguroSystem {
         return resourceBundle.getString("paymentRequestService.findByCodePath");
     }
 
-    public static String getPreApprovalServicePath() {
-        return resourceBundle.getString("preApprovalService.servicePath");
+    public static String getRecurrenceServicePath() {
+        return resourceBundle.getString("recurrenceService.servicePath");
     }
 
-    public static String getPreApprovalFindByCodePath() {
-        return resourceBundle.getString("preApprovalService.findByCodePath");
+    public static String getRecurrenceFindByCodePath() {
+        return resourceBundle.getString("recurrenceService.findByCodePath");
     }
 
-    public static String getPreApprovalCancelByCodePath() {
-        return resourceBundle.getString("preApprovalService.cancelByCodePath");
+    public static String getRecurrenceCancelByCodePath() {
+        return resourceBundle.getString("recurrenceService.cancelByCodePath");
     }
 
     public static String getServiceTimeout() {

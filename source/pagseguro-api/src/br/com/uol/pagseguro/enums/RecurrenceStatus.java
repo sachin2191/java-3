@@ -18,12 +18,12 @@
 
 package br.com.uol.pagseguro.enums;
 
-public enum PreApprovalStatus {
+public enum RecurrenceStatus {
     SCHEDULED('S'), INITIATED('I'), PAUSED('P'), FINISHED('F');
 
     private Character id;
 
-    private PreApprovalStatus(Character id) {
+    private RecurrenceStatus(Character id) {
         this.id = id;
     }
 
@@ -31,8 +31,8 @@ public enum PreApprovalStatus {
         return this.id;
     }
 
-    public static PreApprovalStatus fromValue(Character id) {
-        for (PreApprovalStatus value : PreApprovalStatus.values()) {
+    public static RecurrenceStatus fromValue(Character id) {
+        for (RecurrenceStatus value : RecurrenceStatus.values()) {
             if (value.getId().equals(id)) {
                 return value;
             }

@@ -37,11 +37,6 @@ public class PaymentRequestSender {
     private String name;
 
     /**
-     * Payment request sender phone
-     */
-    private Phone phone;
-
-    /**
      * Initializes a new instance of the PaymentRequestSender class
      */
     public PaymentRequestSender() {
@@ -68,7 +63,6 @@ public class PaymentRequestSender {
     public PaymentRequestSender(String email, String name, Phone phone) {
         this.email = email;
         this.name = PagSeguroUtil.removeExtraSpaces(name);
-        this.phone = phone;
     }
 
     /**
@@ -104,29 +98,10 @@ public class PaymentRequestSender {
     }
 
     /**
-     * @return the sender phone
-     */
-    public Phone getPhone() {
-        if (phone == null) {
-            phone = new Phone();
-        }
-        return phone;
-    }
-
-    /**
-     * Sets the sender phone
-     * 
-     * @param phone
-     */
-    public void setPhone(Phone phone) {
-        this.phone = phone;
-    }
-
-    /**
      * @return string
      */
     @Override
     public String toString() {
-        return "PaymentRequestSender [email=" + email + ", name=" + name + ", phone=" + phone + "]";
+        return "PaymentRequestSender [email=" + email + ", name=" + name + "]";
     }
 }

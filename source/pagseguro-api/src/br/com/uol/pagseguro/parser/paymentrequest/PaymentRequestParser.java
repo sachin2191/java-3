@@ -467,8 +467,6 @@ public class PaymentRequestParser {
                 if (tagValue != null) {
                     phone.setNumber(tagValue);
                 }
-
-                sender.setPhone(phone);
             }
 
             paymentRequestTransaction.setSender(sender);
@@ -537,13 +535,13 @@ public class PaymentRequestParser {
                 }
 
                 // setting address for shipping object
-                shipping.setAddress(address);
+                shipping.setShippingAddress(address);
             }
 
             // setting <paymentRequest><shipping><type>
             tagValue = XMLParserUtils.getTagValue("type", shippingElement);
             if (tagValue != null) {
-                shipping.setType(ShippingType.fromValue(Integer.valueOf(tagValue)));
+                shipping.setShippingType(ShippingType.fromValue(Integer.valueOf(tagValue)));
             }
 
             // setting <paymentRequest><shipping><cost>

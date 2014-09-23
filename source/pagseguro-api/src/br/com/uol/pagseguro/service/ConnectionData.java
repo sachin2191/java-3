@@ -33,11 +33,11 @@ public class ConnectionData {
 
     private String wsPaymentRequestFindByCodeUrl;
 
-    private String wsPreApprovalUrl;
+    private String wsRecurrenceUrl;
 
-    private String wsPreApprovalFindByCodeUrl;
+    private String wsRecurrenceFindByCodeUrl;
 
-    private String wsPreApprovalCancelByCodeUrl;
+    private String wsRecurrenceCancelByCodeUrl;
 
     private String sessionsUrl;
 
@@ -59,9 +59,9 @@ public class ConnectionData {
         this.webServiceUrl = validUrlWebService();
         this.wsPaymentRequestUrl = validUrlWSPaymentRequest();
         this.wsPaymentRequestFindByCodeUrl = validUrlWSPaymentRequestFindByCode();
-        this.wsPreApprovalUrl = validUrlWSPreApproval();
-        this.wsPreApprovalFindByCodeUrl = validUrlWSPreApprovalFindByCode();
-        this.wsPreApprovalCancelByCodeUrl = validUrlWSPreApprovalCancelByCode();
+        this.wsRecurrenceUrl = validUrlWSRecurrence();
+        this.wsRecurrenceFindByCodeUrl = validUrlWSRecurrenceFindByCode();
+        this.wsRecurrenceCancelByCodeUrl = validUrlWSRecurrenceCancelByCode();
         this.charset = PagSeguroConfig.getApplicationCharset();
         this.serviceTimeout = PagSeguroSystem.getServiceTimeout();
 
@@ -158,30 +158,30 @@ public class ConnectionData {
     }
 
     /**
-     * Valid url web service production or development for pre-approval
+     * Valid url web service production or development for recurrence
      * 
      * @return string
      */
-    private String validUrlWSPreApproval() {
-        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPreApprovalServicePath();
+    private String validUrlWSRecurrence() {
+        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getRecurrenceServicePath();
     }
 
     /**
-     * Valid url web service production or development for finding a pre-approval transaction
+     * Valid url web service production or development for finding a recurrence transaction
      * 
      * @return string
      */
-    private String validUrlWSPreApprovalFindByCode() {
-        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPreApprovalFindByCodePath();
+    private String validUrlWSRecurrenceFindByCode() {
+        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getRecurrenceFindByCodePath();
     }
 
     /**
-     * Valid url web service production or development for canceling a pre-approval transaction
+     * Valid url web service production or development for canceling a recurrence transaction
      * 
      * @return string
      */
-    private String validUrlWSPreApprovalCancelByCode() {
-        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPreApprovalCancelByCodePath();
+    private String validUrlWSRecurrenceCancelByCode() {
+        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getRecurrenceCancelByCodePath();
     }
 
     /**
@@ -221,24 +221,24 @@ public class ConnectionData {
     }
 
     /**
-     * @return the wsPreApprovalUrl
+     * @return the wRecurrenceUrl
      */
-    public String getWSPreApprovalUrl() {
-        return wsPreApprovalUrl;
+    public String getWSRecurrenceUrl() {
+        return wsRecurrenceUrl;
     }
 
     /**
-     * @return the wsPreApprovalFindByCodeUrl
+     * @return the wsRecurrenceFindByCodeUrl
      */
-    public String getWSPreApprovalFindByCodeUrl() {
-        return wsPreApprovalFindByCodeUrl;
+    public String getWSRecurrenceFindByCodeUrl() {
+        return wsRecurrenceFindByCodeUrl;
     }
 
     /**
-     * @return the wsPreApprovalCancelByCodeUrl
+     * @return the wsRecurrenceCancelByCodeUrl
      */
-    public String getWSPreApprovalCancelByCodeUrl() {
-        return wsPreApprovalCancelByCodeUrl;
+    public String getWSRecurrenceCancelByCodeUrl() {
+        return wsRecurrenceCancelByCodeUrl;
     }
 
     /**
@@ -266,11 +266,11 @@ public class ConnectionData {
     }
 
     /**
-     * @param wsPreApprovalUrl
-     *            the wsPreApprovalUrl to set
+     * @param wsRecurrenceUrl
+     *            the wsRecurrenceUrl to set
      */
-    public void setWSPreApprovalUrl(String wsPreApprovalUrl) {
-        this.wsPreApprovalUrl = wsPreApprovalUrl;
+    public void setWSRecurrenceUrl(String wsRecurrenceUrl) {
+        this.wsRecurrenceUrl = wsRecurrenceUrl;
     }
 
     /**

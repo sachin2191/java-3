@@ -184,8 +184,9 @@ public class HttpConnection {
 
             connection.setRequestProperty("Content-type", PagSeguroSystem.getContentTypeFormUrlEncoded());
 
-            if (acceptHeader != null)
+            if (acceptHeader != null) {
                 connection.setRequestProperty("Accept", acceptHeader);
+            }
 
             connection.setRequestProperty("lib-description", "java:" + PagSeguroSystem.getLibversion());
             connection.setRequestProperty("language-engine-description",

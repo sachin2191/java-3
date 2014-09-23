@@ -55,7 +55,7 @@ public class PaymentRequestService {
     /**
      * @var String
      */
-    private static final String PREFIX = "PaymentRequestService.";
+    private static final String PREFIX = PaymentRequestService.class.getSimpleName() + ".";
 
     /**
      * @var String

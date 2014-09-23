@@ -47,7 +47,7 @@ public class CreatePaymentRequest {
 
         paymentRequest.setShipping(shipping);
 
-        paymentRequest.setExpiration(30);
+        paymentRequest.setExpiration(new Integer(30));
 
         // Sets a reference code for this payment request, it's useful to identify this payment in future notifications
         paymentRequest.setReference("REF1234");
