@@ -19,13 +19,13 @@
 package br.com.uol.pagseguro.service.preapproval;
 
 import java.net.HttpURLConnection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import br.com.uol.pagseguro.domain.Credentials;
 import br.com.uol.pagseguro.domain.Error;
 import br.com.uol.pagseguro.domain.preapproval.Recurrence;
+import br.com.uol.pagseguro.domain.preapproval.RecurrenceCancelTransaction;
 import br.com.uol.pagseguro.domain.preapproval.RecurrenceTransaction;
 import br.com.uol.pagseguro.enums.HttpStatus;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
@@ -268,7 +268,7 @@ public class RecurrenceService {
      * @return
      * @throws PagSeguroServiceException
      */
-    public static HashMap<String, String> cancelRecurrenceByCode(Credentials credentials, String recurrenceCode)
+    public static RecurrenceCancelTransaction cancelRecurrenceByCode(Credentials credentials, String recurrenceCode)
             throws PagSeguroServiceException {
 
         RecurrenceService.log.info(String.format(PREFIX + CANCEL_BY_CODE + SUFFIX_BEGIN, recurrenceCode));
@@ -289,11 +289,11 @@ public class RecurrenceService {
 
             if (HttpURLConnection.HTTP_OK == httpStatusCode.getCode().intValue()) {
 
-                HashMap<String, String> cancelReturn = RecurrenceParser.readCancelXml(response.getInputStream());
+                RecurrenceCancelTransaction cancelTransaction = RecurrenceParser.readCancelXml(response.getInputStream());
 
                 RecurrenceService.log.info(String.format(RecurrenceService.CANCEL_BY_CODE, recurrenceCode));
 
-                return cancelReturn;
+                return cancelTransaction;
 
             } else if (HttpURLConnection.HTTP_BAD_REQUEST == httpStatusCode.getCode().intValue()) {
 

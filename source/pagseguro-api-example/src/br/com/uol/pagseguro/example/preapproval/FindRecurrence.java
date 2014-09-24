@@ -13,7 +13,7 @@ public class FindRecurrence {
     public static void main(String[] args) {
 
         // Substitute the code below with a valid recurrence code for your account
-        findByCode("B297862B013C40B4BCABA5F3D9CD8C3F");
+        findByCode("898F8425BF1A4632A20C826B0DBCDE75");
     }
 
     private static void findByCode(String recurrenceCode) {

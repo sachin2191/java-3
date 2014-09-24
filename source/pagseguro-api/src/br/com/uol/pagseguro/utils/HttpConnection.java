@@ -53,6 +53,8 @@ public class HttpConnection {
      * @param charset
      * @return connection
      * @throws PagSeguroServiceException
+     * 
+     * @deprecated use {@link #post(String, Map, String, String, String)} instead.
      */
     @Deprecated
     public HttpURLConnection post(String urlPS, Map<Object, Object> data, String timeout, String charset)
@@ -133,6 +135,8 @@ public class HttpConnection {
      * @param charset
      * @return connection
      * @throws PagSeguroServiceException
+     * 
+     * @deprecated use {@link #get(String, String, String, String, String)} instead.
      */
     @Deprecated
     public HttpURLConnection get(String urlPS, String timeout, String charset) throws PagSeguroServiceException {

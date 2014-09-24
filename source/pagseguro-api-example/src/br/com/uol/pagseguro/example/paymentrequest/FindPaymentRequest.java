@@ -13,7 +13,7 @@ public class FindPaymentRequest {
     public static void main(String[] args) {
 
         // Substitute the code below with a valid payment request code for your account
-        findByCode("A7847FB35AC447BD9FAD33728770C6A9");
+        findByCode("79BF5BAC787E432099C65E0ED6C6386B");
     }
 
     private static void findByCode(String paymentRequestCode) {

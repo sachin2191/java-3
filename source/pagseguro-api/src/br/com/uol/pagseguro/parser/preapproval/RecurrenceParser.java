@@ -43,6 +43,7 @@ import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestSender;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShipping;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShippingPackage;
 import br.com.uol.pagseguro.domain.preapproval.Recurrence;
+import br.com.uol.pagseguro.domain.preapproval.RecurrenceCancelTransaction;
 import br.com.uol.pagseguro.domain.preapproval.RecurrenceTransaction;
 import br.com.uol.pagseguro.enums.RecurrencePeriod;
 import br.com.uol.pagseguro.enums.RecurrenceStatus;
@@ -241,7 +242,7 @@ public class RecurrenceParser {
      * @throws SAXException
      * @throws IOException
      */
-    public static HashMap<String, String> readCancelXml(InputStream xmlInputStream)
+    public static RecurrenceCancelTransaction readCancelXml(InputStream xmlInputStream)
             throws ParserConfigurationException, SAXException, IOException, ParseException {
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -251,20 +252,20 @@ public class RecurrenceParser {
         Document doc = dBuilder.parse(is);
 
         Element paymentRequestReturnElement = doc.getDocumentElement();
-        HashMap<String, String> cancelReturn = new HashMap<String, String>();
+        RecurrenceCancelTransaction cancelTransaction = new RecurrenceCancelTransaction();
         String tagValue = null;
 
         // parsing <recurrenceCancel><code>
         tagValue = XMLParserUtils.getTagValue("code", paymentRequestReturnElement);
         if (tagValue != null)
-            cancelReturn.put("code", tagValue);
+            cancelTransaction.setCode(tagValue);
 
         // parsing <recurrenceCancel><date>
         tagValue = XMLParserUtils.getTagValue("date", paymentRequestReturnElement);
         if (tagValue != null)
-            cancelReturn.put("date", tagValue);
+            cancelTransaction.setDate(PagSeguroUtil.parse(tagValue));
 
-        return cancelReturn;
+        return cancelTransaction;
     }
 
     public static RecurrenceTransaction readRecurrence(InputStream xmlInputStream)
