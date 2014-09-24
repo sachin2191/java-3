@@ -17,26 +17,26 @@ public class CancelRecurrence {
 
     private static void cancelByCode(String recurrenceCode) {
 
-        RecurrenceCancelTransaction cancelTransaction = null;
+        RecurrenceCancelTransaction recurrenceCancelTransaction = null;
 
         try {
 
             // Set your account credentials on src/pagseguro-config.properties
-        	cancelTransaction = RecurrenceService.cancelRecurrenceByCode(PagSeguroConfig.getAccountCredentials(),
+        	recurrenceCancelTransaction = RecurrenceService.cancelRecurrenceByCode(PagSeguroConfig.getAccountCredentials(),
                     recurrenceCode);
 
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
         }
 
-        if (cancelTransaction != null)
-            printRecurrence(cancelTransaction);
+        if (recurrenceCancelTransaction != null)
+            printRecurrence(recurrenceCancelTransaction);
     }
 
-    private static void printRecurrence(RecurrenceCancelTransaction cancelTransaction) {
+    private static void printRecurrence(RecurrenceCancelTransaction recurrenceCancelTransaction) {
 
-        System.out.println("code: " + cancelTransaction.getCode());
-        System.out.println("date: " + cancelTransaction.getDate());
+        System.out.println("code: " + recurrenceCancelTransaction.getCode());
+        System.out.println("date: " + recurrenceCancelTransaction.getDate());
     }
     
     private CancelRecurrence() {
