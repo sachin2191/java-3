@@ -8,13 +8,10 @@ A biblioteca PagSeguro em Java é um conjunto de classes de domínio que facilit
 
  - Criar [requisições de checkouts]
  - Criar [requisições de pagamentos]
- - Criar [requisições de pagamentos recorrentes]
  - Consultar [transações por código]
  - Consultar [transações por intervalo de datas]
  - Consultar [transações abandonadas]
- - Consultar [pagamentos recorrentes por código]
  - Receber [notificações]
- - Cancelar [pagamentos recorrentes]
 
 
 Requisitos
@@ -58,7 +55,6 @@ Changelog
 2.3.0
 
   - Adicionada nova funcionalidade que permite criação e consulta de solitações de pagamentos.
-  - Adicionada nova funcionalidade que permite criação, consulta e cancelamento de solicitações de pagamentos recorrentes.
   - Refatoração das classes de Checkout para suporte a Solicitação de Pagamento.
 
 2.2.0
@@ -139,9 +135,6 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
   [transações por código]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-codigo.html
   [transações por intervalo de datas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-intervalo-de-datas.html
   [transações abandonadas]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-abandonadas.html
-  [requisições de pagamentos recorrentes]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html
-  [pagamentos recorrentes por código]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html
-  [pagamentos recorrentes]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html
   [fórum]: http://forum.pagseguro.uol.com.br/
   [Java]: http://www.oracle.com/technetwork/java/index.html
   [GitHub]: https://github.com/pagseguro/java/
