@@ -129,7 +129,7 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
 
 
   [requisições de checkouts]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html
-  [requisições de pagamentos]: https://pagseguro.uol.com.br/receba-pagamentos.jhtml#checkout-transparent
+  [requisições de pagamentos]: https://pagseguro.uol.com.br/v2/guia-de-integracao/tutorial-da-biblioteca-pagseguro-em-java.html
   [Checkout Transparente]: https://pagseguro.uol.com.br/receba-pagamentos.jhtml#checkout-transparent
   [notificações]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-notificacoes.html
   [transações por código]: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-codigo.html
