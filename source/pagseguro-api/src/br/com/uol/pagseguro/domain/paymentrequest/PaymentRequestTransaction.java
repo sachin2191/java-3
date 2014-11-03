@@ -545,13 +545,58 @@ public class PaymentRequestTransaction {
      */
     @Override
     public String toString() {
-        return "PaymentRequestTransaction [date=" + date + ", code=" + code + ", recurrenceCode=" + recurrenceCode
-                + ", reference=" + reference + ", recoveryCode=" + recoveryCode + ", type=" + type + ", status="
-                + status + ", lastEventDate=" + lastEventDate + ", paymentMethod=" + paymentMethod + ", grossAmount="
-                + grossAmount + ", paidAmount=" + paidAmount + ", discountAmount=" + discountAmount + ", receiverFees="
-                + receiverFees + ", netAmount=" + netAmount + ", extraAmount=" + extraAmount + ", description="
-                + description + ", escrowEndDate=" + escrowEndDate + ", installmentCount=" + installmentCount
-                + ", itemCount=" + itemCount + ", items=" + items + ", sender=" + sender + ", shipping=" + shipping
-                + ", expiration=" + expiration + ", due=" + due + "]";
+
+        final StringBuilder builder = new StringBuilder()//
+                .append("PaymentRequestTransaction [")//
+                .append("date=")//
+                .append(date)//
+                .append(",code=\"")//
+                .append(code + "\"")//
+                .append(",recurrenceCode=\"")//
+                .append(recurrenceCode + "\"")//
+                .append(",reference=\"")//
+                .append(reference + "\"")//
+                .append(",recoveryCode=\"")//
+                .append(recoveryCode + "\"")//
+                .append(",type=")//
+                .append(type)//
+                .append(",status=")//
+                .append(status)//
+                .append(",lastEventDate=")//
+                .append(lastEventDate)//
+                .append(",paymentMethod=")//
+                .append(paymentMethod)//
+                .append(",grossAmount=")//
+                .append(grossAmount)//
+                .append(",paidAmount=")//
+                .append(paidAmount)//
+                .append(",discountAmount=")//
+                .append(discountAmount)//
+                .append(",receiverFees=")//
+                .append(receiverFees)//
+                .append(",netAmount=")//
+                .append(netAmount)//
+                .append(",extraAmount=")//
+                .append(extraAmount)//
+                .append(",description=\"")//
+                .append(description + "\"")//
+                .append(",escrowEndDate=")//
+                .append(escrowEndDate)//
+                .append(",installmentCount=")//
+                .append(installmentCount)//
+                .append(",itemCount=")//
+                .append(itemCount)//
+                .append(",items=")//
+                .append(items)//
+                .append(",sender=")//
+                .append(sender)//
+                .append(",shipping=")//
+                .append(shipping)//
+                .append(",expiration=")//
+                .append(expiration)//
+                .append(",due=")//
+                .append(due)//
+                .append("]");
+        return builder.toString();
     }
 }

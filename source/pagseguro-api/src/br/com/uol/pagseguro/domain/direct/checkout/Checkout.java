@@ -466,6 +466,6 @@ public abstract class Checkout {
         }
 
         return data;
-    };
+    }
 
 }

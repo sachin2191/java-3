@@ -7,9 +7,9 @@ import br.com.uol.pagseguro.properties.PagSeguroConfig;
 import br.com.uol.pagseguro.service.preapproval.RecurrenceService;
 
 public class FindRecurrence {
-	/**
-	 * Class with a main method to illustrate the usage of the domain class Recurrence
-	 */
+    /**
+     * Class with a main method to illustrate the usage of the domain class Recurrence
+     */
     public static void main(String[] args) {
 
         // Substitute the code below with a valid recurrence code for your account
@@ -64,12 +64,9 @@ public class FindRecurrence {
         }
 
         if (recurrenceTransaction.getPaymentRequest().getShipping() != null) {
-
-            System.out.println("shippingType: " + recurrenceTransaction.getPaymentRequest().getShipping().getShippingType());
-
             if (recurrenceTransaction.getPaymentRequest().getShipping().getCost() != null) {
-                System.out.println("shippingCost: "
-                        + recurrenceTransaction.getPaymentRequest().getShipping().getCost());
+                System.out
+                        .println("shippingCost: " + recurrenceTransaction.getPaymentRequest().getShipping().getCost());
             }
 
             if (recurrenceTransaction.getPaymentRequest().getShipping().getPaymentRequestShippingPackage() != null) {

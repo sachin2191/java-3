@@ -21,7 +21,7 @@ package br.com.uol.pagseguro.enums;
 public enum RecurrenceStatus {
     SCHEDULED('S'), INITIATED('I'), PAUSED('P'), FINISHED('F');
 
-    private Character id;
+    private final Character id;
 
     private RecurrenceStatus(Character id) {
         this.id = id;

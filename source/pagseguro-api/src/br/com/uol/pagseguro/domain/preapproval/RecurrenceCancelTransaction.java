@@ -27,7 +27,7 @@ public class RecurrenceCancelTransaction {
 
     /** Recurrence code */
     private String code;
-    
+
     /** Recurrence cancel date */
     private Date date;
 
@@ -71,11 +71,18 @@ public class RecurrenceCancelTransaction {
     }
 
     /**
-	 * @return string
-	 */
-	@Override
-	public String toString() {
-		return "RecurrenceCancelTransaction [code=" + code + ", date=" + date
-				+ "]";
-	}
+     * @return string
+     */
+    @Override
+    public String toString() {
+
+        final StringBuilder builder = new StringBuilder()//
+                .append("RecurrenceCancelTransaction [")//
+                .append("code=\"")//
+                .append(code + "\"")//
+                .append(",date=")//
+                .append(date)//
+                .append("]");
+        return builder.toString();
+    }
 }

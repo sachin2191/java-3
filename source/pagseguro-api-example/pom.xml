@@ -3,7 +3,7 @@
   <groupId>pagseguro-api-example</groupId>
   <artifactId>pagseguro-api-example</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>UOL - PagSeguro 2.3.0 - Exemplo de integração PagSeguro em Java</name>
+  <name>UOL - PagSeguro 2.3.1 - Exemplo de integração PagSeguro em Java</name>
   <description>Visualizar a utilização das classes da biblioteca de acordo com cada funcionalidade disponível.</description>
   <build>
     <sourceDirectory>src</sourceDirectory>

@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.uol.pagseguro.domain.Sender;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequest;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestItem;
-import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestSender;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShipping;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.properties.PagSeguroConfig;
@@ -19,9 +19,9 @@ public class CreatePaymentRequest {
 
         PaymentRequest paymentRequest = new PaymentRequest();
 
-        PaymentRequestSender sender = new PaymentRequestSender( //
-                "test@test.com", // email
-                "Sender name test" // name
+        Sender sender = new Sender( //
+                "Sender name test", // name
+                "test@test.com" // email
         );
 
         paymentRequest.setSender(sender);

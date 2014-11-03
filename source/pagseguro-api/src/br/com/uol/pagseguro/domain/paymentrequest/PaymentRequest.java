@@ -23,6 +23,7 @@ import java.util.List;
 
 import br.com.uol.pagseguro.domain.Credentials;
 import br.com.uol.pagseguro.domain.Item;
+import br.com.uol.pagseguro.domain.Sender;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.service.paymentrequest.PaymentRequestService;
 
@@ -34,7 +35,7 @@ import br.com.uol.pagseguro.service.paymentrequest.PaymentRequestService;
 public class PaymentRequest {
 
     /**
-     * Receiver name
+     * PaymentRequest name
      */
     private String name;
 
@@ -48,7 +49,7 @@ public class PaymentRequest {
     /**
      * Party that will be sending the money
      */
-    private PaymentRequestSender sender;
+    private Sender sender;
 
     /**
      * List of items in this payment request
@@ -61,7 +62,7 @@ public class PaymentRequest {
     private PaymentRequestShipping shipping;
 
     /**
-     * Observation of this payment request/ Comment in the debtor email
+     * Description of this payment request/ Comment in the debtor email
      * 
      * Optional
      */
@@ -98,7 +99,7 @@ public class PaymentRequest {
      * @param expiration
      * @param due
      */
-    public PaymentRequest(String name, String reference, PaymentRequestSender sender, List<PaymentRequestItem> items,
+    public PaymentRequest(String name, String reference, Sender sender, List<PaymentRequestItem> items,
             PaymentRequestShipping shipping, String description, Integer expiration, Integer due) {
         super();
         this.name = name;
@@ -146,16 +147,16 @@ public class PaymentRequest {
     /**
      * @return the PaymentRequestSender
      */
-    public PaymentRequestSender getSender() {
+    public Sender getSender() {
         return sender;
     }
 
     /**
      * Sets the PaymentRequestSender
      * 
-     * @param PaymentRequestSender
+     * @param sender
      */
-    public void setSender(PaymentRequestSender sender) {
+    public void setSender(Sender sender) {
         this.sender = sender;
     }
 
@@ -293,8 +294,26 @@ public class PaymentRequest {
      */
     @Override
     public String toString() {
-        return "PaymentRequest [name=" + name + ", reference=" + reference + ", sender=" + sender + ", items=" + items
-                + ", shipping=" + shipping + ", description=" + description + ", expiration=" + expiration + ", due="
-                + due + "]";
+
+        final StringBuilder builder = new StringBuilder()//
+                .append("PaymentRequest [")//
+                .append("name=\"")//
+                .append(name + "\"")//
+                .append(",reference=\"")//
+                .append(reference + "\"")//
+                .append(",sender=")//
+                .append(sender)//
+                .append(",items=")//
+                .append(items)//
+                .append(",shipping=")//
+                .append(shipping)//
+                .append(",description=\"")//
+                .append(description + "\"")//
+                .append(",expiration=")//
+                .append(expiration)//
+                .append(",due=")//
+                .append(due)//
+                .append("]");
+        return builder.toString();
     }
 }

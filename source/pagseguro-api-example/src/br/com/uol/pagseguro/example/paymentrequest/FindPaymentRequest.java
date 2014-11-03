@@ -84,27 +84,6 @@ public class FindPaymentRequest {
         System.out.println("senderEmail: " + paymentRequestTransaction.getSender().getEmail());
 
         if (paymentRequestTransaction.getShipping() != null) {
-            if (paymentRequestTransaction.getShipping().getShippingAddress() != null) {
-                System.out.println("shippingAddressStreet: "
-                        + paymentRequestTransaction.getShipping().getShippingAddress().getStreet());
-                System.out.println("shippingAddressNumber: "
-                        + paymentRequestTransaction.getShipping().getShippingAddress().getNumber());
-                System.out.println("shippingAddressComplement: "
-                        + paymentRequestTransaction.getShipping().getShippingAddress().getComplement());
-                System.out.println("shippingAddressDistrict: "
-                        + paymentRequestTransaction.getShipping().getShippingAddress().getDistrict());
-                System.out.println("shippingAddressCity: "
-                        + paymentRequestTransaction.getShipping().getShippingAddress().getCity());
-                System.out.println("shippingAddressState: "
-                        + paymentRequestTransaction.getShipping().getShippingAddress().getState());
-                System.out.println("shippingAddressCountry: "
-                        + paymentRequestTransaction.getShipping().getShippingAddress().getCountry());
-                System.out.println("shippingAddressPostalCode: "
-                        + paymentRequestTransaction.getShipping().getShippingAddress().getPostalCode());
-            }
-
-            System.out.println("shippingType: " + paymentRequestTransaction.getShipping().getShippingType());
-
             if (paymentRequestTransaction.getShipping().getCost() != null) {
                 System.out.println("shippingCost: " + paymentRequestTransaction.getShipping().getCost());
             }

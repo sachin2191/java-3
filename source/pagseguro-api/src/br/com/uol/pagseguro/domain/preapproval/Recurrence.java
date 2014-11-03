@@ -168,7 +168,18 @@ public class Recurrence {
      */
     @Override
     public String toString() {
-        return "Recurrence [initialDate=" + initialDate + ", paymentRequest=" + paymentRequest
-                + ", paymentRequestsQuantity=" + paymentRequestsQuantity + ", period=" + period + "]";
+
+        final StringBuilder builder = new StringBuilder()//
+                .append("Recurrence [")//
+                .append("initialDate=\"")//
+                .append(initialDate + "\"")//
+                .append(",paymentRequest=")//
+                .append(paymentRequest)//
+                .append(",paymentRequestsQuantity=")//
+                .append(paymentRequestsQuantity)//
+                .append(",period=")//
+                .append(period)//
+                .append("]");
+        return builder.toString();
     }
 }

@@ -24,39 +24,39 @@ import java.util.Map;
 
 import br.com.uol.pagseguro.domain.Credentials;
 import br.com.uol.pagseguro.domain.Error;
-import br.com.uol.pagseguro.domain.preapproval.Recurrence;
-import br.com.uol.pagseguro.domain.preapproval.RecurrenceCancelTransaction;
-import br.com.uol.pagseguro.domain.preapproval.RecurrenceTransaction;
+import br.com.uol.pagseguro.domain.preapproval.PreApprovalCancelTransaction;
+import br.com.uol.pagseguro.domain.preapproval.PreApprovalRequest;
+import br.com.uol.pagseguro.domain.preapproval.PreApprovalRequestTransaction;
 import br.com.uol.pagseguro.enums.HttpStatus;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.logs.Log;
-import br.com.uol.pagseguro.parser.preapproval.RecurrenceParser;
+import br.com.uol.pagseguro.parser.preapproval.PreApprovalParser;
 import br.com.uol.pagseguro.properties.PagSeguroSystem;
 import br.com.uol.pagseguro.service.ConnectionData;
 import br.com.uol.pagseguro.utils.HttpConnection;
 import br.com.uol.pagseguro.xmlparser.ErrorsParser;
 
 /**
- * 
- * Class Recurrence Service
+ *
+ * Class PreApproval Service
  */
-public class RecurrenceService {
+public class PreApprovalService {
 
-    private RecurrenceService() {
+    private PreApprovalService() {
 
     }
 
     /**
      * PagSeguro Log tool
-     * 
+     *
      * @see Log
      */
-    private static final Log log = new Log(RecurrenceService.class);
+    private static final Log log = new Log(PreApprovalService.class);
 
     /**
      * @var String
      */
-    private static final String PREFIX = RecurrenceService.class.getSimpleName() + ".";
+    private static final String PREFIX = PreApprovalService.class.getSimpleName() + ".";
 
     /**
      * @var String
@@ -89,60 +89,60 @@ public class RecurrenceService {
     private static final String CANCEL_BY_CODE = "CancelByCode";
 
     /**
-     * 
+     *
      * @param connectionData
      * @return string
      * @throws PagSeguroServiceException
      */
-    public static String buildRecurrenceUrl(ConnectionData connectionData) throws PagSeguroServiceException {
-        return connectionData.getWSRecurrenceUrl() + "?" + connectionData.getCredentialsUrlQuery();
+    public static String buildPreApprovalRequestUrl(ConnectionData connectionData) throws PagSeguroServiceException {
+        return connectionData.getWSPreApprovalRequestUrl() + "?" + connectionData.getCredentialsUrlQuery();
     }
 
     /**
      * Build Find Url By Code
-     * 
+     *
      * @param connectionData
-     * @param recurrenceCode
+     * @param preApprovalRequestCode
      * @return string
      * @throws PagSeguroServiceException
      */
-    private static String buildRecurrenceFindUrlByCode(ConnectionData connectionData, String recurrenceCode)
-            throws PagSeguroServiceException {
-        return connectionData.getWSRecurrenceFindByCodeUrl() + "/" + recurrenceCode + "?"
+    private static String buildPreApprovalRequestFindByCodeUrl(ConnectionData connectionData,
+            String preApprovalRequestCode) throws PagSeguroServiceException {
+        return connectionData.getWSPreApprovalRequestFindByCodeUrl() + "/" + preApprovalRequestCode + "?"
                 + connectionData.getCredentialsUrlQuery();
     }
 
     /**
      * Build Cancel Url By Code
-     * 
+     *
      * @param connectionData
-     * @param recurrenceCode
+     * @param preApprovalCode
      * @return string
      * @throws PagSeguroServiceException
      */
-    private static String buildRecurrenceCancelByCodeUrl(ConnectionData connectionData, String recurrenceCode)
+    private static String buildPreApprovalCancelByCodeUrl(ConnectionData connectionData, String preApprovalCode)
             throws PagSeguroServiceException {
-        return connectionData.getWSRecurrenceCancelByCodeUrl() + "/" + recurrenceCode + "?"
+        return connectionData.getWSPreApprovalCancelByCodeUrl() + "/" + preApprovalCode + "?"
                 + connectionData.getCredentialsUrlQuery();
     }
 
     /**
-     * 
+     *
      * @param credentials
-     * @param recurrence
+     * @param preApprovalRequest
      * @return string
      * @throws Exception
      */
-    public static String createRecurrence(Credentials credentials, Recurrence recurrence)
+    public static String createPreApprovalRequest(Credentials credentials, PreApprovalRequest preApprovalRequest)
             throws PagSeguroServiceException {
 
-        log.info(String.format(PREFIX + REGISTER + SUFFIX_BEGIN, recurrence.toString()));
+        log.info(String.format(PREFIX + REGISTER + SUFFIX_BEGIN, preApprovalRequest.toString()));
 
         ConnectionData connectionData = new ConnectionData(credentials);
 
-        Map<Object, Object> data = RecurrenceParser.getData(recurrence);
+        Map<Object, Object> data = PreApprovalParser.getData(preApprovalRequest);
 
-        String url = buildRecurrenceUrl(connectionData);
+        String url = buildPreApprovalRequestUrl(connectionData);
 
         HttpConnection connection = new HttpConnection();
         HttpStatus httpCodeStatus = null;
@@ -151,14 +151,13 @@ public class RecurrenceService {
                 connectionData.getCharset(), PagSeguroSystem.getAcceptHeaderXML());
 
         try {
-
             httpCodeStatus = HttpStatus.fromCode(response.getResponseCode());
             if (httpCodeStatus == null) {
                 throw new PagSeguroServiceException("Connection Timeout");
             } else if (HttpURLConnection.HTTP_OK == httpCodeStatus.getCode().intValue()) {
-                String code = RecurrenceParser.readSuccessXml(response);
+                String code = PreApprovalParser.readSuccessXml(response);
 
-                log.info(String.format(PREFIX + REGISTER + SUFFIX_END, recurrence.toString(), code));
+                log.info(String.format(PREFIX + REGISTER + SUFFIX_END, preApprovalRequest.toString(), code));
 
                 return code;
 
@@ -168,7 +167,8 @@ public class RecurrenceService {
 
                 PagSeguroServiceException exception = new PagSeguroServiceException(httpCodeStatus, errors);
 
-                log.error(String.format(PREFIX + REGISTER + SUFFIX_ERROR, recurrence.toString(), exception.getMessage()));
+                log.error(String.format(PREFIX + REGISTER + SUFFIX_ERROR, preApprovalRequest.toString(),
+                        exception.getMessage()));
 
                 throw exception;
 
@@ -181,7 +181,7 @@ public class RecurrenceService {
             throw e;
         } catch (Exception e) {
 
-            log.error(String.format(PREFIX + REGISTER + SUFFIX_ERROR, recurrence.toString(), e.getMessage()));
+            log.error(String.format(PREFIX + REGISTER + SUFFIX_ERROR, preApprovalRequest.toString(), e.getMessage()));
 
             throw new PagSeguroServiceException(httpCodeStatus, e);
 
@@ -191,24 +191,25 @@ public class RecurrenceService {
     }
 
     /**
-     * 
+     *
      * @param credentials
-     * @param recurrenceCode
+     * @param preApprovalRequestCode
      * @return PaymentRequest
      * @throws Exception
      */
-    public static RecurrenceTransaction findByCode(Credentials credentials, String recurrenceCode)
+    public static PreApprovalRequestTransaction findByCode(Credentials credentials, String preApprovalRequestCode)
             throws PagSeguroServiceException {
 
-        log.info(String.format(PREFIX + FIND_BY_CODE + SUFFIX_BEGIN, recurrenceCode));
+        log.info(String.format(PREFIX + FIND_BY_CODE + SUFFIX_BEGIN, preApprovalRequestCode));
 
         ConnectionData connectionData = new ConnectionData(credentials);
 
         HttpConnection connection = new HttpConnection();
         HttpStatus httpStatusCode = null;
 
-        HttpURLConnection response = connection.get(buildRecurrenceFindUrlByCode(connectionData, recurrenceCode),
-                connectionData.getServiceTimeout(), connectionData.getCharset(), PagSeguroSystem.getAcceptHeaderXML());
+        HttpURLConnection response = connection.get(
+                buildPreApprovalRequestFindByCodeUrl(connectionData, preApprovalRequestCode),
+                connectionData.getServiceTimeout(), connectionData.getCharset());
 
         try {
 
@@ -216,12 +217,12 @@ public class RecurrenceService {
 
             if (HttpURLConnection.HTTP_OK == httpStatusCode.getCode().intValue()) {
 
-                RecurrenceTransaction recurrenceTransaction = RecurrenceParser
-                        .readRecurrence(response.getInputStream());
+                PreApprovalRequestTransaction preApprovalRequestTransaction = PreApprovalParser
+                        .readPreApprovalRequest(response.getInputStream());
 
-                log.info(String.format(FIND_BY_CODE, recurrenceCode, recurrenceTransaction.toString()));
+                log.info(String.format(FIND_BY_CODE, preApprovalRequestCode, preApprovalRequestTransaction.toString()));
 
-                return recurrenceTransaction;
+                return preApprovalRequestTransaction;
 
             } else if (HttpURLConnection.HTTP_BAD_REQUEST == httpStatusCode.getCode().intValue()) {
 
@@ -229,7 +230,8 @@ public class RecurrenceService {
 
                 PagSeguroServiceException exception = new PagSeguroServiceException(httpStatusCode, listErrors);
 
-                log.error(String.format(PREFIX + FIND_BY_CODE + SUFFIX_ERROR, recurrenceCode, exception.getMessage()));
+                log.error(String.format(PREFIX + FIND_BY_CODE + SUFFIX_ERROR, preApprovalRequestCode,
+                        exception.getMessage()));
 
                 throw exception;
             } else {
@@ -240,7 +242,7 @@ public class RecurrenceService {
             throw e;
         } catch (Exception e) {
 
-            log.error(String.format(PREFIX + FIND_BY_CODE + SUFFIX_END, recurrenceCode, e.getMessage()));
+            log.error(String.format(PREFIX + FIND_BY_CODE + SUFFIX_END, preApprovalRequestCode, e.getMessage()));
 
             throw new PagSeguroServiceException(httpStatusCode, e);
 
@@ -250,16 +252,16 @@ public class RecurrenceService {
     }
 
     /**
-     * 
+     *
      * @param credentials
-     * @param recurrenceCode
+     * @param preApprovalCode
      * @return
      * @throws PagSeguroServiceException
      */
-    public static RecurrenceCancelTransaction cancelRecurrenceByCode(Credentials credentials, String recurrenceCode)
+    public static PreApprovalCancelTransaction cancelPreApprovalByCode(Credentials credentials, String preApprovalCode)
             throws PagSeguroServiceException {
 
-        log.info(String.format(PREFIX + CANCEL_BY_CODE + SUFFIX_BEGIN, recurrenceCode));
+        log.info(String.format(PREFIX + CANCEL_BY_CODE + SUFFIX_BEGIN, preApprovalCode));
 
         ConnectionData connectionData = new ConnectionData(credentials);
 
@@ -267,8 +269,8 @@ public class RecurrenceService {
         HttpStatus httpStatusCode = null;
 
         HttpURLConnection response = connection.httpRequestMethod(
-                buildRecurrenceCancelByCodeUrl(connectionData, recurrenceCode), connectionData.getServiceTimeout(),
-                connectionData.getCharset(), "POST", PagSeguroSystem.getAcceptHeaderXML());
+                buildPreApprovalCancelByCodeUrl(connectionData, preApprovalCode), connectionData.getServiceTimeout(),
+                connectionData.getCharset(), "GET");
 
         try {
 
@@ -276,10 +278,10 @@ public class RecurrenceService {
 
             if (HttpURLConnection.HTTP_OK == httpStatusCode.getCode().intValue()) {
 
-                RecurrenceCancelTransaction cancelTransaction = RecurrenceParser.readCancelXml(response
+                PreApprovalCancelTransaction cancelTransaction = PreApprovalParser.readCancelXml(response
                         .getInputStream());
 
-                log.info(String.format(CANCEL_BY_CODE, recurrenceCode));
+                log.info(String.format(CANCEL_BY_CODE, preApprovalCode));
 
                 return cancelTransaction;
 
@@ -289,7 +291,7 @@ public class RecurrenceService {
 
                 PagSeguroServiceException exception = new PagSeguroServiceException(httpStatusCode, listErrors);
 
-                log.error(String.format(PREFIX + CANCEL_BY_CODE + SUFFIX_ERROR, recurrenceCode, exception.getMessage()));
+                log.error(String.format(PREFIX + CANCEL_BY_CODE + SUFFIX_ERROR, preApprovalCode, exception.getMessage()));
 
                 throw exception;
             } else {
@@ -300,7 +302,7 @@ public class RecurrenceService {
             throw e;
         } catch (Exception e) {
 
-            log.error(String.format(PREFIX + CANCEL_BY_CODE + SUFFIX_END, recurrenceCode, e.getMessage()));
+            log.error(String.format(PREFIX + CANCEL_BY_CODE + SUFFIX_END, preApprovalCode, e.getMessage()));
 
             throw new PagSeguroServiceException(httpStatusCode, e);
 

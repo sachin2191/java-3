@@ -16,28 +16,42 @@
  ************************************************************************
  */
 
-package br.com.uol.pagseguro.enums;
+package br.com.uol.pagseguro.domain;
 
-public enum RecurrencePeriod {
-    WEEKLY('W'), MONTHLY('M'), YEARLY('Y');
+/**
+ * Represents the receiver of a transaction
+ */
+public class Receiver {
 
-    private final Character id;
+    /**
+     * Receiver e-mail
+     */
+    private String email;
 
-    private RecurrencePeriod(Character id) {
-        this.id = id;
+    public Receiver() {
+
     }
 
-    public Character getId() {
-        return this.id;
+    public Receiver(final String email) {
+
+        this.email = email;
     }
 
-    public static RecurrencePeriod fromValue(Character id) {
-        for (RecurrencePeriod value : RecurrencePeriod.values()) {
-            if (value.getId().equals(id)) {
-                return value;
-            }
-        }
+    /**
+     * @return email
+     */
+    public String getEmail() {
 
-        return null;
+        return email;
+    }
+
+    /**
+     * Sets the email
+     *
+     * @param email
+     */
+    public void setEmail(final String email) {
+
+        this.email = email;
     }
 }

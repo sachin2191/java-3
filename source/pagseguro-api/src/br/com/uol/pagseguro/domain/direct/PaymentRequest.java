@@ -279,6 +279,6 @@ public abstract class PaymentRequest {
 
     public Map<Object, Object> getMap() {
         return this.checkout.getMap();
-    };
+    }
 
 }

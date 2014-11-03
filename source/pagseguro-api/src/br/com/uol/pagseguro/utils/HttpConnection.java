@@ -42,12 +42,12 @@ public class HttpConnection {
     /**
      * @var Log
      */
-    private Log log = new Log(HttpConnection.class);
+    private final Log log = new Log(HttpConnection.class);
 
     /**
      * POST
      * 
-     * @param url
+     * @param urlPS
      * @param data
      * @param timeout
      * @param charset
@@ -66,7 +66,7 @@ public class HttpConnection {
     /**
      * POST
      * 
-     * @param url
+     * @param urlPS
      * @param data
      * @param timeout
      * @param charset
@@ -130,7 +130,7 @@ public class HttpConnection {
     /**
      * GET
      * 
-     * @param url
+     * @param urlPS
      * @param timeout
      * @param charset
      * @return connection
@@ -147,7 +147,7 @@ public class HttpConnection {
     /**
      * GET
      * 
-     * @param url
+     * @param urlPS
      * @param timeout
      * @param charset
      * @return connection
@@ -185,7 +185,6 @@ public class HttpConnection {
             connection.setDoInput(true);
             connection.setRequestMethod(method);
             connection.setRequestProperty("charset", charset);
-
             connection.setRequestProperty("Content-type", PagSeguroSystem.getContentTypeFormUrlEncoded());
 
             if (acceptHeader != null) {

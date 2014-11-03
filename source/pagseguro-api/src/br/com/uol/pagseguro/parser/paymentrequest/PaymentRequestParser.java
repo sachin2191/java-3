@@ -37,7 +37,6 @@ import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import br.com.uol.pagseguro.domain.Address;
 import br.com.uol.pagseguro.domain.PaymentMethod;
 import br.com.uol.pagseguro.domain.Phone;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequest;
@@ -49,7 +48,6 @@ import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShippingPackage;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestTransaction;
 import br.com.uol.pagseguro.enums.PaymentMethodCode;
 import br.com.uol.pagseguro.enums.PaymentMethodType;
-import br.com.uol.pagseguro.enums.ShippingType;
 import br.com.uol.pagseguro.enums.TransactionStatus;
 import br.com.uol.pagseguro.enums.TransactionType;
 import br.com.uol.pagseguro.helper.PagSeguroUtil;
@@ -67,29 +65,29 @@ public class PaymentRequestParser {
      * 
      * @see Logger
      */
-    private static Log log = new Log(PaymentRequestParser.class);
+    private static final Log log = new Log(PaymentRequestParser.class);
 
-    public static String PAYMENT_REQUEST_NAME = "name";
-    public static String PAYMENT_REQUEST_REFERENCE = "reference";
-    public static String PAYMENT_REQUEST_EXPIRATION = "expiration";
-    public static String PAYMENT_REQUEST_DUE = "due";
-    public static String PAYMENT_REQUEST_SENDER_EMAIL = "sender.email";
-    public static String PAYMENT_REQUEST_SENDER_NAME = "sender.name";
-    public static String PAYMENT_REQUEST_ITEM_PREFIX = "item[";
-    public static String PAYMENT_REQUEST_ITEM_DESCRIPTION = "].description";
-    public static String PAYMENT_REQUEST_ITEM_QUANTITY = "].quantity";
-    public static String PAYMENT_REQUEST_ITEM_AMOUNT = "].amount";
-    public static String PAYMENT_REQUEST_ITEM_ID = "].id";
-    public static String PAYMENT_REQUEST_SHIPPING_PREFIX = "shipping";
-    public static String PAYMENT_REQUEST_SHIPPING_COST = PAYMENT_REQUEST_SHIPPING_PREFIX + ".cost";
-    public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX = ".package";
-    public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_WIDTH = PAYMENT_REQUEST_SHIPPING_PREFIX
+    public static final String PAYMENT_REQUEST_NAME = "name";
+    public static final String PAYMENT_REQUEST_REFERENCE = "reference";
+    public static final String PAYMENT_REQUEST_EXPIRATION = "expiration";
+    public static final String PAYMENT_REQUEST_DUE = "due";
+    public static final String PAYMENT_REQUEST_SENDER_EMAIL = "sender.email";
+    public static final String PAYMENT_REQUEST_SENDER_NAME = "sender.name";
+    public static final String PAYMENT_REQUEST_ITEM_PREFIX = "item[";
+    public static final String PAYMENT_REQUEST_ITEM_DESCRIPTION = "].description";
+    public static final String PAYMENT_REQUEST_ITEM_QUANTITY = "].quantity";
+    public static final String PAYMENT_REQUEST_ITEM_AMOUNT = "].amount";
+    public static final String PAYMENT_REQUEST_ITEM_ID = "].id";
+    public static final String PAYMENT_REQUEST_SHIPPING_PREFIX = "shipping";
+    public static final String PAYMENT_REQUEST_SHIPPING_COST = PAYMENT_REQUEST_SHIPPING_PREFIX + ".cost";
+    public static final String PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX = ".package";
+    public static final String PAYMENT_REQUEST_SHIPPING_PACKAGE_WIDTH = PAYMENT_REQUEST_SHIPPING_PREFIX
             + PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX + ".width";
-    public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_HEIGHT = PAYMENT_REQUEST_SHIPPING_PREFIX
+    public static final String PAYMENT_REQUEST_SHIPPING_PACKAGE_HEIGHT = PAYMENT_REQUEST_SHIPPING_PREFIX
             + PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX + ".height";
-    public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_LENGTH = PAYMENT_REQUEST_SHIPPING_PREFIX
+    public static final String PAYMENT_REQUEST_SHIPPING_PACKAGE_LENGTH = PAYMENT_REQUEST_SHIPPING_PREFIX
             + PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX + ".length";
-    public static String PAYMENT_REQUEST_SHIPPING_PACKAGE_WEIGHT = PAYMENT_REQUEST_SHIPPING_PREFIX
+    public static final String PAYMENT_REQUEST_SHIPPING_PACKAGE_WEIGHT = PAYMENT_REQUEST_SHIPPING_PREFIX
             + PAYMENT_REQUEST_SHIPPING_PACKAGE_PREFIX + ".weight";
 
     private PaymentRequestParser() {
@@ -478,71 +476,6 @@ public class PaymentRequestParser {
 
             // creating new PaymentRequestShipping object
             PaymentRequestShipping shipping = new PaymentRequestShipping();
-
-            // setting <paymentRequest><shipping><address>
-            Element addressElement = XMLParserUtils.getElement("address", shippingElement);
-            if (addressElement != null) {
-
-                // creating new Address object
-                Address address = new Address();
-
-                // setting <transaction><shipping><address><street>
-                tagValue = XMLParserUtils.getTagValue("street", addressElement);
-                if (tagValue != null) {
-                    address.setStreet(tagValue);
-                }
-
-                // setting <transaction><shipping><address><number>
-                tagValue = XMLParserUtils.getTagValue("number", addressElement);
-                if (tagValue != null) {
-                    address.setNumber(tagValue);
-                }
-
-                // setting <transaction><shipping><address><complement>
-                tagValue = XMLParserUtils.getTagValue("complement", addressElement);
-                if (tagValue != null) {
-                    address.setComplement(tagValue);
-                }
-
-                // setting <transaction><shipping><address><district>
-                tagValue = XMLParserUtils.getTagValue("district", addressElement);
-                if (tagValue != null) {
-                    address.setDistrict(tagValue);
-                }
-
-                // setting <transaction><shipping><address><postalCode>
-                tagValue = XMLParserUtils.getTagValue("postalCode", addressElement);
-                if (tagValue != null) {
-                    address.setPostalCode(tagValue);
-                }
-
-                // setting <transaction><shipping><address><city>
-                tagValue = XMLParserUtils.getTagValue("city", addressElement);
-                if (tagValue != null) {
-                    address.setCity(tagValue);
-                }
-
-                // setting <transaction><shipping><address><state>
-                tagValue = XMLParserUtils.getTagValue("state", addressElement);
-                if (tagValue != null) {
-                    address.setState(tagValue);
-                }
-
-                // setting <transaction><shipping><address><country>
-                tagValue = XMLParserUtils.getTagValue("country", addressElement);
-                if (tagValue != null) {
-                    address.setCountry(tagValue);
-                }
-
-                // setting address for shipping object
-                shipping.setShippingAddress(address);
-            }
-
-            // setting <paymentRequest><shipping><type>
-            tagValue = XMLParserUtils.getTagValue("type", shippingElement);
-            if (tagValue != null) {
-                shipping.setShippingType(ShippingType.fromValue(Integer.valueOf(tagValue)));
-            }
 
             // setting <paymentRequest><shipping><cost>
             tagValue = XMLParserUtils.getTagValue("cost", shippingElement);

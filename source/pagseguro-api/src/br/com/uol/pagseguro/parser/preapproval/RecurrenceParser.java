@@ -37,6 +37,7 @@ import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import br.com.uol.pagseguro.domain.Sender;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequest;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestItem;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestSender;
@@ -63,11 +64,11 @@ public class RecurrenceParser {
      * 
      * @see Logger
      */
-    private static Log log = new Log(RecurrenceParser.class);
+    private static final Log log = new Log(RecurrenceParser.class);
 
-    public static String RECURRENCE_INITIAL_DATE = "initialDate";
-    public static String RECURRENCE_PAYMENT_REQUESTS_QUANTITY = "paymentRequestsQuantity";
-    public static String RECURRENCE_PERIOD = "period";
+    private static String RECURRENCE_INITIAL_DATE = "initialDate";
+    private static final String RECURRENCE_PAYMENT_REQUESTS_QUANTITY = "paymentRequestsQuantity";
+    private static final String RECURRENCE_PERIOD = "period";
 
     private RecurrenceParser() {
 
@@ -217,7 +218,7 @@ public class RecurrenceParser {
      * Reads the recurrence request code when the request is successful
      * 
      * @param connection
-     * @return payment request code
+     * @return recurrence code
      * @throws ParserConfigurationException
      * @throws SAXException
      * @throws IOException
@@ -228,15 +229,14 @@ public class RecurrenceParser {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(connection.getInputStream());
-        Element paymentRequestReturnElement = doc.getDocumentElement();
+        Element recurrenceReturnElement = doc.getDocumentElement();
 
-        return XMLParserUtils.getTagValue("code", paymentRequestReturnElement);
+        return XMLParserUtils.getTagValue("code", recurrenceReturnElement);
     }
 
     /**
      * Reads the recurrence cancel information
      * 
-     * @param connection
      * @return payment request code
      * @throws ParserConfigurationException
      * @throws SAXException
@@ -251,25 +251,25 @@ public class RecurrenceParser {
         InputSource is = new InputSource(xmlInputStream);
         Document doc = dBuilder.parse(is);
 
-        Element paymentRequestReturnElement = doc.getDocumentElement();
+        Element recurrenceReturnElement = doc.getDocumentElement();
         RecurrenceCancelTransaction cancelTransaction = new RecurrenceCancelTransaction();
         String tagValue = null;
 
         // parsing <recurrenceCancel><code>
-        tagValue = XMLParserUtils.getTagValue("code", paymentRequestReturnElement);
+        tagValue = XMLParserUtils.getTagValue("code", recurrenceReturnElement);
         if (tagValue != null)
             cancelTransaction.setCode(tagValue);
 
         // parsing <recurrenceCancel><date>
-        tagValue = XMLParserUtils.getTagValue("date", paymentRequestReturnElement);
+        tagValue = XMLParserUtils.getTagValue("date", recurrenceReturnElement);
         if (tagValue != null)
             cancelTransaction.setDate(PagSeguroUtil.parse(tagValue));
 
         return cancelTransaction;
     }
 
-    public static RecurrenceTransaction readRecurrence(InputStream xmlInputStream)
-            throws ParserConfigurationException, SAXException, IOException, ParseException {
+    public static RecurrenceTransaction readRecurrence(InputStream xmlInputStream) throws ParserConfigurationException,
+            SAXException, IOException, ParseException {
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -324,7 +324,7 @@ public class RecurrenceParser {
             Element senderElement = XMLParserUtils.getElement("sender", paymentRequestElement);
             if (senderElement != null) {
 
-                PaymentRequestSender sender = new PaymentRequestSender();
+                Sender sender = new Sender();
 
                 // setting <recurrence><paymentRequest><sender><email>
                 tagValue = XMLParserUtils.getTagValue("email", senderElement);

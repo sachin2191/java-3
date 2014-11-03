@@ -18,26 +18,12 @@
 
 package br.com.uol.pagseguro.enums;
 
-public enum RecurrencePeriod {
-    WEEKLY('W'), MONTHLY('M'), YEARLY('Y');
-
-    private final Character id;
-
-    private RecurrencePeriod(Character id) {
-        this.id = id;
-    }
-
-    public Character getId() {
-        return this.id;
-    }
-
-    public static RecurrencePeriod fromValue(Character id) {
-        for (RecurrencePeriod value : RecurrencePeriod.values()) {
-            if (value.getId().equals(id)) {
-                return value;
-            }
-        }
-
-        return null;
-    }
+public enum DayOfWeek {
+    SUNDAY, //
+    MONDAY, //
+    TUESDAY, //
+    WEDNESDAY, //
+    THURSDAY, //
+    FRIDAY, //
+    SATURDAY
 }

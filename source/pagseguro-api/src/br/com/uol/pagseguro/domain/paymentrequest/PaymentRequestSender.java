@@ -18,7 +18,6 @@
 
 package br.com.uol.pagseguro.domain.paymentrequest;
 
-import br.com.uol.pagseguro.domain.Phone;
 import br.com.uol.pagseguro.helper.PagSeguroUtil;
 
 /**
@@ -50,17 +49,6 @@ public class PaymentRequestSender {
      * @param name
      */
     public PaymentRequestSender(String email, String name) {
-        this.email = email;
-        this.name = PagSeguroUtil.removeExtraSpaces(name);
-    }
-
-    /**
-     * Initializes a new instance of the PaymentRequestSender class with the specified arguments
-     * 
-     * @param email
-     * @param name
-     */
-    public PaymentRequestSender(String email, String name, Phone phone) {
         this.email = email;
         this.name = PagSeguroUtil.removeExtraSpaces(name);
     }
