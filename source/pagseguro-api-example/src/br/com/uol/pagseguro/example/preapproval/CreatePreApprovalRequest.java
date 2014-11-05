@@ -40,9 +40,8 @@ public class CreatePreApprovalRequest {
 
         preApproval.setPeriod(PreApprovalPeriod.WEEKLY);
 
-        // Set initialDate as tomorrow
+        // Set initialDate as today
         Calendar initialDateAsCalendar = Calendar.getInstance();
-        initialDateAsCalendar.add(Calendar.DAY_OF_MONTH, 1);
         preApproval.setInitialDate(initialDateAsCalendar.getTime());
 
         preApprovalRequest.setPreApproval(preApproval);
