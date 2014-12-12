@@ -28,13 +28,42 @@ public class Receiver {
      */
     private String email;
 
-    public Receiver() {
+    /**
+     * Receiver name
+     */
+    private String name;
 
+    /**
+     * Receiver phone
+     */
+    private Phone phone;
+
+    public Receiver() {
+        this.phone = new Phone();
     }
 
+    /**
+     * Initializes a new instance of the PaymentRequest class with the specified arguments
+     *
+     * @param email
+     */
     public Receiver(final String email) {
 
         this.email = email;
+    }
+
+    /**
+     * Initializes a new instance of the PaymentRequest class with the specified arguments
+     *
+     * @param email
+     * @param name
+     * @param phone
+     */
+    public Receiver(final String email, final String name, final Phone phone) {
+
+        this.email = email;
+        this.name = name;
+        this.phone = phone;
     }
 
     /**
@@ -53,5 +82,41 @@ public class Receiver {
     public void setEmail(final String email) {
 
         this.email = email;
+    }
+
+    /**
+     * @return name
+     */
+    public String getName() {
+
+        return name;
+    }
+
+    /**
+     * Sets the name
+     *
+     * @param name
+     */
+    public void setName(final String name) {
+
+        this.name = name;
+    }
+
+    /**
+     * @return phone
+     */
+    public Phone getPhone() {
+
+        return phone;
+    }
+
+    /**
+     * Sets the phone
+     *
+     * @param phone
+     */
+    public void setPhone(final Phone phone) {
+
+        this.phone = phone;
     }
 }

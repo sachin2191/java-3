@@ -147,6 +147,10 @@ public class PagSeguroSystem {
         return resourceBundle.getString("notificationService." + PagSeguroConfig.getEnvironment() + ".url");
     }
 
+    public static String getPaymentRequestNotificationUrl() {
+        return resourceBundle.getString("notificationService.paymentRequest");
+    }
+
     public static String getUrlNotification() {
         return resourceBundle.getString("url.notification");
     }

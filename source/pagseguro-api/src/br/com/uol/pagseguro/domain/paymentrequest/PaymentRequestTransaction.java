@@ -23,8 +23,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import br.com.uol.pagseguro.domain.AutomaticDebit;
 import br.com.uol.pagseguro.domain.Item;
 import br.com.uol.pagseguro.domain.PaymentMethod;
+import br.com.uol.pagseguro.domain.Receiver;
 import br.com.uol.pagseguro.domain.Shipping;
 import br.com.uol.pagseguro.enums.TransactionStatus;
 import br.com.uol.pagseguro.enums.TransactionType;
@@ -55,6 +57,15 @@ public class PaymentRequestTransaction {
     /** Transaction type */
     private TransactionType type;
 
+    /** Payment request type */
+    private PaymentRequestType paymentRequestType;
+
+    /** Cancellation source */
+    private String cancellationSource;
+
+    /** Automatic debit information */
+    private AutomaticDebit automaticDebit;
+
     /** Transaction status */
     private TransactionStatus status;
 
@@ -84,6 +95,9 @@ public class PaymentRequestTransaction {
 
     /** Transaction description */
     private String description;
+
+    /** Receiver information */
+    private Receiver receiver;
 
     /** Transaction escrow end date */
     private Date escrowEndDate;
@@ -133,6 +147,8 @@ public class PaymentRequestTransaction {
         this.itemCount = Integer.valueOf(MIN_VALUE);
         this.sender = new PaymentRequestSender();
         this.shipping = new PaymentRequestShipping();
+        this.automaticDebit = new AutomaticDebit();
+        this.receiver = new Receiver();
     }
 
     /**
@@ -219,6 +235,38 @@ public class PaymentRequestTransaction {
     }
 
     /**
+     * @return the receiver
+     */
+    public Receiver getReceiver() {
+        return receiver;
+    }
+
+    /**
+     * Ses the receiver
+     *
+     * @param receiver
+     */
+    public void setReceiver(Receiver receiver) {
+        this.receiver = receiver;
+    }
+
+    /**
+     * @return the automatic debit information
+     */
+    public AutomaticDebit getAutomaticDebit() {
+        return automaticDebit;
+    }
+
+    /**
+     * Ses the automatic debit
+     *
+     * @param automaticDebit
+     */
+    public void setAutomaticDebit(AutomaticDebit automaticDebit) {
+        this.automaticDebit = automaticDebit;
+    }
+
+    /**
      * @return the transaction Type
      * @see TransactionType
      */
@@ -301,7 +349,7 @@ public class PaymentRequestTransaction {
     /**
      * Sets the transaction gross amount
      * 
-     * @param grossAmount
+     * @param totalValue
      */
     public void setGrossAmount(BigDecimal totalValue) {
         this.grossAmount = totalValue;
@@ -498,10 +546,29 @@ public class PaymentRequestTransaction {
     }
 
     /**
+     * Sets the payment request type for this transaction
+     * 
+     * @see PaymentRequestType
+     * 
+     * @param paymentRequestType
+     */
+    public void setPaymentRequestType(PaymentRequestType paymentRequestType) {
+        this.paymentRequestType = paymentRequestType;
+    }
+
+    /**
+     * @return the payment request type
+     * @see PaymentRequestType
+     */
+    public PaymentRequestType getPaymentRequestType() {
+        return this.paymentRequestType;
+    }
+
+    /**
      * Sets the shipping information for this transaction
-     * 
+     *
      * @see PaymentRequestShipping
-     * 
+     *
      * @param shipping
      */
     public void setShipping(PaymentRequestShipping shipping) {
@@ -540,6 +607,21 @@ public class PaymentRequestTransaction {
         this.due = due;
     }
 
+    public String getCancellationSource() {
+
+        return cancellationSource;
+    }
+
+    /**
+     * Sets the cancellation source
+     *
+     * @param cancellationSource
+     */
+    public void setCancellationSource(String cancellationSource) {
+
+        this.cancellationSource = cancellationSource;
+    }
+
     /**
      * @return string
      */
@@ -560,6 +642,12 @@ public class PaymentRequestTransaction {
                 .append(recoveryCode + "\"")//
                 .append(",type=")//
                 .append(type)//
+                .append(",paymentRequestType=")//
+                .append(paymentRequestType)//
+                .append(",cancellationSource=\"")//
+                .append(cancellationSource + "\"")//
+                .append(",automaticDebit=")//
+                .append(automaticDebit)//
                 .append(",status=")//
                 .append(status)//
                 .append(",lastEventDate=")//
@@ -580,6 +668,8 @@ public class PaymentRequestTransaction {
                 .append(extraAmount)//
                 .append(",description=\"")//
                 .append(description + "\"")//
+                .append(",receiver=")//
+                .append(receiver)//
                 .append(",escrowEndDate=")//
                 .append(escrowEndDate)//
                 .append(",installmentCount=")//

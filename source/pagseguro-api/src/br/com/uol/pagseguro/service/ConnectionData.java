@@ -33,6 +33,8 @@ public class ConnectionData {
 
     private String wsPaymentRequestFindByCodeUrl;
 
+    private String wsPaymentRequestNotificationUrl;
+
     private String wsRecurrenceUrl;
 
     private String wsRecurrenceFindByCodeUrl;
@@ -66,6 +68,7 @@ public class ConnectionData {
 
         this.wsPaymentRequestUrl = validUrlWSPaymentRequest();
         this.wsPaymentRequestFindByCodeUrl = validUrlWSPaymentRequestFindByCode();
+        this.wsPaymentRequestNotificationUrl = validUrlWSPaymentRequestByNotificationCode();
 
         this.wsRecurrenceUrl = validUrlWSRecurrence();
         this.wsRecurrenceFindByCodeUrl = validUrlWSRecurrenceFindByCode();
@@ -171,6 +174,15 @@ public class ConnectionData {
     }
 
     /**
+     * Valid url web service production or development for finding a payment request by notification code
+     *
+     * @return string
+     */
+    private String validUrlWSPaymentRequestByNotificationCode() {
+        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPaymentRequestNotificationUrl();
+    }
+
+    /**
      * Valid url web service production or development for recurrence
      * 
      * @return string
@@ -258,6 +270,13 @@ public class ConnectionData {
      */
     public String getWSPaymentRequestFindByCodeUrl() {
         return wsPaymentRequestFindByCodeUrl;
+    }
+
+    /**
+     * @return the wsPaymentRequestNotificationUrl
+     */
+    public String getWsPaymentRequestNotificationUrl() {
+        return wsPaymentRequestNotificationUrl;
     }
 
     /**

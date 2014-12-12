@@ -66,7 +66,7 @@ public class RecurrenceParser {
      */
     private static final Log log = new Log(RecurrenceParser.class);
 
-    private static String RECURRENCE_INITIAL_DATE = "initialDate";
+    private static final String RECURRENCE_INITIAL_DATE = "initialDate";
     private static final String RECURRENCE_PAYMENT_REQUESTS_QUANTITY = "paymentRequestsQuantity";
     private static final String RECURRENCE_PERIOD = "period";
 

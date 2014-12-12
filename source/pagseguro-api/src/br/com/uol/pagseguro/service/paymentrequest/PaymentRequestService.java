@@ -223,7 +223,7 @@ public class PaymentRequestService {
             throw e;
         } catch (Exception e) {
 
-            log.error(String.format(PREFIX + FIND_BY_CODE + SUFFIX_END, paymentRequestcode, e.getMessage()));
+            log.error(String.format(PREFIX + FIND_BY_CODE + SUFFIX_ERROR, paymentRequestcode, e.getMessage()));
 
             throw new PagSeguroServiceException(httpStatusCode, e);
 

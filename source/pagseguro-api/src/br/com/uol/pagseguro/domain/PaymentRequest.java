@@ -437,7 +437,7 @@ public class PaymentRequest {
      * @see Shipping
      */
     public Shipping getShipping() {
-        return getShipping();
+        return this.shipping;
     }
 
     /**

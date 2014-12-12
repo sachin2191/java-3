@@ -37,8 +37,10 @@ import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import br.com.uol.pagseguro.domain.AutomaticDebit;
 import br.com.uol.pagseguro.domain.PaymentMethod;
 import br.com.uol.pagseguro.domain.Phone;
+import br.com.uol.pagseguro.domain.Receiver;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequest;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestItem;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestReceiverFees;
@@ -46,6 +48,7 @@ import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestSender;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShipping;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShippingPackage;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestTransaction;
+import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestType;
 import br.com.uol.pagseguro.enums.PaymentMethodCode;
 import br.com.uol.pagseguro.enums.PaymentMethodType;
 import br.com.uol.pagseguro.enums.TransactionStatus;
@@ -253,10 +256,22 @@ public class PaymentRequestParser {
             paymentRequestTransaction.setType(TransactionType.fromValue((Integer.valueOf(tagValue))));
         }
 
+        // parsing <paymentRequest><paymentType>
+        tagValue = XMLParserUtils.getTagValue("paymentType", paymentRequestElement);
+        if (tagValue != null) {
+            paymentRequestTransaction.setPaymentRequestType(PaymentRequestType.fromValue(Integer.parseInt(tagValue)));
+        }
+
         // parsing <paymentRequest><status>
         tagValue = XMLParserUtils.getTagValue("status", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setStatus(TransactionStatus.fromValue((Integer.valueOf(tagValue))));
+        }
+
+        // parsing <paymentRequest><cancellationSource>
+        tagValue = XMLParserUtils.getTagValue("cancellationSource", paymentRequestElement);
+        if (tagValue != null) {
+            paymentRequestTransaction.setCancellationSource(tagValue);
         }
 
         // parsing <paymentRequest><expiration>
@@ -298,6 +313,33 @@ public class PaymentRequestParser {
             paymentRequestTransaction.setPaymentMethod(paymentMethod);
         }
 
+        // parsing <paymentRequest><automaticDebit>
+        Element automaticDebitElement = XMLParserUtils.getElement("automaticDebit", paymentRequestElement);
+        if (automaticDebitElement != null) {
+            AutomaticDebit automaticDebit = new AutomaticDebit();
+
+            // parsing <paymentRequest><automaticDebit><bank>
+            tagValue = XMLParserUtils.getTagValue("bank", automaticDebitElement);
+            if (tagValue != null) {
+                automaticDebit.setBank(tagValue);
+            }
+
+            // parsing <paymentRequest><automaticDebit><scheduledDate>
+            tagValue = XMLParserUtils.getTagValue("scheduledDate", automaticDebitElement);
+            if (tagValue != null) {
+                automaticDebit.setScheduledDate(PagSeguroUtil.parse(tagValue));
+            }
+
+            // parsing <paymentRequest><automaticDebit><debitDate>
+            tagValue = XMLParserUtils.getTagValue("debitDate", automaticDebitElement);
+            if (tagValue != null) {
+                automaticDebit.setDebitDate(PagSeguroUtil.parse(tagValue));
+            }
+
+            // setting payment request transaction automatic debit information
+            paymentRequestTransaction.setAutomaticDebit(automaticDebit);
+        }
+
         // parsing <paymentRequest><grossAmount>
         tagValue = XMLParserUtils.getTagValue("grossAmount", paymentRequestElement);
         if (tagValue != null) {
@@ -314,6 +356,47 @@ public class PaymentRequestParser {
         tagValue = XMLParserUtils.getTagValue("discountAmount", paymentRequestElement);
         if (tagValue != null) {
             paymentRequestTransaction.setDiscountAmount(new BigDecimal(tagValue));
+        }
+
+        // parsing <paymentRequest><receiver>
+        Element receiverElement = XMLParserUtils.getElement("receiver", paymentRequestElement);
+        if (receiverElement != null) {
+            Receiver receiver = new Receiver();
+
+            // parsing <paymentRequest><receiver><name>
+            tagValue = XMLParserUtils.getTagValue("name", receiverElement);
+            if (tagValue != null) {
+                receiver.setName(tagValue);
+            }
+
+            // parsing <paymentRequest><receiver><email>
+            tagValue = XMLParserUtils.getTagValue("email", receiverElement);
+            if (tagValue != null) {
+                receiver.setEmail(tagValue);
+            }
+
+            // parsing <paymentRequest><receiver><phone>
+            Element receiverPhoneElement = XMLParserUtils.getElement("phone", receiverElement);
+            if (receiverPhoneElement != null) {
+                Phone phone = new Phone();
+
+                // parsing <paymentRequest><receiver><phone><areaCode>
+                tagValue = XMLParserUtils.getTagValue("areaCode", receiverPhoneElement);
+                if (tagValue != null) {
+                    phone.setAreaCode(tagValue);
+                }
+
+                // parsing <paymentRequest><receiver><phone><number>
+                tagValue = XMLParserUtils.getTagValue("number", receiverPhoneElement);
+                if (tagValue != null) {
+                    phone.setNumber(tagValue);
+                }
+
+                receiver.setPhone(phone);
+            }
+
+            // setting payment request transaction receiver information
+            paymentRequestTransaction.setReceiver(receiver);
         }
 
         // parsing <paymentRequest><receiverFees>
