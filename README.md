@@ -54,7 +54,6 @@ Changelog
 
 2.4.0
 
-  - Adicionada nova funcionalidade que permite criação e consulta de assinaturas.
   - Adicionada nova funcionalidade que permite a busca de notificação de solicitação de pagamento.
 
 2.3.0
