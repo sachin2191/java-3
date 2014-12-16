@@ -41,12 +41,6 @@ public class ConnectionData {
 
     private String wsRecurrenceCancelByCodeUrl;
 
-    private String wsPreApprovalRequestUrl;
-
-    private String wsPreApprovalRequestFindByCodeUrl;
-
-    private String wsPreApprovalCancelByCodeUrl;
-
     private String sessionsUrl;
 
     private String installmentsUrl;
@@ -73,10 +67,6 @@ public class ConnectionData {
         this.wsRecurrenceUrl = validUrlWSRecurrence();
         this.wsRecurrenceFindByCodeUrl = validUrlWSRecurrenceFindByCode();
         this.wsRecurrenceCancelByCodeUrl = validUrlWSRecurrenceCancelByCode();
-
-        this.wsPreApprovalRequestUrl = validUrlWSPreApprovalRequest();
-        this.wsPreApprovalRequestFindByCodeUrl = validUrlWSPreApprovalRequestFindByCode();
-        this.wsPreApprovalCancelByCodeUrl = validUrlWSPreApprovalCancelByCode();
 
         this.charset = PagSeguroConfig.getApplicationCharset();
         this.serviceTimeout = PagSeguroSystem.getServiceTimeout();
@@ -210,33 +200,6 @@ public class ConnectionData {
     }
 
     /**
-     * Valid url web service production or development for pre-approval request
-     *
-     * @return string
-     */
-    private String validUrlWSPreApprovalRequest() {
-        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPreApprovalRequestServicePath();
-    }
-
-    /**
-     * Valid url web service production or development for finding a pre-approval request transaction
-     *
-     * @return string
-     */
-    private String validUrlWSPreApprovalRequestFindByCode() {
-        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPreApprovalRequestFindByCodePath();
-    }
-
-    /**
-     * Valid url web service production or development for canceling a pre-approval transaction
-     *
-     * @return string
-     */
-    private String validUrlWSPreApprovalCancelByCode() {
-        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPreApprovalRequestCancelByCodePath();
-    }
-
-    /**
      * @return the credentials
      */
     public Credentials getCredentials() {
@@ -298,30 +261,6 @@ public class ConnectionData {
      */
     public String getWSRecurrenceCancelByCodeUrl() {
         return wsRecurrenceCancelByCodeUrl;
-    }
-
-    /**
-     *
-     * @return the wsPreApprovalRequestUrl
-     */
-    public String getWSPreApprovalRequestUrl() {
-        return wsPreApprovalRequestUrl;
-    }
-
-    /**
-     *
-     * @return the wsPreApprovalRequestFindByCodeUrl
-     */
-    public String getWSPreApprovalRequestFindByCodeUrl() {
-        return wsPreApprovalRequestFindByCodeUrl;
-    }
-
-    /**
-     *
-     * @return the wsPreApprovalCancelByCodeUrl
-     */
-    public String getWSPreApprovalCancelByCodeUrl() {
-        return wsPreApprovalCancelByCodeUrl;
     }
 
     /**

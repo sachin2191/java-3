@@ -127,18 +127,6 @@ public class PagSeguroSystem {
         return resourceBundle.getString("recurrenceService.cancelByCodePath");
     }
 
-    public static String getPreApprovalRequestServicePath() {
-        return resourceBundle.getString("preApprovalRequestService.servicePath");
-    }
-
-    public static String getPreApprovalRequestFindByCodePath() {
-        return resourceBundle.getString("preApprovalRequestService.findByCodePath");
-    }
-
-    public static String getPreApprovalRequestCancelByCodePath() {
-        return resourceBundle.getString("preApprovalRequestService.cancelByCodePath");
-    }
-
     public static String getServiceTimeout() {
         return resourceBundle.getString("serviceTimeout");
     }
