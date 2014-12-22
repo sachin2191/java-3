@@ -112,6 +112,12 @@ public class PaymentRequestParser {
             data.put(PAYMENT_REQUEST_NAME, paymentRequest.getName());
 
         /**
+         * Set payment request description
+         */
+        if (paymentRequest.getDescription() != null)
+            data.put("description", paymentRequest.getDescription());
+
+        /**
          * Set payment request reference
          */
         if (paymentRequest.getReference() != null)
@@ -193,15 +199,15 @@ public class PaymentRequestParser {
 
                 if (paymentRequest.getShipping().getPaymentRequestShippingPackage().getHeight() != null)
                     data.put(PAYMENT_REQUEST_SHIPPING_PACKAGE_HEIGHT, paymentRequest.getShipping()
-                            .getPaymentRequestShippingPackage().getWidth());
+                            .getPaymentRequestShippingPackage().getHeight());
 
                 if (paymentRequest.getShipping().getPaymentRequestShippingPackage().getLength() != null)
                     data.put(PAYMENT_REQUEST_SHIPPING_PACKAGE_LENGTH, paymentRequest.getShipping()
-                            .getPaymentRequestShippingPackage().getWidth());
+                            .getPaymentRequestShippingPackage().getLength());
 
                 if (paymentRequest.getShipping().getPaymentRequestShippingPackage().getWeight() != null)
                     data.put(PAYMENT_REQUEST_SHIPPING_PACKAGE_WEIGHT, paymentRequest.getShipping()
-                            .getPaymentRequestShippingPackage().getWidth());
+                            .getPaymentRequestShippingPackage().getWeight());
             }
 
         }
@@ -576,7 +582,7 @@ public class PaymentRequestParser {
                 // setting <paymentRequest><shipping><package><weight>
                 tagValue = XMLParserUtils.getTagValue("weight", packageElement);
                 if (tagValue != null) {
-                    shippingPackage.setWeight(Integer.valueOf(tagValue));
+                    shippingPackage.setWeight(new BigDecimal(tagValue));
                 }
 
                 // setting <paymentRequest><shipping><package><width>

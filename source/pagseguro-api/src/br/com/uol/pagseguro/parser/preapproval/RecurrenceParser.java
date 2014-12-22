@@ -406,7 +406,7 @@ public class RecurrenceParser {
                     // setting <recurrence><paymentRequest><shipping><package><weight>
                     tagValue = XMLParserUtils.getTagValue("weight", packageElement);
                     if (tagValue != null) {
-                        shippingPackage.setWeight(Integer.valueOf(tagValue));
+                        shippingPackage.setWeight(new BigDecimal(tagValue));
                     }
 
                     // setting <recurrence><paymentRequest><shipping><package><width>

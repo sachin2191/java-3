@@ -18,6 +18,8 @@
 
 package br.com.uol.pagseguro.domain.paymentrequest;
 
+import java.math.BigDecimal;
+
 /**
  * Payment request shipping package information
  */
@@ -41,7 +43,7 @@ public class PaymentRequestShippingPackage {
     /**
      * Shipping package weight
      */
-    private Integer weight;
+    private BigDecimal weight;
 
     /**
      * Initializes a new instance of the PaymentRequestShippingPackage class
@@ -58,7 +60,7 @@ public class PaymentRequestShippingPackage {
      * @param length
      * @param weight
      */
-    public PaymentRequestShippingPackage(Integer width, Integer height, Integer length, Integer weight) {
+    public PaymentRequestShippingPackage(Integer width, Integer height, Integer length, BigDecimal weight) {
         this.width = width;
         this.height = height;
         this.length = length;
@@ -116,7 +118,7 @@ public class PaymentRequestShippingPackage {
     /**
      * @return the weight
      */
-    public Integer getWeight() {
+    public BigDecimal getWeight() {
         return weight;
     }
 
@@ -125,7 +127,7 @@ public class PaymentRequestShippingPackage {
      * 
      * @param weight
      */
-    public void setWeight(Integer weight) {
+    public void setWeight(BigDecimal weight) {
         this.weight = weight;
     }
 
