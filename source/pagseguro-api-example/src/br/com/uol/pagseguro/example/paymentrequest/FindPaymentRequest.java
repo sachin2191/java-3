@@ -13,7 +13,7 @@ public class FindPaymentRequest {
     public static void main(String[] args) {
 
         // Substitute the code below with a valid payment request code for your account
-        findByCode("7453D56132C345A0AE0965DF0F8051CD");
+        findByCode("7C7F6A2556C94028BDA8B51545A545C5");
     }
 
     private static void findByCode(String paymentRequestCode) {
@@ -85,19 +85,24 @@ public class FindPaymentRequest {
         System.out.println("senderEmail: " + paymentRequestTransaction.getSender().getEmail());
 
         if (paymentRequestTransaction.getShipping() != null) {
-            if (paymentRequestTransaction.getShipping().getCost() != null) {
-                System.out.println("shippingCost: " + paymentRequestTransaction.getShipping().getCost());
-            }
-
             if (paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage() != null) {
-                System.out.println("shippingPackageWeight: "
-                        + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getWeight());
-                System.out.println("shippingPackageWidth: "
-                        + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getWidth());
-                System.out.println("shippingPackageHeight: "
-                        + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getHeight());
-                System.out.println("shippingPackageLength: "
-                        + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getLength());
+                if (paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getWeight() == null
+                        || paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getWidth() == null
+                        || paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getHeight() == null
+                        || paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getLength() == null) {
+                    if (paymentRequestTransaction.getShipping().getCost() != null) {
+                        System.out.println("shippingCost: " + paymentRequestTransaction.getShipping().getCost());
+                    }
+                } else {
+                    System.out.println("shippingPackageWeight: "
+                            + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getWeight());
+                    System.out.println("shippingPackageWidth: "
+                            + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getWidth());
+                    System.out.println("shippingPackageHeight: "
+                            + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getHeight());
+                    System.out.println("shippingPackageLength: "
+                            + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getLength());
+                }
             }
         }
     }
