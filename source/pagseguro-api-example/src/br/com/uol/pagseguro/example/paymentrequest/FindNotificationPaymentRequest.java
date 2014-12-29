@@ -146,6 +146,10 @@ public class FindNotificationPaymentRequest {
                     System.out.println("shippingPackageLength: "
                             + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getLength());
                 }
+            } else {
+                if (paymentRequestTransaction.getShipping().getCost() != null) {
+                    System.out.println("shippingCost: " + paymentRequestTransaction.getShipping().getCost());
+                }
             }
         }
     }
