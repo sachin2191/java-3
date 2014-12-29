@@ -19,6 +19,7 @@
 package br.com.uol.pagseguro.domain.paymentrequest;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -135,6 +136,10 @@ public class PaymentRequestTransaction {
     /** Transaction due */
     private Date due;
 
+    private SimpleDateFormat sDF;
+
+    private static String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
+
     /**
      * Initializes a new instance of the PaymentRequestTransaction class
      */
@@ -149,13 +154,19 @@ public class PaymentRequestTransaction {
         this.shipping = new PaymentRequestShipping();
         this.automaticDebit = new AutomaticDebit();
         this.receiver = new Receiver();
+        this.sDF = new SimpleDateFormat(DATE_FORMAT);
+
     }
 
     /**
      * @return the transaction date
      */
-    public Date getDate() {
-        return this.date;
+    public String getDate() {
+        if(this.date == null) {
+            return null;
+        }
+
+        return this.sDF.format(this.date);
     }
 
     /**
@@ -309,8 +320,12 @@ public class PaymentRequestTransaction {
      * 
      * @return the last event date
      */
-    public Date getLastEventDate() {
-        return this.lastEventDate;
+    public String getLastEventDate() {
+        if(this.lastEventDate == null) {
+            return null;
+        }
+
+        return this.sDF.format(this.lastEventDate);
     }
 
     /**
@@ -578,8 +593,12 @@ public class PaymentRequestTransaction {
     /**
      * @return the expiration
      */
-    public Date getExpiration() {
-        return expiration;
+    public String getExpiration() {
+        if(this.expiration == null) {
+            return null;
+        }
+
+        return this.sDF.format(this.expiration);
     }
 
     /**
@@ -594,8 +613,12 @@ public class PaymentRequestTransaction {
     /**
      * @return the due
      */
-    public Date getDue() {
-        return due;
+    public String getDue() {
+        if(this.due == null) {
+            return null;
+        }
+
+        return this.sDF.format(this.due);
     }
 
     /**

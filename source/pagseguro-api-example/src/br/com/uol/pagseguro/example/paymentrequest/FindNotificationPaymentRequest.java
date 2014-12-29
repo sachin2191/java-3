@@ -1,5 +1,7 @@
 package br.com.uol.pagseguro.example.paymentrequest;
 
+import java.text.SimpleDateFormat;
+
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestItem;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestTransaction;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
