@@ -39,6 +39,7 @@ import br.com.uol.pagseguro.enums.TransactionType;
 public class PaymentRequestTransaction {
 
     private static final int MIN_VALUE = 0;
+    private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
 
     /** Transaction date */
     private Date date;
@@ -137,8 +138,6 @@ public class PaymentRequestTransaction {
     private Date due;
 
     private SimpleDateFormat sDF;
-
-    private static String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
 
     /**
      * Initializes a new instance of the PaymentRequestTransaction class
