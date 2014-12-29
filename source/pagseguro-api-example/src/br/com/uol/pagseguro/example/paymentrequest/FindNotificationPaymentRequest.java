@@ -128,19 +128,24 @@ public class FindNotificationPaymentRequest {
         }
 
         if (paymentRequestTransaction.getShipping() != null) {
-            if (paymentRequestTransaction.getShipping().getCost() != null) {
-                System.out.println("shippingCost: " + paymentRequestTransaction.getShipping().getCost());
-            }
-
             if (paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage() != null) {
-                System.out.println("shippingPackageWeight: "
-                        + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getWeight());
-                System.out.println("shippingPackageWidth: "
-                        + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getWidth());
-                System.out.println("shippingPackageHeight: "
-                        + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getHeight());
-                System.out.println("shippingPackageLength: "
-                        + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getLength());
+                if (paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getWeight() == null
+                        || paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getWidth() == null
+                        || paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getHeight() == null
+                        || paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getLength() == null) {
+                    if (paymentRequestTransaction.getShipping().getCost() != null) {
+                        System.out.println("shippingCost: " + paymentRequestTransaction.getShipping().getCost());
+                    }
+                } else {
+                    System.out.println("shippingPackageWeight: "
+                            + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getWeight());
+                    System.out.println("shippingPackageWidth: "
+                            + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getWidth());
+                    System.out.println("shippingPackageHeight: "
+                            + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getHeight());
+                    System.out.println("shippingPackageLength: "
+                            + paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage().getLength());
+                }
             }
         }
     }

@@ -70,17 +70,19 @@ public class FindPaymentRequest {
         System.out.println("netAmount: " + paymentRequestTransaction.getNetAmount());
         System.out.println("extraAmount: " + paymentRequestTransaction.getExtraAmount());
 
-        System.out.println("receiverFeesInstallmentFeeAmount: "
-                + paymentRequestTransaction.getReceiverFees().getInstallmentFeeAmount());
-        System.out.println("receiverFeesOperationalFeeAmount: "
-                + paymentRequestTransaction.getReceiverFees().getOperationalFeeAmount());
-        System.out.println("receiverFeesIntermediationRateAmount: "
-                + paymentRequestTransaction.getReceiverFees().getIntermediationRateAmount());
-        System.out.println("receiverFeesIntermediationFeeAmount: "
-                + paymentRequestTransaction.getReceiverFees().getIntermediationFeeAmount());
-        System.out.println("receiverFeesCommissionFeeAmount: "
-                + paymentRequestTransaction.getReceiverFees().getCommissionFeeAmount());
-        System.out.println("receiverFeesEfrete: " + paymentRequestTransaction.getReceiverFees().getEfrete());
+        if (paymentRequestTransaction.getReceiverFees() != null) {
+            System.out.println("receiverFeesInstallmentFeeAmount: "
+                    + paymentRequestTransaction.getReceiverFees().getInstallmentFeeAmount());
+            System.out.println("receiverFeesOperationalFeeAmount: "
+                    + paymentRequestTransaction.getReceiverFees().getOperationalFeeAmount());
+            System.out.println("receiverFeesIntermediationRateAmount: "
+                    + paymentRequestTransaction.getReceiverFees().getIntermediationRateAmount());
+            System.out.println("receiverFeesIntermediationFeeAmount: "
+                    + paymentRequestTransaction.getReceiverFees().getIntermediationFeeAmount());
+            System.out.println("receiverFeesCommissionFeeAmount: "
+                    + paymentRequestTransaction.getReceiverFees().getCommissionFeeAmount());
+            System.out.println("receiverFeesEfrete: " + paymentRequestTransaction.getReceiverFees().getEfrete());
+        }
 
         System.out.println("description: " + paymentRequestTransaction.getDescription());
         System.out.println("escrowEndDate: " + paymentRequestTransaction.getEscrowEndDate());
@@ -95,8 +97,10 @@ public class FindPaymentRequest {
             System.out.println("itemAmount: " + item.getAmount());
         }
 
-        System.out.println("senderName: " + paymentRequestTransaction.getSender().getName());
-        System.out.println("senderEmail: " + paymentRequestTransaction.getSender().getEmail());
+        if (paymentRequestTransaction.getSender() != null) {
+            System.out.println("senderName: " + paymentRequestTransaction.getSender().getName());
+            System.out.println("senderEmail: " + paymentRequestTransaction.getSender().getEmail());
+        }
 
         if (paymentRequestTransaction.getShipping() != null) {
             if (paymentRequestTransaction.getShipping().getPaymentRequestShippingPackage() != null) {
