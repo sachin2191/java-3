@@ -41,13 +41,13 @@ public class FindPaymentRequest {
         System.out.println("code: " + paymentRequestTransaction.getCode());
         System.out.println("reference: " + paymentRequestTransaction.getReference());
         System.out.println("recoveryCode: " + paymentRequestTransaction.getRecoveryCode());
-        System.out.println("type: " + paymentRequestTransaction.getType());
-        System.out.println("status: " + paymentRequestTransaction.getStatus());
+        System.out.println("type: " + paymentRequestTransaction.getType().getValue());
+        System.out.println("status: " + paymentRequestTransaction.getStatus().getValue());
         System.out.println("expiration: " + paymentRequestTransaction.getExpiration());
         System.out.println("due: " + paymentRequestTransaction.getDue());
 
         System.out.println("lastEventDate: " + paymentRequestTransaction.getLastEventDate());
-        System.out.println("paymentMethodType: " + paymentRequestTransaction.getPaymentMethod().getType());
+        System.out.println("paymentMethodType: " + paymentRequestTransaction.getPaymentMethod().getType().getValue());
         System.out.println("paymentMethodCode: " + paymentRequestTransaction.getPaymentMethod().getCode());
 
         System.out.println("grossAmount: " + paymentRequestTransaction.getGrossAmount());

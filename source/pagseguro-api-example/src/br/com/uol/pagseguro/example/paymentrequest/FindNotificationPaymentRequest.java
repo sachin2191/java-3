@@ -13,7 +13,7 @@ public class FindNotificationPaymentRequest {
     public static void main(String[] args) {
 
         // Substitute the code below with a valid payment request notification code for your account
-        String paymentRequestNotificationCode = "60F608DF89288928401774A7EF9287758823";
+        String paymentRequestNotificationCode = "3098C601B1DCB1DCE56BB43B2FA85F161EBC";
 
         PaymentRequestTransaction paymentRequestTransaction = null;
 
@@ -38,9 +38,9 @@ public class FindNotificationPaymentRequest {
         System.out.println("code: " + paymentRequestTransaction.getCode());
         System.out.println("reference: " + paymentRequestTransaction.getReference());
         System.out.println("recoveryCode: " + paymentRequestTransaction.getRecoveryCode());
-        System.out.println("type: " + paymentRequestTransaction.getType());
-        System.out.println("paymentType: " + paymentRequestTransaction.getPaymentRequestType());
-        System.out.println("status: " + paymentRequestTransaction.getStatus());
+        System.out.println("type: " + paymentRequestTransaction.getType().getValue());
+        System.out.println("paymentType: " + paymentRequestTransaction.getPaymentRequestType().getPublicCode());
+        System.out.println("status: " + paymentRequestTransaction.getStatus().getValue());
         System.out.println("cancellationSource: " + paymentRequestTransaction.getCancellationSource());
 
         System.out.println("expiration: " + paymentRequestTransaction.getExpiration());
