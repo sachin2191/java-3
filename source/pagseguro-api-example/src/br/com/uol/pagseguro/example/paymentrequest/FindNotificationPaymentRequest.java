@@ -40,9 +40,19 @@ public class FindNotificationPaymentRequest {
         System.out.println("code: " + paymentRequestTransaction.getCode());
         System.out.println("reference: " + paymentRequestTransaction.getReference());
         System.out.println("recoveryCode: " + paymentRequestTransaction.getRecoveryCode());
-        System.out.println("type: " + paymentRequestTransaction.getType().getValue());
-        System.out.println("paymentType: " + paymentRequestTransaction.getPaymentRequestType().getPublicCode());
-        System.out.println("status: " + paymentRequestTransaction.getStatus().getValue());
+
+        if (paymentRequestTransaction.getType() != null) {
+            System.out.println("type: " + paymentRequestTransaction.getType().getValue());
+        }
+
+        if (paymentRequestTransaction.getPaymentRequestType() != null) {
+            System.out.println("paymentType: " + paymentRequestTransaction.getPaymentRequestType().getPublicCode());
+        }
+
+        if (paymentRequestTransaction.getStatus() != null) {
+            System.out.println("status: " + paymentRequestTransaction.getStatus().getValue());
+        }
+
         System.out.println("cancellationSource: " + paymentRequestTransaction.getCancellationSource());
 
         System.out.println("expiration: " + paymentRequestTransaction.getExpiration());
@@ -73,7 +83,8 @@ public class FindNotificationPaymentRequest {
             System.out.println("receiverEmail: " + paymentRequestTransaction.getReceiver().getEmail());
 
             if (paymentRequestTransaction.getReceiver().getPhone() != null) {
-                System.out.println("phoneAreaCode: " + paymentRequestTransaction.getReceiver().getPhone().getAreaCode());
+                System.out
+                        .println("phoneAreaCode: " + paymentRequestTransaction.getReceiver().getPhone().getAreaCode());
                 System.out.println("phoneNumber: " + paymentRequestTransaction.getReceiver().getPhone().getNumber());
             }
         }
