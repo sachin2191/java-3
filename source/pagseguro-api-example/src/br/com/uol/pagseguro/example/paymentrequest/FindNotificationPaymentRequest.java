@@ -61,7 +61,11 @@ public class FindNotificationPaymentRequest {
         System.out.println("lastEventDate: " + paymentRequestTransaction.getLastEventDate());
 
         if (paymentRequestTransaction.getPaymentMethod() != null) {
-            System.out.println("paymentMethodType: " + paymentRequestTransaction.getPaymentMethod().getType());
+            if (paymentRequestTransaction.getPaymentMethod().getType() != null) {
+                System.out.println("paymentMethodType: "
+                        + paymentRequestTransaction.getPaymentMethod().getType().getValue());
+            }
+
             System.out.println("paymentMethodCode: " + paymentRequestTransaction.getPaymentMethod().getCode());
         }
 
