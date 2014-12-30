@@ -81,12 +81,12 @@ public class RecurrenceService {
     /**
      * @var String
      */
-    private static final String FIND_BY_CODE = "FindByCode";
+    private static final String FIND_BY_CODE = "FindByCode - ";
 
     /**
      * @var String
      */
-    private static final String CANCEL_BY_CODE = "CancelByCode";
+    private static final String CANCEL_BY_CODE = "CancelByCode - ";
 
     /**
      * 
@@ -219,7 +219,7 @@ public class RecurrenceService {
                 RecurrenceTransaction recurrenceTransaction = RecurrenceParser
                         .readRecurrence(response.getInputStream());
 
-                log.info(String.format(FIND_BY_CODE, recurrenceCode, recurrenceTransaction.toString()));
+                log.info(FIND_BY_CODE + recurrenceCode + recurrenceTransaction.toString());
 
                 return recurrenceTransaction;
 
@@ -279,7 +279,7 @@ public class RecurrenceService {
                 RecurrenceCancelTransaction cancelTransaction = RecurrenceParser.readCancelXml(response
                         .getInputStream());
 
-                log.info(String.format(CANCEL_BY_CODE, recurrenceCode));
+                log.info(CANCEL_BY_CODE + recurrenceCode);
 
                 return cancelTransaction;
 

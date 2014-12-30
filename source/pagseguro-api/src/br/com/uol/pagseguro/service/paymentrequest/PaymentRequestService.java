@@ -80,7 +80,7 @@ public class PaymentRequestService {
     /**
      * @var String
      */
-    private static final String FIND_BY_CODE = "FindByCode";
+    private static final String FIND_BY_CODE = "FindByCode - ";
 
     /**
      * 
@@ -201,7 +201,7 @@ public class PaymentRequestService {
                 PaymentRequestTransaction paymentRequestTransaction = PaymentRequestParser.readPaymentRequest(response
                         .getInputStream());
 
-                log.info(String.format(FIND_BY_CODE, paymentRequestcode, paymentRequestTransaction.toString()));
+                log.info(FIND_BY_CODE + paymentRequestcode + paymentRequestTransaction.toString());
 
                 return paymentRequestTransaction;
 
