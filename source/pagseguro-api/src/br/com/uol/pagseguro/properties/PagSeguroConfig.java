@@ -21,6 +21,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import br.com.uol.pagseguro.domain.AccountCredentials;
+import br.com.uol.pagseguro.domain.ApplicationCredentials;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 
 /**
@@ -111,6 +112,42 @@ public class PagSeguroConfig {
         }
 
         return new AccountCredentials(email, productionToken, sandboxToken);
+    }
+    
+    /**
+     * Application credentials read from config file <b>pagseguro-config.properties</b> To read the application credentials from
+     * config, you have to set <b>credential.production.appId</b>, <b>credential.production.appKey</b>, <b>credential.sandbox.appId</b>
+     * and <b>credential.sandbox.appKey</b> in the <b>pagseguro-config.properties</b> file
+     * 
+     * @return the application credentials read from <b>pagseguro-config.properties</b> file.
+     * @throws Exception
+     * 
+     */
+    public static ApplicationCredentials getApplicationCredentials() throws PagSeguroServiceException {
+
+        String productionAppId = resourceBundle.getString("credential.production.appId");
+        String productionAppKey = resourceBundle.getString("credential.production.appKey");
+        String sandboxAppId = resourceBundle.getString("credential.sandbox.appId");
+        String sandboxAppKey = resourceBundle.getString("credential.sandbox.appKey");
+
+        productionAppId = productionAppId == null ? null : productionAppId.trim();
+        productionAppKey = productionAppKey == null ? null : productionAppKey.trim();
+        sandboxAppId = sandboxAppId == null ? null : sandboxAppId.trim();
+        sandboxAppKey = sandboxAppKey == null ? null : sandboxAppKey.trim();
+        
+        // it is validated at this point to put a error message in the exception
+        if (productionAppId == null || "".equals(productionAppId) || productionAppKey == null || "".equals(productionAppKey)
+                || sandboxAppId == null || "".equals(sandboxAppId) || sandboxAppKey == null || "".equals(sandboxAppKey)) {
+
+            throw new PagSeguroServiceException(
+                    "To use application credentials from config.properties file you must "
+                            + "configure the properties credential.production.appId, credential.production.appKey, credential.sandbox.appId and credential.sandbox.appKey. Currently "
+                            + "credential.production.appId=[" + productionAppId + "], credential.production.appKey=[" + productionAppKey
+                            + "],credential.sandbox.appId=[" + sandboxAppId + "]  and credential.sandbox.appKey=[" + sandboxAppKey + "].");
+
+        }
+
+        return new ApplicationCredentials(productionAppId, productionAppKey, sandboxAppId, sandboxAppKey);
     }
 
     /**

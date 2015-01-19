@@ -61,7 +61,7 @@ public class CreateTransactionUsingOnlineDebit {
 
         request.setReference("REF1234");
 
-        request.setSender(new Sender("JoÃ£o Comprador", //
+        request.setSender(new Sender("João Comprador", //
                 "comprador@uol.com.br", //
                 new Phone("11", "56273440"), //
                 new SenderDocument(DocumentType.CPF, "000.000.001-91")));
@@ -73,7 +73,7 @@ public class CreateTransactionUsingOnlineDebit {
                 "01452002", //
                 "Av. Brig. Faria Lima", //
                 "1384", //
-                "5Âº andar"));
+                "5º andar"));
 
         request.setShippingType(ShippingType.SEDEX);
 
@@ -92,6 +92,16 @@ public class CreateTransactionUsingOnlineDebit {
         request.setBankName("BRADESCO");
 
         try {
+        	
+        	/*
+        	 * If you use application credential you don't need to set request.setReceiverEmail();
+        	 * Set your account credentials on src/pagseguro-config.properties
+			 * You can create an payment using an application credential and set an authorizationCode
+			 * ApplicationCredentials applicationCredentials = PagSeguroConfig.getApplicationCredentials();
+             * applicationCredentials.setAuthorizationCode("your_authorizationCode");
+             *
+			 */
+        	
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
 
             final Transaction transaction = TransactionService.createTransaction(accountCredentials, //
@@ -118,7 +128,9 @@ public class CreateTransactionUsingOnlineDebit {
 
         request.setReference("REF1234");
 
-        request.setSender(new Sender("JoÃ£o Comprador", "comprador@uol.com.br"));
+        request.setSender(new Sender("João Comprador", "comprador@uol.com.br"));
+        
+        request.setSenderHash("0db5776271490042a3b89f7f54d7e54244cf74d469695aa67c49e11c8a56c2c4");
 
         request.addItem(new Item("1", "Notebook Prata", Integer.valueOf(1), new BigDecimal("500.00")));
         request.addItem(new Item("2", "Notebook Rosa", Integer.valueOf(1), new BigDecimal("500.00")));
@@ -126,6 +138,15 @@ public class CreateTransactionUsingOnlineDebit {
         request.setBankName("BRADESCO");
 
         try {
+        	/*
+        	 * If you use application credential you don't need to set request.setReceiverEmail();
+        	 * Set your account credentials on src/pagseguro-config.properties
+			 * You can create an payment using an application credential and set an authorizationCode
+			 * ApplicationCredentials applicationCredentials = PagSeguroConfig.getApplicationCredentials();
+             * applicationCredentials.setAuthorizationCode("your_authorizationCode");
+             *
+			 */
+
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
 
             final Transaction transaction = TransactionService.createTransaction(accountCredentials, //

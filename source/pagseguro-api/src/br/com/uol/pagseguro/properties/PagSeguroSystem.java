@@ -88,6 +88,15 @@ public class PagSeguroSystem {
     public static String getUrlDirectPayment() {
         return resourceBundle.getString("paymentService." + PagSeguroConfig.getEnvironment() + ".directPayment");
     }
+    
+    /**
+     * Get Url to Authorization
+     * 
+     * @return string
+     */
+    public static String getUrlAuthorization() {
+        return resourceBundle.getString("authorizationService." + PagSeguroConfig.getEnvironment() + ".authorizationUrl");
+    }
 
     /**
      * Get Url to Payment-Methods
@@ -125,6 +134,27 @@ public class PagSeguroSystem {
 
     public static String getRecurrenceCancelByCodePath() {
         return resourceBundle.getString("recurrenceService.cancelByCodePath");
+    }
+    
+    /**
+     * Get authorization service path
+     * 
+     * @return string
+     */
+    public static String getAuthorizationServicePath() {
+        return resourceBundle.getString("authorizationService.servicePath");
+    }
+    
+    public static String getAuthorizationNotificationPath() {
+        return resourceBundle.getString("authorizationService.notificationPath");
+    }
+    
+    public static String getAuthorizationFindByCodePath() {
+        return resourceBundle.getString("authorizationService.findByCodePath");
+    }
+    
+    public static String getAuthorizationFindByDatePath() {
+        return resourceBundle.getString("authorizationService.findByDatePath");
     }
 
     public static String getServiceTimeout() {

@@ -7,6 +7,7 @@ import java.util.Map;
 import br.com.uol.pagseguro.domain.Address;
 import br.com.uol.pagseguro.domain.Commission;
 import br.com.uol.pagseguro.domain.Item;
+import br.com.uol.pagseguro.domain.Parameter;
 import br.com.uol.pagseguro.domain.Sender;
 import br.com.uol.pagseguro.domain.Shipping;
 import br.com.uol.pagseguro.domain.direct.checkout.Checkout;
@@ -86,6 +87,15 @@ public abstract class PaymentRequest {
      */
     @SuppressWarnings("unused")
     private Commission commission;
+    
+    /**
+     * Extra parameters that user can add to a PagSeguro checkout request
+     * 
+     * Optional
+     * 
+     * @var PagSeguroParameter
+     */
+    private Parameter parameter;
 
     /**
      * @return the payment mode
@@ -275,6 +285,45 @@ public abstract class PaymentRequest {
      */
     public void setCommission(Commission commission) {
         this.checkout.setCommission(commission);
+    }
+    
+    /**
+     * @return the sender hash
+     */
+    public String getSenderHash() {
+        return this.checkout.getSenderHash();
+    }
+
+    /**
+     * @param senderHash
+     *            the sender hash to set
+     */
+    public void setSenderHash(String senderHash) {
+        this.checkout.setSenderHash(senderHash);
+    }
+    
+    /**
+     * Gets parameter for PagSeguro checkout requests
+     * 
+     * @return Parameter
+     */
+    public Parameter getParameter() {
+
+        if (this.parameter == null) {
+            this.parameter = new Parameter();
+        }
+
+        return this.parameter;
+
+    }
+
+    /**
+     * Sets parameter for PagSeguro checkout requests
+     * 
+     * @param parameter
+     */
+    public void setParameter(Parameter parameter) {
+        this.parameter = parameter;
     }
 
     public Map<Object, Object> getMap() {

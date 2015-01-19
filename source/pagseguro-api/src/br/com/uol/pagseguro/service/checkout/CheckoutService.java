@@ -92,7 +92,7 @@ public class CheckoutService {
         HttpStatus httpCodeStatus = null;
 
         HttpURLConnection response = connection.post(url, data, connectionData.getServiceTimeout(),
-                connectionData.getCharset());
+                connectionData.getCharset(), null);
 
         try {
 

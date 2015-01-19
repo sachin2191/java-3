@@ -166,7 +166,7 @@ public class TransactionSearchService {
 
         HttpURLConnection response = connection.get(
                 TransactionSearchService.buildSearchUrlByCode(connectionData, transactionCode),
-                connectionData.getServiceTimeout(), connectionData.getCharset());
+                connectionData.getServiceTimeout(), connectionData.getCharset(), null);
 
         try {
 
@@ -238,7 +238,7 @@ public class TransactionSearchService {
 
         HttpURLConnection response = connection
                 .get(TransactionSearchService.buildSearchUrlByDate(connectionData, dtInitial, dtFinal, page,
-                        maxPageResults), connectionData.getServiceTimeout(), connectionData.getCharset());
+                        maxPageResults), connectionData.getServiceTimeout(), connectionData.getCharset(), null);
 
         try {
 

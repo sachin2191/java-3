@@ -35,7 +35,11 @@ public class SearchTransactionByCode {
 
         try {
 
-            // Set your account credentials on src/pagseguro-config.properties
+        	/* Set your account credentials on src/pagseguro-config.properties
+			 * You can create an payment using an application credential and set an authorizationCode 
+			 * ApplicationCredentials applicationCredentials = PagSeguroConfig.getApplicationCredentials();
+             * applicationCredentials.setAuthorizationCode("your_authorizationCode");
+			 */
             transaction = TransactionSearchService.searchByCode(PagSeguroConfig.getAccountCredentials(),
                     transactionCode);
 

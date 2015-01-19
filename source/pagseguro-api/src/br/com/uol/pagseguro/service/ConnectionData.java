@@ -40,12 +40,22 @@ public class ConnectionData {
     private String wsRecurrenceFindByCodeUrl;
 
     private String wsRecurrenceCancelByCodeUrl;
+    
+    private String wsAuthorizationUrl;
+    
+    private String wsAuthorizationNotificationUrl;
+    
+    private String wsAuthorizationFindByCodeUrl;
+    
+    private String wsAuthorizationFindByDateUrl;
 
     private String sessionsUrl;
 
     private String installmentsUrl;
 
     private String directPayment;
+    
+    private String authorizationUrl;
 
     private String paymentMethodsUrl;
 
@@ -61,6 +71,9 @@ public class ConnectionData {
         this.webServiceUrl = validUrlWebService();
 
         this.wsPaymentRequestUrl = validUrlWSPaymentRequest();
+        this.wsAuthorizationNotificationUrl = validUrlWSAuthorizationNotification();
+        this.wsAuthorizationFindByCodeUrl = validUrlWSAuthorizationFindByCode();
+        this.wsAuthorizationFindByDateUrl = validUrlWSAuthorizationFindByDate();
         this.wsPaymentRequestFindByCodeUrl = validUrlWSPaymentRequestFindByCode();
         this.wsPaymentRequestNotificationUrl = validUrlWSPaymentRequestByNotificationCode();
 
@@ -68,12 +81,15 @@ public class ConnectionData {
         this.wsRecurrenceFindByCodeUrl = validUrlWSRecurrenceFindByCode();
         this.wsRecurrenceCancelByCodeUrl = validUrlWSRecurrenceCancelByCode();
 
+        this.wsAuthorizationUrl = validUrlWSAuthorization();
+
         this.charset = PagSeguroConfig.getApplicationCharset();
         this.serviceTimeout = PagSeguroSystem.getServiceTimeout();
 
         this.sessionsUrl = PagSeguroSystem.getUrlSessions();
         this.installmentsUrl = PagSeguroSystem.getUrlInstallments();
         this.directPayment = PagSeguroSystem.getUrlDirectPayment();
+        this.authorizationUrl = PagSeguroSystem.getUrlAuthorization();
         this.paymentMethodsUrl = PagSeguroSystem.getUrlPaymentMethods();
 
         this.checkoutServicePath = PagSeguroSystem.getCheckoutServicePath();
@@ -114,7 +130,16 @@ public class ConnectionData {
     public String getDirectPaymentUrl() {
         return this.directPayment;
     }
-
+    
+    /**
+     * Get Authorization Payment Url
+     * 
+     * @return string
+     */
+    public String getAuthorizationUrl() {
+        return this.authorizationUrl;
+    }
+    
     /**
      * @return the paymentMethodsUrl
      */
@@ -161,6 +186,42 @@ public class ConnectionData {
      */
     private String validUrlWSPaymentRequestFindByCode() {
         return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPaymentRequestFindByCodePath();
+    }
+    
+    /**
+     * Valid url web service production or development for authorization request
+     * 
+     * @return string
+     */
+    private String validUrlWSAuthorization() {
+        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getAuthorizationServicePath();
+    }
+    
+    /**
+     * Valid url web service production or development for authorization notification request
+     * 
+     * @return string
+     */
+    private String validUrlWSAuthorizationNotification() {
+        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getAuthorizationNotificationPath();
+    }
+    
+    /**
+     * Valid url web service production or development for authorization find by coderequest
+     * 
+     * @return string
+     */
+    private String validUrlWSAuthorizationFindByCode() {
+        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getAuthorizationFindByCodePath();
+    }
+    
+    /**
+     * Valid url web service production or development for authorization find all request
+     * 
+     * @return string
+     */
+    private String validUrlWSAuthorizationFindByDate() {
+        return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getAuthorizationFindByDatePath();
     }
 
     /**
@@ -234,6 +295,34 @@ public class ConnectionData {
     public String getWSPaymentRequestFindByCodeUrl() {
         return wsPaymentRequestFindByCodeUrl;
     }
+    
+    /**
+     * @return the wsAuthorization Url
+     */
+    public String getWSAuthorizationUrl() {
+        return wsAuthorizationUrl;
+    }
+    
+    /**
+     * @return the wsAuthorizationNotification Url
+     */
+    public String getWSAuthorizationNotificationUrl() {
+        return wsAuthorizationNotificationUrl;
+    }
+    
+    /**
+     * @return the wsAuthorizationFindByCode Url
+     */
+    public String getWSAuthorizationFindByCodeUrl() {
+        return wsAuthorizationFindByCodeUrl;
+    }
+    
+    /**
+     * @return the wsAuthorizationFindAll Url
+     */
+    public String getWSAuthorizationFindByDateUrl() {
+        return wsAuthorizationFindByDateUrl;
+    }
 
     /**
      * @return the wsPaymentRequestNotificationUrl
@@ -285,6 +374,14 @@ public class ConnectionData {
      */
     public void setWSPaymentRequestUrl(String wsPaymentRequestUrl) {
         this.wsPaymentRequestUrl = wsPaymentRequestUrl;
+    }
+    
+    /**
+     * @param wsAuthorizationUrl
+     *            the wsAuthorizationUrl to set
+     */
+    public void setWSAuthorizationUrl(String wsAuthorizationUrl) {
+        this.wsAuthorizationUrl = wsAuthorizationUrl;
     }
 
     /**

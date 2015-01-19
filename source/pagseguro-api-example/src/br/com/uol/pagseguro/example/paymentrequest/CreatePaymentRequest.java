@@ -53,6 +53,7 @@ public class CreatePaymentRequest {
         paymentRequest.setReference("REF1234");
 
         try {
+
             // Set your account credentials on src/pagseguro-config.properties
             String paymentRequestCode = paymentRequest.register(PagSeguroConfig.getAccountCredentials());
             System.out.println(paymentRequestCode);

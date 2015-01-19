@@ -22,7 +22,7 @@ public class FindPaymentRequest {
 
         try {
 
-            // Set your account credentials on src/pagseguro-config.properties
+        	// Set your account credentials on src/pagseguro-config.properties
             paymentRequestTransaction = PaymentRequestService.findByCode(PagSeguroConfig.getAccountCredentials(),
                     paymentRequestCode);
 

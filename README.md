@@ -52,6 +52,10 @@ Changelog
 ---------
 ---
 
+2.5.0
+
+  - Adicionado suporte ao modelo de aplicações.
+
 2.4.0
 
   - Adicionada nova funcionalidade que permite a busca de notificação de solicitação de pagamento.

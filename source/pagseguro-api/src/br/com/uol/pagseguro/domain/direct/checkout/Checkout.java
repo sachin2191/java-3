@@ -27,6 +27,8 @@ import java.util.Map;
 import br.com.uol.pagseguro.domain.Address;
 import br.com.uol.pagseguro.domain.Commission;
 import br.com.uol.pagseguro.domain.Item;
+import br.com.uol.pagseguro.domain.Parameter;
+import br.com.uol.pagseguro.domain.ParameterItem;
 import br.com.uol.pagseguro.domain.Phone;
 import br.com.uol.pagseguro.domain.Sender;
 import br.com.uol.pagseguro.domain.SenderDocument;
@@ -89,6 +91,15 @@ public abstract class Checkout {
      * Commission
      */
     private Commission commission;
+    
+    /**
+     * Extra parameters that user can add to a PagSeguro checkout request
+     * 
+     * Optional
+     * 
+     * @var PagSeguroParameter
+     */
+    private Parameter parameter;
 
     /**
      * @return the payment mode
@@ -291,6 +302,63 @@ public abstract class Checkout {
     public void setCommission(Commission commission) {
         this.commission = commission;
     }
+    
+    /**
+     * @return the senderHash
+     */
+    public String getSenderHash() {
+        return sender.getHash();
+    }
+
+    /**
+     * @param senderHash
+     *            the sender hash to set
+     */
+    public void setSenderHash(String senderHash) {
+        this.sender.setHash(senderHash);
+    }
+    
+    /**
+     * Gets parameter for PagSeguro checkout requests
+     * 
+     * @return Parameter
+     */
+    public Parameter getParameter() {
+
+        if (this.parameter == null) {
+            this.parameter = new Parameter();
+        }
+
+        return this.parameter;
+
+    }
+
+    /**
+     * Sets parameter for PagSeguro checkout requests
+     * 
+     * @param parameter
+     */
+    public void setParameter(Parameter parameter) {
+        this.parameter = parameter;
+    }
+    
+    /**
+     * Add parameters in the checkout request.
+     * 
+     * @param name
+     * @param value
+     */
+    public void addParameter(String name, String value) {
+        this.getParameter().addItem(new ParameterItem(name, value));
+    }
+
+    /**
+     * Add indexed parameters in the checkout request.
+     * 
+     * @param name
+     * @param value
+     * @param index
+     */
 
     public Map<Object, Object> getMap() {
         final Map<Object, Object> data = new HashMap<Object, Object>();
@@ -463,6 +531,28 @@ public abstract class Checkout {
             if (commission.getDescription() != null) {
                 data.put("commissionDescription", commission.getDescription());
             }
+        }
+        
+        /**
+         * PARAMETER
+         * 
+         * @see Parameter
+         */
+        if (getParameter() != null && getParameter().getItems() != null
+                && !getParameter().getItems().isEmpty()) {
+
+            for (ParameterItem param : getParameter().getItems()) {
+
+                if ((param.getName() != null && !"".equals(param.getName()))
+                        && (param.getValue() != null && !"".equals(param.getValue()))) {
+                    if (param.getIndex() != null) {
+                        data.put(param.getName() + "" + param.getIndex().toString(), param.getValue());
+                    } else {
+                        data.put(param.getName(), param.getValue());
+                    }
+                }
+            }
+
         }
 
         return data;

@@ -64,7 +64,7 @@ public class CreateTransactionUsingCreditCard {
 
         request.setReference("REF1234");
 
-        request.setSender(new Sender("JoÃ£o Comprador", //
+        request.setSender(new Sender("João Comprador", //
                 "comprador@uol.com.br", //
                 new Phone("11", "56273440"), //
                 new SenderDocument(DocumentType.CPF, "000.000.001-91")));
@@ -76,7 +76,7 @@ public class CreateTransactionUsingCreditCard {
                 "01452002", //
                 "Av. Brig. Faria Lima", //
                 "1384", //
-                "5Âº andar"));
+                "5º andar"));
         request.setShippingType(ShippingType.SEDEX);
 
         request.setShippingCost(new BigDecimal("5.00"));
@@ -95,7 +95,7 @@ public class CreateTransactionUsingCreditCard {
 
         request.setInstallment(new Installment(1, new BigDecimal("5005.00")));
 
-        request.setHolder(new Holder("JoÃ£o Comprador", //
+        request.setHolder(new Holder("João Comprador", //
                 new Phone("11", "56273440"), //
                 new Document(DocumentType.CPF, "000.000.001-91"), //
                 "07/05/1981"));
@@ -107,9 +107,17 @@ public class CreateTransactionUsingCreditCard {
                 "01452002", //
                 "Av. Brig. Faria Lima", //
                 "1384", //
-                "5Âº andar"));
+                "5º andar"));
 
         try {
+        	/*
+        	 * If you use application credential you don't need to set request.setReceiverEmail();
+        	 * Set your account credentials on src/pagseguro-config.properties
+			 * You can create an payment using an application credential and set an authorizationCode
+			 * ApplicationCredentials applicationCredentials = PagSeguroConfig.getApplicationCredentials();
+             * applicationCredentials.setAuthorizationCode("your_authorizationCode");
+             *
+			 */
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
 
             final Transaction transaction = TransactionService.createTransaction(accountCredentials, //
@@ -136,7 +144,9 @@ public class CreateTransactionUsingCreditCard {
 
         request.setReference("REF1234");
 
-        request.setSender(new Sender("JoÃ£o Comprador", "comprador@uol.com.br"));
+        request.setSender(new Sender("João Comprador", "comprador@uol.com.br"));
+        
+        request.setSenderHash("0db5776271490042a3b89f7f54d7e54244cf74d469695aa67c49e11c8a56c2c4");
 
         request.addItem(new Item("1", "Notebook Prata", Integer.valueOf(1), new BigDecimal("2500.00")));
         request.addItem(new Item("2", "Notebook Rosa", Integer.valueOf(1), new BigDecimal("2500.00")));
@@ -146,6 +156,15 @@ public class CreateTransactionUsingCreditCard {
         request.setInstallment(new Installment(1, new BigDecimal("5000.00")));
 
         try {
+        	/*
+        	 * If you use application credential you don't need to set request.setReceiverEmail();
+        	 * Set your account credentials on src/pagseguro-config.properties
+			 * You can create an payment using an application credential and set an authorizationCode
+			 * ApplicationCredentials applicationCredentials = PagSeguroConfig.getApplicationCredentials();
+             * applicationCredentials.setAuthorizationCode("your_authorizationCode");
+             *
+			 */
+
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
 
             final Transaction transaction = TransactionService.createTransaction(accountCredentials, //

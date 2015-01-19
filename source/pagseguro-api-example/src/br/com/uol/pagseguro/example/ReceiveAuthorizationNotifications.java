@@ -15,22 +15,26 @@
  limitations under the License.
  ************************************************************************
  */
+
 package br.com.uol.pagseguro.example;
 
-import br.com.uol.pagseguro.domain.AccountCredentials;
-import br.com.uol.pagseguro.domain.paymentmethod.PaymentMethod;
-import br.com.uol.pagseguro.domain.paymentmethod.PaymentMethods;
-import br.com.uol.pagseguro.enums.PaymentMethodType;
+import java.util.List;
+
+import br.com.uol.pagseguro.domain.Authorization;
+import br.com.uol.pagseguro.domain.Permission;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.properties.PagSeguroConfig;
-import br.com.uol.pagseguro.service.PaymentMethodService;
+import br.com.uol.pagseguro.service.NotificationService;
 
-/**
- * Class with a main method to illustrate the usage of the InstallmentService to get the installments available
- */
-public class GetPaymentMethods {
+public class ReceiveAuthorizationNotifications {
 
     public static void main(String[] args) {
+
+        // The notificationCode received by your system
+        String notificationCode = "FF422A1EE6AEE6AEEFB444AB9F963C2EF0B7";
+
+        Authorization authorization = null;
+
         try {
         	
         	/* Set your account credentials on src/pagseguro-config.properties
@@ -39,18 +43,24 @@ public class GetPaymentMethods {
              * applicationCredentials.setAuthorizationCode("your_authorizationCode");
 			 */
         	
-            final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
+            authorization = NotificationService.checkAuthorization(PagSeguroConfig.getApplicationCredentials(),
+                    notificationCode);
 
-            final String publicKey = "PUBE469778A81D64C838DA121DB3180FE36";
-            final PaymentMethods paymentMethods = PaymentMethodService.getPaymentMethods(accountCredentials, //
-                    publicKey);
-
-            for (PaymentMethod paymentMethod : paymentMethods.getPaymentMethodsByType(PaymentMethodType.CREDIT_CARD)) {
-                System.out.println(paymentMethod);
-            }
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
         }
+
+        if (authorization != null) {
+            System.out.println("code: " + authorization.getCode());
+            System.out.println("reference: " + authorization.getReference());
+            List<Permission> permissions = authorization.getPermissions();
+            for (Permission permission : permissions) {
+				System.out.println("Permission " + permission.getPermission() + " - Status: " + permission.getStatus());
+			}
+        }
+
     }
 
+    private ReceiveAuthorizationNotifications() {
+    }
 }

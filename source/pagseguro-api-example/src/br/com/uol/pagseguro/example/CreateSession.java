@@ -12,6 +12,13 @@ public class CreateSession {
 
     public static void main(String[] args) {
         try {
+        	
+        	/* Set your account credentials on src/pagseguro-config.properties
+			 * You can create an payment using an application credential and set an authorizationCode 
+			 * ApplicationCredentials applicationCredentials = PagSeguroConfig.getApplicationCredentials();
+             * applicationCredentials.setAuthorizationCode("your_authorizationCode");
+			 */
+        	
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
 
             final String sessionId = SessionService.createSession(accountCredentials);
