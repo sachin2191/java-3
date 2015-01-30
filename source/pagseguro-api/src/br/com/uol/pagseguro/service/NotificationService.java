@@ -271,6 +271,9 @@ public class NotificationService {
      */
     public static PaymentRequestTransaction checkPaymentRequestTransaction(Credentials credentials,
             String paymentRequestNotificationCode) throws PagSeguroServiceException {
+        if(paymentRequestNotificationCode == null || ("").equals(paymentRequestNotificationCode.trim())) {
+            throw new PagSeguroServiceException(HttpStatus.NOT_FOUND);
+        }
 
         log.info(String.format(PREFIX + CHECK_PAYMENT_REQUEST_NOTIFICATION + SUFFIX_BEGIN,
                 paymentRequestNotificationCode));

@@ -13,7 +13,7 @@ public class FindNotificationPaymentRequest {
     public static void main(String[] args) {
 
         // Substitute the code below with a valid payment request notification code for your account
-        String paymentRequestNotificationCode = "3098C601B1DCB1DCE56BB43B2FA85F161EBC";
+        String paymentRequestNotificationCode = "544F42-2FBCDEBCDEA8-688433EF91D2-F3788C";
 
         PaymentRequestTransaction paymentRequestTransaction = null;
 

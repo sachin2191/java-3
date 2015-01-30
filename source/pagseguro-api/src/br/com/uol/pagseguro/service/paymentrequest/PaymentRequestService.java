@@ -180,6 +180,9 @@ public class PaymentRequestService {
      */
     public static PaymentRequestTransaction findByCode(Credentials credentials, String paymentRequestcode)
             throws PagSeguroServiceException {
+        if(paymentRequestcode == null || ("").equals(paymentRequestcode.trim())) {
+            throw new PagSeguroServiceException(HttpStatus.NOT_FOUND);
+        }
 
         log.info(String.format(PREFIX + FIND_BY_CODE + SUFFIX_BEGIN, paymentRequestcode));
 
