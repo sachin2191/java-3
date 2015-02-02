@@ -102,9 +102,7 @@ public class PaymentRequestService {
      */
     private static String buildPaymentRequestFindUrlByCode(ConnectionData connectionData, String paymentRequestCode)
             throws PagSeguroServiceException {
-        final String code = paymentRequestCode.replaceAll(" ", "");
-
-        return connectionData.getWSPaymentRequestFindByCodeUrl() + "/" + code + "?"
+        return connectionData.getWSPaymentRequestFindByCodeUrl() + "/" + paymentRequestCode + "?"
                 + connectionData.getCredentialsUrlQuery();
     }
 
@@ -182,7 +180,7 @@ public class PaymentRequestService {
      */
     public static PaymentRequestTransaction findByCode(Credentials credentials, String paymentRequestcode)
             throws PagSeguroServiceException {
-        if (paymentRequestcode == null || ("").equals(paymentRequestcode.trim())) {
+        if (paymentRequestcode == null || paymentRequestcode.contains(" ")) {
             throw new PagSeguroServiceException(HttpStatus.NOT_FOUND);
         }
 
