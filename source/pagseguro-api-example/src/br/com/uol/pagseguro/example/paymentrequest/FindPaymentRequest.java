@@ -13,7 +13,7 @@ public class FindPaymentRequest {
     public static void main(String[] args) {
 
         // Substitute the code below with a valid payment request code for your account
-        findByCode("F55FC-434-5026-4D2C-B7DB-AD548C81EE46");
+        findByCode("F55FC43450264D2CB7DBAD548C81EE46 ");
     }
 
     private static void findByCode(String paymentRequestCode) {
@@ -22,7 +22,7 @@ public class FindPaymentRequest {
 
         try {
 
-        	// Set your account credentials on src/pagseguro-config.properties
+            // Set your account credentials on src/pagseguro-config.properties
             paymentRequestTransaction = PaymentRequestService.findByCode(PagSeguroConfig.getAccountCredentials(),
                     paymentRequestCode);
 

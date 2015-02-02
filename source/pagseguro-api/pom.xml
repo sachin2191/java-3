@@ -3,7 +3,7 @@
   <groupId>pagseguro-api</groupId>
   <artifactId>pagseguro-api</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>UOL - PagSeguro 2.4.0 - Biblioteca de integração PagSeguro em Java</name>
+  <name>UOL - PagSeguro 2.5.1 - Biblioteca de integração PagSeguro em Java</name>
   <description>A biblioteca PagSeguro em Java é um conjunto de classes de domínio que facilitam, para o desenvolvedor Java, a utilização das funcionalidades que o PagSeguro oferece na forma de APIs. </description>
   <build>
     <sourceDirectory>src</sourceDirectory>

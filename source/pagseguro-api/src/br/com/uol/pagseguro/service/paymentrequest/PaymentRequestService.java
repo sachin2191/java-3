@@ -180,7 +180,7 @@ public class PaymentRequestService {
      */
     public static PaymentRequestTransaction findByCode(Credentials credentials, String paymentRequestcode)
             throws PagSeguroServiceException {
-        if(paymentRequestcode == null || ("").equals(paymentRequestcode.trim())) {
+        if (paymentRequestcode == null || ("").equals(paymentRequestcode.trim())) {
             throw new PagSeguroServiceException(HttpStatus.NOT_FOUND);
         }
 
@@ -192,7 +192,7 @@ public class PaymentRequestService {
         HttpStatus httpStatusCode = null;
 
         HttpURLConnection response = connection.get(
-                buildPaymentRequestFindUrlByCode(connectionData, paymentRequestcode),
+                buildPaymentRequestFindUrlByCode(connectionData, paymentRequestcode.trim()),
                 connectionData.getServiceTimeout(), connectionData.getCharset(), PagSeguroSystem.getAcceptHeaderXML());
 
         try {
