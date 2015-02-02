@@ -269,7 +269,8 @@ public class NotificationService {
      */
     public static PaymentRequestTransaction checkPaymentRequestTransaction(Credentials credentials,
             String paymentRequestNotificationCode) throws PagSeguroServiceException {
-        if (paymentRequestNotificationCode == null || paymentRequestNotificationCode.contains(" ")) {
+        if (paymentRequestNotificationCode == null || ("").equals(paymentRequestNotificationCode.trim())
+                || paymentRequestNotificationCode.contains(" ")) {
             throw new PagSeguroServiceException(HttpStatus.NOT_FOUND);
         }
 
