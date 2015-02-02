@@ -126,8 +126,9 @@ public class NotificationService {
      */
     private static String buildPaymentRequestTransactionNotificationUrl(final ConnectionData connectionData,
             final String paymentRequestNotificationCode) throws PagSeguroServiceException {
+        final String code = paymentRequestNotificationCode.replaceAll(" ", "");
 
-        return connectionData.getWsPaymentRequestNotificationUrl() + "/" + paymentRequestNotificationCode + "?"
+        return connectionData.getWsPaymentRequestNotificationUrl() + "/" + code + "?"
                 + connectionData.getCredentialsUrlQuery();
     }
 
@@ -284,8 +285,8 @@ public class NotificationService {
         PaymentRequestTransaction paymentRequestTransaction = null;
 
         HttpURLConnection response = connection.get(NotificationService.buildPaymentRequestTransactionNotificationUrl(
-                connectionData, paymentRequestNotificationCode.trim()), connectionData.getServiceTimeout(),
-                connectionData.getCharset(), PagSeguroSystem.getAcceptHeaderXML());
+                connectionData, paymentRequestNotificationCode), connectionData.getServiceTimeout(), connectionData
+                .getCharset(), PagSeguroSystem.getAcceptHeaderXML());
 
         try {
 

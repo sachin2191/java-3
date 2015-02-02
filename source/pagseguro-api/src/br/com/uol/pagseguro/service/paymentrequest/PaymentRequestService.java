@@ -102,7 +102,9 @@ public class PaymentRequestService {
      */
     private static String buildPaymentRequestFindUrlByCode(ConnectionData connectionData, String paymentRequestCode)
             throws PagSeguroServiceException {
-        return connectionData.getWSPaymentRequestFindByCodeUrl() + "/" + paymentRequestCode + "?"
+        final String code = paymentRequestCode.replaceAll(" ", "");
+
+        return connectionData.getWSPaymentRequestFindByCodeUrl() + "/" + code + "?"
                 + connectionData.getCredentialsUrlQuery();
     }
 
@@ -192,7 +194,7 @@ public class PaymentRequestService {
         HttpStatus httpStatusCode = null;
 
         HttpURLConnection response = connection.get(
-                buildPaymentRequestFindUrlByCode(connectionData, paymentRequestcode.trim()),
+                buildPaymentRequestFindUrlByCode(connectionData, paymentRequestcode),
                 connectionData.getServiceTimeout(), connectionData.getCharset(), PagSeguroSystem.getAcceptHeaderXML());
 
         try {
