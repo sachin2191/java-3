@@ -30,7 +30,7 @@ Instalação
   - importando o diretório *pagseguro-api* como um novo projeto em sua IDE, e incluí-lo como dependência do seu projeto atual.
  - Opcionalmente você também pode importar o diretório *pagseguro-api-example* como um novo projeto em sua IDE para visualizar a utilização das classes da biblioteca de acordo com cada funcionalidade disponível.
  Obs: em alguns poucos casos é necessário fazer a exportação do certificado existente na página https://ws.pagseguro.uol.com.br e/ou https://ws.sandbox.pagseguro.uol.com.br e em seguida importar para sua JVM. Em caso de dúvida acesse nosso [fórum].
- 
+
 Configuração
 ------------
 ---
@@ -51,6 +51,10 @@ Caso tenha dúvidas ou precise de suporte, acesse nosso [fórum].
 Changelog
 ---------
 ---
+
+2.5.1
+
+  - Ajuste nos parsers.
 
 2.5.0
 
@@ -84,7 +88,7 @@ Changelog
  - Alterado método de envio para HTTP.
  - Adicionado possibilidade de envio de SenderCPF, MetaData e Parameter Generics.
  - Correções de bugs.
- 
+
 2.0.4
 
  - Atualização dos códigos de meios de pagamento.
@@ -131,9 +135,11 @@ Contribuições
 ---
 Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
 
-* Faça um fork.
-* Adicione sua feature ou correção de bug.
+* Faça um fork do projeto.
+* Faça checkout no branch desenvolvimento.
+* Adicione sua feature ou ajuste.
 * Envie um pull request no [GitHub].
+* Obs.: Nao serão aceitos PR no repositório master.
 
 
   [requisições de checkouts]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html
