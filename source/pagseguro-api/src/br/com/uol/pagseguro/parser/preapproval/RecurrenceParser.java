@@ -40,7 +40,6 @@ import org.xml.sax.SAXException;
 import br.com.uol.pagseguro.domain.Sender;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequest;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestItem;
-import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestSender;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShipping;
 import br.com.uol.pagseguro.domain.paymentrequest.PaymentRequestShippingPackage;
 import br.com.uol.pagseguro.domain.preapproval.Recurrence;

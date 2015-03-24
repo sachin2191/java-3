@@ -52,6 +52,10 @@ Changelog
 ---------
 ---
 
+2.5.2
+
+  - Ajustes na ApplicationCredentials
+
 2.5.1
 
   - Ajuste nos parsers.
