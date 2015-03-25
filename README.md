@@ -52,6 +52,10 @@ Changelog
 ---------
 ---
 
+2.5.3
+
+  - Formatacao de codigo e encoding de arquivos
+
 2.5.2
 
   - Ajustes na ApplicationCredentials
