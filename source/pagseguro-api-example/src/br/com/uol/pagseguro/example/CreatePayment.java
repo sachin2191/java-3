@@ -42,7 +42,7 @@ public class CreatePayment {
         PaymentRequest paymentRequest = new PaymentRequest();
 
         paymentRequest.addItem("0001", //
-                "Notebook Lil·s", //
+                "Notebook Lil√°s", //
                 Integer.valueOf(1), //
                 new BigDecimal("2430.00"), //
                 new Long(1000), null);
@@ -66,7 +66,7 @@ public class CreatePayment {
 
         paymentRequest.setShippingCost(new BigDecimal("2.02"));
 
-        paymentRequest.setSender("Jo„o Comprador", //
+        paymentRequest.setSender("Jo√£o Comprador", //
                 "comprador@uol.com.br", //
                 "11", //
                 "56273440", //
@@ -122,13 +122,14 @@ public class CreatePayment {
 
             Boolean onlyCheckoutCode = false;
 
-            /* Set your account credentials on src/pagseguro-config.properties
-			 * You can create an payment using an application credential and set an authorizationCode
-			 * ApplicationCredentials applicationCredentials = PagSeguroConfig.getApplicationCredentials();
-             * applicationCredentials.setAuthorizationCode("your_authorizationCode");
-             * String paymentURL = paymentRequest.register(applicationCredentials), onlyCheckoutCode);
-			 */
-            
+            /*
+             * Set your account credentials on src/pagseguro-config.properties You can create an payment using an
+             * application credential and set an authorizationCode ApplicationCredentials applicationCredentials =
+             * PagSeguroConfig.getApplicationCredentials();
+             * applicationCredentials.setAuthorizationCode("your_authorizationCode"); String paymentURL =
+             * paymentRequest.register(applicationCredentials), onlyCheckoutCode);
+             */
+
             String paymentURL = paymentRequest.register(PagSeguroConfig.getAccountCredentials(), onlyCheckoutCode);
 
             System.out.println(paymentURL);

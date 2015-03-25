@@ -262,7 +262,7 @@ public class NotificationService {
 
     /**
      * checkPaymentRequest
-     *
+     * 
      * @param credentials
      * @param paymentRequestNotificationCode
      * @throws Exception

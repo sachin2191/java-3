@@ -19,7 +19,12 @@
 package br.com.uol.pagseguro.enums;
 
 public enum RecurrencePeriod {
-    WEEKLY('W'), MONTHLY('M'), YEARLY('Y');
+
+    WEEKLY('W'),
+
+    MONTHLY('M'),
+
+    YEARLY('Y');
 
     private final Character id;
 

@@ -38,8 +38,8 @@ import br.com.uol.pagseguro.xmlparser.ErrorsParser;
  * Class AuthorizationService
  */
 public class AuthorizationService {
-	
-	/**
+
+    /**
      * @var Log
      */
     private static Log log = new Log(AuthorizationService.class);
@@ -74,15 +74,16 @@ public class AuthorizationService {
      * @return string
      * @throws Exception
      */
-    public static String createAuthorizationRequest(Credentials credentials, AuthorizationRequest authorization, Boolean onlyCheckoutCode)
-            throws PagSeguroServiceException {
+    public static String createAuthorizationRequest(Credentials credentials, AuthorizationRequest authorization,
+            Boolean onlyCheckoutCode) throws PagSeguroServiceException {
 
-        AuthorizationService.log.info(String.format("AuthorizationService.Register( %s ) - begin", authorization.toString()));
+        AuthorizationService.log.info(String.format("AuthorizationService.Register( %s ) - begin",
+                authorization.toString()));
 
         ConnectionData connectionData = new ConnectionData(credentials);
 
         Map<Object, Object> data = AuthorizationRequestParser.getData(authorization);
-        
+
         String url = AuthorizationService.buildAuthorizationRequestUrl(connectionData);
 
         HttpConnection connection = new HttpConnection();
@@ -102,9 +103,9 @@ public class AuthorizationService {
                 String code = AuthorizationRequestParser.readSuccessXml(response);
 
                 if (onlyCheckoutCode) {
-                	authorizationReturn = code;
+                    authorizationReturn = code;
                 } else {
-                	authorizationReturn = AuthorizationService.buildAuthorizationUrl(connectionData, code);
+                    authorizationReturn = AuthorizationService.buildAuthorizationUrl(connectionData, code);
                 }
 
                 AuthorizationService.log.info(String.format("AuthorizationService.Register( %1s ) - end  %2s )",
@@ -132,8 +133,8 @@ public class AuthorizationService {
             throw e;
         } catch (Exception e) {
 
-        	AuthorizationService.log.error(String.format("AuthorizationService.Register( %1s ) - error %2s", authorization.toString(),
-                    e.getMessage()));
+            AuthorizationService.log.error(String.format("AuthorizationService.Register( %1s ) - error %2s",
+                    authorization.toString(), e.getMessage()));
 
             throw new PagSeguroServiceException(httpCodeStatus, e);
 

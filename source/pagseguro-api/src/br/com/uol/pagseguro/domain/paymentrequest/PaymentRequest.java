@@ -30,7 +30,7 @@ import br.com.uol.pagseguro.service.paymentrequest.PaymentRequestService;
 /**
  * 
  * Represents a payment request transaction
- *
+ * 
  */
 public class PaymentRequest {
 

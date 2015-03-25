@@ -61,7 +61,7 @@ public class PaymentParser {
      * 
      * @param payment
      * @return mixed
-     *
+     * 
      * @deprecated use {@link #getData(Checkout)} instead.
      */
     @Deprecated

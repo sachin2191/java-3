@@ -12,72 +12,72 @@ import br.com.uol.pagseguro.service.authorization.AuthorizationService;
  */
 public class AuthorizationRequest {
 
-	/**
-	 * Reference code
-	 * 
-	 * Optional. You can use the reference code to store an identifier so you can associate the PagSeguro authorization to
-	 * a authorization in your system.
-	 */
-	private String reference;
-    
+    /**
+     * Reference code
+     * 
+     * Optional. You can use the reference code to store an identifier so you can associate the PagSeguro authorization
+     * to a authorization in your system.
+     */
+    private String reference;
+
     /**
      * List of permissions in this authorization
      */
-	private List<String> permissions;
-    
+    private List<String> permissions;
+
     /**
-	 * Uri to where the PagSeguro checkout page should redirect the user after the payment information is processed.
+     * Uri to where the PagSeguro checkout page should redirect the user after the payment information is processed.
      * Typically this is a confirmation page on your web site.
      */
     private String redirectURL;
-   
+
     /**
      * Determines for which url PagSeguro will send the order related notifications changes.
      * 
      * Optional. A new notification will be send to this url if any change happens in the transaction status. You can
      * use that for update the related order.
      */
-	private String notificationURL;
-	
-	public AuthorizationRequest() {
-		this.permissions = new ArrayList<String>();
-	}
+    private String notificationURL;
 
-	public String getReference() {
-		return reference;
-	}
-	
-	public void setReference(String reference) {
-		this.reference = reference;
-	}
-	
-	public List<String> getPermissions() {
-		return permissions;
-	}
-	
-	public void addPermission(String permission){
-		if (permission != null || !"".equals(permission)) {
-			this.permissions.add(permission);
-		}
-	}
-	
-	public String getRedirectURL() {
-		return redirectURL;
-	}
-	
-	public void setRedirectURL(String redirectURL) {
-		this.redirectURL = redirectURL;
-	}
-	
-	public String getNotificationURL() {
-		return notificationURL;
-	}
-	
-	public void setNotificationURL(String notificationURL) {
-		this.notificationURL = notificationURL;
-	}
-	
-	/**
+    public AuthorizationRequest() {
+        this.permissions = new ArrayList<String>();
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public List<String> getPermissions() {
+        return permissions;
+    }
+
+    public void addPermission(String permission) {
+        if (permission != null || !"".equals(permission)) {
+            this.permissions.add(permission);
+        }
+    }
+
+    public String getRedirectURL() {
+        return redirectURL;
+    }
+
+    public void setRedirectURL(String redirectURL) {
+        this.redirectURL = redirectURL;
+    }
+
+    public String getNotificationURL() {
+        return notificationURL;
+    }
+
+    public void setNotificationURL(String notificationURL) {
+        this.notificationURL = notificationURL;
+    }
+
+    /**
      * Calls the PagSeguro web service and register this request for authorization
      * 
      * @param credentials
@@ -100,11 +100,10 @@ public class AuthorizationRequest {
         return AuthorizationService.createAuthorizationRequest(credentials, this, onlyAuthorizationCode);
     }
 
-	@Override
-	public String toString() {
-		return "Authorization [reference=" + reference + ", permissions="
-				+ permissions + ", redirectURL=" + redirectURL
-				+ ", notificationURL=" + notificationURL + "]";
-	}
+    @Override
+    public String toString() {
+        return "Authorization [reference=" + reference + ", permissions=" + permissions + ", redirectURL="
+                + redirectURL + ", notificationURL=" + notificationURL + "]";
+    }
 
 }

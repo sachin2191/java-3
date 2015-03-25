@@ -19,11 +19,18 @@
 package br.com.uol.pagseguro.enums;
 
 public enum DayOfWeek {
-    SUNDAY, //
-    MONDAY, //
-    TUESDAY, //
-    WEDNESDAY, //
-    THURSDAY, //
-    FRIDAY, //
+
+    SUNDAY,
+
+    MONDAY,
+
+    TUESDAY,
+
+    WEDNESDAY,
+
+    THURSDAY,
+
+    FRIDAY,
+
     SATURDAY
 }

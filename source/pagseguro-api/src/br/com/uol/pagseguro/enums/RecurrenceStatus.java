@@ -19,7 +19,14 @@
 package br.com.uol.pagseguro.enums;
 
 public enum RecurrenceStatus {
-    SCHEDULED('S'), INITIATED('I'), PAUSED('P'), FINISHED('F');
+
+    SCHEDULED('S'),
+
+    INITIATED('I'),
+
+    PAUSED('P'),
+
+    FINISHED('F');
 
     private final Character id;
 

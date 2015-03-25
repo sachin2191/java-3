@@ -161,7 +161,7 @@ public class PaymentRequestTransaction {
      * @return the transaction date
      */
     public String getDate() {
-        if(this.date == null) {
+        if (this.date == null) {
             return null;
         }
 
@@ -253,7 +253,7 @@ public class PaymentRequestTransaction {
 
     /**
      * Ses the receiver
-     *
+     * 
      * @param receiver
      */
     public void setReceiver(Receiver receiver) {
@@ -269,7 +269,7 @@ public class PaymentRequestTransaction {
 
     /**
      * Ses the automatic debit
-     *
+     * 
      * @param automaticDebit
      */
     public void setAutomaticDebit(AutomaticDebit automaticDebit) {
@@ -320,7 +320,7 @@ public class PaymentRequestTransaction {
      * @return the last event date
      */
     public String getLastEventDate() {
-        if(this.lastEventDate == null) {
+        if (this.lastEventDate == null) {
             return null;
         }
 
@@ -580,9 +580,9 @@ public class PaymentRequestTransaction {
 
     /**
      * Sets the shipping information for this transaction
-     *
+     * 
      * @see PaymentRequestShipping
-     *
+     * 
      * @param shipping
      */
     public void setShipping(PaymentRequestShipping shipping) {
@@ -593,7 +593,7 @@ public class PaymentRequestTransaction {
      * @return the expiration
      */
     public String getExpiration() {
-        if(this.expiration == null) {
+        if (this.expiration == null) {
             return null;
         }
 
@@ -613,7 +613,7 @@ public class PaymentRequestTransaction {
      * @return the due
      */
     public String getDue() {
-        if(this.due == null) {
+        if (this.due == null) {
             return null;
         }
 
@@ -636,7 +636,7 @@ public class PaymentRequestTransaction {
 
     /**
      * Sets the cancellation source
-     *
+     * 
      * @param cancellationSource
      */
     public void setCancellationSource(String cancellationSource) {

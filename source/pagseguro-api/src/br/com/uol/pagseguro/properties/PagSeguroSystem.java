@@ -30,7 +30,7 @@ public class PagSeguroSystem {
 
     private static ResourceBundle resourceBundle;
 
-    private static final String LIB_VERSION = "2.5.2";
+    private static final String LIB_VERSION = "2.5.3";
 
     private static final String LANGUAGE_ENGINE_DESCRIPTION = System.getProperty("java.version") + ":"
             + System.getProperty("java.vendor");

@@ -61,7 +61,7 @@ public class CreateTransactionUsingBoleto {
 
         request.setReference("REF1234");
 
-        request.setSender(new Sender("Jo„o Comprador", //
+        request.setSender(new Sender("Jo√£o Comprador", //
                 "comprador@uol.com.br", //
                 new Phone("11", "56273440"), //
                 new SenderDocument(DocumentType.CPF, "000.000.001-91")));
@@ -75,7 +75,7 @@ public class CreateTransactionUsingBoleto {
                 "01452002", //
                 "Av. Brig. Faria Lima", //
                 "1384", //
-                "5∫ andar"));
+                "5o andar"));
 
         request.setShippingType(ShippingType.SEDEX);
 
@@ -92,14 +92,13 @@ public class CreateTransactionUsingBoleto {
                 new BigDecimal("2500.00")));
 
         try {
-        	/*
-        	 * If you use application credential you don't need to set request.setReceiverEmail();
-        	 * Set your account credentials on src/pagseguro-config.properties
-			 * You can create an payment using an application credential and set an authorizationCode
-			 * ApplicationCredentials applicationCredentials = PagSeguroConfig.getApplicationCredentials();
+            /*
+             * If you use application credential you don't need to set request.setReceiverEmail(); Set your account
+             * credentials on src/pagseguro-config.properties You can create an payment using an application credential
+             * and set an authorizationCode ApplicationCredentials applicationCredentials =
+             * PagSeguroConfig.getApplicationCredentials();
              * applicationCredentials.setAuthorizationCode("your_authorizationCode");
-             *
-			 */
+             */
 
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
 
@@ -127,8 +126,8 @@ public class CreateTransactionUsingBoleto {
 
         request.setReference("REF1234");
 
-        request.setSender(new Sender("Jo„o Comprador", "comprador@uol.com.br"));
-        
+        request.setSender(new Sender("Jo√£o Comprador", "comprador@uol.com.br"));
+
         request.setSenderHash("0db5776271490042a3b89f7f54d7e54244cf74d469695aa67c49e11c8a56c2c4");
 
         request.addItem(new Item("1", "Notebook Prata", Integer.valueOf(1), new BigDecimal("2500.00")));
@@ -136,15 +135,13 @@ public class CreateTransactionUsingBoleto {
 
         try {
 
-        	/*
-        	 * If you use application credential you don't need to set request.setReceiverEmail();
-        	 * Set your account credentials on src/pagseguro-config.properties
-			 * You can create an payment using an application credential and set an authorizationCode
-			 * ApplicationCredentials applicationCredentials = PagSeguroConfig.getApplicationCredentials();
+            /*
+             * If you use application credential you don't need to set request.setReceiverEmail(); Set your account
+             * credentials on src/pagseguro-config.properties You can create an payment using an application credential
+             * and set an authorizationCode ApplicationCredentials applicationCredentials =
+             * PagSeguroConfig.getApplicationCredentials();
              * applicationCredentials.setAuthorizationCode("your_authorizationCode");
-             *
-			 */
-
+             */
 
             final AccountCredentials accountCredentials = PagSeguroConfig.getAccountCredentials();
 

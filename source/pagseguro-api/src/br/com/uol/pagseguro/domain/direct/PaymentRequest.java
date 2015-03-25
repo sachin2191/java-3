@@ -87,7 +87,7 @@ public abstract class PaymentRequest {
      */
     @SuppressWarnings("unused")
     private Commission commission;
-    
+
     /**
      * Extra parameters that user can add to a PagSeguro checkout request
      * 
@@ -286,7 +286,7 @@ public abstract class PaymentRequest {
     public void setCommission(Commission commission) {
         this.checkout.setCommission(commission);
     }
-    
+
     /**
      * @return the sender hash
      */
@@ -301,7 +301,7 @@ public abstract class PaymentRequest {
     public void setSenderHash(String senderHash) {
         this.checkout.setSenderHash(senderHash);
     }
-    
+
     /**
      * Gets parameter for PagSeguro checkout requests
      * 

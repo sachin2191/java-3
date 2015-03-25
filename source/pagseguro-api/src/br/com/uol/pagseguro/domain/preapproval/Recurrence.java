@@ -27,7 +27,7 @@ import br.com.uol.pagseguro.service.preapproval.RecurrenceService;
 /**
  * 
  * Represents a recurrence transaction
- *
+ * 
  */
 public class Recurrence {
 

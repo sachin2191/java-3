@@ -54,7 +54,7 @@ public class PaymentRequestShippingPackage {
 
     /**
      * Initializes a new instance of the PaymentRequestShippingPackage class with the specified arguments
-     *
+     * 
      * @param width
      * @param height
      * @param length

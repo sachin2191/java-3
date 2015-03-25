@@ -91,7 +91,7 @@ public abstract class Checkout {
      * Commission
      */
     private Commission commission;
-    
+
     /**
      * Extra parameters that user can add to a PagSeguro checkout request
      * 
@@ -302,7 +302,7 @@ public abstract class Checkout {
     public void setCommission(Commission commission) {
         this.commission = commission;
     }
-    
+
     /**
      * @return the senderHash
      */
@@ -317,7 +317,7 @@ public abstract class Checkout {
     public void setSenderHash(String senderHash) {
         this.sender.setHash(senderHash);
     }
-    
+
     /**
      * Gets parameter for PagSeguro checkout requests
      * 
@@ -341,7 +341,7 @@ public abstract class Checkout {
     public void setParameter(Parameter parameter) {
         this.parameter = parameter;
     }
-    
+
     /**
      * Add parameters in the checkout request.
      * 
@@ -532,14 +532,13 @@ public abstract class Checkout {
                 data.put("commissionDescription", commission.getDescription());
             }
         }
-        
+
         /**
          * PARAMETER
          * 
          * @see Parameter
          */
-        if (getParameter() != null && getParameter().getItems() != null
-                && !getParameter().getItems().isEmpty()) {
+        if (getParameter() != null && getParameter().getItems() != null && !getParameter().getItems().isEmpty()) {
 
             for (ParameterItem param : getParameter().getItems()) {
 

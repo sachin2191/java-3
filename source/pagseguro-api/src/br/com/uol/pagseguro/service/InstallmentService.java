@@ -75,8 +75,7 @@ public class InstallmentService {
 
         HttpURLConnection response = connection.get(url.toString(), //
                 connectionData.getServiceTimeout(), //
-                connectionData.getCharset(),
-                null);
+                connectionData.getCharset(), null);
 
         try {
             httpCodeStatus = HttpStatus.fromCode(response.getResponseCode());

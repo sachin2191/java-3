@@ -6,57 +6,56 @@ import br.com.uol.pagseguro.enums.PermissionStatus;
 import br.com.uol.pagseguro.enums.PermissionType;
 
 public class Permission {
-	
-	/** Permission of an authorization **/
-	private PermissionType permission;
-	
-	/** Status of this permission **/
-	private PermissionStatus status;
-	
-	/** Last update date of this permission **/
-	private Date lastUpdate;
 
-	/**
-	 * Get Permission
-	 */
-	public PermissionType getPermission() {
-		return this.permission;
-	}
+    /** Permission of an authorization **/
+    private PermissionType permission;
 
-	/**
-	 * Set Permission
-	 */
-	public void setPermission(PermissionType permission) {
-		this.permission = permission;
-	}
+    /** Status of this permission **/
+    private PermissionStatus status;
 
-	/**
-	 * Get Status
-	 */
-	public PermissionStatus getStatus() {
-		return status;
-	}
+    /** Last update date of this permission **/
+    private Date lastUpdate;
 
-	/**
-	 * Set Status
-	 */
-	public void setStatus(PermissionStatus status) {
-		this.status = status;
-	}
-	
-	/**
-	 * Get last update date
-	 */
-	public Date getLastUpdate() {
-		return lastUpdate;
-	}
+    /**
+     * Get Permission
+     */
+    public PermissionType getPermission() {
+        return this.permission;
+    }
 
-	/**
-	 * Set last update date
-	 */
-	public void setLastUpdate(Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
-	
-	
+    /**
+     * Set Permission
+     */
+    public void setPermission(PermissionType permission) {
+        this.permission = permission;
+    }
+
+    /**
+     * Get Status
+     */
+    public PermissionStatus getStatus() {
+        return status;
+    }
+
+    /**
+     * Set Status
+     */
+    public void setStatus(PermissionStatus status) {
+        this.status = status;
+    }
+
+    /**
+     * Get last update date
+     */
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    /**
+     * Set last update date
+     */
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
 }

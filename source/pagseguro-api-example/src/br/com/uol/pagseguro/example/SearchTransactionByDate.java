@@ -47,11 +47,12 @@ public class SearchTransactionByDate {
 
             Integer maxPageResults = Integer.valueOf(10);
 
-        	/* Set your account credentials on src/pagseguro-config.properties
-			 * You can create an payment using an application credential and set an authorizationCode 
-			 * ApplicationCredentials applicationCredentials = PagSeguroConfig.getApplicationCredentials();
+            /*
+             * Set your account credentials on src/pagseguro-config.properties You can create an payment using an
+             * application credential and set an authorizationCode ApplicationCredentials applicationCredentials =
+             * PagSeguroConfig.getApplicationCredentials();
              * applicationCredentials.setAuthorizationCode("your_authorizationCode");
-			 */
+             */
             transactionSearchResult = TransactionSearchService.searchByDate(PagSeguroConfig.getAccountCredentials(),
                     initialDate.getTime(), finalDate.getTime(), page, maxPageResults);
 

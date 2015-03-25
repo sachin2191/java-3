@@ -40,13 +40,13 @@ public class ConnectionData {
     private String wsRecurrenceFindByCodeUrl;
 
     private String wsRecurrenceCancelByCodeUrl;
-    
+
     private String wsAuthorizationUrl;
-    
+
     private String wsAuthorizationNotificationUrl;
-    
+
     private String wsAuthorizationFindByCodeUrl;
-    
+
     private String wsAuthorizationFindByDateUrl;
 
     private String sessionsUrl;
@@ -54,7 +54,7 @@ public class ConnectionData {
     private String installmentsUrl;
 
     private String directPayment;
-    
+
     private String authorizationUrl;
 
     private String paymentMethodsUrl;
@@ -130,7 +130,7 @@ public class ConnectionData {
     public String getDirectPaymentUrl() {
         return this.directPayment;
     }
-    
+
     /**
      * Get Authorization Payment Url
      * 
@@ -139,7 +139,7 @@ public class ConnectionData {
     public String getAuthorizationUrl() {
         return this.authorizationUrl;
     }
-    
+
     /**
      * @return the paymentMethodsUrl
      */
@@ -187,7 +187,7 @@ public class ConnectionData {
     private String validUrlWSPaymentRequestFindByCode() {
         return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getPaymentRequestFindByCodePath();
     }
-    
+
     /**
      * Valid url web service production or development for authorization request
      * 
@@ -196,7 +196,7 @@ public class ConnectionData {
     private String validUrlWSAuthorization() {
         return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getAuthorizationServicePath();
     }
-    
+
     /**
      * Valid url web service production or development for authorization notification request
      * 
@@ -205,7 +205,7 @@ public class ConnectionData {
     private String validUrlWSAuthorizationNotification() {
         return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getAuthorizationNotificationPath();
     }
-    
+
     /**
      * Valid url web service production or development for authorization find by coderequest
      * 
@@ -214,7 +214,7 @@ public class ConnectionData {
     private String validUrlWSAuthorizationFindByCode() {
         return PagSeguroSystem.getUrlProduction() + PagSeguroSystem.getAuthorizationFindByCodePath();
     }
-    
+
     /**
      * Valid url web service production or development for authorization find all request
      * 
@@ -226,7 +226,7 @@ public class ConnectionData {
 
     /**
      * Valid url web service production or development for finding a payment request by notification code
-     *
+     * 
      * @return string
      */
     private String validUrlWSPaymentRequestByNotificationCode() {
@@ -295,28 +295,28 @@ public class ConnectionData {
     public String getWSPaymentRequestFindByCodeUrl() {
         return wsPaymentRequestFindByCodeUrl;
     }
-    
+
     /**
      * @return the wsAuthorization Url
      */
     public String getWSAuthorizationUrl() {
         return wsAuthorizationUrl;
     }
-    
+
     /**
      * @return the wsAuthorizationNotification Url
      */
     public String getWSAuthorizationNotificationUrl() {
         return wsAuthorizationNotificationUrl;
     }
-    
+
     /**
      * @return the wsAuthorizationFindByCode Url
      */
     public String getWSAuthorizationFindByCodeUrl() {
         return wsAuthorizationFindByCodeUrl;
     }
-    
+
     /**
      * @return the wsAuthorizationFindAll Url
      */
@@ -375,7 +375,7 @@ public class ConnectionData {
     public void setWSPaymentRequestUrl(String wsPaymentRequestUrl) {
         this.wsPaymentRequestUrl = wsPaymentRequestUrl;
     }
-    
+
     /**
      * @param wsAuthorizationUrl
      *            the wsAuthorizationUrl to set

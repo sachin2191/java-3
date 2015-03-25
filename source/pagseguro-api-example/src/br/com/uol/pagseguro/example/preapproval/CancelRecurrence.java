@@ -22,8 +22,8 @@ public class CancelRecurrence {
         try {
 
             // Set your account credentials on src/pagseguro-config.properties
-        	recurrenceCancelTransaction = RecurrenceService.cancelRecurrenceByCode(PagSeguroConfig.getAccountCredentials(),
-                    recurrenceCode);
+            recurrenceCancelTransaction = RecurrenceService.cancelRecurrenceByCode(
+                    PagSeguroConfig.getAccountCredentials(), recurrenceCode);
 
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
@@ -38,8 +38,8 @@ public class CancelRecurrence {
         System.out.println("code: " + recurrenceCancelTransaction.getCode());
         System.out.println("date: " + recurrenceCancelTransaction.getDate());
     }
-    
+
     private CancelRecurrence() {
-    	
+
     }
 }

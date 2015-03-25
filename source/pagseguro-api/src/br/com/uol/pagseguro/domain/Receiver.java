@@ -44,7 +44,7 @@ public class Receiver {
 
     /**
      * Initializes a new instance of the PaymentRequest class with the specified arguments
-     *
+     * 
      * @param email
      */
     public Receiver(final String email) {
@@ -54,7 +54,7 @@ public class Receiver {
 
     /**
      * Initializes a new instance of the PaymentRequest class with the specified arguments
-     *
+     * 
      * @param email
      * @param name
      * @param phone
@@ -76,7 +76,7 @@ public class Receiver {
 
     /**
      * Sets the email
-     *
+     * 
      * @param email
      */
     public void setEmail(final String email) {
@@ -94,7 +94,7 @@ public class Receiver {
 
     /**
      * Sets the name
-     *
+     * 
      * @param name
      */
     public void setName(final String name) {
@@ -112,7 +112,7 @@ public class Receiver {
 
     /**
      * Sets the phone
-     *
+     * 
      * @param phone
      */
     public void setPhone(final Phone phone) {

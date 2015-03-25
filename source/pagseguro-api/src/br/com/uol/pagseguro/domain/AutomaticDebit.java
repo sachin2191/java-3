@@ -42,7 +42,7 @@ public class AutomaticDebit {
 
     /**
      * Initializes a new instance of the AutomaticDebit class with the specified arguments
-     *
+     * 
      * @param bank
      * @param scheduledDate
      * @param debitDate
@@ -70,7 +70,7 @@ public class AutomaticDebit {
 
     /**
      * Sets the bank name
-     *
+     * 
      * @param bank
      */
     public void setBank(final String bank) {
@@ -86,6 +86,7 @@ public class AutomaticDebit {
 
     /**
      * Sets the scheduled date
+     * 
      * @param scheduledDate
      */
     public void setScheduledDate(final Date scheduledDate) {
@@ -101,7 +102,7 @@ public class AutomaticDebit {
 
     /**
      * Sets the debit date
-     *
+     * 
      * @param debitDate
      */
     public void setDebitDate(final Date debitDate) {

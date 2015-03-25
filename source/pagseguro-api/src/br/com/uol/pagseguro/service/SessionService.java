@@ -66,8 +66,7 @@ public class SessionService {
         HttpURLConnection response = connection.post(url, //
                 credentials.getAttributes(), //
                 connectionData.getServiceTimeout(), //
-                connectionData.getCharset(),
-                null);
+                connectionData.getCharset(), null);
 
         try {
             httpCodeStatus = HttpStatus.fromCode(response.getResponseCode());

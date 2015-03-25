@@ -61,8 +61,7 @@ public class PaymentMethodService {
 
         HttpURLConnection response = connection.get(url.toString(), //
                 connectionData.getServiceTimeout(), //
-                connectionData.getCharset(),
-                null);
+                connectionData.getCharset(), null);
 
         try {
             httpCodeStatus = HttpStatus.fromCode(response.getResponseCode());

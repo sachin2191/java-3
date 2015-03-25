@@ -36,13 +36,14 @@ public class ReceiveAuthorizationNotifications {
         Authorization authorization = null;
 
         try {
-        	
-        	/* Set your account credentials on src/pagseguro-config.properties
-			 * You can create an payment using an application credential and set an authorizationCode 
-			 * ApplicationCredentials applicationCredentials = PagSeguroConfig.getApplicationCredentials();
+
+            /*
+             * Set your account credentials on src/pagseguro-config.properties You can create an payment using an
+             * application credential and set an authorizationCode ApplicationCredentials applicationCredentials =
+             * PagSeguroConfig.getApplicationCredentials();
              * applicationCredentials.setAuthorizationCode("your_authorizationCode");
-			 */
-        	
+             */
+
             authorization = NotificationService.checkAuthorization(PagSeguroConfig.getApplicationCredentials(),
                     notificationCode);
 
@@ -55,8 +56,8 @@ public class ReceiveAuthorizationNotifications {
             System.out.println("reference: " + authorization.getReference());
             List<Permission> permissions = authorization.getPermissions();
             for (Permission permission : permissions) {
-				System.out.println("Permission " + permission.getPermission() + " - Status: " + permission.getStatus());
-			}
+                System.out.println("Permission " + permission.getPermission() + " - Status: " + permission.getStatus());
+            }
         }
 
     }

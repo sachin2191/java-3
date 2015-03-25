@@ -38,7 +38,7 @@ public class SearchAuthorizationByCode {
         try {
 
             authorization = AuthorizationSearchService.searchByCode(PagSeguroConfig.getApplicationCredentials(),
-            		authorizationCode);
+                    authorizationCode);
 
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
@@ -49,8 +49,8 @@ public class SearchAuthorizationByCode {
             System.out.println("reference: " + authorization.getReference());
             List<Permission> permissions = authorization.getPermissions();
             for (Permission permission : permissions) {
-				System.out.println("Permission " + permission.getPermission() + " - Status: " + permission.getStatus());
-			}
+                System.out.println("Permission " + permission.getPermission() + " - Status: " + permission.getStatus());
+            }
         }
 
     }

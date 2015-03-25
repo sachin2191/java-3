@@ -31,7 +31,7 @@ public class SearchAuthorizationsByDate {
 
     public static void main(String[] args) {
 
-        List<Authorization> authorizations = null; 
+        List<Authorization> authorizations = null;
 
         try {
 
@@ -44,29 +44,30 @@ public class SearchAuthorizationsByDate {
             Integer page = Integer.valueOf(1);
 
             Integer maxPageResults = Integer.valueOf(10);
-            
+
             // Set your account credentials on src/pagseguro-config.properties
-        	authorizations = AuthorizationSearchService.searchByDate(PagSeguroConfig.getApplicationCredentials(),
+            authorizations = AuthorizationSearchService.searchByDate(PagSeguroConfig.getApplicationCredentials(),
                     initialDate.getTime(), finalDate.getTime(), page, maxPageResults);
 
         } catch (PagSeguroServiceException e) {
             System.err.println(e.getMessage());
         }
-        
+
         if (authorizations != null) {
-        	for (Authorization authorization : authorizations) {
-            	if (authorization != null) {
+            for (Authorization authorization : authorizations) {
+                if (authorization != null) {
                     System.out.println("code: " + authorization.getCode());
                     System.out.println("reference: " + authorization.getReference());
                     List<Permission> permissions = authorization.getPermissions();
                     for (Permission permission : permissions) {
-        				System.out.println("Permission " + permission.getPermission() + " - Status: " + permission.getStatus());
-        			}
+                        System.out.println("Permission " + permission.getPermission() + " - Status: "
+                                + permission.getStatus());
+                    }
                 }
-    		}
-		} else {
-			System.out.println("You don't have any authorizations");
-		}
+            }
+        } else {
+            System.out.println("You don't have any authorizations");
+        }
     }
 
     private SearchAuthorizationsByDate() {

@@ -37,12 +37,12 @@ import br.com.uol.pagseguro.xmlparser.XMLParserUtils;
  * Parses Authorization and responses
  */
 public class AuthorizationRequestParser {
-	
-	private AuthorizationRequestParser() {
+
+    private AuthorizationRequestParser() {
 
     }
-	
-	/**
+
+    /**
      * 
      * @param authorization
      * @return mixed
@@ -70,27 +70,27 @@ public class AuthorizationRequestParser {
         if (authorization.getNotificationURL() != null && !"".equals(authorization.getNotificationURL())) {
             data.put("notificationURL", authorization.getNotificationURL());
         }
-        
+
         /**
          * PERMISSIONS
          */
         if (authorization.getPermissions() != null && authorization.getPermissions().size() > 0) {
-        	
-        	String permissionList = "";
-        	boolean first = true;
-            for (String permission: authorization.getPermissions()) {
+
+            String permissionList = "";
+            boolean first = true;
+            for (String permission : authorization.getPermissions()) {
 
                 if (permission != null && !"".equals(permission)) {
-                    
-                	if(first == true){
-                		permissionList += permission;
-                	} else {
-                		permissionList += "," + permission;
-                	}
-                	first = false;
+
+                    if (first == true) {
+                        permissionList += permission;
+                    } else {
+                        permissionList += "," + permission;
+                    }
+                    first = false;
                 }
             }
-            
+
             data.put("permissions", permissionList);
 
         }
@@ -98,17 +98,17 @@ public class AuthorizationRequestParser {
         return data;
 
     }
-    
+
     public static String readSuccessXml(HttpURLConnection connection) throws ParserConfigurationException,
-	    SAXException, IOException {
-	
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		org.w3c.dom.Document doc = dBuilder.parse(connection.getInputStream());
-		Element authorizationReturnElement = doc.getDocumentElement();
-		
-		return XMLParserUtils.getTagValue("code", authorizationReturnElement);
-	
-	}
+            SAXException, IOException {
+
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        org.w3c.dom.Document doc = dBuilder.parse(connection.getInputStream());
+        Element authorizationReturnElement = doc.getDocumentElement();
+
+        return XMLParserUtils.getTagValue("code", authorizationReturnElement);
+
+    }
 
 }
